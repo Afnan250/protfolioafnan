@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniHostel HMS</title>
+	
+	
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="scene">
+        <div class="card" id="card">
+
+            <!-- Front Side -->
+<div class="face front">
+
+    <h2>Login</h2>
+
+    <input
+    type="email"
+    id="login-email"
+    placeholder="Email">
+
+    <input
+    type="password"
+    id="login-password"
+    placeholder="Password">
+		
+		<select id="role">
+    <option value="student">Student</option>
+    <option value="admin">Admin</option>
+</select>
+
+<p class="forgot-password">
+    <a href="#" onclick="forgotPassword()">
+        Forgot Password?
+    </a>
+</p>
+
+    <button
+    class="login-btn"
+    onclick="login()">
+    Login
+</button>
+
+    <p class="account-link">
+        Don't have an account?
+        <span onclick="flipCard()">Register</span>
+    </p>
+
+</div>
+
+<!-- Back Side -->
+<div class="face back">
+
+    <h2>Create Account</h2>
+
+    <input
+        type="text"
+        id="reg-name"
+        placeholder="Full Name">
+
+    <input
+        type="email"
+        id="reg-email"
+        placeholder="Email">
+
+    <input
+        type="password"
+        id="reg-password"
+        placeholder="Password">
+
+    <button
+        class="login-btn"
+        onclick="registerUser()">
+        Register
+    </button>
+
+    <p class="account-link">
+        Already Registered?
+        <span onclick="flipCard()">
+            Back to Login
+        </span>
+    </p>
+
+</div>
+
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

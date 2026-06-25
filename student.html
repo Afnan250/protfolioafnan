@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UniHostel - Student Portal</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-header">
+
+        <div class="logo">
+            <h2>🎓 UniHostel</h2>
+            <span>Student Portal</span>
+        </div>
+
+    </div>
+
+    <div class="sidebar-nav">
+	<div class="nav-item" onclick="window.location.href='index.html'">
+    🏠 Admin Panel
+</div>
+<div class="sidebar-nav">
+
+    <div class="nav-item active" data-page="dashboard">
+        🏠 Dashboard
+    </div>
+
+    <div class="nav-item" data-page="profile">
+        👤 My Profile
+    </div>
+
+    <div class="nav-item" data-page="room">
+        🛏️ My Room
+    </div>
+
+    <div class="nav-item" data-page="food">
+        🍽️ Food Menu
+    </div>
+
+    <div class="nav-item" data-page="entry">
+        🚪 Entry / Exit
+    </div>
+
+    <div class="nav-item" data-page="complaint">
+        📢 Complaints
+    </div>
+
+</div>
+
+<div class="sidebar-footer">
+
+    <button
+        class="btn btn-secondary"
+        style="width:100%;"
+        onclick="logout()">
+
+        🚪 Logout
+
+    </button>
+
+</div>
+</aside>
+
+<!-- MAIN CONTENT -->
+
+<main class="main-content">
+
+    <div class="topbar">
+
+        <div>
+            <h2>Student Dashboard</h2>
+            <p>University Hostel Management System</p>
+        </div>
+
+        <div class="student-profile">
+    Welcome, <span id="student-name"></span>
+</div>
+
+    </div>
+
+    <!-- DASHBOARD -->
+
+    <div id="page-dashboard" class="page">
+
+        <div class="cards-grid">
+
+            <div class="metric-card card-accent-cyan">
+                <div class="card-value">A-101</div>
+                <div class="card-label">Room Number</div>
+            </div>
+
+            <div class="metric-card card-accent-green">
+                <div class="card-value">3</div>
+                <div class="card-label">Meals Today</div>
+            </div>
+
+            <div class="metric-card card-accent-amber">
+                <div class="card-value">2</div>
+                <div class="card-label">Complaints</div>
+            </div>
+
+            <div class="metric-card card-accent-purple">
+                <div class="card-value">08:30 AM</div>
+                <div class="card-label">Last Entry</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PROFILE -->
+
+    <div id="page-profile" class="page" style="display:none;">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>My Profile</h3>
+            </div>
+
+            <div class="card-body">
+
+                <table>
+
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td>Afnan</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Student ID</strong></td>
+                        <td>USTM001</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Course</strong></td>
+                        <td>BCA</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Room</strong></td>
+                        <td>A-101</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td>9876543210</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ROOM -->
+
+    <div id="page-room" class="page" style="display:none;">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Room Details</h3>
+            </div>
+
+            <div class="card-body">
+
+                <p><strong>Room Number:</strong> A-101</p>
+                <br>
+
+                <p><strong>Block:</strong> A</p>
+                <br>
+
+                <p><strong>Capacity:</strong> 3 Students</p>
+                <br>
+
+                <p><strong>Occupied:</strong> 2 Students</p>
+
+                <br><br>
+
+                <h4>Roommates</h4>
+
+                <ul>
+
+                    <li>Rahul Das</li>
+                    <li>Amit Sharma</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOD -->
+
+    <div id="page-food" class="page" style="display:none;">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>🍽️ Weekly Food Menu</h3>
+        </div>
+
+        <div class="card-body">
+
+            <table class="food-menu-table">
+
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tbody>
+
+<tr>
+    <td>Monday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Egg Curry</td>
+</tr>
+
+<tr>
+    <td>Tuesday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Fish Curry</td>
+</tr>
+
+<tr>
+    <td>Wednesday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Chicken Curry</td>
+</tr>
+
+<tr>
+    <td>Thursday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Paneer Curry</td>
+</tr>
+
+<tr>
+    <td>Friday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Egg Curry</td>
+</tr>
+
+<tr>
+    <td>Saturday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Fish Curry</td>
+</tr>
+
+<tr>
+    <td>Sunday</td>
+    <td>Red Tea + Biscuit</td>
+    <td>Rice, Dal, Mix-Veg, Salad/Chutney/Pickle</td>
+    <td>Rice, Dal, Chicken Curry</td>
+</tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- ENTRY EXIT -->
+
+    <div id="page-entry" class="page" style="display:none;">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Entry / Exit Register</h3>
+        </div>
+
+        <div class="card-body">
+
+            <button class="btn btn-success"
+                    onclick="markEntry()">
+                ✅ Mark Entry
+            </button>
+
+            <button class="btn btn-danger"
+                    onclick="markExit()">
+                🚪 Mark Exit
+            </button>
+
+            <br><br>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Entry Time</th>
+                        <th>Exit Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="entry-history">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- COMPLAINT -->
+
+    <div id="page-complaint" class="page" style="display:none;">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Submit Complaint</h3>
+            </div>
+
+            <div class="card-body">
+
+               <select class="filter-select" id="complaint-type">
+
+                    <option>Food</option>
+                    <option>WiFi</option>
+                    <option>Maintenance</option>
+                    <option>Security</option>
+
+                </select>
+
+                <br><br>
+
+               <textarea
+id="complaint-desc"
+class="form-textarea"
+placeholder="Describe your issue"></textarea>
+
+                <br><br>
+
+               <button class="btn btn-primary" onclick="submitComplaint()">
+Submit Complaint
+</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+<script src="student.js"></script>
+<script>
+window.onload = function () {
+
+    const studentName =
+        localStorage.getItem("studentName");
+
+    const nameElement =
+        document.getElementById("student-name");
+
+    if (nameElement && studentName) {
+        nameElement.textContent = studentName;
+    } else {
+        console.log("Name not found in LocalStorage");
+    }
+};
+</script>
+
+</body>
+</html>

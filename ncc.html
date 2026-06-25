@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCC Leadership | Afnan Al Jedid</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html,body{
+      width:100%;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#f8fafc;
+      color:#071b3a;
+    }
+
+    .ncc-header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:74px;
+      padding:0 7%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#06264a;
+      z-index:999;
+      box-shadow:0 8px 25px rgba(0,0,0,.18);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:#fff;
+      text-decoration:none;
+    }
+
+    .brand img{
+      width:55px;
+      height:55px;
+      object-fit:contain;
+    }
+
+    .brand h2{
+      font-size:22px;
+      line-height:1.1;
+    }
+
+    .ncc-nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:24px;
+      font-size:14px;
+      font-weight:700;
+      text-transform:uppercase;
+    }
+
+    .ncc-nav a:hover{
+      color:#ff8a00;
+    }
+
+    .hero{
+      min-height:100vh;
+      padding:120px 7% 140px;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      align-items:center;
+      gap:55px;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(5,35,70,.48),rgba(5,35,70,.48)),
+        url("indian-flag.jpg");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(4,31,61,.22);
+      z-index:0;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      left:-8%;
+      bottom:-90px;
+      width:116%;
+      height:185px;
+      background:#f8fafc;
+      border-radius:50% 50% 0 0;
+      border-top:14px solid #ff7a00;
+      box-shadow:0 -10px 0 #138808;
+      z-index:1;
+    }
+
+    .hero-content,
+    .hero-photo{
+      position:relative;
+      z-index:2;
+    }
+
+    .big-logo{
+      width:130px;
+      margin-bottom:25px;
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
+    }
+
+    .hero-content h1{
+      color:#fff;
+      font-size:62px;
+      line-height:1.05;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .hero-content h1 span{
+      display:block;
+      color:#ff7a00;
+      font-size:72px;
+    }
+
+    .tricolor-line{
+      display:flex;
+      width:420px;
+      height:6px;
+      margin:25px 0;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    .tricolor-line .orange{
+      flex:1;
+      background:#ff7a00;
+    }
+
+    .tricolor-line .white{
+      flex:1;
+      background:#fff;
+    }
+
+    .tricolor-line .green{
+      flex:1;
+      background:#138808;
+    }
+
+    .hero-content h3{
+      color:#fff;
+      font-size:24px;
+      margin-bottom:16px;
+    }
+
+    .hero-content p{
+      max-width:620px;
+      color:#f1f5f9;
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    .back-btn{
+      margin-top:28px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+      text-decoration:none;
+      padding:14px 24px;
+      border:1.5px solid rgba(255,255,255,.85);
+      border-radius:9px;
+      font-weight:700;
+      transition:.3s;
+    }
+
+    .back-btn:hover{
+      background:#fff;
+      color:#06264a;
+    }
+
+    .hero-photo{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .hero-photo img{
+      width:360px;
+      height:520px;
+      object-fit:cover;
+      object-position:center top;
+      border-radius:18px;
+      border:6px solid #fff;
+      box-shadow:0 22px 55px rgba(0,0,0,.38);
+    }
+
+    .photo-name{
+      width:360px;
+      margin-top:12px;
+      background:#06264a;
+      color:#fff;
+      text-align:center;
+      padding:16px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.35);
+      box-shadow:0 18px 35px rgba(0,0,0,.22);
+    }
+
+    .photo-name h2{
+      font-size:22px;
+      text-transform:uppercase;
+    }
+
+    .photo-name p{
+      color:#ffc928;
+      font-weight:700;
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    .section{
+      padding:75px 7%;
+      position:relative;
+      z-index:2;
+      background:#f8fafc;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:38px;
+      position:relative;
+      z-index:10;
+    }
+
+    .section-title h2{
+      color:#06264a;
+      font-size:32px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .title-line{
+      width:180px;
+      height:5px;
+      margin:12px auto 0;
+      border-radius:20px;
+      background:linear-gradient(
+        to right,
+        #ff7a00 0%,
+        #ff7a00 33.33%,
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+        #138808 66.66%,
+        #138808 100%
+      );
+      border:1px solid rgba(6,38,74,.08);
+    }
+
+    .role-grid{
+      max-width:1000px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .role-card{
+      background:#06264a;
+      color:#fff;
+      padding:30px;
+      border-radius:16px;
+      box-shadow:0 16px 38px rgba(6,38,74,.22);
+    }
+
+    .role-item{
+      display:flex;
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .role-item i{
+      font-size:24px;
+      width:30px;
+      color:#fff;
+    }
+
+    .role-item b{
+      display:block;
+      font-size:14px;
+    }
+
+    .role-item span{
+      color:#dbeafe;
+      font-size:14px;
+    }
+
+    .role-text{
+      background:#fff;
+      border-radius:16px;
+      padding:34px;
+      line-height:1.8;
+      color:#334155;
+      box-shadow:0 12px 35px rgba(15,23,42,.08);
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:24px;
+    }
+
+    .ncc-card{
+      background:#fff;
+      padding:32px 22px;
+      text-align:center;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      box-shadow:0 12px 32px rgba(15,23,42,.09);
+      transition:.3s;
+    }
+
+    .ncc-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 18px 45px rgba(15,23,42,.14);
+    }
+
+    .icon{
+      width:66px;
+      height:66px;
+      margin:0 auto 18px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:#fff;
+      font-size:26px;
+    }
+
+    .navy{background:#06264a}
+    .orange-bg{background:#ff7a00}
+    .blue{background:#1d6fff}
+    .green-bg{background:#138808}
+
+    .ncc-card h3{
+      color:#06264a;
+      margin-bottom:12px;
+      font-size:18px;
+    }
+
+    .ncc-card p{
+      color:#475569;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .camp-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .camp-card{
+      background:#fff;
+      padding:28px;
+      border-radius:16px;
+      display:flex;
+      gap:18px;
+      box-shadow:0 12px 32px rgba(15,23,42,.09);
+      border:1px solid #e5e7eb;
+    }
+
+    .camp-card h3{
+      color:#06264a;
+      margin-bottom:8px;
+    }
+
+    .camp-card p{
+      color:#475569;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .tags span{
+      display:inline-block;
+      margin-top:14px;
+      margin-right:6px;
+      padding:5px 10px;
+      background:#06264a;
+      color:#fff;
+      border-radius:5px;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .tags span:nth-child(2){
+      background:#138808;
+    }
+
+    .skills-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:24px;
+    }
+
+    .skill-box{
+      display:flex;
+      gap:15px;
+      align-items:flex-start;
+      background:#fff;
+      padding:24px;
+      border-radius:14px;
+      box-shadow:0 12px 32px rgba(15,23,42,.08);
+    }
+
+    .skill-box i{
+      font-size:34px;
+      color:#06264a;
+    }
+
+    .skill-box h3{
+      color:#06264a;
+      margin-bottom:6px;
+    }
+
+    .skill-box p{
+      color:#475569;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .socials-section{
+      background:#06264a;
+      padding:80px 7%;
+      position:relative;
+      z-index:2;
+    }
+
+    .socials-section .section-title h2{
+      color:#fff;
+    }
+
+    .socials-section .title-line{
+      border:0;
+    }
+
+    .social-section{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:25px;
+      margin-top:40px;
+    }
+
+.social-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    padding:2px;
+    border-radius:18px;
+
+    background:linear-gradient(
+      90deg,
+      #ff7a00,
+      #ffffff,
+      #138808
+    );
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+
+    pointer-events:none;
+}
+
+    .social-card{
+    position:relative;
+    overflow:hidden;
+
+    text-decoration:none;
+    text-align:center;
+
+    background:white;
+    padding:35px 25px;
+
+    border-radius:18px;
+
+    color:#06264a;
+
+    transition:.4s;
+
+    border:2px solid transparent;
+
+    box-shadow:
+      0 0 0 rgba(255,122,0,0),
+      0 0 0 rgba(255,255,255,0),
+      0 0 0 rgba(19,136,8,0);
+}
+
+.social-card::after{
+    content:"";
+    position:absolute;
+    inset:-50%;
+
+    background:linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,122,0,.15),
+      rgba(255,255,255,.20),
+      rgba(19,136,8,.15),
+      transparent
+    );
+
+    transform:rotate(25deg);
+    animation:shine 6s linear infinite;
+}
+
+@keyframes shine{
+    0%{
+        transform:translateX(-150%) rotate(25deg);
+    }
+    100%{
+        transform:translateX(150%) rotate(25deg);
+    }
+}
+   .social-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+      0 0 20px rgba(255,122,0,.45),
+      0 0 35px rgba(255,255,255,.45),
+      0 0 20px rgba(19,136,8,.45);
+}
+
+    .social-card i{
+      font-size:52px;
+      margin-bottom:15px;
+    }
+
+    .instagram i{color:#E1306C}
+    .facebook i{color:#1877F2}
+    .whatsapp i{color:#25D366}
+    .email i{color:#EA4335}
+
+    .social-card h3{
+      margin-bottom:8px;
+      font-size:20px;
+    }
+
+    .social-card p{
+      color:#64748b;
+      font-size:14px;
+      word-break:break-word;
+    }
+
+    .footer{
+      background:#031b35;
+      color:#fff;
+      text-align:center;
+      padding:34px 7%;
+    }
+
+    .footer h3{
+      font-size:18px;
+      margin-bottom:12px;
+    }
+
+    .footer span{
+      color:#ff7a00;
+    }
+
+    .footer p{
+      color:#dbeafe;
+      font-size:14px;
+    }
+
+    @media(max-width:900px){
+      .ncc-nav{
+        display:none;
+      }
+
+      .ncc-header{
+        padding:0 5%;
+      }
+
+      .brand h2{
+        font-size:17px;
+      }
+
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding:110px 5% 120px;
+      }
+
+      .big-logo{
+        margin:auto auto 20px;
+        width:105px;
+      }
+
+      .hero-content h1{
+        font-size:42px;
+      }
+
+      .hero-content h1 span{
+        font-size:50px;
+      }
+
+      .tricolor-line{
+        margin-left:auto;
+        margin-right:auto;
+        width:260px;
+      }
+
+      .hero-content p{
+        margin:auto;
+        font-size:15px;
+      }
+
+      .hero-content h3{
+        font-size:19px;
+      }
+
+      .hero-photo img{
+        width:300px;
+        height:430px;
+      }
+
+      .photo-name{
+        width:300px;
+      }
+
+      .role-grid,
+      .card-grid,
+      .camp-grid,
+      .skills-row,
+      .social-section{
+        grid-template-columns:1fr;
+      }
+
+      .camp-card{
+        flex-direction:column;
+        text-align:center;
+        align-items:center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="ncc-header">
+  <a href="index.html" class="brand">
+    <img src="ncc-logo.png" alt="NCC Logo">
+    <div>
+      <h2>AFNAN AL JEDID</h2>
+    </div>
+  </a>
+
+  <nav class="ncc-nav">
+    <a href="index.html">Home</a>
+    <a href="#role">About</a>
+    <a href="#responsibilities">NCC</a>
+    <a href="#camps">Camps</a>
+    <a href="#skills">Skills</a>
+    <a href="#socials">Socials</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <img src="ncc-logo.png" alt="NCC Logo" class="big-logo">
+
+    <h1>
+      42 MEGH BN NCC
+      <span>Journey</span>
+    </h1>
+
+    <div class="tricolor-line">
+      <span class="orange"></span>
+      <span class="white"></span>
+      <span class="green"></span>
+    </div>
+
+    <h3>Sgt. Afnan Al Jedid • USTM NCC</h3>
+
+    <p>
+      A showcase of my NCC leadership experience, event coordination,
+      cadet management, camp participation, discipline, teamwork,
+      and media design work.
+    </p>
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Portfolio
+    </a>
+  </div>
+
+  <div class="hero-photo">
+    <img src="ncc profile.jpeg" alt="Sgt. Afnan Al Jedid">
+
+    <div class="photo-name">
+      <h2>Sgt. Afnan Al Jedid</h2>
+      <p>42 MEGH BN NCC | USTM</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="role">
+  <div class="section-title">
+    <h2>My NCC Role</h2>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-item">
+        <i class="fa-solid fa-chevron-up"></i>
+        <div>
+          <b>Rank</b>
+          <span>Sergeant</span>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <i class="fa-solid fa-flag"></i>
+        <div>
+          <b>Unit</b>
+          <span>42 MEGH BN NCC</span>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <i class="fa-solid fa-building-columns"></i>
+        <div>
+          <b>Institution</b>
+          <span>USTM</span>
+        </div>
+      </div>
+
+      <div class="role-item">
+        <i class="fa-solid fa-bullseye"></i>
+        <div>
+          <b>Focus</b>
+          <span>Leadership, Discipline, Event Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-text">
+      <p>
+        As an NCC cadet, I have worked in leadership, coordination,
+        volunteer management, cadet communication, discipline management,
+        and official event support.
+      </p>
+      <br>
+      <p>
+        My NCC journey helped me develop confidence, teamwork,
+        public communication, responsibility, and management skills
+        that continue to shape my personal and professional growth.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="responsibilities">
+  <div class="section-title">
+    <h2>Key Responsibilities</h2>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="card-grid">
+    <div class="ncc-card">
+      <div class="icon navy"><i class="fa-solid fa-users"></i></div>
+      <h3>Cadet Coordination</h3>
+      <p>Managing cadet reporting, attendance, dress code, duties and communication.</p>
+    </div>
+
+    <div class="ncc-card">
+      <div class="icon orange-bg"><i class="fa-solid fa-calendar-days"></i></div>
+      <h3>Event Management</h3>
+      <p>Supporting NCC events, university programs, volunteer duties and activities.</p>
+    </div>
+
+    <div class="ncc-card">
+      <div class="icon blue"><i class="fa-solid fa-palette"></i></div>
+      <h3>Media Design</h3>
+      <p>Creating posters, captions, frames, promotional designs and digital content.</p>
+    </div>
+
+    <div class="ncc-card">
+      <div class="icon green-bg"><i class="fa-solid fa-star"></i></div>
+      <h3>Leadership</h3>
+      <p>Guiding juniors, maintaining discipline and supporting NCC class organization.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="camps">
+  <div class="section-title">
+    <h2>Camps & Activities</h2>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="camp-grid">
+    <div class="camp-card">
+      <div class="icon navy"><i class="fa-solid fa-shield-halved"></i></div>
+      <div>
+        <h3>CATC Camp</h3>
+        <p>Participated in Combined Annual Training Camp and NCC training activities.</p>
+        <div class="tags"><span>NCC</span><span>Training</span></div>
+      </div>
+    </div>
+
+    <div class="camp-card">
+      <div class="icon orange-bg"><i class="fa-solid fa-people-group"></i></div>
+      <div>
+        <h3>EBSB Camp</h3>
+        <p>Represented NCC through cultural exchange, discipline and teamwork activities.</p>
+        <div class="tags"><span>Camp</span><span>Culture</span></div>
+      </div>
+    </div>
+
+    <div class="camp-card">
+      <div class="icon green-bg"><i class="fa-solid fa-map-location-dot"></i></div>
+      <div>
+        <h3>TSC Map Reading</h3>
+        <p>Selected for map reading activities under TSC-related NCC training.</p>
+        <div class="tags"><span>Map Reading</span><span>Skill</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="section-title">
+    <h2>Skills Developed</h2>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="skills-row">
+    <div class="skill-box">
+      <i class="fa-solid fa-person-military-rifle"></i>
+      <div>
+        <h3>Discipline</h3>
+        <p>Learned time management, responsibility and official conduct.</p>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <i class="fa-solid fa-people-arrows"></i>
+      <div>
+        <h3>Teamwork</h3>
+        <p>Worked with cadets, seniors, ANOs and PI staff during activities.</p>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <i class="fa-solid fa-bullhorn"></i>
+      <div>
+        <h3>Communication</h3>
+        <p>Prepared notices, captions, instructions and cadet announcements.</p>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <i class="fa-solid fa-pen-nib"></i>
+      <div>
+        <h3>Design</h3>
+        <p>Created NCC-related posters, frames and promotional content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="socials-section" id="socials">
+  <div class="section-title">
+    <h2>Connect With USTM NCC</h2>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="social-section">
+    <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ==" target="_blank" class="social-card instagram">
+      <i class="fa-brands fa-instagram"></i>
+      <h3>Instagram</h3>
+      <p>@ustmncc_warriors</p>
+    </a>
+
+    <a href="https://www.facebook.com/share/1BdKmMqtJk/" target="_blank" class="social-card facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+      <h3>Facebook</h3>
+      <p>USTM NCC Unit</p>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank" class="social-card whatsapp">
+      <i class="fa-brands fa-whatsapp"></i>
+      <h3>WhatsApp Channel</h3>
+      <p>USTM NCC Updates</p>
+    </a>
+
+    <a href="mailto:ustmnccwarriors@gmail.com" class="social-card email">
+      <i class="fa-solid fa-envelope"></i>
+      <h3>Email</h3>
+      <p>ustmnccwarriors@gmail.com</p>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <h3>⭐ “Unity and Discipline are the true strength of an <span>NCC Cadet</span>.” ⭐</h3>
+  <p>© 2026 Afnan Al Jedid. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

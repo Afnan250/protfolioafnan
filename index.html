@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afnan Al Jedid | Portfolio</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <a href="#home" class="logo"><span>A</span> Afnan Al Jedid</a>
+
+    <nav class="navbar" id="navbar">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="themeBtn" class="theme-btn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button id="menuBtn" class="menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content reveal">
+      <p class="tag">Full Stack Developer & UI/UX Designer</p>
+      <h1>Hi, I'm <span>Afnan Al Jedid</span></h1>
+      <h3>BCA Student • Freelancer • Web Developer</h3>
+      <p class="desc">I build modern, responsive, and user-focused web applications that combine clean design with powerful functionality.</p>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="btn primary">Hire Me <i class="fa-solid fa-paper-plane"></i></a>
+        <a href="#projects" class="btn secondary">View Projects <i class="fa-solid fa-eye"></i></a>
+      </div>
+
+      <div class="socials">
+        <a href="https://github.com/Afnan250" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/afnan-al-jedid-005937323" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:afnanjedid@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <div class="hero-image reveal">
+      <div class="circle"></div>
+    <img src="profile.jpg" alt="Afnan Al Jedid">
+      <div class="code-card"><i class="fa-solid fa-code"></i></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-title reveal"><i class="fa-regular fa-user"></i><h2>About Me</h2></div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I am a Bachelor of Computer Applications student with a strong interest in web development, software engineering, and user interface design.</p>
+        <p>I enjoy transforming ideas into functional, responsive, and visually appealing digital products. My goal is to build solutions that help businesses and individuals establish a strong online presence.</p>
+      </div>
+
+      <div class="info-box reveal">
+        <p><b>Name:</b> Afnan Al Jedid</p>
+        <p><b>Email:</b> afnanjedid@gmail.com</p>
+        <p><b>Degree:</b> BCA Student</p>
+        <p><b>Freelance:</b> Available</p>
+        <p><b>Location:</b> India</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="section-title reveal"><i class="fa-solid fa-code"></i><h2>My Skills</h2></div>
+
+    <div class="skill-grid">
+      <div class="skill-card reveal"><h3>Frontend</h3><p>HTML5</p><p>CSS3</p><p>JavaScript</p><p>React</p><p>Responsive Design</p></div>
+      <div class="skill-card reveal"><h3>Backend</h3><p>Node.js</p><p>Express.js</p><p>REST APIs</p><p>Database Management</p><p>Authentication</p></div>
+      <div class="skill-card reveal"><h3>Design</h3><p>UI/UX Design</p><p>Figma</p><p>Graphic Design</p><p>Branding</p><p>Canva</p></div>
+      <div class="skill-card reveal"><h3>Tools</h3><p>Git</p><p>GitHub</p><p>VS Code</p><p>Postman</p><p>Deployment</p></div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-title reveal"><i class="fa-solid fa-briefcase"></i><h2>What I Do</h2></div>
+
+    <div class="service-grid">
+      <div class="service-card reveal"><i class="fa-solid fa-laptop-code"></i><h3>Portfolio Websites</h3><p>Modern personal websites to showcase your work.</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-globe"></i><h3>Business Websites</h3><p>Professional websites for businesses and organizations.</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-palette"></i><h3>UI/UX Design</h3><p>Beautiful and user-friendly digital experiences.</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-screwdriver-wrench"></i><h3>Maintenance</h3><p>Website updates, fixes, and optimization.</p></div>
+    </div>
+  </section>
+  
+<section class="projects" id="projects">
+  <div class="section-title reveal">
+    <i class="fa-regular fa-folder-open"></i>
+    <h2>Featured Projects</h2>
+  </div>
+
+  <div class="project-grid">
+<div class="project-card reveal"
+     onclick="window.location.href='./dashboard.html'">
+      <div class="project-img gradient">
+        <i class="fa-solid fa-building-user"></i>
+      </div>
+
+      <h3>Hostel Management System</h3>
+
+      <p>
+        A modern Hostel Management System with Student Management, Room Allocation,
+        Entry/Exit Tracking, Complaint Management, Food Menu Management,
+        Medical Assistance, and Admin Dashboard.
+      </p>
+
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>JavaScript</span>
+    </div>
+
+    <div class="project-card reveal" onclick="window.open('ncc.html','_blank')">
+      <div class="project-img gradient">
+        <i class="fa-solid fa-photo-film"></i>
+      </div>
+
+      <h3>NCC Event Management & Media Design</h3>
+      <p>Digital posters, event promotions, certificate designs, and NCC media solutions.</p>
+
+      <span>Canva</span>
+      <span>Design</span>
+      <span>Branding</span>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img gradient">
+        <i class="fa-solid fa-user-tie"></i>
+      </div>
+
+      <h3>Personal Portfolio Website</h3>
+      <p>A modern responsive portfolio website with dark/light mode and animations.</p>
+
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JS</span>
+    </div>
+
+  </div>
+</section>
+
+
+  <section class="achievements">
+    <div class="section-title reveal"><i class="fa-solid fa-trophy"></i><h2>Achievements</h2></div>
+
+    <div class="achievement-grid">
+      <div class="achievement reveal"><h3>NCC Cadet</h3><p>Active NCC cadet with leadership experience.</p></div>
+      <div class="achievement reveal"><h3>Web Developer</h3><p>Built multiple full stack and frontend projects.</p></div>
+      <div class="achievement reveal"><h3>UI/UX Designer</h3><p>Designed posters, banners, and digital media.</p></div>
+      <div class="achievement reveal"><h3>Freelancer</h3><p>Helping clients build modern web solutions.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-title reveal"><i class="fa-solid fa-paper-plane"></i><h2>Let's Connect</h2></div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p><i class="fa-solid fa-envelope"></i> afnanjedid@gmail.com</p>
+        <p><i class="fa-brands fa-github"></i> github.com/Afnan250</p>
+        <p><i class="fa-brands fa-linkedin"></i> linkedin.com/in/afnan-al-jedid-005937323</p>
+      </div>
+
+      <form class="contact-form reveal" action="https://formsubmit.co/afnanjedid@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Portfolio Message - Afnan Al Jedid">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="thankyou.html">
+
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <input type="tel" id="phone" name="phone" placeholder="Your Phone / WhatsApp Number (optional)">
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+        <div class="form-buttons">
+          <button class="btn primary" type="submit">Send to My Email</button>
+          <button class="btn secondary whatsapp-btn" type="button" onclick="sendWhatsApp()">Send to My WhatsApp</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Afnan Al Jedid. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
