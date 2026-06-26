@@ -158,36 +158,60 @@ body{
 /* RIGHT LOGO CARD */
 
 .ustm-card{
-    background:rgba(255,255,255,.08);
-    border:3px solid white;
-    border-radius:22px;
-    padding:35px;
+    background:transparent;
+    border:none;
     text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    padding:20px;
 }
 
 .ustm-card img{
-    width:270px;
-    height:270px;
+    width:280px;
+    height:280px;
     object-fit:contain;
     background:white;
     border-radius:50%;
-    padding:15px;
+    padding:12px;
+    border:6px solid white;
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,.8),
+    0 0 30px rgba(255,255,255,.7),
+    0 0 60px rgba(255,255,255,.6);
+
     margin-bottom:25px;
-    border:5px solid white;
-    box-shadow:0 0 25px rgba(255,255,255,.35);
 }
 
 .ustm-card h3{
-    font-size:28px;
+    font-size:48px;
+    font-weight:900;
+    color:white;
+    margin-bottom:18px;
+}
+
+.title-line{
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.title-line span{
+    width:80px;
+    height:5px;
+}
+
+.ustm-card h4{
+    font-size:38px;
+    color:#ffd700;
+    margin-bottom:15px;
+    font-weight:900;
 }
 
 .ustm-card p{
-    color:#ffd700;
-    font-weight:900;
-    margin-top:10px;
+    font-size:24px;
+    color:white;
+    font-weight:700;
+    line-height:1.4;
 }
-
 /* SECTIONS */
 
 .section{
@@ -369,19 +393,28 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    background-image: linear-gradient(to right, #FF9933 0%, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%, #138808 100%); color: #000000;
-    color:white;
+    background:linear-gradient(
+        to right,
+        #ff9933 0%,
+        #ff9933 33.33%,
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+        #138808 66.66%,
+        #138808 100%
+    );
+    color:#061f3a;
     font-weight:900;
     padding:10px 0;
     overflow:hidden;
     z-index:1000;
+    border-top:2px solid white;
 }
 
 .marquee span{
     display:inline-block;
     white-space:nowrap;
     padding-left:100%;
-    animation:moveText 25s linear infinite;
+    animation:moveText 18s linear infinite;
 }
 
 @keyframes moveText{
@@ -506,10 +539,22 @@ footer{
     </div>
 
     <div class="ustm-card">
-        <img src="ncc2.jpeg" alt="USTM NCC Logo">
-        <h3>USTM NCC UNIT</h3>
-        <p>42 MEGH BN NCC | University of Science & Technology Meghalaya</p>
+     <img src="ncc2.jpeg" alt="USTM NCC Logo">
+    <h4>USTM NCC UNIT</h4>
+
+    <div class="title-line">
+        <span class="orange"></span>
+        <span class="white"></span>
+        <span class="green"></span>
     </div>
+
+    <h3>42 MEGH BN NCC</h3>
+
+    <p>
+        UNIVERSITY OF SCIENCE <br>
+        AND TECHNOLOGY MEGHALAYA
+    </p>
+</div>
 </section>
 
 <section class="section" id="about">
