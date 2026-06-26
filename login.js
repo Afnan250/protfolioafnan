@@ -97,8 +97,8 @@ function loginUser(){
             return;
         }
 
-        localStorage.setItem("studentName", students[userId].name);
-        localStorage.setItem("studentRoom", students[userId].room);
+       localStorage.setItem("studentRoll", userId);
+localStorage.setItem("studentName", students[userId].name);
         window.location.href = "student.html";
     }else{
         if(!admins[userId]){
