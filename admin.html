@@ -4,110 +4,179 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel | UniHostel</title>
-<link rel="stylesheet" href="hostelstyle.css">
-</head>
 
+<link rel="stylesheet" href="hostelstyle.css">
+
+</head>
 <body>
 
 <div class="app">
 
-<aside class="sidebar">
-<div class="logo-section">
-<h2>🎓 UniHostel</h2>
-<p>Admin Panel</p>
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <h2>🎓 UniHostel</h2>
+            <p>Administrator Panel</p>
+        </div>
+
+        <button onclick="showPage('dashboard')">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="showPage('students')">
+            👥 All Students
+        </button>
+
+        <button onclick="showPage('requests')">
+            📋 Room Requests
+        </button>
+
+        <button onclick="showPage('assigned')">
+            🛏 Assigned Rooms
+        </button>
+
+        <button onclick="showPage('complaints')">
+            📢 Complaints
+        </button>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+    <main class="main-content">
+
+        <section id="dashboard" class="page active">
+
+            <h1>Admin Dashboard</h1>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Students</h3>
+                    <h2 id="studentCount">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Pending Requests</h3>
+                    <h2 id="requestCount">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Assigned Rooms</h3>
+                    <h2 id="assignedCount">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Total Complaints</h3>
+                    <h2 id="complaintCountAdmin">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="students" class="page">
+
+            <h1>All Registered Students</h1>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Roll Number</th>
+                        <th>Department</th>
+                        <th>Room</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentsTable">
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section id="requests" class="page">
+
+            <h1>Room Requests</h1>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll</th>
+                        <th>Hostel Choice</th>
+                        <th>Room Type</th>
+                        <th>Bathroom</th>
+                        <th>Reason</th>
+                        <th>Assign Room</th>
+                    </tr>
+                </thead>
+
+                <tbody id="requestTable">
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section id="assigned" class="page">
+
+            <h1>Assigned Rooms</h1>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll</th>
+                        <th>Hostel</th>
+                        <th>Room No</th>
+                        <th>Room Type</th>
+                        <th>Bathroom</th>
+                    </tr>
+                </thead>
+
+                <tbody id="assignedTable">
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section id="complaints" class="page">
+
+            <h1>Student Complaints</h1>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll</th>
+                        <th>Complaint</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="adminComplaintTable">
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
 </div>
 
-<button onclick="showPage('dashboard')">🏠 Dashboard</button>
-<button onclick="showPage('students')">👥 All Students</button>
-<button onclick="showPage('requests')">📋 Room Requests</button>
-<button onclick="showPage('assigned')">🛏 Assigned Rooms</button>
-<button onclick="showPage('complaints')">📢 Complaints</button>
-<button onclick="logout()">🚪 Logout</button>
-</aside>
+<script src="admin.js?v=10"></script>
 
-<main class="main-content">
-
-<section id="dashboard" class="page active">
-<h1>Admin Dashboard</h1>
-
-<div class="cards">
-<div class="card"><h3>Total Students</h3><h2 id="studentCount">0</h2></div>
-<div class="card"><h3>Pending Requests</h3><h2 id="requestCount">0</h2></div>
-<div class="card"><h3>Assigned Rooms</h3><h2 id="assignedCount">0</h2></div>
-<div class="card"><h3>Complaints</h3><h2 id="complaintCountAdmin">0</h2></div>
-</div>
-</section>
-
-<section id="students" class="page">
-<h1>All Students</h1>
-<table>
-<thead>
-<tr>
-<th>Photo</th>
-<th>Name</th>
-<th>Roll</th>
-<th>Department</th>
-<th>Room</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="studentsTable"></tbody>
-</table>
-</section>
-
-<section id="requests" class="page">
-<h1>Room Requests</h1>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Roll</th>
-<th>Hostel Choice</th>
-<th>Room Type</th>
-<th>Bathroom</th>
-<th>Reason</th>
-<th>Assign</th>
-</tr>
-</thead>
-<tbody id="requestTable"></tbody>
-</table>
-</section>
-
-<section id="assigned" class="page">
-<h1>Assigned Rooms</h1>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Roll</th>
-<th>Hostel</th>
-<th>Room</th>
-<th>Room Type</th>
-<th>Bathroom</th>
-</tr>
-</thead>
-<tbody id="assignedTable"></tbody>
-</table>
-</section>
-
-<section id="complaints" class="page">
-<h1>Complaints</h1>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Roll</th>
-<th>Complaint</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="adminComplaintTable"></tbody>
-</table>
-</section>
-
-</main>
-</div>
-
-<script src="admin.js"></script>
 </body>
 </html>
