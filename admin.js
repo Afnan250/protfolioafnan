@@ -23,36 +23,23 @@ function loadAllStudents(){
         let student = students[roll];
         let room = assignedRooms.find(item => item.roll === roll);
 
-let photo =
-localStorage.getItem("profilePicture_" + roll);
+        let photo = localStorage.getItem("profilePicture_" + roll);
 
-if(!photo){
-    photo =
-    "https://via.placeholder.com/60";
-}
+        if(!photo){
+            photo = "https://via.placeholder.com/60";
+        }
 
-table.innerHTML += `
-<tr>
-
-<td>
-<img
-src="${photo}"
-class="student-photo">
-</td>
-
-<td>${student.name}</td>
-
-<td>${roll}</td>
-
-<td>${student.dept || "-"}</td>
-
-<td>${room ? room.room : "Not Assigned"}</td>
-
-<td>${room ? "Allocated" : "Pending"}</td>
-
-</tr>
-`;
-
+        table.innerHTML += `
+        <tr>
+            <td>
+                <img src="${photo}" class="student-photo">
+            </td>
+            <td>${student.name}</td>
+            <td>${roll}</td>
+            <td>${student.dept || "-"}</td>
+            <td>${room ? room.room : "Not Assigned"}</td>
+            <td>${room ? "Allocated" : "Pending"}</td>
+        </tr>
         `;
     });
 
