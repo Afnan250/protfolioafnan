@@ -10,7 +10,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:url("C:\Users\afnan\Downloads\afnan-portfolio-fixed\afnan-protfolio-main\hostel-bg.jpg") center/cover no-repeat;
+  background: url("./images/hostel-bg.jpg") center/cover no-repeat;
   overflow:hidden;
 }
 
