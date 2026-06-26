@@ -1,3 +1,4 @@
+```javascript
 let roll = localStorage.getItem("studentRoll");
 let name = localStorage.getItem("studentName");
 let dept = localStorage.getItem("studentDept");
@@ -6,112 +7,95 @@ if(!roll){
     window.location.href = "login.html";
 }
 
-document.getElementById("studentName").innerText = name || "Student";
-
-if(document.getElementById("profileName")){
-    document.getElementById("profileName").innerText = name || "-";
-}
-
-if(document.getElementById("profileRoll")){
-    document.getElementById("profileRoll").innerText = roll || "-";
-}
-
-if(document.getElementById("profileDept")){
-    document.getElementById("profileDept").innerText = dept || "-";
-}
+document.getElementById("studentName").innerText = name;
+document.getElementById("profileName").innerText = name;
+document.getElementById("profileRoll").innerText = roll;
+document.getElementById("profileDept").innerText = dept;
 
 function showPage(pageId){
-    document.querySelectorAll(".page").forEach(page=>{
+
+    document.querySelectorAll(".page")
+    .forEach(page=>{
         page.classList.remove("active");
     });
 
-    document.getElementById(pageId).classList.add("active");
+    document.getElementById(pageId)
+    .classList.add("active");
 }
 
 function loadRoom(){
+
     let assignedRooms =
-        JSON.parse(localStorage.getItem("assignedRooms")) || [];
+    JSON.parse(localStorage.getItem("assignedRooms")) || [];
 
-    let roomData =
-        assignedRooms.find(item => item.roll === roll);
+    let room =
+    assignedRooms.find(item => item.roll === roll);
 
-    if(roomData){
+    if(room){
 
-        if(document.getElementById("roomStatus")){
-            document.getElementById("roomStatus").innerText = "Assigned";
-        }
+        document.getElementById("roomStatus")
+        .innerText = "Allocated";
 
-        if(document.getElementById("studentRoom")){
-            document.getElementById("studentRoom").innerText =
-            roomData.room;
-        }
+        document.getElementById("studentHostel")
+        .innerText = room.hostel;
 
-        if(document.getElementById("profileRoom")){
-            document.getElementById("profileRoom").innerText =
-            roomData.room;
-        }
+        document.getElementById("studentRoom")
+        .innerText = room.room;
 
-        if(document.getElementById("roomDetails")){
-            document.getElementById("roomDetails").innerHTML = `
-                <h2>Room ${roomData.room}</h2>
-                <p><b>Block:</b> ${roomData.block}</p>
-                <p><b>Type:</b> ${roomData.type}</p>
-                <p><b>Status:</b> Allocated</p>
-            `;
-        }
+        document.getElementById("profileRoom")
+        .innerText = room.room;
+
+        document.getElementById("roomDetails")
+        .innerHTML = `
+            <h2>${room.room}</h2>
+            <p><b>Hostel:</b> ${room.hostel}</p>
+            <p><b>Room Type:</b> ${room.roomType}</p>
+            <p><b>Bathroom:</b> ${room.bathroom}</p>
+            <p><b>Status:</b> Allocated</p>
+        `;
 
     }else{
 
-        if(document.getElementById("roomStatus")){
-            document.getElementById("roomStatus").innerText =
-            "Pending";
-        }
-
-        if(document.getElementById("studentRoom")){
-            document.getElementById("studentRoom").innerText =
-            "Not Assigned";
-        }
-
-        if(document.getElementById("profileRoom")){
-            document.getElementById("profileRoom").innerText =
-            "Not Assigned";
-        }
-
-        if(document.getElementById("roomDetails")){
-            document.getElementById("roomDetails").innerHTML = `
-                <h2>No Room Assigned</h2>
-                <p>Waiting for admin approval.</p>
-            `;
-        }
+        document.getElementById("roomStatus")
+        .innerText = "Pending";
     }
 }
 
 function requestRoom(){
 
-    let reason =
-        document.getElementById("requestReason").value.trim();
+    let hostel =
+    document.getElementById("hostelType").value;
 
-    if(reason === ""){
-        alert("Enter request reason");
+    let roomType =
+    document.getElementById("roomType").value;
+
+    let bathroom =
+    document.getElementById("bathroomType").value;
+
+    let reason =
+    document.getElementById("requestReason").value;
+
+    if(
+        hostel === "" ||
+        roomType === "" ||
+        bathroom === "" ||
+        reason === ""
+    ){
+        alert("Please fill all fields");
         return;
     }
 
     let requests =
-        JSON.parse(localStorage.getItem("roomRequests")) || [];
-
-    let existing =
-        requests.find(item => item.roll === roll);
-
-    if(existing){
-        alert("Request already submitted");
-        return;
-    }
+    JSON.parse(localStorage.getItem("roomRequests")) || [];
 
     requests.push({
-        name:name,
-        roll:roll,
-        dept:dept,
-        reason:reason,
+        roll,
+        name,
+        dept,
+        hostel,
+        roomType,
+        bathroom,
+        reason,
         status:"Pending"
     });
 
@@ -120,9 +104,67 @@ function requestRoom(){
         JSON.stringify(requests)
     );
 
-    document.getElementById("requestReason").value = "";
+    document.getElementById("requestMsg")
+    .innerText =
+    "Room request submitted successfully.";
 
-    alert("Room request submitted");
+    document.getElementById("requestReason").value = "";
+}
+
+function addComplaint(){
+
+    let complaint =
+    document.getElementById("complaintText").value;
+
+    if(complaint === ""){
+        return;
+    }
+
+    let complaints =
+    JSON.parse(localStorage.getItem("complaints")) || [];
+
+    complaints.push({
+        roll,
+        name,
+        complaint,
+        status:"Pending"
+    });
+
+    localStorage.setItem(
+        "complaints",
+        JSON.stringify(complaints)
+    );
+
+    loadComplaints();
+
+    document.getElementById("complaintText").value = "";
+}
+
+function loadComplaints(){
+
+    let complaints =
+    JSON.parse(localStorage.getItem("complaints")) || [];
+
+    let myComplaints =
+    complaints.filter(item => item.roll === roll);
+
+    document.getElementById("complaintCount")
+    .innerText = myComplaints.length;
+
+    let table =
+    document.getElementById("complaintTable");
+
+    table.innerHTML = "";
+
+    myComplaints.forEach(item=>{
+
+        table.innerHTML += `
+        <tr>
+            <td>${item.complaint}</td>
+            <td>${item.status}</td>
+        </tr>
+        `;
+    });
 }
 
 function logout(){
@@ -135,3 +177,5 @@ function logout(){
 }
 
 loadRoom();
+loadComplaints();
+```
