@@ -1,196 +1,94 @@
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    /* Temporary background */
-    background:linear-gradient(
-        135deg,
-        #0f172a,
-        #1e293b,
-        #334155
-    );
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#07101f;
+  color:white;
 }
 
-.scene{
-    perspective:1200px;
+.login-box{
+  width:380px;
+  background:#111827;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 0 25px rgba(59,130,246,0.4);
+  text-align:center;
 }
 
-.card{
-    width:380px;
-    height:500px;
-    position:relative;
-    transform-style:preserve-3d;
-    transition:1s;
+h1{ margin-bottom:10px; }
+h2{ margin-bottom:20px; color:#60a5fa; }
+
+.role-buttons{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-.card.flip{
-    transform:rotateY(180deg);
-}
-
-.face{
-    position:absolute;
-    width:100%;
-    height:100%;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:15px;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,0.1);
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,0.2);
-
-    box-shadow:0 8px 32px rgba(0,0,0,0.3);
-
-    backface-visibility:hidden;
-}
-
-.back{
-    transform:rotateY(180deg);
-}
-
-h2{
-    color:white;
-    margin-bottom:10px;
-}
-
-p{
-    color:white;
-    text-align:center;
+.role-buttons button{
+  background:#374151;
 }
 
 input{
-    width:100%;
-    padding:14px;
-
-    border:none;
-    outline:none;
-
-    border-radius:10px;
-
-    background:rgba(255,255,255,0.15);
-
-    color:white;
-    font-size:16px;
-}
-
-input::placeholder{
-    color:rgba(255,255,255,0.7);
+  width:100%;
+  padding:13px;
+  margin:10px 0;
+  border:none;
+  outline:none;
+  border-radius:10px;
+  font-size:15px;
 }
 
 button{
-    width:100%;
-    padding:14px;
-
-    border:none;
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:16px;
-    font-weight:600;
-
-    transition:.3s;
+  width:100%;
+  padding:13px;
+  margin-top:12px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.login-btn{
-    background:#3b82f6;
-    color:white;
+button:hover{ background:#1d4ed8; }
+
+.captcha-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
 }
 
-.flip-btn{
-    background:transparent;
-    color:white;
-    border:1px solid rgba(255,255,255,0.3);
+#captchaText{
+  flex:1;
+  background:#f3f4f6;
+  color:#111827;
+  padding:12px;
+  border-radius:10px;
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
-button:hover{
-    transform:translateY(-2px);
+.captcha-row button{
+  width:55px;
+  margin:0;
 }
 
-.account-link{
-    color:white;
-    font-size:14px;
-    margin-top:5px;
+#otpShow{
+  color:#22c55e;
+  margin-top:12px;
+  font-weight:bold;
 }
 
-.account-link span{
-    color:#60a5fa;
-    cursor:pointer;
-    font-weight:600;
-}
-
-.account-link span:hover{
-    text-decoration:underline;
-}
-
-.divider{
-    width:100%;
-    text-align:center;
-    color:rgba(255,255,255,0.8);
-    margin:10px 0;
-    position:relative;
-}
-
-.divider::before,
-.divider::after{
-    content:"";
-    position:absolute;
-    top:50%;
-    width:35%;
-    height:1px;
-    background:rgba(255,255,255,0.3);
-}
-
-.divider::before{
-    left:0;
-}
-
-.divider::after{
-    right:0;
-}
-
-select{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:rgba(255,255,255,0.15);
-    color:white;
-    font-size:16px;
-    outline:none;
-}
-
-.forgot-password{
-    text-align:center;
-    margin-top:10px;
-}
-
-.forgot-password a{
-    color:#2563eb;
-    text-decoration:none;
-    font-size:14px;
-    cursor:pointer;
-}
-
-.forgot-password a:hover{
-    text-decoration:underline;
+#message{
+  margin-top:15px;
+  color:#f87171;
 }
