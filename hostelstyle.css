@@ -220,3 +220,12 @@ textarea{
 #imageUpload{
     width:250px;
 }
+
+.student-photo{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border-radius:12px;
+    border:2px solid #ffd700;
+}
+
