@@ -1,28 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | UniHostel</title>
+<link rel="stylesheet" href="hostelstyle.css">
 </head>
-
 <body>
 
+<div class="app">
+<aside class="sidebar">
+<h2>🎓 UniHostel</h2>
+<p>Admin Panel</p>
+
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('requests')">Room Requests</button>
+<button onclick="showPage('assigned')">Assigned Rooms</button>
+<button onclick="showPage('complaints')">Complaints</button>
+<button onclick="logout()">Logout</button>
+</aside>
+
+<main class="main">
+
+<section id="dashboard" class="page active">
 <h1>Admin Dashboard</h1>
+<div class="cards">
+<div class="card"><h3>Room Requests</h3><h2 id="requestCount">0</h2></div>
+<div class="card"><h3>Assigned Rooms</h3><h2 id="assignedCount">0</h2></div>
+<div class="card"><h3>Complaints</h3><h2 id="adminComplaintCount">0</h2></div>
+</div>
+</section>
 
-<h3>Management Panel</h3>
+<section id="requests" class="page">
+<h1>Room Requests</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Roll</th>
+<th>Reason</th>
+<th>Assign Room</th>
+</tr>
+</thead>
+<tbody id="requestTable"></tbody>
+</table>
+</section>
 
-<ul>
+<section id="assigned" class="page">
+<h1>Assigned Rooms</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Roll</th>
+<th>Room</th>
+<th>Block</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody id="assignedTable"></tbody>
+</table>
+</section>
 
-<li>Manage Hostellers</li>
+<section id="complaints" class="page">
+<h1>Complaints</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Roll</th>
+<th>Complaint</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="adminComplaintTable"></tbody>
+</table>
+</section>
 
-<li>Manage Rooms</li>
+</main>
+</div>
 
-<li>View Complaints</li>
-
-<li>Entry Exit Records</li>
-
-</ul>
-
-<a href="login.html">Logout</a>
-
+<script src="admin.js"></script>
 </body>
 </html>
