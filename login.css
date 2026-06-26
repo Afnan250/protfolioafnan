@@ -1,3 +1,10 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -6,40 +13,41 @@ body{
 
     background:
     linear-gradient(
-    rgba(0,0,0,0.70),
-    rgba(0,0,0,0.70)
+    rgba(0,0,0,.72),
+    rgba(0,0,0,.72)
     ),
-    url("./images/hostel-bg.png");
+    background:url("./images/hostel-bg.png");
 
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
+    background-attachment:fixed;
 }
 
 .login-card{
-    width:92%;
-    max-width:460px;
+    width:90%;
+    max-width:520px;
 
     padding:40px;
 
-    background:rgba(10,10,10,0.80);
+    background:rgba(10,10,10,.85);
 
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-    border:1px solid rgba(212,175,55,0.25);
+    border:1px solid rgba(212,175,55,.25);
 
     border-radius:30px;
 
     box-shadow:
-    0 15px 40px rgba(0,0,0,0.60);
+    0 20px 60px rgba(0,0,0,.60);
 
     color:white;
 }
 
 .logo{
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .logo i{
@@ -49,35 +57,35 @@ body{
 }
 
 .logo h1{
-    font-size:34px;
+    font-size:38px;
+    color:#fff;
     font-weight:700;
-    color:#ffffff;
 }
 
 .logo p{
     color:#c5c5c5;
-    font-size:14px;
+    margin-top:10px;
 }
 
 .tabs{
     display:flex;
-    gap:10px;
-    margin-bottom:15px;
+    gap:12px;
+    margin-bottom:20px;
 }
 
 .tabs button{
     flex:1;
-
-    padding:13px;
+    height:55px;
 
     border:none;
-    border-radius:14px;
+    border-radius:15px;
 
-    background:rgba(255,255,255,0.08);
+    background:#252525;
 
     color:white;
-
+    font-size:16px;
     font-weight:600;
+
     cursor:pointer;
 }
 
@@ -93,31 +101,33 @@ body{
 
 .input-box{
     position:relative;
-    margin-bottom:15px;
+    width:100%;
+    margin-bottom:18px;
 }
 
 .input-box i{
     position:absolute;
-    left:15px;
+    left:18px;
     top:50%;
     transform:translateY(-50%);
 
     color:#D4AF37;
+    font-size:18px;
 }
 
 .input-box input{
     width:100%;
+    height:58px;
 
-    padding:14px 14px 14px 45px;
+    padding-left:52px;
 
-    border:1px solid rgba(212,175,55,0.15);
+    border-radius:15px;
 
-    border-radius:14px;
+    border:1px solid rgba(212,175,55,.25);
 
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,.05);
 
     color:white;
-
     outline:none;
 }
 
@@ -127,49 +137,57 @@ body{
 
 .captcha-box{
     display:flex;
-    gap:10px;
-    margin-bottom:15px;
+    gap:12px;
+    margin-bottom:18px;
 }
 
 #captchaText{
     flex:1;
 
-    padding:14px;
+    height:58px;
 
-    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    border-radius:14px;
+    border-radius:15px;
 
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,.05);
 
-    border:1px solid rgba(212,175,55,0.20);
+    border:1px solid rgba(212,175,55,.25);
 
     color:#FFD700;
 
+    font-size:20px;
     font-weight:700;
-    letter-spacing:4px;
+    letter-spacing:5px;
 }
 
 .captcha-box button{
-    width:60px;
+    width:70px;
 
     border:none;
-    border-radius:14px;
+    border-radius:15px;
 
-    background:#D4AF37;
+    background:linear-gradient(
+    135deg,
+    #B8860B,
+    #FFD700
+    );
 
     color:black;
+    font-size:18px;
+    font-weight:700;
 
     cursor:pointer;
 }
 
 .main-btn{
     width:100%;
-
-    padding:14px;
+    height:60px;
 
     border:none;
-    border-radius:14px;
+    border-radius:15px;
 
     background:linear-gradient(
     135deg,
@@ -179,7 +197,7 @@ body{
 
     color:black;
 
-    font-size:16px;
+    font-size:18px;
     font-weight:700;
 
     cursor:pointer;
@@ -188,18 +206,18 @@ body{
 #message{
     margin-top:12px;
     text-align:center;
-
     color:#ff6b6b;
 }
 
-@media(max-width:500px){
+@media(max-width:600px){
 
 .login-card{
+    width:94%;
     padding:25px;
 }
 
 .logo h1{
-    font-size:28px;
+    font-size:30px;
 }
 
 }
