@@ -175,6 +175,46 @@ function logout(){
     window.location.href = "login.html";
 }
 
+function changeProfilePicture(){
+
+    const file =
+    document.getElementById("imageUpload").files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        localStorage.setItem(
+            "profilePicture_" + roll,
+            e.target.result
+        );
+
+        loadProfilePicture();
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function loadProfilePicture(){
+
+    let image =
+    localStorage.getItem(
+        "profilePicture_" + roll
+    );
+
+    if(image){
+
+        document.getElementById("profileImage").src =
+        image;
+
+        document.getElementById("profileImageProfile").src =
+        image;
+    }
+}
+
 loadRoom();
 loadComplaints();
+loadProfilePicture();
 
