@@ -1,155 +1,139 @@
-let name = localStorage.getItem("studentName") || "AFNAN AL JEDID";
-let roll = localStorage.getItem("studentRoll") || "USTM001";
+```javascript
+let roll = localStorage.getItem("studentRoll");
+let name = localStorage.getItem("studentName");
+let dept = localStorage.getItem("studentDept");
 
-document.getElementById("studentName").innerText = name;
-document.getElementById("profileName").innerText = name;
-document.getElementById("profileRoll").innerText = roll;
+if(!roll){
+    window.location.href = "login.html";
+}
 
-function showPage(id){
-    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+document.getElementById("studentName").innerText = name || "Student";
+
+if(document.getElementById("profileName")){
+    document.getElementById("profileName").innerText = name || "-";
+}
+
+if(document.getElementById("profileRoll")){
+    document.getElementById("profileRoll").innerText = roll || "-";
+}
+
+if(document.getElementById("profileDept")){
+    document.getElementById("profileDept").innerText = dept || "-";
+}
+
+function showPage(pageId){
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageId).classList.add("active");
 }
 
 function loadRoom(){
-    let assignedRooms = JSON.parse(localStorage.getItem("assignedRooms")) || [];
-    let room = assignedRooms.find(item => item.roll === roll);
+    let assignedRooms =
+        JSON.parse(localStorage.getItem("assignedRooms")) || [];
 
-    if(room){
-        document.getElementById("roomStatus").innerText = "Assigned";
-        document.getElementById("studentRoom").innerText = room.room;
-        document.getElementById("profileRoom").innerText = room.room;
+    let roomData =
+        assignedRooms.find(item => item.roll === roll);
 
-        document.getElementById("roomDetails").innerHTML = `
-            <h2>Room ${room.room}</h2>
-            <p><b>Block:</b> ${room.block}</p>
-            <p><b>Room Type:</b> ${room.type}</p>
-            <p><b>Status:</b> Allocated</p>
-        `;
+    if(roomData){
+
+        if(document.getElementById("roomStatus")){
+            document.getElementById("roomStatus").innerText = "Assigned";
+        }
+
+        if(document.getElementById("studentRoom")){
+            document.getElementById("studentRoom").innerText =
+            roomData.room;
+        }
+
+        if(document.getElementById("profileRoom")){
+            document.getElementById("profileRoom").innerText =
+            roomData.room;
+        }
+
+        if(document.getElementById("roomDetails")){
+            document.getElementById("roomDetails").innerHTML = `
+                <h2>Room ${roomData.room}</h2>
+                <p><b>Block:</b> ${roomData.block}</p>
+                <p><b>Type:</b> ${roomData.type}</p>
+                <p><b>Status:</b> Allocated</p>
+            `;
+        }
+
     }else{
-        document.getElementById("roomStatus").innerText = "Pending";
-        document.getElementById("studentRoom").innerText = "Not Assigned";
-        document.getElementById("profileRoom").innerText = "Not Assigned";
 
-        document.getElementById("roomDetails").innerHTML = `
-            <h2>No Room Assigned</h2>
-            <p>Please request a room and wait for admin approval.</p>
-        `;
+        if(document.getElementById("roomStatus")){
+            document.getElementById("roomStatus").innerText =
+            "Pending";
+        }
+
+        if(document.getElementById("studentRoom")){
+            document.getElementById("studentRoom").innerText =
+            "Not Assigned";
+        }
+
+        if(document.getElementById("profileRoom")){
+            document.getElementById("profileRoom").innerText =
+            "Not Assigned";
+        }
+
+        if(document.getElementById("roomDetails")){
+            document.getElementById("roomDetails").innerHTML = `
+                <h2>No Room Assigned</h2>
+                <p>Waiting for admin approval.</p>
+            `;
+        }
     }
 }
 
 function requestRoom(){
-    let reason = document.getElementById("requestReason").value.trim();
+
+    let reason =
+        document.getElementById("requestReason").value.trim();
 
     if(reason === ""){
-        alert("Please enter reason");
+        alert("Enter request reason");
         return;
     }
 
-    let requests = JSON.parse(localStorage.getItem("roomRequests")) || [];
+    let requests =
+        JSON.parse(localStorage.getItem("roomRequests")) || [];
 
-    let alreadyRequested = requests.find(item => item.roll === roll && item.status === "Pending");
+    let existing =
+        requests.find(item => item.roll === roll);
 
-    if(alreadyRequested){
-        document.getElementById("requestMsg").innerText = "You already have a pending request.";
+    if(existing){
+        alert("Request already submitted");
         return;
     }
 
     requests.push({
         name:name,
         roll:roll,
+        dept:dept,
         reason:reason,
         status:"Pending"
     });
 
-    localStorage.setItem("roomRequests", JSON.stringify(requests));
+    localStorage.setItem(
+        "roomRequests",
+        JSON.stringify(requests)
+    );
 
     document.getElementById("requestReason").value = "";
-    document.getElementById("requestMsg").innerText = "Room request submitted successfully.";
-}
 
-function markEntry(){
-    let now = new Date();
-    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
-
-    records.push({
-        roll:roll,
-        date:now.toLocaleDateString(),
-        entry:now.toLocaleTimeString(),
-        exit:"--"
-    });
-
-    localStorage.setItem("entryRecords", JSON.stringify(records));
-    localStorage.setItem("lastEntry", now.toLocaleTimeString());
-    loadEntryRecords();
-}
-
-function markExit(){
-    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
-
-    for(let i = records.length - 1; i >= 0; i--){
-        if(records[i].roll === roll && records[i].exit === "--"){
-            records[i].exit = new Date().toLocaleTimeString();
-            break;
-        }
-    }
-
-    localStorage.setItem("entryRecords", JSON.stringify(records));
-    loadEntryRecords();
-}
-
-function loadEntryRecords(){
-    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
-    let table = document.getElementById("entryTable");
-    table.innerHTML = "";
-
-    records.filter(item => item.roll === roll).forEach(item => {
-        table.innerHTML += `<tr><td>${item.date}</td><td>${item.entry}</td><td>${item.exit}</td></tr>`;
-    });
-
-    document.getElementById("lastEntry").innerText = localStorage.getItem("lastEntry") || "--";
-}
-
-function addComplaint(){
-    let text = document.getElementById("complaintText").value.trim();
-
-    if(text === ""){
-        alert("Please write complaint");
-        return;
-    }
-
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-
-    complaints.push({
-        roll:roll,
-        name:name,
-        text:text,
-        status:"Pending"
-    });
-
-    localStorage.setItem("complaints", JSON.stringify(complaints));
-
-    document.getElementById("complaintText").value = "";
-    loadComplaints();
-}
-
-function loadComplaints(){
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-    let table = document.getElementById("complaintTable");
-    table.innerHTML = "";
-
-    let myComplaints = complaints.filter(item => item.roll === roll);
-
-    myComplaints.forEach(item => {
-        table.innerHTML += `<tr><td>${item.text}</td><td>${item.status}</td></tr>`;
-    });
-
-    document.getElementById("complaintCount").innerText = myComplaints.length;
+    alert("Room request submitted");
 }
 
 function logout(){
+
+    localStorage.removeItem("studentRoll");
+    localStorage.removeItem("studentName");
+    localStorage.removeItem("studentDept");
+
     window.location.href = "login.html";
 }
 
 loadRoom();
-loadEntryRecords();
-loadComplaints();
+```
