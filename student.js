@@ -1,438 +1,155 @@
-// ================================
-// STUDENT PANEL PAGE NAVIGATION
-// ================================
+let name = localStorage.getItem("studentName") || "AFNAN AL JEDID";
+let roll = localStorage.getItem("studentRoll") || "USTM001";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("studentName").innerText = name;
+document.getElementById("profileName").innerText = name;
+document.getElementById("profileRoll").innerText = roll;
 
-    const navItems = document.querySelectorAll(".nav-item[data-page]");
-    const pages = document.querySelectorAll(".page");
+function showPage(id){
+    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
 
-    navItems.forEach(item => {
+function loadRoom(){
+    let assignedRooms = JSON.parse(localStorage.getItem("assignedRooms")) || [];
+    let room = assignedRooms.find(item => item.roll === roll);
 
-        item.addEventListener("click", function () {
+    if(room){
+        document.getElementById("roomStatus").innerText = "Assigned";
+        document.getElementById("studentRoom").innerText = room.room;
+        document.getElementById("profileRoom").innerText = room.room;
 
-            const pageName = this.getAttribute("data-page");
+        document.getElementById("roomDetails").innerHTML = `
+            <h2>Room ${room.room}</h2>
+            <p><b>Block:</b> ${room.block}</p>
+            <p><b>Room Type:</b> ${room.type}</p>
+            <p><b>Status:</b> Allocated</p>
+        `;
+    }else{
+        document.getElementById("roomStatus").innerText = "Pending";
+        document.getElementById("studentRoom").innerText = "Not Assigned";
+        document.getElementById("profileRoom").innerText = "Not Assigned";
 
-            navItems.forEach(nav =>
-                nav.classList.remove("active")
-            );
-
-            this.classList.add("active");
-
-            pages.forEach(page =>
-                page.style.display = "none"
-            );
-
-            const selectedPage =
-                document.getElementById("page-" + pageName);
-
-            if (selectedPage) {
-                selectedPage.style.display = "block";
-            }
-
-        });
-
-    });
-
-    // Default page
-    pages.forEach(page =>
-        page.style.display = "none"
-    );
-
-    const dashboard =
-        document.getElementById("page-dashboard");
-
-    if (dashboard) {
-        dashboard.style.display = "block";
+        document.getElementById("roomDetails").innerHTML = `
+            <h2>No Room Assigned</h2>
+            <p>Please request a room and wait for admin approval.</p>
+        `;
     }
+}
 
-});
+function requestRoom(){
+    let reason = document.getElementById("requestReason").value.trim();
 
-// ================================
-// COMPLAINT SYSTEM
-// ================================
-
-function submitComplaint() {
-
-    let type = document.getElementById("complaint-type").value;
-    let description = document.getElementById("complaint-desc").value;
-
-    if(description.trim() === ""){
-        alert("Please write your complaint.");
+    if(reason === ""){
+        alert("Please enter reason");
         return;
     }
 
-    let complaints =
-        JSON.parse(localStorage.getItem("complaints")) || [];
+    let requests = JSON.parse(localStorage.getItem("roomRequests")) || [];
+
+    let alreadyRequested = requests.find(item => item.roll === roll && item.status === "Pending");
+
+    if(alreadyRequested){
+        document.getElementById("requestMsg").innerText = "You already have a pending request.";
+        return;
+    }
+
+    requests.push({
+        name:name,
+        roll:roll,
+        reason:reason,
+        status:"Pending"
+    });
+
+    localStorage.setItem("roomRequests", JSON.stringify(requests));
+
+    document.getElementById("requestReason").value = "";
+    document.getElementById("requestMsg").innerText = "Room request submitted successfully.";
+}
+
+function markEntry(){
+    let now = new Date();
+    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
+
+    records.push({
+        roll:roll,
+        date:now.toLocaleDateString(),
+        entry:now.toLocaleTimeString(),
+        exit:"--"
+    });
+
+    localStorage.setItem("entryRecords", JSON.stringify(records));
+    localStorage.setItem("lastEntry", now.toLocaleTimeString());
+    loadEntryRecords();
+}
+
+function markExit(){
+    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
+
+    for(let i = records.length - 1; i >= 0; i--){
+        if(records[i].roll === roll && records[i].exit === "--"){
+            records[i].exit = new Date().toLocaleTimeString();
+            break;
+        }
+    }
+
+    localStorage.setItem("entryRecords", JSON.stringify(records));
+    loadEntryRecords();
+}
+
+function loadEntryRecords(){
+    let records = JSON.parse(localStorage.getItem("entryRecords")) || [];
+    let table = document.getElementById("entryTable");
+    table.innerHTML = "";
+
+    records.filter(item => item.roll === roll).forEach(item => {
+        table.innerHTML += `<tr><td>${item.date}</td><td>${item.entry}</td><td>${item.exit}</td></tr>`;
+    });
+
+    document.getElementById("lastEntry").innerText = localStorage.getItem("lastEntry") || "--";
+}
+
+function addComplaint(){
+    let text = document.getElementById("complaintText").value.trim();
+
+    if(text === ""){
+        alert("Please write complaint");
+        return;
+    }
+
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
     complaints.push({
-        student_id: 1,
-        student: "Afnan",
-        type: type,
-        description: description,
-        date: new Date().toLocaleString()
-    });
-
-    localStorage.setItem(
-        "complaints",
-        JSON.stringify(complaints)
-    );
-
-    alert(
-        "Complaint Submitted Successfully!\n\n" +
-        "Type: " + type + "\n" +
-        "Issue: " + description
-    );
-
-    document.getElementById("complaint-desc").value = "";
-}
-
-// ================================
-// ENTRY / EXIT SYSTEM
-// ================================
-
-let entryHistory =
-JSON.parse(localStorage.getItem("entryHistory")) || [];
-
-function loadEntryHistory() {
-
-    const tbody =
-    document.getElementById("entry-history");
-
-    if(!tbody) return;
-
-    tbody.innerHTML = "";
-
-    entryHistory.forEach(record => {
-
-        tbody.innerHTML += `
-        <tr>
-            <td>${record.date}</td>
-            <td>${record.entry}</td>
-            <td>${record.exit}</td>
-        </tr>
-        `;
-
-    });
-
-}
-
-function markEntry() {
-
-    let logs =
-    JSON.parse(localStorage.getItem("hostelLogs")) || [];
-
-    const now = new Date();
-
-    logs.unshift({
-
-        studentName: "Afnan",
-        roomNo: "A-101",
-        date: now.toLocaleDateString(),
-        entryTime: now.toLocaleTimeString(),
-        exitTime: "-"
-
-    });
-
-    localStorage.setItem(
-        "hostelLogs",
-        JSON.stringify(logs)
-    );
-
-    alert("Entry Recorded Successfully");
-
-}
-
-function markExit() {
-
-    let logs =
-    JSON.parse(localStorage.getItem("hostelLogs")) || [];
-
-    if(logs.length === 0){
-
-        alert("Please mark entry first");
-        return;
-
-    }
-
-    logs[0].exitTime =
-    new Date().toLocaleTimeString();
-
-    localStorage.setItem(
-        "hostelLogs",
-        JSON.stringify(logs)
-    );
-
-    alert("Exit Recorded Successfully");
-
-}
-
-window.onload = () => {
-
-    pages.forEach(page => {
-        page.style.display = "none";
-    });
-
-    const dashboard = document.getElementById("page-dashboard");
-
-    if(dashboard){
-        dashboard.style.display = "block";
-    }
-
-    loadEntryHistory();
-
-};
-
-
-
-// ======================
-// SWITCH LOGIN TABS
-// ======================
-
-function showLogin(type) {
-
-    const studentLogin = document.getElementById("studentLogin");
-    const adminLogin = document.getElementById("adminLogin");
-
-    const tabs = document.querySelectorAll(".tab");
-
-    tabs.forEach(tab => tab.classList.remove("active"));
-
-    if (type === "student") {
-
-        studentLogin.style.display = "block";
-        adminLogin.style.display = "none";
-
-        tabs[0].classList.add("active");
-
-    } else {
-
-        studentLogin.style.display = "none";
-        adminLogin.style.display = "block";
-
-        tabs[1].classList.add("active");
-    }
-}
-
-// ======================
-// DARK MODE
-// ======================
-
-function toggleTheme() {
-
-    document.body.classList.toggle("dark");
-
-    if(document.body.classList.contains("dark")){
-
-        localStorage.setItem("theme","dark");
-
-    }else{
-
-        localStorage.setItem("theme","light");
-    }
-}
-
-// Load saved theme
-
-window.onload = function(){
-
-    let savedTheme = localStorage.getItem("theme");
-
-    if(savedTheme === "dark"){
-
-        document.body.classList.add("dark");
-    }
-}
-
-// ======================
-// SHOW / HIDE PASSWORD
-// ======================
-
-function togglePassword(id, eye){
-
-    let input = document.getElementById(id);
-
-    if(input.type === "password"){
-
-        input.type = "text";
-
-        eye.innerHTML = "🙈";
-
-    }else{
-
-        input.type = "password";
-
-        eye.innerHTML = "👁️";
-    }
-}
-
-// ======================
-// ADMIN LOGIN
-// ======================
-
-function adminLogin(){
-
-    let email =
-    document.getElementById("adminEmail").value;
-
-    let password =
-    document.getElementById("adminPassword").value;
-
-    if(
-        email === "admin@unihostel.com" &&
-        password === "admin123"
-    ){
-
-        alert("Admin Login Successful");
-
-        localStorage.setItem("userRole","admin");
-
-        window.location.href = "index.html";
-
-    }else{
-
-        alert("Invalid Admin Credentials");
-    }
-}
-
-// ======================
-// STUDENT LOGIN
-// ======================
-
-function studentLogin(){
-
-    let email =
-    document.getElementById("studentEmail").value;
-
-    let password =
-    document.getElementById("studentPassword").value;
-
-    let user =
-    JSON.parse(localStorage.getItem(email));
-
-    if(user && user.password === password){
-
-        alert("Student Login Successful");
-
-        localStorage.setItem("userRole","student");
-
-        localStorage.setItem(
-            "currentStudent",
-            JSON.stringify(user)
-        );
-
-        window.location.href = "student.html";
-
-    }else{
-
-        alert("Invalid Student Login");
-    }
-}
-
-// ======================
-// REGISTER STUDENT
-// ======================
-
-function registerStudent(){
-
-    let name =
-    document.getElementById("fullName").value;
-
-    let studentId =
-    document.getElementById("studentId").value;
-
-    let email =
-    document.getElementById("email").value;
-
-    let password =
-    document.getElementById("password").value;
-
-    let confirm =
-    document.getElementById("confirmPassword").value;
-
-    if(password !== confirm){
-
-        alert("Passwords do not match");
-
-        return;
-    }
-
-    let user = {
-
+        roll:roll,
         name:name,
-        studentId:studentId,
-        email:email,
-        password:password,
-        role:"student"
+        text:text,
+        status:"Pending"
+    });
 
-    };
+    localStorage.setItem("complaints", JSON.stringify(complaints));
 
-    localStorage.setItem(
-        email,
-        JSON.stringify(user)
-    );
-
-    alert("Registration Successful");
-
-    window.location.href = "login.html";
+    document.getElementById("complaintText").value = "";
+    loadComplaints();
 }
 
-// ======================
-// FORGOT PASSWORD
-// ======================
+function loadComplaints(){
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    let table = document.getElementById("complaintTable");
+    table.innerHTML = "";
 
-function resetPassword(){
+    let myComplaints = complaints.filter(item => item.roll === roll);
 
-    let email =
-    document.getElementById("resetEmail").value;
+    myComplaints.forEach(item => {
+        table.innerHTML += `<tr><td>${item.text}</td><td>${item.status}</td></tr>`;
+    });
 
-    let newPassword =
-    document.getElementById("newPassword").value;
-
-    let confirmPassword =
-    document.getElementById("confirmNewPassword").value;
-
-    if(newPassword !== confirmPassword){
-
-        alert("Passwords do not match");
-
-        return;
-    }
-
-    let user =
-    JSON.parse(localStorage.getItem(email));
-
-    if(!user){
-
-        alert("Email not found");
-
-        return;
-    }
-
-    user.password = newPassword;
-
-    localStorage.setItem(
-        email,
-        JSON.stringify(user)
-    );
-
-    alert("Password Reset Successful");
-
-    window.location.href = "login.html";
+    document.getElementById("complaintCount").innerText = myComplaints.length;
 }
-
-// ======================
-// LOGOUT
-// ======================
 
 function logout(){
-
-    localStorage.removeItem("userRole");
-
-    localStorage.removeItem("currentStudent");
-
     window.location.href = "login.html";
 }
 
-
-
+loadRoom();
+loadEntryRecords();
+loadComplaints();
