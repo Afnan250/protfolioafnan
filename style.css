@@ -72,18 +72,6 @@ body.light{
   font-size:14px;
 }
 
-.navbar a:hover{color:#6ea8ff}
-
-.theme-btn,.menu-btn{
-  background:var(--card);
-  color:var(--text);
-  border:1px solid var(--border);
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
 .menu-btn{display:none}
 
 .hero{
