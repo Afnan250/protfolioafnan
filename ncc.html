@@ -327,19 +327,24 @@ body{
 .connect-container{
     display:flex;
     justify-content:space-evenly;
-    align-items:center;
+    align-items:flex-start;
     flex-wrap:wrap;
     gap:35px;
 }
 
 .social-link{
-    width:210px;
+    width:220px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
     text-align:center;
 }
 
 .social-link i{
     font-size:52px;
     margin-bottom:15px;
+    display:block;
 }
 
 .social-link a{
@@ -349,6 +354,7 @@ body{
     font-size:23px;
     font-weight:900;
     margin-bottom:8px;
+    text-align:center;
 }
 
 .social-link a:hover{
@@ -359,7 +365,11 @@ body{
     color:#dce7f3;
     font-size:16px;
     word-break:break-word;
+    text-align:center;
+    line-height:1.4;
 }
+
+/* Social Icon Colors */
 
 .fa-instagram{
     color:#E1306C;
@@ -377,6 +387,12 @@ body{
     color:#EA4335;
 }
 
+/* Hover Effect */
+
+.social-link:hover i{
+    transform:scale(1.1);
+    transition:0.3s ease;
+}
 /* FOOTER */
 
 footer{
@@ -720,10 +736,8 @@ footer{
         </div>
 
         <div class="social-link">
-            <i class="fa-solid fa-envelope"></i>
-            <a href="mailto:ustmnccwarriors@gmail.com">ustmnccwarriors@gmail.com</a>
-        </div>
-
+    <i class="fa-solid fa-envelope"></i>
+   <a href="mailto:ustmnccwarriors@gmail.com">ustmnccwarriors@gmail.com</a>
     </div>
 </section>
 
