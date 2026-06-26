@@ -1,96 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniHostel HMS</title>
-	
-	
-
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | UniHostel</title>
+  <link rel="stylesheet" href="student-login.css">
 </head>
 <body>
 
-    <div class="scene">
-        <div class="card" id="card">
+<div class="login-box">
+  <h1>🎓 UniHostel</h1>
+  <h2 id="loginTitle">Student Login</h2>
 
-            <!-- Front Side -->
-<div class="face front">
+  <div class="role-buttons">
+    <button onclick="setRole('student')">Student</button>
+    <button onclick="setRole('admin')">Admin</button>
+  </div>
 
-    <h2>Login</h2>
+  <input type="text" id="userId" placeholder="Enter Student Roll Number">
 
-    <input
-    type="email"
-    id="login-email"
-    placeholder="Email">
+  <div class="captcha-row">
+    <span id="captchaText"></span>
+    <button onclick="generateCaptcha()">↻</button>
+  </div>
 
-    <input
-    type="password"
-    id="login-password"
-    placeholder="Password">
-		
-		<select id="role">
-    <option value="student">Student</option>
-    <option value="admin">Admin</option>
-</select>
+  <input type="text" id="captchaInput" placeholder="Enter Captcha">
 
-<p class="forgot-password">
-    <a href="#" onclick="forgotPassword()">
-        Forgot Password?
-    </a>
-</p>
+  <button onclick="generateOTP()">Generate OTP</button>
 
-    <button
-    class="login-btn"
-    onclick="login()">
-    Login
-</button>
+  <p id="otpShow"></p>
 
-    <p class="account-link">
-        Don't have an account?
-        <span onclick="flipCard()">Register</span>
-    </p>
+  <input type="text" id="otpInput" placeholder="Enter OTP">
 
+  <button onclick="loginUser()">Login</button>
+
+  <p id="message"></p>
 </div>
 
-<!-- Back Side -->
-<div class="face back">
-
-    <h2>Create Account</h2>
-
-    <input
-        type="text"
-        id="reg-name"
-        placeholder="Full Name">
-
-    <input
-        type="email"
-        id="reg-email"
-        placeholder="Email">
-
-    <input
-        type="password"
-        id="reg-password"
-        placeholder="Password">
-
-    <button
-        class="login-btn"
-        onclick="registerUser()">
-        Register
-    </button>
-
-    <p class="account-link">
-        Already Registered?
-        <span onclick="flipCard()">
-            Back to Login
-        </span>
-    </p>
-
-</div>
-
-        </div>
-    </div>
-
-<script src="script.js"></script>
+<script src="login.js"></script>
 </body>
 </html>
