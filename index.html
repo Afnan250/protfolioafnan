@@ -18,20 +18,20 @@
   <header class="header">
     <a href="#home" class="logo"><span>A</span> Afnan Al Jedid</a>
 
-    <nav class="navbar" id="navbar">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+   <nav class="navbar" id="navbar">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#services">Services</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-    <div class="header-actions">
-      <button id="menuBtn" class="menu-btn">
-        <i class="fa-solid fa-ellipsis-vertical menu-btn" onclick="toggleMenu()"></i>
-      </button>
-    </div>
+<div class="header-actions">
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+</div>
   </header>
 
   <section class="hero" id="home">
@@ -203,11 +203,14 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-function toggleMenu(){
-    document.querySelector(".navbar").classList.toggle("active");
-}
-</script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navbar = document.getElementById("navbar");
 
+menuBtn.addEventListener("click", function(){
+  navbar.classList.toggle("active");
+});
+</script>
+</script>
 </body>
 </html>
