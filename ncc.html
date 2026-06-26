@@ -24,6 +24,8 @@ body{
     color:white;
 }
 
+/* NAVBAR */
+
 .navbar{
     width:100%;
     padding:16px 7%;
@@ -70,6 +72,12 @@ body{
     font-weight:800;
     font-size:15px;
 }
+
+.nav-links a:hover{
+    color:#ff7a00;
+}
+
+/* HERO */
 
 .hero{
     min-height:88vh;
@@ -142,6 +150,13 @@ body{
     font-weight:800;
 }
 
+.btn:hover{
+    background:white;
+    color:#061f3a;
+}
+
+/* RIGHT LOGO CARD */
+
 .ustm-card{
     background:rgba(255,255,255,.08);
     border:3px solid white;
@@ -152,13 +167,15 @@ body{
 }
 
 .ustm-card img{
-    width:280px;
-    height:280px;
+    width:270px;
+    height:270px;
     object-fit:contain;
     background:white;
-    border-radius:20px;
+    border-radius:50%;
     padding:15px;
     margin-bottom:25px;
+    border:5px solid white;
+    box-shadow:0 0 25px rgba(255,255,255,.35);
 }
 
 .ustm-card h3{
@@ -170,6 +187,8 @@ body{
     font-weight:900;
     margin-top:10px;
 }
+
+/* SECTIONS */
 
 .section{
     padding:70px 7%;
@@ -261,6 +280,8 @@ body{
     margin-right:10px;
 }
 
+/* GALLERY */
+
 .gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -277,24 +298,43 @@ body{
     background:white;
 }
 
+/* CONNECT SECTION */
+
 .connect-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:35px;
 }
 
-.connect-card{
-    background:white;
-    color:#061f3a;
-    border-radius:16px;
-    padding:28px;
+.social-link{
+    width:210px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
-.connect-card i{
-    font-size:46px;
+.social-link i{
+    font-size:52px;
     margin-bottom:15px;
+}
+
+.social-link a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    font-size:23px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.social-link a:hover{
+    color:#ff7a00;
+}
+
+.social-link p{
+    color:#dce7f3;
+    font-size:16px;
+    word-break:break-word;
 }
 
 .fa-instagram{
@@ -313,12 +353,16 @@ body{
     color:#EA4335;
 }
 
+/* FOOTER */
+
 footer{
     background:#04182d;
     padding:25px 20px 55px;
     text-align:center;
     color:white;
 }
+
+/* MARQUEE */
 
 .marquee{
     position:fixed;
@@ -349,6 +393,8 @@ footer{
         transform:translateX(-100%);
     }
 }
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
     .navbar{
@@ -385,6 +431,10 @@ footer{
     .hero h2 span{
         font-size:48px;
     }
+
+    .connect-container{
+        flex-direction:column;
+    }
 }
 
 @media(max-width:600px){
@@ -401,8 +451,8 @@ footer{
     }
 
     .ustm-card img{
-        width:180px;
-        height:180px;
+        width:190px;
+        height:190px;
     }
 
     .section h2{
@@ -456,7 +506,7 @@ footer{
     </div>
 
     <div class="ustm-card">
-        <img src="ncc2.jpeg" alt="USTM NCC Logo">
+        <img src="ustmncclogo.jpeg" alt="USTM NCC Logo">
         <h3>USTM NCC UNIT</h3>
         <p>42 MEGH BN NCC | University of Science & Technology Meghalaya</p>
     </div>
@@ -609,33 +659,27 @@ footer{
     </div>
 
     <div class="connect-container">
-        <div class="connect-card">
+
+        <div class="social-link">
             <i class="fa-brands fa-instagram"></i>
-            <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ==" target="_blank" class="social-card instagram">
-            <h3>Instagram</h3>
-            <p>ustmncc_warriors</p>
+            <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ%3D%3D" target="_blank">ustmncc_warriors</a>
         </div>
 
-        <div class="connect-card">
+        <div class="social-link">
             <i class="fa-brands fa-facebook-f"></i>
-             <a href="https://www.facebook.com/share/1BdKmMqtJk/" target="_blank" class="social-card facebook">
-            <h3>Facebook</h3>
-            <p>USTM NCC Unit</p>
+            <a href="https://www.facebook.com/people/USTM-NCC-Unit/61580434981030/?rdid=x5k94QZkvKnY5w9v&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BdKmMqtJk%2F" target="_blank">USTM NCC Unit</a>
         </div>
 
-        <div class="connect-card">
+        <div class="social-link">
             <i class="fa-brands fa-whatsapp"></i>
-            <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank" class="social-card whatsapp">
-            <h3>WhatsApp</h3>
-            <p>USTM NCC Updates</p>
+            <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank">USTM NCC Updates</a>
         </div>
 
-        <div class="connect-card">
+        <div class="social-link">
             <i class="fa-solid fa-envelope"></i>
-            <a href="mailto:ustmnccwarriors@gmail.com" class="social-card email">
-            <h3>Email</h3>
-            <p>ustmnccwarriors@gmail.com</p>
+            <a href="mailto:ustmnccwarriors@gmail.com">ustmnccwarriors@gmail.com</a>
         </div>
+
     </div>
 </section>
 
