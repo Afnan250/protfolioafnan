@@ -47,16 +47,27 @@ text-align:left;
 cursor:pointer;
 }
 
+.sidebar{
+    width:320px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:#111;
+    padding:25px;
+}
+
 .sidebar button:hover{
 background:linear-gradient(135deg,#b8860b,#ffd700);
 color:black;
 }
 
-.main{
-margin-left:260px;
-width:calc(100% - 260px);
-padding:35px;
+.main-content{
+    margin-left:320px;
+    width:calc(100% - 320px);
+    padding:40px;
 }
+
 
 .page{
 display:none;
