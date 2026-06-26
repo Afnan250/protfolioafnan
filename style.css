@@ -72,7 +72,41 @@ body.light{
   font-size:14px;
 }
 
-.menu-btn{display:none}
+.menu-btn{
+  display:none;
+  color:var(--text);
+  font-size:28px;
+  cursor:pointer;
+  z-index:9999;
+}
+
+@media(max-width:900px){
+  .menu-btn{
+    display:block;
+  }
+
+  .navbar{
+    position:absolute;
+    top:72px;
+    right:-100%;
+    width:260px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:0 0 0 18px;
+    padding:20px;
+    transition:.3s;
+    z-index:9998;
+  }
+
+  .navbar.active{
+    right:0;
+  }
+
+  .navbar a{
+    display:block;
+    margin:18px;
+  }
+}
 
 .hero{
   min-height:100vh;
