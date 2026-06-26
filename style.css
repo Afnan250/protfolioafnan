@@ -481,7 +481,7 @@ padding:20px 7%;
 
 .navbar{
 display:flex;
-align-items:center;
+align-items:right;
 gap:30px;
 margin-left:auto;
 }
