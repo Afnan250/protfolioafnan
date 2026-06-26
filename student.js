@@ -1,4 +1,3 @@
-```javascript
 let roll = localStorage.getItem("studentRoll");
 let name = localStorage.getItem("studentName");
 let dept = localStorage.getItem("studentDept");
@@ -136,4 +135,3 @@ function logout(){
 }
 
 loadRoom();
-```
