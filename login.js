@@ -99,7 +99,7 @@ function loginUser(){
 
         localStorage.setItem("studentName", students[userId].name);
         localStorage.setItem("studentRoom", students[userId].room);
-        window.location.href = "student-dashboard.html";
+        window.location.href = "student.html";
     }else{
         if(!admins[userId]){
             message.innerText = "Admin ID not found";
