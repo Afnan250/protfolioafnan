@@ -32,6 +32,23 @@
 <section id="dashboard" class="page active">
 
 <h1>Welcome, <span id="studentName"></span></h1>
+  <section id="dashboard" class="page active">
+
+<h1>Welcome, <span id="studentName"></span></h1>
+
+<div class="profile-box">
+
+    <img id="profileImage"
+         src="https://via.placeholder.com/180"
+         alt="Profile Picture">
+
+    <input
+        type="file"
+        id="imageUpload"
+        accept="image/*"
+        onchange="changeProfilePicture()">
+
+</div>
 
 <div class="cards">
 
@@ -64,6 +81,14 @@
 <h1>Student Profile</h1>
 
 <div class="panel">
+
+<div class="profile-photo-section">
+
+    <img id="profileImageProfile"
+         src="https://via.placeholder.com/180"
+         alt="Profile Picture">
+
+</div>
 
 <p><strong>Name:</strong> <span id="profileName"></span></p>
 
