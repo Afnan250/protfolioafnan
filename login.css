@@ -2,7 +2,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:Poppins,Arial,sans-serif;
 }
 
 body{
@@ -10,85 +10,182 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#07101f;
+  background:url(""C:\Users\afnan\Downloads\afnan-portfolio-fixed\afnan-protfolio-main\hostel-bg.jpg"") center/cover no-repeat;
+  overflow:hidden;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(3,7,18,.75),rgba(30,64,175,.45));
+}
+
+.login-card{
+  position:relative;
+  width:92%;
+  max-width:430px;
+  padding:32px;
+  border-radius:28px;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
   color:white;
+  animation:slideUp .8s ease;
 }
 
-.login-box{
-  width:380px;
-  background:#111827;
-  padding:35px;
-  border-radius:18px;
-  box-shadow:0 0 25px rgba(59,130,246,0.4);
+@keyframes slideUp{
+  from{opacity:0; transform:translateY(60px) scale(.95);}
+  to{opacity:1; transform:translateY(0) scale(1);}
+}
+
+.logo{
   text-align:center;
+  margin-bottom:20px;
 }
 
-h1{ margin-bottom:10px; }
-h2{ margin-bottom:20px; color:#60a5fa; }
+.logo i{
+  font-size:42px;
+  color:#60a5fa;
+}
 
-.role-buttons{
+.logo h1{
+  font-size:32px;
+  margin-top:8px;
+}
+
+.logo p{
+  font-size:13px;
+  color:#e5e7eb;
+}
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tabs button,
+.role-switch button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.tabs .active,
+.role-switch .active{
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+.form{
+  display:none;
+  animation:fade .4s ease;
+}
+
+.active-form{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateX(20px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+.role-switch{
   display:flex;
   gap:10px;
   margin-bottom:15px;
 }
 
-.role-buttons button{
-  background:#374151;
+.input-box{
+  position:relative;
+  margin-bottom:14px;
 }
 
-input{
+.input-box i{
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#dbeafe;
+}
+
+.input-box input{
   width:100%;
-  padding:13px;
-  margin:10px 0;
+  padding:14px 14px 14px 45px;
   border:none;
   outline:none;
-  border-radius:10px;
+  border-radius:15px;
+  background:rgba(255,255,255,.14);
+  color:white;
   font-size:15px;
 }
 
-button{
-  width:100%;
+.input-box input::placeholder{
+  color:#e5e7eb;
+}
+
+.captcha{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.captcha span{
+  flex:1;
   padding:13px;
-  margin-top:12px;
+  text-align:center;
+  border-radius:15px;
+  background:rgba(255,255,255,.18);
+  letter-spacing:4px;
+  font-weight:700;
+}
+
+.captcha button{
+  width:58px;
   border:none;
-  border-radius:10px;
+  border-radius:15px;
   background:#2563eb;
   color:white;
-  font-weight:bold;
   cursor:pointer;
 }
 
-button:hover{ background:#1d4ed8; }
-
-.captcha-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
+.main-btn{
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border:none;
+  border-radius:15px;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
 }
 
-#captchaText{
-  flex:1;
-  background:#f3f4f6;
-  color:#111827;
-  padding:12px;
-  border-radius:10px;
-  font-weight:bold;
-  letter-spacing:3px;
+.main-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(37,99,235,.45);
 }
 
-.captcha-row button{
-  width:55px;
-  margin:0;
-}
+@media(max-width:480px){
+  body{
+    overflow:auto;
+    padding:25px 0;
+  }
 
-#otpShow{
-  color:#22c55e;
-  margin-top:12px;
-  font-weight:bold;
-}
+  .login-card{
+    padding:24px;
+  }
 
-#message{
-  margin-top:15px;
-  color:#f87171;
+  .logo h1{
+    font-size:26px;
+  }
 }
