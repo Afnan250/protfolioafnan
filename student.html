@@ -3,7 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal | UniHostel</title><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Portal | UniHostel</title>
+<link rel="stylesheet" href="hostelstyle.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+    <div class="logo-section">
+        <h2>🎓 UniHostel</h2>
+        <p>Student Portal</p>
+    </div>
+
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+    <button onclick="showPage('profile')">👤 My Profile</button>
+    <button onclick="showPage('room')">🛏 My Room</button>
+    <button onclick="showPage('request')">📋 Room Request</button>
+    <button onclick="showPage('complaints')">📢 Complaints</button>
+    <button onclick="logout()">🚪 Logout</button>
+</aside>
+
+<main class="main-content">
+
+<section id="dashboard" class="page active">
+    <h1>Welcome, <span id="studentName">Student</span></h1>
+
+    <div class="profile-box">
+        <img id="profileImage" src="https://via.placeholder.com/180" alt="Profile Picture">
+        <input type="file" id="imageUpload" accept="image/*" onchange="changeProfilePicture()">
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Room Status</h3>
+            <h2 id="roomStatus">Pending</h2>
+        </div>
+
+        <div class="card">
+            <h3>Hostel</h3>
+            <h2 id="studentHostel">Not Assigned</h2>
+        </div>
+
+        <div class="card">
+            <h3>Room Number</h3>
+            <h2 id="studentRoom">Not Assigned</h2>
+        </div>
+
+        <div class="card">
+            <h3>Complaints</h3>
+            <h2 id="complaintCount">0</h2>
+        </div>
+    </div>
+</section>
+
+<section id="profile" class="page">
+    <h1>Student Profile</h1>
+
+    <div class="panel">
+        <div class="profile-photo-section">
+            <img id="profileImageProfile" src="https://via.placeholder.com/180" alt="Profile Picture">
+        </div>
+
+        <p><strong>Name:</strong> <span id="profileName">Student</span></p>
+        <p><strong>Roll Number:</strong> <span id="profileRoll">USTM001</span></p>
+        <p><strong>Department:</strong> <span id="profileDept">BCA</span></p>
+        <p><strong>Room:</strong> <span id="profileRoom">Not Assigned</span></p>
+    </div>
+</section>
+
+<section id="room" class="page">
+    <h1>Room Information</h1>
+
+    <div class="panel" id="roomDetails">
+        <h2>No Room Assigned</h2>
+        <p>Please submit a room request.</p>
+    </div>
+</section>
+
+<section id="request" class="page">
+    <h1>Hostel Room Request</h1>
+
+    <div class="panel">
+        <select id="hostelType">
+            <option value="">Select Hostel</option>
+            <option>Boys Hostel 1</option>
+            <option>Boys Hostel 2</option>
+            <option>Boys Hostel 3</option>
+            <option>Girls Hostel 1</option>
+            <option>Girls Hostel 2</option>
+            <option>Girls Hostel 3</option>
+        </select>
+
+        <select id="roomType">
+            <option value="">Preferred Room Type</option>
+            <option>2 Seater</option>
+            <option>3 Seater</option>
+            <option>4 Seater</option>
+        </select>
+
+        <select id="bathroomType">
+            <option value="">Bathroom Preference</option>
+            <option>Attached Bathroom</option>
+            <option>Common Bathroom</option>
+        </select>
+
+        <textarea id="requestReason" placeholder="Reason for hostel accommodation"></textarea>
+
+        <button onclick="requestRoom()">Submit Request</button>
+
+        <p id="requestMsg"></p>
+    </div>
+</section>
+
+<section id="complaints" class="page">
+    <h1>Complaints</h1>
+
+    <div class="panel">
+        <input type="text" id="complaintText" placeholder="Write your complaint">
+        <button onclick="addComplaint()">Submit Complaint</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Complaint</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="complaintTable"></tbody>
+    </table>
+</section>
+
+</main>
+</div>
+
+<script>
+function showPage(pageId){
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageId).classList.add("active");
+}
+
+function requestRoom(){
+    const hostel = document.getElementById("hostelType").value;
+    const room = document.getElementById("roomType").value;
+    const bathroom = document.getElementById("bathroomType").value;
+    const reason = document.getElementById("requestReason").value;
+    const msg = document.getElementById("requestMsg");
+
+    if(hostel === "" || room === "" || bathroom === "" || reason.trim() === ""){
+        msg.innerText = "Please fill all details.";
+        msg.style.color = "red";
+        return;
+    }
+
+    localStorage.setItem("hostelType", hostel);
+    localStorage.setItem("roomType", room);
+    localStorage.setItem("bathroomType", bathroom);
+    localStorage.setItem("requestReason", reason);
+
+    document.getElementById("roomStatus").innerText = "Request Submitted";
+    document.getElementById("studentHostel").innerText = hostel;
+    document.getElementById("studentRoom").innerText = room;
+    document.getElementById("profileRoom").innerText = room;
+
+    document.getElementById("roomDetails").innerHTML = `
+        <h2>Room Request Submitted</h2>
+        <p><strong>Hostel:</strong> ${hostel}</p>
+        <p><strong>Room Type:</strong> ${room}</p>
+        <p><strong>Bathroom:</strong> ${bathroom}</p>
+        <p><strong>Status:</strong> Pending Admin Approval</p>
+    `;
+
+    msg.innerText = "Room request submitted successfully.";
+    msg.style.color = "green";
+}
+
+function addComplaint(){
+    const complaintInput = document.getElementById("complaintText");
+    const complaint = complaintInput.value.trim();
+
+    if(complaint === ""){
+        alert("Please write a complaint.");
+        return;
+    }
+
+    const table = document.getElementById("complaintTable");
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${complaint}</td>
+        <td>Pending</td>
+    `;
+
+    table.appendChild(row);
+
+    const count = document.querySelectorAll("#complaintTable tr").length;
+    document.getElementById("complaintCount").innerText = count;
+
+    complaintInput.value = "";
+}
+
+function changeProfilePicture(){
+    const file = document.getElementById("imageUpload").files[0];
+
+    if(file){
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+            document.getElementById("profileImage").src = e.target.result;
+            document.getElementById("profileImageProfile").src = e.target.result;
+            localStorage.setItem("profileImage", e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+function logout(){
+    window.location.href = "login.html";
+}
+
+window.onload = function(){
+    const savedImage = localStorage.getItem("profileImage");
+
+    if(savedImage){
+        document.getElementById("profileImage").src = savedImage;
+        document.getElementById("profileImageProfile").src = savedImage;
+    }
+
+    const hostel = localStorage.getItem("hostelType");
+    const room = localStorage.getItem("roomType");
+    const bathroom = localStorage.getItem("bathroomType");
+
+    if(hostel && room && bathroom){
+        document.getElementById("roomStatus").innerText = "Request Submitted";
+        document.getElementById("studentHostel").innerText = hostel;
+        document.getElementById("studentRoom").innerText = room;
+        document.getElementById("profileRoom").innerText = room;
+
+        document.getElementById("roomDetails").innerHTML = `
+            <h2>Room Request Submitted</h2>
+            <p><strong>Hostel:</strong> ${hostel}</p>
+            <p><strong>Room Type:</strong> ${room}</p>
+            <p><strong>Bathroom:</strong> ${bathroom}</p>
+            <p><strong>Status:</strong> Pending Admin Approval</p>
+        `;
+    }
+};
+</script>
+
+</body>
+</html>
 <link rel="stylesheet" href="hostelstyle.css">
 </head>
 
