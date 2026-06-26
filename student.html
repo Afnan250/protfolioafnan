@@ -6,87 +6,189 @@
 <title>Student Portal | UniHostel</title>
 <link rel="stylesheet" href="hostelstyle.css">
 </head>
+
 <body>
 
 <div class="app">
+
 <aside class="sidebar">
+
+<div class="logo-section">
 <h2>🎓 UniHostel</h2>
 <p>Student Portal</p>
+</div>
 
-<button onclick="showPage('dashboard')">Dashboard</button>
-<button onclick="showPage('profile')">My Profile</button>
-<button onclick="showPage('room')">My Room</button>
-<button onclick="showPage('request')">Request Room</button>
-<button onclick="showPage('entry')">Entry / Exit</button>
-<button onclick="showPage('complaint')">Complaints</button>
-<button onclick="logout()">Logout</button>
+<button onclick="showPage('dashboard')">🏠 Dashboard</button>
+<button onclick="showPage('profile')">👤 My Profile</button>
+<button onclick="showPage('room')">🛏 My Room</button>
+<button onclick="showPage('request')">📋 Room Request</button>
+<button onclick="showPage('complaints')">📢 Complaints</button>
+<button onclick="logout()">🚪 Logout</button>
+
 </aside>
 
-<main class="main">
+<main class="main-content">
 
 <section id="dashboard" class="page active">
-<h1>Student Dashboard</h1>
-<p>Welcome, <span id="studentName"></span></p>
+
+<h1>Welcome, <span id="studentName"></span></h1>
 
 <div class="cards">
-<div class="card"><h3>Room Status</h3><h2 id="roomStatus">Pending</h2></div>
-<div class="card"><h3>Room Number</h3><h2 id="studentRoom">Not Assigned</h2></div>
-<div class="card"><h3>Complaints</h3><h2 id="complaintCount">0</h2></div>
-<div class="card"><h3>Last Entry</h3><h2 id="lastEntry">--</h2></div>
+
+<div class="card">
+<h3>Room Status</h3>
+<h2 id="roomStatus">Pending</h2>
 </div>
+
+<div class="card">
+<h3>Hostel</h3>
+<h2 id="studentHostel">Not Assigned</h2>
+</div>
+
+<div class="card">
+<h3>Room Number</h3>
+<h2 id="studentRoom">Not Assigned</h2>
+</div>
+
+<div class="card">
+<h3>Complaints</h3>
+<h2 id="complaintCount">0</h2>
+</div>
+
+</div>
+
 </section>
 
 <section id="profile" class="page">
-<h1>My Profile</h1>
+
+<h1>Student Profile</h1>
+
 <div class="panel">
-<p><b>Name:</b> <span id="profileName"></span></p>
-<p><b>Roll Number:</b> <span id="profileRoll"></span></p>
-<p><b>Department:</b> BCA</p>
-<p><b>Room:</b> <span id="profileRoom">Not Assigned</span></p>
+
+<p><strong>Name:</strong> <span id="profileName"></span></p>
+
+<p><strong>Roll Number:</strong>
+<span id="profileRoll"></span></p>
+
+<p><strong>Department:</strong>
+<span id="profileDept"></span></p>
+
+<p><strong>Room:</strong>
+<span id="profileRoom">Not Assigned</span></p>
+
 </div>
+
 </section>
 
 <section id="room" class="page">
-<h1>My Room</h1>
-<div class="panel" id="roomDetails"></div>
+
+<h1>Room Information</h1>
+
+<div class="panel" id="roomDetails">
+
+<h2>No Room Assigned</h2>
+
+<p>Please submit a room request.</p>
+
+</div>
+
 </section>
 
 <section id="request" class="page">
-<h1>Request Room</h1>
+
+<h1>Hostel Room Request</h1>
+
 <div class="panel">
-<input type="text" id="requestReason" placeholder="Reason for hostel room request">
-<button onclick="requestRoom()">Submit Room Request</button>
+
+<select id="hostelType">
+
+<option value="">Select Hostel</option>
+
+<option>Boys Hostel 1</option>
+<option>Boys Hostel 2</option>
+<option>Boys Hostel 3</option>
+
+<option>Girls Hostel 1</option>
+<option>Girls Hostel 2</option>
+<option>Girls Hostel 3</option>
+
+</select>
+
+<select id="roomType">
+
+<option value="">Preferred Room Type</option>
+
+<option>2 Seater</option>
+<option>3 Seater</option>
+<option>4 Seater</option>
+
+</select>
+
+<select id="bathroomType">
+
+<option value="">Bathroom Preference</option>
+
+<option>Attached Bathroom</option>
+<option>Common Bathroom</option>
+
+</select>
+
+<textarea
+id="requestReason"
+placeholder="Reason for hostel accommodation">
+</textarea>
+
+<button onclick="requestRoom()">
+Submit Request
+</button>
+
 <p id="requestMsg"></p>
+
 </div>
+
 </section>
 
-<section id="entry" class="page">
-<h1>Entry / Exit</h1>
-<div class="panel">
-<button onclick="markEntry()">Mark Entry</button>
-<button onclick="markExit()">Mark Exit</button>
-</div>
-<table>
-<thead><tr><th>Date</th><th>Entry</th><th>Exit</th></tr></thead>
-<tbody id="entryTable"></tbody>
-</table>
-</section>
+<section id="complaints" class="page">
 
-<section id="complaint" class="page">
 <h1>Complaints</h1>
+
 <div class="panel">
-<input type="text" id="complaintText" placeholder="Write your complaint">
-<button onclick="addComplaint()">Submit Complaint</button>
+
+<input
+type="text"
+id="complaintText"
+placeholder="Write your complaint">
+
+<button onclick="addComplaint()">
+Submit Complaint
+</button>
+
 </div>
+
 <table>
-<thead><tr><th>Complaint</th><th>Status</th></tr></thead>
-<tbody id="complaintTable"></tbody>
+
+<thead>
+
+<tr>
+<th>Complaint</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="complaintTable">
+</tbody>
+
 </table>
+
 </section>
 
 </main>
+
 </div>
 
 <script src="student.js"></script>
+
 </body>
 </html>
+
