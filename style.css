@@ -506,7 +506,6 @@ cursor:pointer;
 
 @media(max-width:900px){
 
-```
 .menu-btn{
     display:block;
 }
@@ -536,7 +535,7 @@ cursor:pointer;
     padding:10px;
     margin:0;
 }
-```
+
 
 }
 
@@ -544,16 +543,41 @@ cursor:pointer;
 
 @media(max-width:560px){
 
-```
 .header{
     padding:18px 5%;
 }
 
-.navbar{
-    width:100%;
-    top:70px;
-    border-radius:0;
+/* Three-dot menu button */
+.menu-btn{
+    display:block;
+    font-size:28px;
+    cursor:pointer;
 }
-```
+
+/* Hidden navbar */
+.navbar{
+    position:absolute;
+    top:70px;
+    right:-100%;
+    width:250px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:0 0 0 18px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    transition:.3s;
+}
+
+/* Show when menu clicked */
+.navbar.active{
+    right:0;
+}
+
+.navbar a{
+    display:block;
+    padding:12px 0;
+    margin:0;
+}
 
 }
