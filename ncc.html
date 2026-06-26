@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>USTM NCC Connect</title>
+<title>USTM NCC Portfolio</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -19,25 +17,85 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 body{
     background:#082f57;
-}
-
-.connect-section{
-    min-height:100vh;
-    padding:100px 20px;
-    text-align:center;
-}
-
-.connect-section h2{
     color:white;
-    font-size:42px;
+}
+
+nav{
+    width:100%;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#061f3a;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
     font-weight:900;
-    margin-bottom:25px;
+    color:#ff7a00;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:22px;
+    font-weight:700;
+}
+
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    background:linear-gradient(rgba(8,47,87,.85),rgba(8,47,87,.95));
+}
+
+.hero h1{
+    font-size:58px;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#ff7a00;
+}
+
+.hero p{
+    max-width:800px;
+    margin:25px auto;
+    font-size:20px;
+    line-height:1.7;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:14px 35px;
+    background:#ff7a00;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:800;
+}
+
+.section{
+    padding:90px 8%;
+}
+
+.section h2{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
 }
 
 .line{
     display:flex;
     justify-content:center;
-    margin-bottom:60px;
+    margin-bottom:50px;
 }
 
 .line span{
@@ -45,16 +103,69 @@ body{
     height:6px;
 }
 
-.orange{
-    background:#ff7a00;
-}
+.orange{background:#ff7a00;}
+.white{background:white;}
+.green{background:#18a84f;}
 
-.white{
+.about-box{
+    max-width:1000px;
+    margin:auto;
     background:white;
+    color:#082f57;
+    padding:35px;
+    border-radius:22px;
+    line-height:1.8;
+    font-size:18px;
+    border:4px solid #ff7a00;
+    box-shadow:6px 6px 0 #18a84f;
 }
 
-.green{
-    background:#18a84f;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    color:#082f57;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    border:3px solid #ff7a00;
+    box-shadow:4px 4px 0 #18a84f;
+}
+
+.card i{
+    font-size:48px;
+    color:#ff7a00;
+    margin-bottom:18px;
+}
+
+.card h3{
+    margin-bottom:12px;
+    font-size:22px;
+}
+
+.card p{
+    color:#555;
+    line-height:1.6;
+}
+
+.achievement-list{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    color:#082f57;
+    border-radius:22px;
+    padding:35px;
+    border:4px solid #ff7a00;
+    box-shadow:6px 6px 0 #18a84f;
+}
+
+.achievement-list li{
+    margin-bottom:15px;
+    font-size:18px;
 }
 
 .connect-container{
@@ -71,11 +182,7 @@ body{
     padding:40px 20px;
     border:3px solid #ff7a00;
     box-shadow:4px 4px 0 #18a84f;
-    transition:.3s;
-}
-
-.connect-card:hover{
-    transform:translateY(-8px);
+    text-align:center;
 }
 
 .connect-card i{
@@ -83,21 +190,10 @@ body{
     margin-bottom:20px;
 }
 
-.fa-instagram{
-    color:#E1306C;
-}
-
-.fa-facebook-f{
-    color:#1877F2;
-}
-
-.fa-whatsapp{
-    color:#25D366;
-}
-
-.fa-envelope{
-    color:#EA4335;
-}
+.fa-instagram{color:#E1306C;}
+.fa-facebook-f{color:#1877F2;}
+.fa-whatsapp{color:#25D366;}
+.fa-envelope{color:#EA4335;}
 
 .connect-card h3{
     color:#082f57;
@@ -108,35 +204,138 @@ body{
     color:#666;
 }
 
-@media(max-width:900px){
-
-.connect-container{
-grid-template-columns:repeat(2,1fr);
+footer{
+    text-align:center;
+    padding:25px;
+    background:#061f3a;
+    color:white;
 }
 
+@media(max-width:900px){
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .connect-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
 }
 
 @media(max-width:600px){
+    nav a{
+        display:inline-block;
+        margin:8px;
+    }
 
-.connect-container{
-grid-template-columns:1fr;
+    .connect-container{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .section h2{
+        font-size:30px;
+    }
 }
-
-.connect-section h2{
-font-size:28px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
-<section class="connect-section">
+<nav>
+<div class="logo">USTM NCC</div>
+<div>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#activities">Activities</a>
+<a href="#achievements">Achievements</a>
+<a href="#connect">Connect</a>
+</div>
+</nav>
 
+<section class="hero" id="home">
+<div>
+<h1>USTM <span>NCC</span> Portfolio</h1>
+<p>
+Discipline, unity, leadership and service. USTM NCC represents the spirit of dedication, patriotism and youth leadership through training, camps, social service and national activities.
+</p>
+<a href="#about" class="btn">Explore NCC</a>
+</div>
+</section>
+
+<section class="section" id="about">
+<h2>About USTM NCC</h2>
+<div class="line">
+<span class="orange"></span>
+<span class="white"></span>
+<span class="green"></span>
+</div>
+
+<div class="about-box">
+USTM NCC works to develop discipline, leadership, teamwork, confidence and national responsibility among cadets. Through regular drill, theory classes, camps, adventure activities, social service and institutional events, cadets learn to serve with commitment and pride.
+</div>
+</section>
+
+<section class="section" id="activities">
+<h2>NCC Activities</h2>
+<div class="line">
+<span class="orange"></span>
+<span class="white"></span>
+<span class="green"></span>
+</div>
+
+<div class="grid">
+<div class="card">
+<i class="fa-solid fa-person-military-rifle"></i>
+<h3>Drill Training</h3>
+<p>Cadets are trained in discipline, parade movements, command response and military bearing.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-book-open"></i>
+<h3>Theory Classes</h3>
+<p>Classes include leadership, personality development, map reading, field craft and NCC knowledge.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-tent"></i>
+<h3>Camps</h3>
+<p>Cadets participate in CATC, trekking, firing, adventure camps and national level activities.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-hand-holding-heart"></i>
+<h3>Social Service</h3>
+<p>Awareness drives, blood donation, cleanliness activities and community service are key parts of NCC.</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="achievements">
+<h2>Achievements</h2>
+<div class="line">
+<span class="orange"></span>
+<span class="white"></span>
+<span class="green"></span>
+</div>
+
+<ul class="achievement-list">
+<li>Participation in NCC camps, university events and institutional duties.</li>
+<li>Cadets selected for adventure, trekking, firing and map reading activities.</li>
+<li>Active contribution in discipline management and volunteer coordination at USTM events.</li>
+<li>Development of leadership, confidence, teamwork and public responsibility among cadets.</li>
+</ul>
+</section>
+
+<section class="section" id="connect">
 <h2>CONNECT WITH USTM NCC</h2>
-
 <div class="line">
 <span class="orange"></span>
 <span class="white"></span>
@@ -144,7 +343,6 @@ font-size:28px;
 </div>
 
 <div class="connect-container">
-
 <div class="connect-card">
 <i class="fa-brands fa-instagram"></i>
 <h3>Instagram</h3>
@@ -168,10 +366,13 @@ font-size:28px;
 <h3>Email</h3>
 <p>ustmnccwarriors@gmail.com</p>
 </div>
-
 </div>
-
 </section>
+
+<footer>
+<p>© 2026 USTM NCC Portfolio | Designed by Afnan Al Jedid</p>
+</footer>
 
 </body>
 </html>
+
