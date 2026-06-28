@@ -3,552 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ANO Dashboard | USTM NCC</title>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI,Arial,sans-serif;
-}
-
-body{
-  background:#f5f7fb;
-  color:#071a3d;
-}
-
-body{
-  background:
-    radial-gradient(circle at top left, rgba(255,153,51,.18), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(19,136,8,.18), transparent 35%),
-    linear-gradient(135deg,#eef4f8,#ffffff,#f3fff6);
-  color:#071a3d;
-  position:relative;
-  overflow-x:hidden;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("ncc2.jpeg");
-  background-size:520px;
-  background-position:center;
-  background-repeat:no-repeat;
-  opacity:.06;
-  z-index:-2;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  width:900px;
-  height:220px;
-  right:-180px;
-  top:80px;
-  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
-  opacity:.18;
-  transform:rotate(-12deg);
-  border-radius:50%;
-  filter:blur(20px);
-  z-index:-1;
-}
-  
-header{
-  background:#071a3d;
-  color:white;
-  padding:18px 7%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom-right-radius:45px;
-  box-shadow:0 10px 25px rgba(0,0,0,.18);
-}
-
-.brand h2{
-  color:#ff9933;
-  font-size:28px;
-}
-
-.brand p{
-  color:#ddd;
-}
-
-.logout{
-  background:#ff9933;
-  color:#071a3d;
-  padding:12px 22px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:800;
-}
-
-.hero{
-  margin:25px 3%;
-  padding:55px 7%;
-  border-radius:30px;
-  background:
-    linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),
-    url("ncc2.jpeg");
-  background-size:cover;
-  background-position:center;
-  color:white;
-  box-shadow:0 18px 40px rgba(0,0,0,.2);
-  position:relative;
-  overflow:hidden;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  right:-70px;
-  top:25px;
-  width:520px;
-  height:80px;
-  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
-  transform:rotate(-18deg);
-  border-radius:80px;
-  opacity:.9;
-}
-
-.hero h1,
-.hero p{
-  position:relative;
-  z-index:2;
-}
-.dashboard{
-  padding:25px 4% 45px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:24px;
-}
-
-.card{
-  background:white;
-  padding:28px;
-  border-radius:22px;
-  box-shadow:0 12px 28px rgba(0,0,0,.08);
-  border-top:5px solid #ff9933;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-7px);
-}
-
-.card i{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:#071a3d;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  margin-bottom:18px;
-}
-
-.card h3{
-  font-size:25px;
-  margin-bottom:14px;
-}
-
-.card p{
-  color:#555;
-  line-height:1.6;
-  margin-bottom:12px;
-}
-
-input, textarea, select{
-  width:100%;
-  padding:13px;
-  margin:9px 0;
-  border:1px solid #d2d6df;
-  border-radius:10px;
-  outline:none;
-  font-size:15px;
-}
-
-textarea{
-  resize:vertical;
-}
-
-button{
-  background:#071a3d;
-  color:white;
-  padding:12px 20px;
-  border:none;
-  border-radius:10px;
-  font-weight:800;
-  cursor:pointer;
-  margin-top:8px;
-}
-
-button:hover{
-  background:#ff9933;
-  color:#071a3d;
-}
-
-.danger{
-  background:#b00020;
-}
-
-.danger:hover{
-  background:#ff4d4d;
-  color:white;
-}
-
-.output{
-  margin-top:14px;
-  padding:14px;
-  background:#fff7ef;
-  border-left:5px solid #ff9933;
-  border-radius:12px;
-  color:#333;
-}
-
-.cadet-list p{
-  padding:10px;
-  background:#f4f6f9;
-  border-radius:8px;
-  margin:8px 0;
-  font-size:14px;
-}
-
-footer{
-  background:#071a3d;
-  color:white;
-  text-align:center;
-  padding:24px;
-}
-
-@media(max-width:700px){
-  header{
-    flex-direction:column;
-    gap:14px;
-    text-align:center;
-  }
-
-  .hero h1{
-    font-size:30px;
-  }
-}
-  .year-select{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid #d6d6d6;
-    background:white;
-    font-size:16px;
-    margin:15px 0;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{background:linear-gradient(135deg,#fff7ef,#f4f6f9,#eefaf0);color:#071a3d}
+header{background:#071a3d;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center}
+header h2{color:#ff9933}.logout{background:#ff9933;color:#071a3d;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:800}
+.hero{margin:25px 3%;padding:45px 7%;border-radius:28px;background:linear-gradient(#071a3ddd,#071a3df0),url("ncc2.jpeg");background-size:cover;color:white}
+.dashboard{padding:30px 4%;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.card{background:white;padding:28px;border-radius:22px;box-shadow:0 12px 28px #0001;border-top:5px solid #ff9933}
+.card i{font-size:34px;color:#071a3d;margin-bottom:15px}
+input,textarea,select{width:100%;padding:14px;margin:9px 0;border:1px solid #ccd3df;border-radius:10px}
+button{background:#071a3d;color:white;padding:12px 18px;border:none;border-radius:10px;font-weight:800;cursor:pointer}
+button:hover{background:#ff9933;color:#071a3d}.danger{background:#b00020}
+.output{margin-top:12px;background:#fff7ef;padding:12px;border-left:5px solid #ff9933;border-radius:10px}
+footer{text-align:center;background:#071a3d;color:white;padding:22px}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="brand">
+  <div>
     <h2>USTM NCC ANO Dashboard</h2>
-    <p id="anoIdText">Loading ANO ID...</p>
+    <p id="anoIdText">Loading...</p>
   </div>
-
-  <a href="ncc.html" class="logout" onclick="logoutANO()">
-    <i class="fa-solid fa-right-from-bracket"></i> Logout
-  </a>
+  <a href="ncc.html" class="logout" onclick="logoutANO()">Logout</a>
 </header>
 
 <section class="hero">
   <h1>Administrative Control Panel</h1>
-  <p>
-    Manage notices, attendance, camp updates, cadet status, and public gallery data.
-  </p>
+  <p>Manage notices, attendance, camp updates and cadet status.</p>
 </section>
 
 <main class="dashboard">
 
-  <div class="card">
-    <i class="fa-solid fa-bullhorn"></i>
-    <h3>Publish Notice</h3>
-    <p>Notice can be published by ANO or Senior In-Charge.</p>
-
-    <select id="noticeRole">
-      <option value="ANO">ANO</option>
-      <option value="Senior In-Charge">Senior In-Charge</option>
-    </select>
-
-    <input type="text" id="noticeTitle" placeholder="Notice Title">
-
-    <textarea id="noticeContent" rows="5" placeholder="Write notice here..."></textarea>
-
-    <button onclick="publishNotice()">Publish Notice</button>
-
-    <div class="output" id="noticeOutput">No notice published yet.</div>
-  </div>
-
-  <div class="card">
-    <i class="fa-solid fa-calendar-check"></i>
-    <h3>Declare Attendance</h3>
-    <p>Attendance is counted from regular NCC classes and events.</p>
-
-    <input type="text" id="attendanceCadetId" placeholder="Enter Cadet ID">
-
-    <input type="number" id="attendancePercent" placeholder="Attendance Percentage">
-
-    <textarea id="attendanceText" rows="4" placeholder="Example: Regular classes: 70%, Events: 80%"></textarea>
-
-    <button onclick="declareAttendance()">Declare Attendance</button>
-
-    <div class="output">
-      20% to 70% attendance means the cadet is not eligible for camp.
-    </div>
-  </div>
-
-  <div class="card">
-    <i class="fa-solid fa-campground"></i>
-    <h3>Declare Camp Update</h3>
-    <p>Camp updates will appear on cadet dashboards after declaration.</p>
-
-    <textarea id="campUpdate" rows="5" placeholder="Write camp update here..."></textarea>
-
-    <button onclick="declareCamp()">Publish Camp Update</button>
-
-    <div class="output" id="campOutput">No camp update published yet.</div>
-  </div>
-
-  <div class="card">
-    <i class="fa-solid fa-user-xmark"></i>
-    <h3>Cancel Cadet</h3>
-    <p>Cancelled cadets will not be able to open their dashboard.</p>
-
-    <input type="text" id="cancelCadetId" placeholder="Enter Cadet ID">
-
-    <button class="danger" onclick="cancelCadet()">Cancel Cadet</button>
-  </div>
-
 <div class="card">
-    <i class="fa-solid fa-user-graduate"></i>
-
-    <h3>Mark Batch as Passout</h3>
-
-    <p>
-        Select a registered batch. All cadets from that batch will be
-        automatically marked as passout cadets.
-    </p>
-
-    <select id="passoutYear" class="year-select">
-        <option value="">Select Registered Year</option>
-    </select>
-
-    <button onclick="markBatchPassout()">
-        Mark Batch Passout
-    </button>
-
-    <div class="output" id="batchPassoutOutput">
-        No batch selected yet.
-    </div>
+  <i class="fa-solid fa-bullhorn"></i>
+  <h3>Publish Notice</h3>
+  <select id="noticeRole">
+    <option value="ANO">ANO</option>
+    <option value="Senior In-Charge">Senior In-Charge</option>
+  </select>
+  <input id="noticeTitle" placeholder="Notice Title">
+  <textarea id="noticeContent" rows="5" placeholder="Write notice here"></textarea>
+  <button onclick="publishNotice()">Publish Notice</button>
+  <div class="output" id="noticeOutput">No notice published yet.</div>
 </div>
 
-  <div class="card">
-    <i class="fa-solid fa-users"></i>
-    <h3>Registered Cadets</h3>
-    <p>View cadets registered in this browser storage.</p>
+<div class="card">
+  <i class="fa-solid fa-calendar-check"></i>
+  <h3>Declare Attendance</h3>
+  <input id="attendanceCadetId" placeholder="Cadet ID">
+  <input type="number" id="attendancePercent" placeholder="Attendance %">
+  <textarea id="attendanceText" rows="4" placeholder="Regular classes and events record"></textarea>
+  <button onclick="declareAttendance()">Declare Attendance</button>
+</div>
 
-    <button onclick="showCadets()">Show Cadets</button>
+<div class="card">
+  <i class="fa-solid fa-campground"></i>
+  <h3>Camp Update</h3>
+  <textarea id="campUpdate" rows="5" placeholder="Write camp update"></textarea>
+  <button onclick="declareCamp()">Publish Camp Update</button>
+</div>
 
-    <div class="output cadet-list" id="cadetList">
-      Click “Show Cadets”.
-    </div>
-  </div>
+<div class="card">
+  <i class="fa-solid fa-user-xmark"></i>
+  <h3>Cancel Cadet</h3>
+  <input id="cancelCadetId" placeholder="Cadet ID">
+  <button class="danger" onclick="cancelCadet()">Cancel Cadet</button>
+</div>
 
-  <div class="card">
-    <i class="fa-solid fa-images"></i>
-    <h3>Main Gallery Review</h3>
-    <p>Achievement photos uploaded by cadets are stored for the main page gallery.</p>
-
-    <button onclick="showGalleryCount()">Check Gallery Uploads</button>
-
-    <div class="output" id="galleryOutput">
-      No gallery data checked yet.
-    </div>
-  </div>
+<div class="card">
+  <i class="fa-solid fa-user-graduate"></i>
+  <h3>Mark Batch as Passout</h3>
+  <select id="passoutYear" onclick="loadBatchYears()">
+    <option value="">Select Registered Year</option>
+  </select>
+  <button onclick="markBatchPassout()">Mark Batch Passout</button>
+  <div class="output" id="batchPassoutOutput">No batch selected yet.</div>
+</div>
 
 </main>
 
-<footer>
-  © 2026 USTM NCC | ANO Admin Portal
-</footer>
+<footer>© 2026 USTM NCC | ANO Portal</footer>
 
-<script>
-const anoId = localStorage.getItem("activeAnoId");
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
+  authDomain: "ustm-ncc-portal.firebaseapp.com",
+  databaseURL: "https://ustm-ncc-portal-default-rtdb.firebaseio.com",
+  projectId: "ustm-ncc-portal",
+  storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  messagingSenderId: "164517585348",
+  appId: "1:164517585348:web:119a2abdb1d871226ec491"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const anoId=localStorage.getItem("activeAnoId");
 if(!anoId){
-  alert("Please login first as ANO.");
-  window.location.href = "ncc.html";
+  window.location.href="ncc.html";
 }else{
-  document.getElementById("anoIdText").innerText = anoId;
+  document.getElementById("anoIdText").innerText=anoId;
 }
 
-function publishNotice(){
-  const role = document.getElementById("noticeRole").value;
-  const title = document.getElementById("noticeTitle").value.trim();
-  const content = document.getElementById("noticeContent").value.trim();
-
-  if(title === "" || content === ""){
-    alert("Please fill notice title and content.");
-    return;
-  }
-
-  localStorage.setItem("nccNoticeTitle", title);
-  localStorage.setItem("nccNoticeContent", content);
-  localStorage.setItem("nccNoticeBy", role);
-  localStorage.setItem("nccNoticeDate", new Date().toLocaleString());
-
-  document.getElementById("noticeOutput").innerHTML =
-    "<b>" + title + "</b><br>" + content + "<br><small>Published by: " + role + "</small>";
-
-  alert("Notice published successfully.");
+function safeKey(id){
+  return btoa(unescape(encodeURIComponent(id))).replaceAll("=","");
 }
 
-function declareAttendance(){
-  const cadetId = document.getElementById("attendanceCadetId").value.trim();
-  const percent = document.getElementById("attendancePercent").value.trim();
-  const text = document.getElementById("attendanceText").value.trim();
+window.publishNotice = async function(){
+  const title=document.getElementById("noticeTitle").value.trim();
+  const content=document.getElementById("noticeContent").value.trim();
+  const by=document.getElementById("noticeRole").value;
 
-  if(cadetId === "" || percent === ""){
-    alert("Enter Cadet ID and attendance percentage.");
+  if(!title || !content){
+    alert("Fill all notice fields.");
     return;
   }
 
-  if(percent < 0 || percent > 100){
-    alert("Attendance percentage must be between 0 and 100.");
-    return;
-  }
+  await set(ref(db,"notice"),{
+    title,content,by,date:new Date().toLocaleString()
+  });
 
-  localStorage.setItem("attendancePercent_" + cadetId, percent);
-  localStorage.setItem("attendanceText_" + cadetId, text || "Attendance counted from regular NCC classes and events.");
-
-  alert("Attendance declared successfully.");
+  document.getElementById("noticeOutput").innerText="Notice published successfully.";
+  alert("Notice published.");
 }
 
-function declareCamp(){
-  const camp = document.getElementById("campUpdate").value.trim();
+window.declareAttendance = async function(){
+  const id=document.getElementById("attendanceCadetId").value.trim();
+  const percent=document.getElementById("attendancePercent").value.trim();
+  const text=document.getElementById("attendanceText").value.trim();
 
-  if(camp === ""){
-    alert("Write camp update first.");
+  if(!id || !percent){
+    alert("Enter cadet ID and percentage.");
     return;
   }
 
-  localStorage.setItem("nccCampUpdate", camp);
-  localStorage.setItem("nccCampDate", new Date().toLocaleString());
+  await set(ref(db,"attendance/"+safeKey(id)),{
+    cadetId:id,percent,text,date:new Date().toLocaleString()
+  });
 
-  document.getElementById("campOutput").innerText = camp;
-
-  alert("Camp update published successfully.");
+  alert("Attendance declared.");
 }
 
-function cancelCadet(){
-  const cadetId = document.getElementById("cancelCadetId").value.trim();
-
-  if(cadetId === ""){
-    alert("Enter Cadet ID first.");
+window.declareCamp = async function(){
+  const camp=document.getElementById("campUpdate").value.trim();
+  if(!camp){
+    alert("Write camp update.");
     return;
   }
 
-  localStorage.removeItem("cadet_" + cadetId);
-  localStorage.setItem("cadetStatus_" + cadetId, "cancelled");
+  await set(ref(db,"campUpdate"),{
+    text:camp,date:new Date().toLocaleString(),by:"ANO"
+  });
 
-  alert("Cadet cancelled successfully.");
+  alert("Camp update published.");
 }
 
-function markBatchPassout(){
-  const year = document.getElementById("passoutYear").value;
-
-  if(year === ""){
-    alert("Please select a registered year first.");
+window.cancelCadet = async function(){
+  const id=document.getElementById("cancelCadetId").value.trim();
+  if(!id){
+    alert("Enter cadet ID.");
     return;
   }
 
-  let count = 0;
+  await update(ref(db,"cadets/"+safeKey(id)),{status:"cancelled"});
+  alert("Cadet cancelled.");
+}
 
-  for(let i = 0; i < localStorage.length; i++){
-    const key = localStorage.key(i);
+window.loadBatchYears = function(){
+  const select=document.getElementById("passoutYear");
+  if(select.options.length>1) return;
 
-    if(key && key.startsWith("cadet_")){
-      const cadetId = key.replace("cadet_", "");
+  const currentYear=new Date().getFullYear();
+  for(let year=2023; year<=currentYear+10; year++){
+    const option=document.createElement("option");
+    option.value=year;
+    option.textContent=year+" Batch";
+    select.appendChild(option);
+  }
+}
 
-      if(cadetId.includes("ML/" + year + "/")){
-        localStorage.setItem("cadetStatus_" + cadetId, "completed");
+window.markBatchPassout = async function(){
+  const year=document.getElementById("passoutYear").value;
+
+  if(!year){
+    alert("Select registered year.");
+    return;
+  }
+
+  const snap=await get(ref(db,"cadets"));
+  let count=0;
+
+  if(snap.exists()){
+    const updates={};
+
+    snap.forEach(child=>{
+      const cadet=child.val();
+      if(cadet.year == year){
+        updates["cadets/"+child.key+"/status"]="completed";
         count++;
       }
-    }
+    });
+
+    await update(ref(db),updates);
   }
 
   document.getElementById("batchPassoutOutput").innerHTML =
-    `<strong>${year} Batch Passout Completed</strong><br>
-     Total cadets marked as passout: ${count}`;
+    `<b>${year} Batch Passout Completed</b><br>Total cadets marked: ${count}`;
 
-  alert(year + " batch cadets are now marked as passout.");
+  alert(year+" batch cadets are now marked as passout.");
 }
 
-function showCadets(){
-  let output = "";
-
-  for(let i = 0; i < localStorage.length; i++){
-    const key = localStorage.key(i);
-
-    if(key.startsWith("cadet_")){
-      const cadetId = key.replace("cadet_", "");
-      const status = localStorage.getItem("cadetStatus_" + cadetId) || "active";
-
-      output += "<p><b>" + cadetId + "</b><br>Status: " + status + "</p>";
-    }
-  }
-
-  document.getElementById("cadetList").innerHTML =
-    output || "No registered cadets found.";
-}
-
-function showGalleryCount(){
-  const gallery =
-    JSON.parse(localStorage.getItem("mainGalleryPhotos")) || [];
-
-  document.getElementById("galleryOutput").innerText =
-    "Total uploaded achievement photos: " + gallery.length;
-}
-
-function logoutANO(){
+window.logoutANO=function(){
   localStorage.removeItem("activeAnoId");
 }
- function loadBatchYears(){
 
-    const yearSelect = document.getElementById("passoutYear");
-
-    if(!yearSelect) return;
-
-    const currentYear = new Date().getFullYear();
-
-    for(let year = 2023; year <= currentYear + 10; year++){
-
-        const option = document.createElement("option");
-
-        option.value = year;
-        option.textContent = year + " Batch";
-
-        yearSelect.appendChild(option);
-    }
-}
-
-window.onload = function(){
-
-    loadBatchYears();
-
-};
+document.addEventListener("DOMContentLoaded",loadBatchYears);
 </script>
 
 </body>
