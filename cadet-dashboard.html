@@ -1,21 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadet Dashboard | USTM NCC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadet Dashboard | USTM NCC</title>
 
-  <link rel="stylesheet" href="cadet-dashboard.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{background:#f4f6f9;color:#222}
+
+.top-header{
+  background:#071a3d;color:white;padding:16px 7%;
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+.cadet-brand{display:flex;align-items:center;gap:14px}
+.cadet-brand img{
+  width:66px;height:66px;border-radius:50%;object-fit:cover;
+  border:4px solid #ff9933;background:white;
+}
+.cadet-brand h2{color:#ff9933}
+.cadet-brand p{color:#ddd}
+
+.logout-btn{
+  background:#ff9933;color:#071a3d;padding:10px 18px;
+  border-radius:8px;text-decoration:none;font-weight:800;
+}
+
+.hero{
+  min-height:360px;
+  background:linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),url("ncc1.jpeg");
+  background-size:cover;background-position:center;
+  display:flex;align-items:center;padding:45px 7%;
+}
+
+.cadet-profile{
+  width:100%;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(16px);border-radius:24px;padding:28px;
+  display:flex;gap:28px;align-items:center;color:white;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.photo-box{text-align:center}
+.photo-box img{
+  width:145px;height:145px;border-radius:50%;
+  object-fit:cover;border:5px solid #ff9933;background:white;
+}
+.upload-btn{
+  display:block;margin-top:12px;padding:9px 15px;
+  background:#ff9933;color:#071a3d;border-radius:8px;
+  font-weight:800;cursor:pointer;
+}
+
+.cadet-info h1{font-size:38px;margin-bottom:8px}
+.info-row{display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
+.info-row span{
+  background:rgba(255,255,255,.18);padding:9px 14px;
+  border-radius:30px;font-weight:700;
+}
+.service-select{margin:15px 0}
+.service-select select{
+  padding:10px 16px;border:none;border-radius:8px;
+  outline:none;font-weight:700;color:#071a3d;
+}
+.photo-rule{font-size:14px;color:#eee}
+
+.stats{
+  padding:28px 7%;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:18px;
+}
+.stat-box{
+  background:white;border-radius:16px;padding:22px;text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid #ff9933;
+}
+.stat-box h2{color:#071a3d;font-size:28px}
+.stat-box p{color:#666;font-weight:700}
+
+.dashboard{
+  padding:10px 7% 45px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+.card{
+  background:white;padding:25px;border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid #ff9933;transition:.3s;
+}
+.card:hover{transform:translateY(-7px)}
+.card i{font-size:36px;color:#071a3d;margin-bottom:14px}
+.card h3{color:#071a3d;margin-bottom:10px}
+.card p{color:#555;line-height:1.7}
+.notice-card{grid-column:1/-1;background:#fff7ef}
+small{display:block;margin-top:15px;color:#777}
+
+.card select{
+  width:100%;padding:12px;margin-top:12px;
+  border:1px solid #ccc;border-radius:8px;font-size:15px;
+}
+.contact-info{
+  margin-top:15px;padding:12px;background:#f8f9fa;border-radius:10px;
+}
+.contact-info h4{color:#071a3d;margin-bottom:8px}
+.contact-info a{color:#0b3d1e;text-decoration:none;font-weight:800}
+
+footer{
+  background:#071a3d;color:white;text-align:center;padding:24px;
+}
+
+@media(max-width:760px){
+  .top-header{flex-direction:column;gap:14px;text-align:center}
+  .cadet-brand{flex-direction:column}
+  .cadet-profile{flex-direction:column;text-align:center}
+  .cadet-info h1{font-size:30px}
+  .info-row{justify-content:center}
+}
+</style>
 </head>
+
 <body>
 
 <header class="top-header">
-
   <div class="cadet-brand">
     <img id="headerCadetPhoto" src="default-cadet.png" alt="Cadet Photo">
-
     <div>
       <h2 id="headerCadetName">Cadet Name</h2>
       <p id="headerCadetRank">Rank: Cadet</p>
@@ -25,73 +136,49 @@
   <a href="ncc.html" class="logout-btn" onclick="logoutCadet()">
     <i class="fa-solid fa-right-from-bracket"></i> Logout
   </a>
-
 </header>
 
 <section class="hero">
-  <div class="hero-overlay">
-
-    <div class="cadet-profile">
-
-      <div class="photo-box">
-        <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
-
-        <label class="upload-btn">
-          Upload Photo
-          <input type="file" id="photoUpload" accept="image/*" hidden>
-        </label>
-      </div>
-
-      <div class="cadet-info">
-        <h1 id="cadetName">Cadet Name</h1>
-        <p id="cadetIdText">Cadet ID loading...</p>
-
-        <div class="info-row">
-          <span id="cadetRank">Rank: Cadet</span>
-          <span>Wing: Army Wing</span>
-          <span id="cadetStatus">Status: Active</span>
-        </div>
-
-        <div class="service-select">
-          <label for="serviceYear">Service Year:</label>
-
-          <select id="serviceYear">
-            <option value="1st Year">1st Year</option>
-            <option value="2nd Year">2nd Year</option>
-            <option value="3rd Year">3rd Year</option>
-          </select>
-        </div>
-
-        <p class="photo-rule">
-          Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
-        </p>
-      </div>
-
+  <div class="cadet-profile">
+    <div class="photo-box">
+      <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+      <label class="upload-btn">
+        Upload Photo
+        <input type="file" id="photoUpload" accept="image/*" hidden>
+      </label>
     </div>
 
+    <div class="cadet-info">
+      <h1 id="cadetName">Cadet Name</h1>
+      <p id="cadetIdText">Cadet ID loading...</p>
+
+      <div class="info-row">
+        <span id="cadetRank">Rank: Cadet</span>
+        <span>Wing: Army Wing</span>
+        <span>Status: Active</span>
+      </div>
+
+      <div class="service-select">
+        <label>Service Year:</label>
+        <select id="serviceYear">
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+        </select>
+      </div>
+
+      <p class="photo-rule">
+        Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
+      </p>
+    </div>
   </div>
 </section>
 
 <section class="stats">
-  <div class="stat-box">
-    <h2>Army</h2>
-    <p>Wing</p>
-  </div>
-
-  <div class="stat-box">
-    <h2 id="rankStat">Cadet</h2>
-    <p>Rank</p>
-  </div>
-
-  <div class="stat-box">
-    <h2 id="yearStat">1st</h2>
-    <p>Service Year</p>
-  </div>
-
-  <div class="stat-box">
-    <h2>Active</h2>
-    <p>Status</p>
-  </div>
+  <div class="stat-box"><h2>Army</h2><p>Wing</p></div>
+  <div class="stat-box"><h2 id="rankStat">Cadet</h2><p>Rank</p></div>
+  <div class="stat-box"><h2 id="yearStat">1st</h2><p>Service Year</p></div>
+  <div class="stat-box"><h2>Active</h2><p>Status</p></div>
 </section>
 
 <main class="dashboard">
@@ -106,7 +193,7 @@
   <div class="card">
     <i class="fa-solid fa-user"></i>
     <h3>My Profile</h3>
-    <p>View your registered cadet ID, rank, army wing, service year and status.</p>
+    <p>View your cadet ID, rank, army wing, service year and status.</p>
   </div>
 
   <div class="card">
@@ -118,25 +205,25 @@
   <div class="card">
     <i class="fa-solid fa-campground"></i>
     <h3>Camp Updates</h3>
-    <p>Get updates for CATC, RDC, TSC, EBSB, trekking and other NCC camps.</p>
+    <p>Get updates for CATC, RDC, TSC, EBSB and trekking camps.</p>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-book-open"></i>
     <h3>Training Materials</h3>
-    <p>Access drill, map reading, NCC history, leadership and personality development materials.</p>
+    <p>Access drill, map reading, NCC history and leadership materials.</p>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-medal"></i>
     <h3>Achievements</h3>
-    <p>View achievements, selections, certificates, awards and participation records.</p>
+    <p>View selections, certificates, awards and participation records.</p>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-image"></i>
     <h3>Gallery</h3>
-    <p>Explore photos from parades, camps, social service, events and adventure activities.</p>
+    <p>Explore photos from parades, camps and NCC events.</p>
   </div>
 
   <div class="card">
@@ -162,7 +249,133 @@
   © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
 
-<script src="cadet-dashboard.js"></script>
+<script>
+const cadetId = localStorage.getItem("activeCadetId");
+
+if(!cadetId){
+  alert("Please login first.");
+  window.location.href = "ncc.html";
+}
+
+const passoutMessage =
+"Thank you for your dedicated service to USTM NCC. Your commitment, discipline, and leadership have helped guide the next generation of cadets. The legacy you built is now being carried forward by new cadets. We wish them strength, success, and honour as they continue this journey. Jai Hind.";
+
+const status = localStorage.getItem("cadetStatus_" + cadetId);
+const joinYear = parseInt(localStorage.getItem("joinYear_" + cadetId));
+const currentYear = new Date().getFullYear();
+
+if(status === "cancelled"){
+  alert("Your NCC enrollment has been cancelled by the authority.");
+  localStorage.removeItem("activeCadetId");
+  window.location.href = "ncc.html";
+}
+
+if(status === "completed" || (joinYear && currentYear - joinYear >= 3)){
+  localStorage.setItem("cadetStatus_" + cadetId, "completed");
+  alert(passoutMessage);
+  localStorage.removeItem("activeCadetId");
+  window.location.href = "ncc.html";
+}
+
+document.getElementById("cadetIdText").innerText = cadetId;
+
+let rank = "Cadet";
+let name = "Cadet Name";
+
+const parts = cadetId.split("/");
+if(parts.length >= 6){
+  rank = parts[4];
+  name = parts[5];
+}
+
+document.getElementById("cadetName").innerText = name;
+document.getElementById("cadetRank").innerText = "Rank: " + rank;
+document.getElementById("rankStat").innerText = rank;
+document.getElementById("headerCadetName").innerText = name;
+document.getElementById("headerCadetRank").innerText = "Rank: " + rank;
+
+const serviceYear = document.getElementById("serviceYear");
+const yearStat = document.getElementById("yearStat");
+
+const savedServiceYear = localStorage.getItem("serviceYear_" + cadetId);
+if(savedServiceYear){
+  serviceYear.value = savedServiceYear;
+  yearStat.innerText = savedServiceYear.replace(" Year", "");
+}
+
+serviceYear.addEventListener("change", function(){
+  localStorage.setItem("serviceYear_" + cadetId, this.value);
+  yearStat.innerText = this.value.replace(" Year", "");
+});
+
+const noticeTitle = localStorage.getItem("nccNoticeTitle");
+const noticeContent = localStorage.getItem("nccNoticeContent");
+const noticeBy = localStorage.getItem("nccNoticeBy");
+const noticeDate = localStorage.getItem("nccNoticeDate");
+
+if(noticeTitle && noticeContent){
+  document.getElementById("noticeTitle").innerText = noticeTitle;
+  document.getElementById("noticeContent").innerText = noticeContent;
+  document.getElementById("noticeBy").innerText =
+    "Published by: " + noticeBy + " | " + noticeDate;
+}
+
+const upload = document.getElementById("photoUpload");
+const image = document.getElementById("cadetPhoto");
+const headerPhoto = document.getElementById("headerCadetPhoto");
+
+const savedPhoto = localStorage.getItem("cadetPhoto_" + cadetId);
+if(savedPhoto){
+  image.src = savedPhoto;
+  headerPhoto.src = savedPhoto;
+}
+
+upload.addEventListener("change", function(){
+  const file = this.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    image.src = e.target.result;
+    headerPhoto.src = e.target.result;
+    localStorage.setItem("cadetPhoto_" + cadetId, e.target.result);
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function showContact(){
+  const selected = document.getElementById("contactSelect").value;
+  const contactBox = document.getElementById("contactInfo");
+
+  if(selected === "ano1"){
+    contactBox.innerHTML = `
+      <h4>Lt. Rizaul Karim Ahmed</h4>
+      <p>ANO</p>
+      <a href="tel:9678226474">📞 9678226474</a>
+    `;
+  }else if(selected === "ano2"){
+    contactBox.innerHTML = `
+      <h4>Lt. Dr. Fahmida S. Bora</h4>
+      <p>ANO</p>
+      <a href="tel:9706151620">📞 9706151620</a>
+    `;
+  }else if(selected === "senior"){
+    contactBox.innerHTML = `
+      <h4>Sgt. Afnan Al Jedid</h4>
+      <p>Senior In-Charge</p>
+      <a href="tel:6900638787">📞 6900638787</a>
+    `;
+  }else{
+    contactBox.innerHTML = "<p>Select a contact from the dropdown.</p>";
+  }
+}
+
+function logoutCadet(){
+  localStorage.removeItem("activeCadetId");
+}
+</script>
 
 </body>
 </html>
