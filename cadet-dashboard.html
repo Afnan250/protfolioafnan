@@ -31,7 +31,7 @@ body{background:#f4f6f9;color:#222}
 
 .hero{
   min-height:360px;
-  background:linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),url("ncc1.jpeg");
+  background:linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),url("ncc2.jpeg");
   background-size:cover;background-position:center;
   display:flex;align-items:center;padding:45px 7%;
 }
@@ -98,15 +98,62 @@ body{background:#f4f6f9;color:#222}
 .notice-card{grid-column:1/-1;background:#fff7ef}
 small{display:block;margin-top:15px;color:#777}
 
-.card select{
-  width:100%;padding:12px;margin-top:12px;
-  border:1px solid #ccc;border-radius:8px;font-size:15px;
+.attendance-box{
+  margin-top:15px;
+  padding:14px;
+  border-radius:12px;
+  background:#f8f9fa;
+  border-left:5px solid #ff9933;
 }
-.contact-info{
-  margin-top:15px;padding:12px;background:#f8f9fa;border-radius:10px;
+
+.attendance-percent{
+  font-size:32px;
+  font-weight:900;
+  color:#071a3d;
 }
-.contact-info h4{color:#071a3d;margin-bottom:8px}
-.contact-info a{color:#0b3d1e;text-decoration:none;font-weight:800}
+
+.camp-status{
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+  font-weight:800;
+}
+
+.allowed{
+  background:#e8f7ee;
+  color:#0b7a34;
+}
+
+.not-allowed{
+  background:#ffe8e8;
+  color:#b00020;
+}
+
+.upload-achievement{
+  margin-top:14px;
+  display:inline-block;
+  background:#071a3d;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.achievement-preview{
+  margin-top:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
+  gap:10px;
+}
+
+.achievement-preview img{
+  width:100%;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  border:2px solid #ff9933;
+}
 
 footer{
   background:#071a3d;color:white;text-align:center;padding:24px;
@@ -199,48 +246,38 @@ footer{
   <div class="card">
     <i class="fa-solid fa-calendar-check"></i>
     <h3>Attendance</h3>
-    <p>View parade, class, camp and event attendance records.</p>
+    <p>Attendance is counted from regular NCC classes and events.</p>
+
+    <div class="attendance-box">
+      <div class="attendance-percent" id="attendancePercent">Not Declared</div>
+      <p id="attendanceText">Attendance will be shown when ANO declares it.</p>
+      <div id="campEligibility" class="camp-status">Camp eligibility pending.</div>
+    </div>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-campground"></i>
     <h3>Camp Updates</h3>
-    <p>Get updates for CATC, RDC, TSC, EBSB and trekking camps.</p>
+    <p id="campText">Camp updates will appear here when ANO declares camp information.</p>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-book-open"></i>
     <h3>Training Materials</h3>
-    <p>Access drill, map reading, NCC history and leadership materials.</p>
+    <p>Training materials will be updated soon.</p>
   </div>
 
   <div class="card">
     <i class="fa-solid fa-medal"></i>
     <h3>Achievements</h3>
-    <p>View selections, certificates, awards and participation records.</p>
-  </div>
+    <p>Upload your achievement photos. These photos can be shown on the main page gallery.</p>
 
-  <div class="card">
-    <i class="fa-solid fa-image"></i>
-    <h3>Gallery</h3>
-    <p>Explore photos from parades, camps and NCC events.</p>
-  </div>
+    <label class="upload-achievement">
+      Upload Achievement Photo
+      <input type="file" id="achievementUpload" accept="image/*" hidden>
+    </label>
 
-  <div class="card">
-    <i class="fa-solid fa-phone"></i>
-    <h3>Important Contacts</h3>
-    <p>Select ANO or Senior In-Charge contact.</p>
-
-    <select id="contactSelect" onchange="showContact()">
-      <option value="">-- Select Contact --</option>
-      <option value="ano1">ANO - Lt. Rizaul Karim Ahmed</option>
-      <option value="ano2">ANO - Lt. Dr. Fahmida S. Bora</option>
-      <option value="senior">Senior In-Charge - Sgt. Afnan Al Jedid</option>
-    </select>
-
-    <div id="contactInfo" class="contact-info">
-      <p>Select a contact from the dropdown.</p>
-    </div>
+    <div id="achievementPreview" class="achievement-preview"></div>
   </div>
 
 </main>
@@ -320,6 +357,45 @@ if(noticeTitle && noticeContent){
     "Published by: " + noticeBy + " | " + noticeDate;
 }
 
+/* Attendance from ANO */
+const attendancePercent = localStorage.getItem("attendancePercent_" + cadetId);
+const attendanceText = localStorage.getItem("attendanceText_" + cadetId);
+
+if(attendancePercent){
+  const percent = parseInt(attendancePercent);
+
+  document.getElementById("attendancePercent").innerText = percent + "%";
+
+  if(attendanceText){
+    document.getElementById("attendanceText").innerText = attendanceText;
+  }else{
+    document.getElementById("attendanceText").innerText =
+      "Attendance counted from regular NCC classes and events.";
+  }
+
+  if(percent >= 20 && percent <= 70){
+    document.getElementById("campEligibility").innerText =
+      "Not eligible for camp due to low attendance.";
+    document.getElementById("campEligibility").className =
+      "camp-status not-allowed";
+  }else if(percent > 70){
+    document.getElementById("campEligibility").innerText =
+      "Eligible for camp selection, subject to ANO approval.";
+    document.getElementById("campEligibility").className =
+      "camp-status allowed";
+  }else{
+    document.getElementById("campEligibility").innerText =
+      "Attendance below minimum record. ANO review required.";
+    document.getElementById("campEligibility").className =
+      "camp-status not-allowed";
+  }
+}
+
+const campText = localStorage.getItem("nccCampUpdate");
+if(campText){
+  document.getElementById("campText").innerText = campText;
+}
+
 const upload = document.getElementById("photoUpload");
 const image = document.getElementById("cadetPhoto");
 const headerPhoto = document.getElementById("headerCadetPhoto");
@@ -345,32 +421,59 @@ upload.addEventListener("change", function(){
   reader.readAsDataURL(file);
 });
 
-function showContact(){
-  const selected = document.getElementById("contactSelect").value;
-  const contactBox = document.getElementById("contactInfo");
+const achievementUpload = document.getElementById("achievementUpload");
+const achievementPreview = document.getElementById("achievementPreview");
 
-  if(selected === "ano1"){
-    contactBox.innerHTML = `
-      <h4>Lt. Rizaul Karim Ahmed</h4>
-      <p>ANO</p>
-      <a href="tel:9678226474">📞 9678226474</a>
-    `;
-  }else if(selected === "ano2"){
-    contactBox.innerHTML = `
-      <h4>Lt. Dr. Fahmida S. Bora</h4>
-      <p>ANO</p>
-      <a href="tel:9706151620">📞 9706151620</a>
-    `;
-  }else if(selected === "senior"){
-    contactBox.innerHTML = `
-      <h4>Sgt. Afnan Al Jedid</h4>
-      <p>Senior In-Charge</p>
-      <a href="tel:6900638787">📞 6900638787</a>
-    `;
-  }else{
-    contactBox.innerHTML = "<p>Select a contact from the dropdown.</p>";
-  }
+let achievementPhotos =
+  JSON.parse(localStorage.getItem("achievementPhotos_" + cadetId)) || [];
+
+function showAchievementPhotos(){
+  achievementPreview.innerHTML = "";
+
+  achievementPhotos.forEach(photo => {
+    const img = document.createElement("img");
+    img.src = photo;
+    achievementPreview.appendChild(img);
+  });
 }
+
+showAchievementPhotos();
+
+achievementUpload.addEventListener("change", function(){
+  const file = this.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    achievementPhotos.push(e.target.result);
+
+    localStorage.setItem(
+      "achievementPhotos_" + cadetId,
+      JSON.stringify(achievementPhotos)
+    );
+
+    let mainGallery =
+      JSON.parse(localStorage.getItem("mainGalleryPhotos")) || [];
+
+    mainGallery.push({
+      cadetId: cadetId,
+      photo: e.target.result,
+      date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem(
+      "mainGalleryPhotos",
+      JSON.stringify(mainGallery)
+    );
+
+    showAchievementPhotos();
+
+    alert("Achievement photo uploaded successfully.");
+  };
+
+  reader.readAsDataURL(file);
+});
 
 function logoutCadet(){
   localStorage.removeItem("activeCadetId");
