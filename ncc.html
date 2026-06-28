@@ -477,17 +477,6 @@ section{
   text-decoration:underline;
 }
 
-.admin-note{
-  margin-top:15px;
-  padding:12px;
-  border-radius:10px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  color:#fff;
-  text-align:center;
-  line-height:1.6;
-}
-
 @keyframes saffronWave{
   0%{transform:translateX(-100px);}
   50%{transform:translateX(100px);}
@@ -740,12 +729,6 @@ footer{
 
         <button class="btn login-main-btn" onclick="login()">Login</button>
 
-        <div class="admin-note">
-          <strong>ANO Admin Login</strong><br>
-          User ID: ANO001<br>
-          Password: 123456
-        </div>
-
         <p class="switch-text">
           Cadet not registered?
           <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
@@ -824,7 +807,7 @@ function login(){
   const pass = document.getElementById("loginPass").value.trim();
 
   if(type === "ano"){
-    if(id === "ANO001" && pass === "123456"){
+    if(id === "ANO001" && pass === "USTMNCC@Admin2026"){
       localStorage.setItem("activeAnoId", "ANO001");
       alert("Welcome ANO");
       window.location.href = "ano-dashboard.html";
