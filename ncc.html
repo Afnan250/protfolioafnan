@@ -55,10 +55,24 @@ header{
   gap:12px;
 }
 
-.logo-box img{
-  width:62px;
-  height:62px;
-  object-fit:contain;
+.logo-frame{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  padding:5px;
+  background:linear-gradient(135deg,#ff9933,#fff,#138808);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 0 18px rgba(255,153,51,.45);
+}
+
+.logo-frame img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
 }
 
 .logo-text h2{
@@ -94,7 +108,7 @@ nav a:hover{
   min-height:85vh;
   background:
   linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),
-  url("ncc1.jpg");
+  url("ncc1.jpeg");
   background-size:cover;
   background-position:center;
   display:flex;
@@ -104,7 +118,7 @@ nav a:hover{
 }
 
 .hero-content{
-  max-width:720px;
+  max-width:760px;
 }
 
 .hero-content h1{
@@ -118,9 +132,10 @@ nav a:hover{
 }
 
 .hero-content p{
-  font-size:19px;
+  font-size:18px;
   color:#eee;
   margin-bottom:28px;
+  line-height:1.8;
 }
 
 .btn{
@@ -220,21 +235,68 @@ section{
   box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-/* Glass Login */
+/* LOGIN SECTION */
 .login-section{
   background:
   linear-gradient(rgba(7,26,61,.88),rgba(7,26,61,.94)),
-  url("ncc2.jpg");
+  url("ncc2.jpeg");
   background-size:cover;
   background-position:center;
-
   position:relative;
   overflow:hidden;
+  perspective:1200px;
 }
 
 .login-section .title,
 .login-section .subtitle{
   color:white;
+}
+
+.tricolor-bg{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:1200px;
+  height:500px;
+  z-index:0;
+  pointer-events:none;
+}
+
+.tricolor-bg::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:120px;
+  top:40px;
+  background:linear-gradient(90deg,transparent,#FF9933,transparent);
+  filter:blur(50px);
+  animation:saffronWave 6s ease-in-out infinite;
+}
+
+.tricolor-bg::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:120px;
+  bottom:40px;
+  background:linear-gradient(90deg,transparent,#138808,transparent);
+  filter:blur(50px);
+  animation:greenWave 6s ease-in-out infinite reverse;
+}
+
+.login-section::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:1000px;
+  height:100px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
+  filter:blur(40px);
+  animation:whiteWave 5s ease-in-out infinite;
+  z-index:0;
 }
 
 .flip-wrapper{
@@ -244,6 +306,7 @@ section{
   position:relative;
   transform-style:preserve-3d;
   transition:transform .8s ease;
+  z-index:5;
 }
 
 .flip-wrapper.flip{
@@ -275,18 +338,6 @@ section{
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   box-shadow:0 25px 55px rgba(0,0,0,.35);
-  animation:glassUp .9s ease;
-}
-
-@keyframes glassUp{
-  from{
-    opacity:0;
-    transform:translateY(45px) scale(.96);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
 }
 
 .login-glass h3{
@@ -317,6 +368,13 @@ section{
   color:black;
 }
 
+.note{
+  color:rgba(255,255,255,.85);
+  font-size:14px;
+  margin:12px 0 20px;
+  text-align:center;
+}
+
 .login-main-btn{
   width:100%;
   border-radius:50px;
@@ -335,41 +393,35 @@ section{
   color:white;
 }
 
-.switch-text span{
+.switch-link{
+  background:none;
+  border:none;
   color:#ff9933;
   font-weight:800;
+  font-size:17px;
   cursor:pointer;
 }
 
-.note{
-  color:rgba(255,255,255,.85);
-  font-size:14px;
-  margin:12px 0 20px;
-  text-align:center;
+.switch-link:hover{
+  text-decoration:underline;
 }
 
-@media(max-width:600px){
-  .login-section{
-    padding:60px 5%;
-  }
+@keyframes saffronWave{
+  0%{transform:translateX(-100px);}
+  50%{transform:translateX(100px);}
+  100%{transform:translateX(-100px);}
+}
 
-  .flip-wrapper{
-    min-height:540px;
-  }
+@keyframes greenWave{
+  0%{transform:translateX(100px);}
+  50%{transform:translateX(-100px);}
+  100%{transform:translateX(100px);}
+}
 
-  .flip-side{
-    min-height:540px;
-  }
-
-  .login-glass{
-    min-height:540px;
-    padding:26px 18px;
-    border-radius:22px;
-  }
-
-  .login-glass h3{
-    font-size:24px;
-  }
+@keyframes whiteWave{
+  0%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
+  50%{transform:translate(-50%,-50%) scaleX(1.1);opacity:1;}
+  100%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
 }
 
 footer{
@@ -392,7 +444,7 @@ footer{
 
   nav{
     position:fixed;
-    top:92px;
+    top:98px;
     right:-100%;
     width:75%;
     height:100vh;
@@ -418,146 +470,32 @@ footer{
   .hero-content h1{
     font-size:38px;
   }
+}
+
+@media(max-width:600px){
+  .login-section{
+    padding:60px 5%;
+  }
+
+  .flip-wrapper,
+  .flip-side,
+  .login-glass{
+    min-height:540px;
+  }
 
   .login-glass{
-    padding:24px 18px;
+    padding:26px 18px;
+    border-radius:22px;
   }
 
-  .tabs button{
-    width:100%;
+  .login-glass h3{
+    font-size:24px;
   }
-}
-  /* NCC Tricolor Background Animation */
 
-.tricolor-bg{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:1200px;
-    height:500px;
-    z-index:0;
-    pointer-events:none;
-}
-
-/* SAFFRON - TOP */
-.tricolor-bg::before{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:120px;
-    top:40px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #FF9933,
-        transparent
-    );
-
-    filter:blur(50px);
-
-    animation:saffronWave 6s ease-in-out infinite;
-}
-
-/* GREEN - BOTTOM */
-.tricolor-bg::after{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:120px;
-    bottom:40px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #138808,
-        transparent
-    );
-
-    filter:blur(50px);
-
-    animation:greenWave 6s ease-in-out infinite reverse;
-}
-
-/* WHITE - CENTER */
-.login-section::before{
-    content:"";
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:1000px;
-    height:100px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.95),
-        transparent
-    );
-
-    filter:blur(40px);
-
-    animation:whiteWave 5s ease-in-out infinite;
-
-    z-index:0;
-}
-
-.flip-wrapper{
-    position:relative;
-    z-index:5;
-}
-
-@keyframes saffronWave{
-
-    0%{
-        transform:translateX(-100px);
-    }
-
-    50%{
-        transform:translateX(100px);
-    }
-
-    100%{
-        transform:translateX(-100px);
-    }
-}
-
-@keyframes greenWave{
-
-    0%{
-        transform:translateX(100px);
-    }
-
-    50%{
-        transform:translateX(-100px);
-    }
-
-    100%{
-        transform:translateX(100px);
-    }
-}
-
-@keyframes whiteWave{
-
-    0%{
-        transform:translate(-50%,-50%) scaleX(.8);
-        opacity:.6;
-    }
-
-    50%{
-        transform:translate(-50%,-50%) scaleX(1.1);
-        opacity:1;
-    }
-
-    100%{
-        transform:translate(-50%,-50%) scaleX(.8);
-        opacity:.6;
-    }
+  .logo-frame{
+    width:60px;
+    height:60px;
+  }
 }
 </style>
 </head>
@@ -571,7 +509,10 @@ footer{
 
 <header>
   <div class="logo-box">
-    <img src="ncc2.jpeg" alt="USTM NCC Logo">
+    <div class="logo-frame">
+      <img src="ncc2.jpeg" alt="USTM NCC Logo">
+    </div>
+
     <div class="logo-text">
       <h2>USTM NCC</h2>
       <p>Unity and Discipline</p>
@@ -593,9 +534,13 @@ footer{
 <section class="hero" id="home">
   <div class="hero-content">
     <h1>Welcome to <span>USTM NCC</span></h1>
+
     <p>
-      A public information portal for USTM NCC. Registered ML cadets and ANOs
-      can access their separate internal dashboard after login.
+      Jai Hind. Our mission is to develop character, leadership, discipline,
+      patriotism and the spirit of selfless service among youth. Through
+      training, adventure, social service and national integration programmes,
+      NCC prepares cadets to become responsible citizens and future leaders.
+      At USTM NCC, we proudly follow the motto: <b>Unity and Discipline</b>.
     </p>
 
     <a href="#about" class="btn">Explore NCC</a>
@@ -648,15 +593,15 @@ footer{
 </section>
 
 <section class="login-section" id="login">
+  <div class="tricolor-bg"></div>
+
   <h2 class="title">Cadet / ANO Access</h2>
   <p class="subtitle">Login first. New user? Flip the card and register.</p>
-  <div class="tricolor-bg"></div>
+
   <div class="flip-wrapper" id="flipCard">
 
-    <!-- LOGIN SIDE -->
     <div class="flip-side flip-front">
       <div class="login-glass">
-
         <h3>Login</h3>
 
         <select id="loginType">
@@ -671,16 +616,13 @@ footer{
 
         <p class="switch-text">
           Not registered?
-          <span onclick="flipToRegister()">Register here</span>
+          <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
         </p>
-
       </div>
     </div>
 
-    <!-- REGISTER SIDE -->
     <div class="flip-side flip-back">
       <div class="login-glass">
-
         <h3>Register</h3>
 
         <select id="registerType" onchange="changeRegisterType()">
@@ -691,18 +633,22 @@ footer{
         <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
         <input type="password" id="registerPass" placeholder="Create Password">
 
+        <p class="note" id="formatNote">
+          Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME
+        </p>
+
         <button class="btn login-main-btn" onclick="registerUser()">Register</button>
 
         <p class="switch-text">
           Already registered?
-          <span onclick="flipToLogin()">Login here</span>
+          <button type="button" class="switch-link" onclick="flipToLogin()">Login here</button>
         </p>
-
       </div>
     </div>
 
   </div>
 </section>
+
 <footer>
   © 2026 USTM NCC
 </footer>
@@ -721,11 +667,13 @@ function changeRegisterType(){
   const input = document.getElementById("registerId");
   const note = document.getElementById("formatNote");
 
- if(type === "cadet"){
-    alert("Cadet Login");
-}
-else{
-    alert("ANO Login");
+  if(type === "cadet"){
+    input.placeholder = "ML/2026/SDIA/12345/Cadet/Afnan Al Jedid";
+    note.innerText = "Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME";
+  }else{
+    input.placeholder = "NCC/Lt/SD/12345";
+    note.innerText = "Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER";
+  }
 }
 
 function registerUser(){
@@ -757,6 +705,7 @@ function registerUser(){
 
   document.getElementById("loginType").value = type;
   document.getElementById("loginId").value = id;
+  document.getElementById("loginPass").value = "";
 
   flipToLogin();
 }
@@ -769,19 +718,15 @@ function login(){
   const savedPass = localStorage.getItem(type + "_" + id);
 
   if(savedPass === pass){
-
     if(type === "cadet"){
       localStorage.setItem("activeCadetId", id);
       window.location.href = "cadet-dashboard.html";
-    }
-
-    if(type === "ano"){
+    }else{
       localStorage.setItem("activeAnoId", id);
       window.location.href = "ano-dashboard.html";
     }
-
   }else{
-    alert("You are not registered. Please register first.");
+    alert("You are not registered or password is incorrect. Please register first.");
     flipToRegister();
   }
 }
