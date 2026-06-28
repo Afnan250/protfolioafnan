@@ -807,12 +807,11 @@ function login(){
   const pass = document.getElementById("loginPass").value.trim();
 
 if(type === "ano"){
-  const anoUser = "ANO001";
-  const anoPass = "USTMNCC@Admin2026";
+  const typedId = id.trim().toUpperCase();
+  const typedPass = pass.trim();
 
-  if(id.trim() === anoUser && pass.trim() === anoPass){
-    localStorage.setItem("activeAnoId", anoUser);
-    alert("Welcome ANO");
+  if(typedId === "ANO001" && typedPass === "USTMNCC@Admin2026"){
+    localStorage.setItem("activeAnoId", "ANO001");
     window.location.href = "ano-dashboard.html";
   }else{
     alert("Invalid ANO ID or Password.");
