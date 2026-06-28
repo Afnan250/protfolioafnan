@@ -15,7 +15,7 @@
 <body>
 
 <header>
-  <a href="#home" class="logo"><span>AFNAN</span> A</a>
+ <a href="#home" class="logo"><strong>A</strong> <span>AFNAN</span></a>
 
   <input type="checkbox" id="check">
   <label for="check" class="menu-btn"><i class="fa-solid fa-bars"></i></label>
@@ -146,21 +146,19 @@
 <section id="feedback">
   <h2 class="title">Your Feedback</h2>
 
-  <div class="feedback-box">
+  <form class="feedback-box" action="https://formspree.io/f/xjgqreap" method="POST">
     <p>Did you like my portfolio?</p>
 
     <div class="feedback-buttons">
-      <a href="mailto:afnanjedid@gmail.com?subject=Portfolio Feedback&body=I liked your portfolio. It looks professional and impressive."
-         class="like-btn">
+      <button type="submit" name="feedback" value="Someone liked your portfolio" class="like-btn">
         <i class="fa-solid fa-thumbs-up"></i> Like
-      </a>
+      </button>
 
-      <a href="mailto:afnanjedid@gmail.com?subject=Portfolio Feedback&body=I did not like your portfolio. Here is my suggestion:"
-         class="dislike-btn">
+      <button type="submit" name="feedback" value="Someone disliked your portfolio" class="dislike-btn">
         <i class="fa-solid fa-thumbs-down"></i> Dislike
-      </a>
+      </button>
     </div>
-  </div>
+  </form>
 </section>
 
 <section id="contact">
