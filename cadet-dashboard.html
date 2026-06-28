@@ -106,36 +106,52 @@ body{
 }
 
 /* PHOTO FRAME */
+
 .photo-wrap{
   text-align:center;
 }
 
 .photo-glow{
-  width:215px;
-  height:215px;
+  position:relative;
+  width:220px;
+  height:220px;
+  margin:auto;
   border-radius:50%;
   padding:8px;
-  background:conic-gradient(#ff9933 0deg 120deg,#ffffff 120deg 240deg,#138808 240deg 360deg);
+
+  background:
+  conic-gradient(
+    #ff9933 0deg 120deg,
+    #ffffff 120deg 240deg,
+    #138808 240deg 360deg
+  );
+
+  animation:rotateBorder 8s linear infinite;
+
   box-shadow:
-    0 0 18px rgba(255,153,51,.9),
-    0 0 28px rgba(255,255,255,.9),
-    0 0 22px rgba(19,136,8,.8);
-  animation:glowPulse 2.5s infinite alternate;
+    0 0 15px rgba(255,153,51,.9),
+    0 0 25px rgba(255,255,255,.8),
+    0 0 35px rgba(19,136,8,.8),
+    0 0 55px rgba(255,153,51,.4);
 }
 
-@keyframes glowPulse{
-  from{
-    box-shadow:
-      0 0 14px rgba(255,153,51,.7),
-      0 0 20px rgba(255,255,255,.7),
-      0 0 16px rgba(19,136,8,.7);
-  }
-  to{
-    box-shadow:
-      0 0 25px rgba(255,153,51,1),
-      0 0 35px rgba(255,255,255,1),
-      0 0 28px rgba(19,136,8,1);
-  }
+.photo-glow::before{
+  content:"";
+  position:absolute;
+  inset:-15px;
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(255,153,51,.35),
+    rgba(255,255,255,.25),
+    rgba(19,136,8,.35),
+    transparent 75%
+  );
+
+  z-index:-1;
+  filter:blur(18px);
 }
 
 .main-photo{
@@ -143,10 +159,18 @@ body{
   height:100%;
   border-radius:50%;
   object-fit:cover;
-  background:white;
-  border:5px solid white;
+  border:6px solid white;
+  display:block;
 }
 
+@keyframes rotateBorder{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
 .upload-btn{
   display:inline-block;
   margin-top:18px;
@@ -464,17 +488,24 @@ footer{
 
 <section class="hero">
   <div class="hero-inner">
+<div class="photo-wrap">
 
-    <div class="photo-wrap">
-      <div class="photo-glow">
-        <img id="cadetPhoto" class="main-photo" src="default-cadet.png" alt="Cadet Photo">
-      </div>
+  <div class="photo-glow">
+      <img id="cadetPhoto"
+           class="main-photo"
+           src="default-cadet.png"
+           alt="Cadet Photo">
+  </div>
 
-      <label class="upload-btn">
-        Upload Photo
-        <input type="file" id="photoUpload" accept="image/*" hidden>
-      </label>
-    </div>
+  <label class="upload-btn">
+      Upload Photo
+      <input type="file"
+             id="photoUpload"
+             accept="image/*"
+             hidden>
+  </label>
+
+</div>
 
     <div class="cadet-info">
       <h1 id="cadetName">Cadet Name</h1>
