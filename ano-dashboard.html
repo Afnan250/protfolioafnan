@@ -466,17 +466,34 @@ function cancelCadet(){
   alert("Cadet cancelled successfully.");
 }
 
-function markPassout(){
-  const cadetId = document.getElementById("passoutCadetId").value.trim();
+function markBatchPassout(){
+  const year = document.getElementById("passoutYear").value;
 
-  if(cadetId === ""){
-    alert("Enter Cadet ID first.");
+  if(year === ""){
+    alert("Please select a registered year first.");
     return;
   }
 
-  localStorage.setItem("cadetStatus_" + cadetId, "completed");
+  let count = 0;
 
-  alert("Cadet marked as passout successfully.");
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key && key.startsWith("cadet_")){
+      const cadetId = key.replace("cadet_", "");
+
+      if(cadetId.includes("ML/" + year + "/")){
+        localStorage.setItem("cadetStatus_" + cadetId, "completed");
+        count++;
+      }
+    }
+  }
+
+  document.getElementById("batchPassoutOutput").innerHTML =
+    `<strong>${year} Batch Passout Completed</strong><br>
+     Total cadets marked as passout: ${count}`;
+
+  alert(year + " batch cadets are now marked as passout.");
 }
 
 function showCadets(){
