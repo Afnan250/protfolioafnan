@@ -768,35 +768,14 @@ function flipToLogin(){
   document.getElementById("flipCard").classList.remove("flip");
 }
 
-function changeRegisterType(){
-  const type = document.getElementById("registerType").value;
-  const input = document.getElementById("registerId");
-  const note = document.getElementById("formatNote");
-
-  if(type === "cadet"){
-    input.placeholder = "ML/2026/SDIA/12345/Cadet/Afnan Al Jedid";
-    note.innerText = "Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME";
-  }else{
-    input.placeholder = "NCC/Lt/SD/12345";
-    note.innerText = "Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER";
-  }
-}
-
 function registerUser(){
-  const type = document.getElementById("registerType").value;
   const id = document.getElementById("registerId").value.trim();
   const pass = document.getElementById("registerPass").value.trim();
 
-  let pattern;
-
-  if(type === "cadet"){
-    pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
-  }else{
-    pattern = /^NCC\/[A-Za-z]+\/(SD|SW)\/\d{5}$/;
-  }
+  const pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
 
   if(!pattern.test(id)){
-    alert("Invalid ID format.");
+    alert("Invalid Cadet ID format.");
     return;
   }
 
@@ -805,11 +784,13 @@ function registerUser(){
     return;
   }
 
-  localStorage.setItem(type + "_" + id, pass);
+  localStorage.setItem("cadet_" + id, pass);
+  localStorage.setItem("cadetStatus_" + id, "active");
+  localStorage.setItem("joinYear_" + id, new Date().getFullYear());
 
-  alert("Registration successful. Now login.");
+  alert("Cadet registration successful. Now login.");
 
-  document.getElementById("loginType").value = type;
+  document.getElementById("loginType").value = "cadet";
   document.getElementById("loginId").value = id;
   document.getElementById("loginPass").value = "";
 
@@ -821,23 +802,45 @@ function login(){
   const id = document.getElementById("loginId").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
 
-  const savedPass = localStorage.getItem(type + "_" + id);
+  if(type === "ano"){
+    if(id === "ANO001" && pass === "123456"){
+      localStorage.setItem("activeAnoId", "ANO001");
+      alert("Welcome ANO");
+      window.location.href = "ano-dashboard.html";
+    }else{
+      alert("Invalid ANO ID or Password.");
+    }
+    return;
+  }
+
+  const savedPass = localStorage.getItem("cadet_" + id);
+  const cadetStatus = localStorage.getItem("cadetStatus_" + id);
+
+  if(cadetStatus === "completed"){
+    alert(
+      "Thank you for your dedicated service to USTM NCC. Your commitment, discipline, and leadership have helped guide the next generation of cadets. The legacy you built is now being carried forward by new cadets. We wish them strength, success, and honour as they continue this journey. Jai Hind."
+    );
+    return;
+  }
+
+  if(cadetStatus === "cancelled"){
+    alert("Your NCC enrollment has been cancelled by the authority.");
+    return;
+  }
 
   if(savedPass === pass){
-    if(type === "cadet"){
-      localStorage.setItem("activeCadetId", id);
-      window.location.href = "cadet-dashboard.html";
-    }else{
-      localStorage.setItem("activeAnoId", id);
-      window.location.href = "ano-dashboard.html";
-    }
+    localStorage.setItem("activeCadetId", id);
+    window.location.href = "cadet-dashboard.html";
   }else{
     alert("You are not registered or password is incorrect. Please register first.");
     flipToRegister();
   }
 }
-  function loadMainGallery(){
+
+function loadMainGallery(){
   const gallery = document.getElementById("mainGallery");
+
+  if(!gallery) return;
 
   const uploadedPhotos =
     JSON.parse(localStorage.getItem("mainGalleryPhotos")) || [];
