@@ -8,101 +8,368 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{background:#f4f6f9;color:#222}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#071a3d;
+}
 
 .top-header{
-  background:#071a3d;color:white;padding:16px 7%;
-  display:flex;justify-content:space-between;align-items:center;
+  background:#071a3d;
+  color:white;
+  padding:14px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom-right-radius:45px;
+  box-shadow:0 10px 25px rgba(0,0,0,.18);
+  position:relative;
+  overflow:hidden;
 }
 
-.cadet-brand{display:flex;align-items:center;gap:14px}
-.cadet-brand img{
-  width:66px;height:66px;border-radius:50%;object-fit:cover;
-  border:4px solid #ff9933;background:white;
+.top-header::after{
+  content:"";
+  position:absolute;
+  right:80px;
+  top:28px;
+  width:420px;
+  height:45px;
+  background:linear-gradient(135deg,#ff9933 0 33%,#fff 33% 66%,#138808 66%);
+  transform:skewX(-25deg);
+  border-radius:50px;
+  opacity:.95;
 }
-.cadet-brand h2{color:#ff9933}
-.cadet-brand p{color:#ddd}
+
+.cadet-brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  z-index:2;
+}
+
+.cadet-brand img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  padding:4px;
+  background:linear-gradient(145deg,#ff9933,#fff,#138808);
+  box-shadow:0 0 18px rgba(255,153,51,.5);
+}
+
+.cadet-brand h2{
+  color:white;
+  font-size:28px;
+  text-transform:uppercase;
+}
+
+.cadet-brand p{
+  color:white;
+  font-size:20px;
+}
+
+.cadet-brand p span{
+  color:#ff9933;
+  font-weight:800;
+}
 
 .logout-btn{
-  background:#ff9933;color:#071a3d;padding:10px 18px;
-  border-radius:8px;text-decoration:none;font-weight:800;
+  position:relative;
+  z-index:2;
+  background:#071a3d;
+  color:white;
+  border:1px solid rgba(255,255,255,.3);
+  padding:14px 26px;
+  border-radius:18px;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 5px 15px rgba(0,0,0,.25);
 }
 
 .hero{
-  min-height:360px;
-  background:linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),url("ncc2.jpeg");
-  background-size:cover;background-position:center;
-  display:flex;align-items:center;padding:45px 7%;
+  margin:22px 3%;
+  min-height:330px;
+  border-radius:24px;
+  background:
+  linear-gradient(rgba(255,255,255,.84),rgba(255,255,255,.9)),
+  url("ncc2.jpeg");
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+  overflow:hidden;
+  position:relative;
 }
 
-.cadet-profile{
-  width:100%;background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.3);
-  backdrop-filter:blur(16px);border-radius:24px;padding:28px;
-  display:flex;gap:28px;align-items:center;color:white;
-  box-shadow:0 20px 45px rgba(0,0,0,.25);
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  top:20px;
+  width:55%;
+  height:100%;
+  background:
+  linear-gradient(150deg,transparent,#ff9933 12%,#fff 30%,#138808 48%,transparent 70%);
+  opacity:.28;
 }
 
-.photo-box{text-align:center}
-.photo-box img{
-  width:145px;height:145px;border-radius:50%;
-  object-fit:cover;border:5px solid #ff9933;background:white;
+.hero-inner{
+  position:relative;
+  z-index:2;
+  padding:32px 8%;
+  display:flex;
+  align-items:center;
+  gap:38px;
+  min-height:330px;
 }
+
+.main-photo-wrap{
+  position:relative;
+}
+
+.main-photo{
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  object-fit:cover;
+  padding:7px;
+  background:linear-gradient(150deg,#ff9933 0 40%,#fff 40% 58%,#138808 58%);
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+}
+
+.small-badge{
+  position:absolute;
+  bottom:-10px;
+  right:15px;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:white;
+  border:4px solid #ff9933;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:#071a3d;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
 .upload-btn{
-  display:block;margin-top:12px;padding:9px 15px;
-  background:#ff9933;color:#071a3d;border-radius:8px;
-  font-weight:800;cursor:pointer;
+  display:block;
+  text-align:center;
+  margin-top:18px;
+  padding:10px 16px;
+  background:#071a3d;
+  color:white;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.cadet-info h1{font-size:38px;margin-bottom:8px}
-.info-row{display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
-.info-row span{
-  background:rgba(255,255,255,.18);padding:9px 14px;
-  border-radius:30px;font-weight:700;
+.cadet-info h1{
+  font-size:34px;
+  text-transform:uppercase;
+  margin-bottom:14px;
 }
-.service-select{margin:15px 0}
+
+.cadet-id{
+  display:inline-block;
+  background:white;
+  padding:8px 14px;
+  border-radius:9px;
+  font-weight:700;
+  box-shadow:0 5px 14px rgba(0,0,0,.08);
+  margin-bottom:14px;
+}
+
+.info-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  margin:14px 0;
+}
+
+.pill{
+  background:white;
+  padding:12px 18px;
+  border-radius:12px;
+  min-width:120px;
+  box-shadow:0 6px 16px rgba(0,0,0,.1);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.pill i{
+  color:#ff9933;
+  font-size:22px;
+}
+
+.pill small{
+  display:block;
+  color:#555;
+}
+
+.pill b{
+  display:block;
+  color:#071a3d;
+}
+
+.service-select{
+  margin-top:18px;
+}
+
+.service-select label{
+  font-weight:800;
+  margin-right:8px;
+}
+
 .service-select select{
-  padding:10px 16px;border:none;border-radius:8px;
-  outline:none;font-weight:700;color:#071a3d;
+  padding:11px 18px;
+  border:none;
+  border-radius:10px;
+  font-weight:800;
+  color:#071a3d;
+  box-shadow:0 6px 16px rgba(0,0,0,.1);
 }
-.photo-rule{font-size:14px;color:#eee}
+
+.photo-rule{
+  margin-top:18px;
+  font-size:14px;
+  color:#071a3d;
+  font-weight:600;
+}
 
 .stats{
-  padding:28px 7%;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:18px;
+  padding:10px 4% 22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
 }
+
 .stat-box{
-  background:white;border-radius:16px;padding:22px;text-align:center;
+  background:white;
+  border-radius:20px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:18px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
   border-top:5px solid #ff9933;
 }
-.stat-box h2{color:#071a3d;font-size:28px}
-.stat-box p{color:#666;font-weight:700}
+
+.stat-box:nth-child(2){border-top-color:#071a3d}
+.stat-box:nth-child(3){border-top-color:#138808}
+
+.stat-icon{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#ff9933;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+.stat-box:nth-child(2) .stat-icon{background:#071a3d}
+.stat-box:nth-child(3) .stat-icon{background:#138808}
+
+.stat-box h2{
+  font-size:26px;
+}
+
+.stat-box p{
+  color:#555;
+  font-weight:700;
+}
 
 .dashboard{
-  padding:10px 7% 45px;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  padding:0 4% 45px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:24px;
 }
+
 .card{
-  background:white;padding:25px;border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  border-top:5px solid #ff9933;transition:.3s;
+  background:white;
+  padding:28px;
+  min-height:235px;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  border:1px solid #e4e7ee;
+  border-top:5px solid #ff9933;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
 }
-.card:hover{transform:translateY(-7px)}
-.card i{font-size:36px;color:#071a3d;margin-bottom:14px}
-.card h3{color:#071a3d;margin-bottom:10px}
-.card p{color:#555;line-height:1.7}
-.notice-card{grid-column:1/-1;background:#fff7ef}
-small{display:block;margin-top:15px;color:#777}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 35px rgba(0,0,0,.14);
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  right:-60px;
+  bottom:-60px;
+  width:160px;
+  height:160px;
+  background:radial-gradient(circle,#13880833,transparent 70%);
+}
+
+.card i{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#071a3d;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:26px;
+  margin-bottom:12px;
+}
+
+.card h3::after{
+  content:"";
+  display:block;
+  width:55px;
+  height:4px;
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+  margin-top:8px;
+  border-radius:10px;
+}
+
+.card p{
+  color:#444;
+  line-height:1.7;
+}
+
+.notice-card{
+  grid-column:1/-1;
+  background:#fff7ef;
+  min-height:auto;
+}
 
 .attendance-box{
   margin-top:15px;
-  padding:14px;
-  border-radius:12px;
-  background:#f8f9fa;
+  background:#fff8f0;
+  padding:18px;
+  border-radius:16px;
   border-left:5px solid #ff9933;
 }
 
@@ -113,58 +380,97 @@ small{display:block;margin-top:15px;color:#777}
 }
 
 .camp-status{
-  margin-top:10px;
-  padding:10px;
-  border-radius:8px;
-  font-weight:800;
+  margin-top:12px;
+  font-weight:900;
 }
 
 .allowed{
-  background:#e8f7ee;
-  color:#0b7a34;
+  color:#138808;
 }
 
 .not-allowed{
-  background:#ffe8e8;
   color:#b00020;
 }
 
 .upload-achievement{
-  margin-top:14px;
+  margin-top:18px;
   display:inline-block;
   background:#071a3d;
   color:white;
-  padding:10px 16px;
-  border-radius:8px;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:800;
   cursor:pointer;
-  font-weight:700;
+}
+
+.achievement-card{
+  grid-column:span 2;
 }
 
 .achievement-preview{
-  margin-top:15px;
+  margin-top:18px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
-  gap:10px;
+  gap:12px;
 }
 
 .achievement-preview img{
   width:100%;
-  height:90px;
+  height:95px;
+  border-radius:12px;
   object-fit:cover;
-  border-radius:10px;
-  border:2px solid #ff9933;
+  border:3px solid #ff9933;
 }
 
 footer{
-  background:#071a3d;color:white;text-align:center;padding:24px;
+  background:#071a3d;
+  color:white;
+  text-align:center;
+  padding:22px;
+  font-weight:600;
+}
+
+@media(max-width:1000px){
+  .dashboard{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .top-header::after{
+    display:none;
+  }
 }
 
 @media(max-width:760px){
-  .top-header{flex-direction:column;gap:14px;text-align:center}
-  .cadet-brand{flex-direction:column}
-  .cadet-profile{flex-direction:column;text-align:center}
-  .cadet-info h1{font-size:30px}
-  .info-row{justify-content:center}
+  .top-header{
+    flex-direction:column;
+    gap:14px;
+    text-align:center;
+  }
+
+  .cadet-brand{
+    flex-direction:column;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .info-pills{
+    justify-content:center;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .achievement-card{
+    grid-column:span 1;
+  }
+
+  .cadet-info h1{
+    font-size:28px;
+  }
 }
 </style>
 </head>
@@ -174,9 +480,10 @@ footer{
 <header class="top-header">
   <div class="cadet-brand">
     <img id="headerCadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+
     <div>
       <h2 id="headerCadetName">Cadet Name</h2>
-      <p id="headerCadetRank">Rank: Cadet</p>
+      <p>Rank: <span id="headerCadetRank">Cadet</span></p>
     </div>
   </div>
 
@@ -186,9 +493,15 @@ footer{
 </header>
 
 <section class="hero">
-  <div class="cadet-profile">
-    <div class="photo-box">
-      <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+  <div class="hero-inner">
+
+    <div class="main-photo-wrap">
+      <img id="cadetPhoto" class="main-photo" src="default-cadet.png" alt="Cadet Photo">
+
+      <div class="small-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+
       <label class="upload-btn">
         Upload Photo
         <input type="file" id="photoUpload" accept="image/*" hidden>
@@ -197,12 +510,27 @@ footer{
 
     <div class="cadet-info">
       <h1 id="cadetName">Cadet Name</h1>
-      <p id="cadetIdText">Cadet ID loading...</p>
 
-      <div class="info-row">
-        <span id="cadetRank">Rank: Cadet</span>
-        <span>Wing: Army Wing</span>
-        <span>Status: Active</span>
+      <div class="cadet-id">
+        <i class="fa-solid fa-id-card"></i>
+        <span id="cadetIdText">Cadet ID loading...</span>
+      </div>
+
+      <div class="info-pills">
+        <div class="pill">
+          <i class="fa-solid fa-user-shield"></i>
+          <div><small>Rank</small><b id="cadetRank">Cadet</b></div>
+        </div>
+
+        <div class="pill">
+          <i class="fa-solid fa-shield"></i>
+          <div><small>Wing</small><b>Army Wing</b></div>
+        </div>
+
+        <div class="pill">
+          <i class="fa-solid fa-circle-check"></i>
+          <div><small>Status</small><b>Active</b></div>
+        </div>
       </div>
 
       <div class="service-select">
@@ -215,17 +543,34 @@ footer{
       </div>
 
       <p class="photo-rule">
+        <i class="fa-solid fa-circle-info"></i>
         Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
       </p>
     </div>
+
   </div>
 </section>
 
 <section class="stats">
-  <div class="stat-box"><h2>Army</h2><p>Wing</p></div>
-  <div class="stat-box"><h2 id="rankStat">Cadet</h2><p>Rank</p></div>
-  <div class="stat-box"><h2 id="yearStat">1st</h2><p>Service Year</p></div>
-  <div class="stat-box"><h2>Active</h2><p>Status</p></div>
+  <div class="stat-box">
+    <div class="stat-icon"><i class="fa-solid fa-shield"></i></div>
+    <div><h2>Army</h2><p>Wing</p></div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon"><i class="fa-solid fa-medal"></i></div>
+    <div><h2 id="rankStat">Cadet</h2><p>Rank</p></div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+    <div><h2 id="yearStat">1st</h2><p>Service Year</p></div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div><h2>Active</h2><p>Status</p></div>
+  </div>
 </section>
 
 <main class="dashboard">
@@ -240,7 +585,7 @@ footer{
   <div class="card">
     <i class="fa-solid fa-user"></i>
     <h3>My Profile</h3>
-    <p>View your cadet ID, rank, army wing, service year and status.</p>
+    <p>View your cadet ID, rank, army wing, service year and active service status.</p>
   </div>
 
   <div class="card">
@@ -267,12 +612,13 @@ footer{
     <p>Training materials will be updated soon.</p>
   </div>
 
-  <div class="card">
-    <i class="fa-solid fa-medal"></i>
+  <div class="card achievement-card">
+    <i class="fa-solid fa-trophy"></i>
     <h3>Achievements</h3>
     <p>Upload your achievement photos. These photos can be shown on the main page gallery.</p>
 
     <label class="upload-achievement">
+      <i class="fa-solid fa-upload"></i>
       Upload Achievement Photo
       <input type="file" id="achievementUpload" accept="image/*" hidden>
     </label>
@@ -326,10 +672,10 @@ if(parts.length >= 6){
 }
 
 document.getElementById("cadetName").innerText = name;
-document.getElementById("cadetRank").innerText = "Rank: " + rank;
+document.getElementById("cadetRank").innerText = rank;
 document.getElementById("rankStat").innerText = rank;
 document.getElementById("headerCadetName").innerText = name;
-document.getElementById("headerCadetRank").innerText = "Rank: " + rank;
+document.getElementById("headerCadetRank").innerText = rank;
 
 const serviceYear = document.getElementById("serviceYear");
 const yearStat = document.getElementById("yearStat");
@@ -357,7 +703,6 @@ if(noticeTitle && noticeContent){
     "Published by: " + noticeBy + " | " + noticeDate;
 }
 
-/* Attendance from ANO */
 const attendancePercent = localStorage.getItem("attendancePercent_" + cadetId);
 const attendanceText = localStorage.getItem("attendanceText_" + cadetId);
 
