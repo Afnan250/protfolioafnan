@@ -238,6 +238,15 @@ footer{
     font-size:30px;
   }
 }
+  .year-select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #d6d6d6;
+    background:white;
+    font-size:16px;
+    margin:15px 0;
+}
 </style>
 </head>
 
@@ -322,17 +331,28 @@ footer{
     <button class="danger" onclick="cancelCadet()">Cancel Cadet</button>
   </div>
 
-  <div class="card">
-    <i class="fa-solid fa-user-check"></i>
-    <h3>Mark Cadet as Passout</h3>
-    <p>Passout cadets will receive a respectful legacy message on login.</p>
+<div class="card">
+    <i class="fa-solid fa-user-graduate"></i>
 
-    <select id="passoutYear">
-    <option value="">Select Registered Year</option>
-</select>
+    <h3>Mark Batch as Passout</h3>
 
-    <button onclick="markPassout()">Mark Passout</button>
-  </div>
+    <p>
+        Select a registered batch. All cadets from that batch will be
+        automatically marked as passout cadets.
+    </p>
+
+    <select id="passoutYear" class="year-select">
+        <option value="">Select Registered Year</option>
+    </select>
+
+    <button onclick="markBatchPassout()">
+        Mark Batch Passout
+    </button>
+
+    <div class="output" id="batchPassoutOutput">
+        No batch selected yet.
+    </div>
+</div>
 
   <div class="card">
     <i class="fa-solid fa-users"></i>
@@ -488,9 +508,11 @@ function showGalleryCount(){
 function logoutANO(){
   localStorage.removeItem("activeAnoId");
 }
-  function loadBatchYears(){
+ function loadBatchYears(){
 
     const yearSelect = document.getElementById("passoutYear");
+
+    if(!yearSelect) return;
 
     const currentYear = new Date().getFullYear();
 
@@ -504,6 +526,12 @@ function logoutANO(){
         yearSelect.appendChild(option);
     }
 }
+
+window.onload = function(){
+
+    loadBatchYears();
+
+};
 </script>
 
 </body>
