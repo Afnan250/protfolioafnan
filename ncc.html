@@ -489,55 +489,64 @@ footer{
 
 <section class="login-section" id="login">
   <h2 class="title">Cadet / ANO Access</h2>
-  <p class="subtitle">Register first, then login to open your dashboard.</p>
+  <p class="subtitle">Login first. New user? Flip the card and register.</p>
 
-  <div class="login-glass">
+  <div class="flip-wrapper" id="flipCard">
 
-    <div class="tabs">
-      <button class="active" onclick="showForm('cadetRegister', this)">Cadet Register</button>
-      <button onclick="showForm('anoRegister', this)">ANO Register</button>
-      <button onclick="showForm('loginForm', this)">Login</button>
+    <!-- LOGIN SIDE -->
+    <div class="flip-side flip-front">
+      <div class="login-glass">
+
+        <h3>Login</h3>
+
+        <select id="loginType">
+          <option value="cadet">Cadet</option>
+          <option value="ano">ANO</option>
+        </select>
+
+        <input type="text" id="loginId" placeholder="Enter ID">
+        <input type="password" id="loginPass" placeholder="Enter Password">
+
+        <button class="btn login-main-btn" onclick="login()">Login</button>
+
+        <p class="switch-text">
+          Not registered?
+          <span onclick="flipToRegister()">Register here</span>
+        </p>
+
+      </div>
     </div>
 
-    <div id="cadetRegister" class="form active">
-      <h3>Cadet Registration</h3>
+    <!-- REGISTER SIDE -->
+    <div class="flip-side flip-back">
+      <div class="login-glass">
 
-      <input type="text" id="cadetId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
-      <input type="password" id="cadetPass" placeholder="Create Password">
+        <h3>Register</h3>
 
-      <p class="note">Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME</p>
+        <select id="registerType" onchange="changeRegisterType()">
+          <option value="cadet">Cadet Register</option>
+          <option value="ano">ANO Register</option>
+        </select>
 
-      <button class="btn login-main-btn" onclick="registerCadet()">Register Cadet</button>
-    </div>
+        <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
+        <input type="password" id="registerPass" placeholder="Create Password">
 
-    <div id="anoRegister" class="form">
-      <h3>ANO Registration</h3>
+        <p class="note" id="formatNote">
+          Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME
+        </p>
 
-      <input type="text" id="anoId" placeholder="NCC/Lt/SD/12345">
-      <input type="password" id="anoPass" placeholder="Create Password">
+        <button class="btn login-main-btn" onclick="registerUser()">Register</button>
 
-      <p class="note">Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER</p>
+        <p class="switch-text">
+          Already registered?
+          <span onclick="flipToLogin()">Login here</span>
+        </p>
 
-      <button class="btn login-main-btn" onclick="registerANO()">Register ANO</button>
-    </div>
-
-    <div id="loginForm" class="form">
-      <h3>Login</h3>
-
-      <select id="loginType">
-        <option value="cadet">Cadet</option>
-        <option value="ano">ANO</option>
-      </select>
-
-      <input type="text" id="loginId" placeholder="Enter ID">
-      <input type="password" id="loginPass" placeholder="Enter Password">
-
-      <button class="btn login-main-btn" onclick="login()">Login</button>
+      </div>
     </div>
 
   </div>
 </section>
-
 <footer>
   © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
