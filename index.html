@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Afnan Al Jedid | Portfolio</title>
+
   <link rel="stylesheet" href="style.css" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <header>
-  <a href="#" class="logo"><span class="logo-glow">AFNAN</span> A</a>
+  <a href="#home" class="logo"><span>AFNAN</span> A</a>
 
   <input type="checkbox" id="check">
-  <label for="check" class="menu-btn">☰</label>
+  <label for="check" class="menu-btn"><i class="fa-solid fa-bars"></i></label>
 
   <nav>
     <a href="#home">Home</a>
@@ -23,17 +26,23 @@
     <a href="#skills">Skills</a>
     <a href="#services">Services</a>
     <a href="#projects">Projects</a>
-    <a href="#views">Views</a>
+    <a href="#feedback">Feedback</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-text">
+  <div class="hero-content">
     <p class="tag">Full Stack Developer & UI/UX Designer</p>
+
     <h1>Hi, I'm <span>Afnan Al Jedid</span></h1>
+
     <h3>BCA Student • Freelancer • Web Developer</h3>
-    <p>I design and develop sleek, responsive, and professional digital experiences.</p>
+
+    <p>
+      I create modern, responsive, and visually refined websites with a focus on
+      clean design, smooth user experience, and professional digital presentation.
+    </p>
 
     <div class="buttons">
       <a href="#contact" class="btn">Hire Me</a>
@@ -51,13 +60,17 @@
 
   <div class="about-box">
     <p>
-      I am Afnan Al Jedid, a passionate BCA student, web developer, and UI/UX enthusiast.
-      I focus on building clean, modern, and high-performing websites that combine
-      strong functionality with elegant design. My goal is to create digital solutions
-      that look premium, work smoothly, and deliver a professional user experience.
+      I am Afnan Al Jedid, a dedicated BCA student with a strong interest in
+      full stack web development, UI/UX design, and digital product creation.
+      I aim to build websites that are not only visually impressive but also
+      functional, responsive, and easy to use.
     </p>
 
-    <a href="#" class="btn resume-btn" onclick="window.print()">Download Resume / CV</a>
+    <p>
+      My work focuses on creating professional web experiences for portfolios,
+      businesses, organizations, and student projects. I believe in clean
+      structure, elegant design, strong presentation, and continuous improvement.
+    </p>
   </div>
 </section>
 
@@ -68,25 +81,25 @@
     <div class="skill-card">
       <i class="fa-brands fa-html5"></i>
       <h3>HTML</h3>
-      <div class="bar"><span style="width:95%"></span></div>
+      <p>Clean structure and semantic layout.</p>
     </div>
 
     <div class="skill-card">
       <i class="fa-brands fa-css3-alt"></i>
       <h3>CSS</h3>
-      <div class="bar"><span style="width:90%"></span></div>
+      <p>Responsive, animated and premium styling.</p>
     </div>
 
     <div class="skill-card">
       <i class="fa-brands fa-js"></i>
       <h3>JavaScript</h3>
-      <div class="bar"><span style="width:75%"></span></div>
+      <p>Interactive and dynamic web functionality.</p>
     </div>
 
     <div class="skill-card">
       <i class="fa-brands fa-react"></i>
       <h3>React</h3>
-      <div class="bar"><span style="width:70%"></span></div>
+      <p>Modern frontend interface development.</p>
     </div>
   </div>
 </section>
@@ -97,17 +110,17 @@
   <div class="grid">
     <div class="card">
       <h3>Portfolio Website</h3>
-      <p>Modern portfolio websites for students, developers, and freelancers.</p>
+      <p>Professional portfolio websites for students, freelancers, and developers.</p>
     </div>
 
     <div class="card">
       <h3>Business Website</h3>
-      <p>Professional websites for brands, startups, and organizations.</p>
+      <p>Modern websites for brands, startups, institutions, and organizations.</p>
     </div>
 
     <div class="card">
       <h3>UI/UX Design</h3>
-      <p>Clean, premium, and user-friendly interface designs.</p>
+      <p>Clean, premium, and user-friendly interface design for digital products.</p>
     </div>
   </div>
 </section>
@@ -115,28 +128,37 @@
 <section id="projects">
   <h2 class="title">Projects</h2>
 
-  <div class="grid">
+  <div class="grid project-grid">
     <a href="dashboard.html" class="card project-card">
       <h3>Hostel Management System</h3>
-      <p>Student, room, complaints, food menu and admin management system.</p>
+      <p>Student, room, complaint, food menu, and admin management system.</p>
+      <span>Open Project →</span>
     </a>
 
     <a href="ncc.html" class="card project-card">
       <h3>USTM NCC Website</h3>
       <p>Professional webpage for USTM NCC updates, gallery, and event showcase.</p>
+      <span>Open Project →</span>
     </a>
   </div>
 </section>
 
-<section id="views">
-  <h2 class="title">People's Views</h2>
+<section id="feedback">
+  <h2 class="title">Your Feedback</h2>
 
-  <div class="view-box">
+  <div class="feedback-box">
     <p>Did you like my portfolio?</p>
 
-    <div class="reaction-buttons">
-      <button onclick="likePortfolio()">👍 Like <span id="likeCount">0</span></button>
-      <button onclick="dislikePortfolio()">👎 Dislike <span id="dislikeCount">0</span></button>
+    <div class="feedback-buttons">
+      <a href="mailto:afnanjedid@gmail.com?subject=Portfolio Feedback&body=I liked your portfolio. It looks professional and impressive."
+         class="like-btn">
+        <i class="fa-solid fa-thumbs-up"></i> Like
+      </a>
+
+      <a href="mailto:afnanjedid@gmail.com?subject=Portfolio Feedback&body=I did not like your portfolio. Here is my suggestion:"
+         class="dislike-btn">
+        <i class="fa-solid fa-thumbs-down"></i> Dislike
+      </a>
     </div>
   </div>
 </section>
@@ -146,19 +168,23 @@
 
   <div class="contact-box">
     <a href="mailto:afnanjedid@gmail.com">
-      <i class="fa-solid fa-envelope"></i> Email
+      <i class="fa-solid fa-envelope"></i>
+      <span>Email</span>
     </a>
 
     <a href="https://github.com/Afnan250" target="_blank">
-      <i class="fa-brands fa-github"></i> GitHub
+      <i class="fa-brands fa-github"></i>
+      <span>GitHub</span>
     </a>
 
     <a href="https://linkedin.com/in/afnan-al-jedid-005937323" target="_blank">
-      <i class="fa-brands fa-linkedin"></i> LinkedIn
+      <i class="fa-brands fa-linkedin"></i>
+      <span>LinkedIn</span>
     </a>
 
     <a href="https://instagram.com/afnanunfolded24" target="_blank">
-      <i class="fa-brands fa-instagram"></i> Instagram
+      <i class="fa-brands fa-instagram"></i>
+      <span>Instagram</span>
     </a>
   </div>
 </section>
@@ -166,26 +192,6 @@
 <footer>
   © 2026 Afnan Al Jedid. All rights reserved.
 </footer>
-
-<script>
-  let likes = localStorage.getItem("likes") || 0;
-  let dislikes = localStorage.getItem("dislikes") || 0;
-
-  document.getElementById("likeCount").innerText = likes;
-  document.getElementById("dislikeCount").innerText = dislikes;
-
-  function likePortfolio() {
-    likes++;
-    localStorage.setItem("likes", likes);
-    document.getElementById("likeCount").innerText = likes;
-  }
-
-  function dislikePortfolio() {
-    dislikes++;
-    localStorage.setItem("dislikes", dislikes);
-    document.getElementById("dislikeCount").innerText = dislikes;
-  }
-</script>
 
 </body>
 </html>
