@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>USTM NCC | 42 MEGH BN NCC</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -235,6 +236,76 @@ section{
   box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
+/* SOCIAL */
+.social-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:22px;
+  margin-top:40px;
+}
+
+.social-card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  color:#071a3d;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:.35s;
+}
+
+.social-card:hover{
+  transform:translateY(-8px);
+}
+
+.social-card i{
+  font-size:38px;
+}
+
+.social-card h3{
+  margin-bottom:5px;
+  font-size:20px;
+}
+
+.social-card p{
+  color:#666;
+  font-size:14px;
+}
+
+.instagram{
+  border-left:5px solid #E1306C;
+}
+
+.instagram i{
+  color:#E1306C;
+}
+
+.facebook{
+  border-left:5px solid #1877F2;
+}
+
+.facebook i{
+  color:#1877F2;
+}
+
+.whatsapp{
+  border-left:5px solid #25D366;
+}
+
+.whatsapp i{
+  color:#25D366;
+}
+
+.email{
+  border-left:5px solid #ff9933;
+}
+
+.email i{
+  color:#ff9933;
+}
+
 /* LOGIN SECTION */
 .login-section{
   background:
@@ -406,6 +477,17 @@ section{
   text-decoration:underline;
 }
 
+.admin-note{
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;
+  text-align:center;
+  line-height:1.6;
+}
+
 @keyframes saffronWave{
   0%{transform:translateX(-100px);}
   50%{transform:translateX(100px);}
@@ -424,78 +506,6 @@ section{
   100%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
 }
 
-  .social-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:22px;
-    margin-top:40px;
-}
-
-.social-card{
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    color:#071a3d;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.35s;
-}
-
-.social-card:hover{
-    transform:translateY(-8px);
-}
-
-.social-card i{
-    font-size:38px;
-}
-
-.social-card h3{
-    margin-bottom:5px;
-    font-size:20px;
-}
-
-.social-card p{
-    color:#666;
-    font-size:14px;
-}
-
-/* Instagram */
-.instagram{
-    border-left:5px solid #E1306C;
-}
-
-.instagram i{
-    color:#E1306C;
-}
-
-/* Facebook */
-.facebook{
-    border-left:5px solid #1877F2;
-}
-
-.facebook i{
-    color:#1877F2;
-}
-
-/* WhatsApp */
-.whatsapp{
-    border-left:5px solid #25D366;
-}
-
-.whatsapp i{
-    color:#25D366;
-}
-  /* Email */
-.email{
-    border-left:5px solid #ff9933;
-}
-
-.email i{
-    color:#ff9933;
-}
-  
 footer{
   background:#071a3d;
   color:white;
@@ -599,6 +609,7 @@ footer{
     <a href="#about">About</a>
     <a href="#notice">Notice</a>
     <a href="#gallery">Gallery</a>
+    <a href="#social">Social</a>
     <a href="#login">Login/Register</a>
   </nav>
 </header>
@@ -647,10 +658,13 @@ footer{
 
 <section class="notice-board" id="notice">
   <h2 class="title">Notice Board</h2>
-  <p class="subtitle">Public updates and announcements.</p>
+  <p class="subtitle">Latest updates from ANO or Senior In-Charge.</p>
 
-  <div class="notice"><b>Enrollment:</b> New enrollment updates will be informed by the NCC office.</div>
-  <div class="notice"><b>Camp Selection:</b> Selected cadets must follow instructions from seniors and ANOs.</div>
+  <div class="notice">
+    <h3 id="noticeTitle">No Notice Available</h3>
+    <p id="noticeContent">Waiting for official updates.</p>
+    <small id="noticeBy"></small>
+  </div>
 </section>
 
 <section id="gallery">
@@ -664,60 +678,7 @@ footer{
   </div>
 </section>
 
-<section class="login-section" id="login">
-  <div class="tricolor-bg"></div>
-
-  <h2 class="title">Cadet / ANO Access</h2>
-  <p class="subtitle">Login first. New user? Flip the card and register.</p>
-
-  <div class="flip-wrapper" id="flipCard">
-
-    <div class="flip-side flip-front">
-      <div class="login-glass">
-        <h3>Login</h3>
-
-        <select id="loginType">
-          <option value="cadet">Cadet</option>
-          <option value="ano">ANO</option>
-        </select>
-
-        <input type="text" id="loginId" placeholder="Enter ID">
-        <input type="password" id="loginPass" placeholder="Enter Password">
-
-        <button class="btn login-main-btn" onclick="login()">Login</button>
-
-        <p class="switch-text">
-          Not registered?
-          <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
-        </p>
-      </div>
-    </div>
-
-    <div class="flip-side flip-back">
-      <div class="login-glass">
-        <h3>Register</h3>
-
-        <select id="registerType" onchange="changeRegisterType()">
-          <option value="cadet">Cadet Register</option>
-          <option value="ano">ANO Register</option>
-        </select>
-
-        <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
-        <input type="password" id="registerPass" placeholder="Create Password">
-        <button class="btn login-main-btn" onclick="registerUser()">Register</button>
-
-        <p class="switch-text">
-          Already registered?
-          <button type="button" class="switch-link" onclick="flipToLogin()">Login here</button>
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  <section id="social">
+<section id="social">
   <h2 class="title">Connect With USTM NCC</h2>
 
   <div class="social-grid">
@@ -756,6 +717,66 @@ footer{
 
   </div>
 </section>
+
+<section class="login-section" id="login">
+  <div class="tricolor-bg"></div>
+
+  <h2 class="title">Cadet / ANO Access</h2>
+  <p class="subtitle">Cadets register first. ANO uses fixed admin login.</p>
+
+  <div class="flip-wrapper" id="flipCard">
+
+    <div class="flip-side flip-front">
+      <div class="login-glass">
+        <h3>Login</h3>
+
+        <select id="loginType">
+          <option value="cadet">Cadet Login</option>
+          <option value="ano">ANO Admin Login</option>
+        </select>
+
+        <input type="text" id="loginId" placeholder="Enter ID">
+        <input type="password" id="loginPass" placeholder="Enter Password">
+
+        <button class="btn login-main-btn" onclick="login()">Login</button>
+
+        <div class="admin-note">
+          <strong>ANO Admin Login</strong><br>
+          User ID: ANO001<br>
+          Password: 123456
+        </div>
+
+        <p class="switch-text">
+          Cadet not registered?
+          <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="flip-side flip-back">
+      <div class="login-glass">
+        <h3>Cadet Registration</h3>
+
+        <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
+        <input type="password" id="registerPass" placeholder="Create Password">
+
+        <p class="note" id="formatNote">
+          Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME
+        </p>
+
+        <button class="btn login-main-btn" onclick="registerUser()">Register Cadet</button>
+
+        <p class="switch-text">
+          Already registered?
+          <button type="button" class="switch-link" onclick="flipToLogin()">Login here</button>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
   © 2026 USTM NCC
 </footer>
 
@@ -853,7 +874,22 @@ function loadMainGallery(){
   });
 }
 
+function loadNotice(){
+  const title = localStorage.getItem("nccNoticeTitle");
+  const content = localStorage.getItem("nccNoticeContent");
+  const by = localStorage.getItem("nccNoticeBy");
+  const date = localStorage.getItem("nccNoticeDate");
+
+  if(title && content){
+    document.getElementById("noticeTitle").innerText = title;
+    document.getElementById("noticeContent").innerText = content;
+    document.getElementById("noticeBy").innerText =
+      "Published by: " + by + " | " + date;
+  }
+}
+
 loadMainGallery();
+loadNotice();
 </script>
 
 </body>
