@@ -3,595 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>USTM NCC</title>
+<title>USTM NCC | 42 MEGH BN NCC</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",Arial,sans-serif;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:#f4f6f9;
-  color:#222;
-}
-
-a{
-  text-decoration:none;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#f4f6f9;color:#222}
+a{text-decoration:none}
 
 .top-bar{
-  background:#071a3d;
-  color:white;
-  padding:8px 7%;
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
+  background:#071a3d;color:white;padding:8px 7%;
+  display:flex;justify-content:space-between;font-size:14px
 }
 
 header{
-  background:white;
-  padding:14px 7%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
-  position:sticky;
-  top:0;
-  z-index:1000;
+  background:white;padding:14px 7%;display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000
 }
 
-.logo-box{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
+.logo-box{display:flex;align-items:center;gap:12px}
 .logo-frame{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  padding:5px;
+  width:70px;height:70px;border-radius:50%;padding:5px;
   background:linear-gradient(135deg,#ff9933,#fff,#138808);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 0 18px rgba(255,153,51,.45);
+  box-shadow:0 0 18px rgba(255,153,51,.45)
 }
+.logo-frame img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:white}
+.logo-text h2{color:#071a3d}
+.logo-text p{color:#d35400;font-weight:700}
 
-.logo-frame img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  background:white;
-}
+nav a{margin-left:22px;color:#071a3d;font-weight:700}
+nav a:hover{color:#d35400}
 
-.logo-text h2{
-  color:#071a3d;
-}
-
-.logo-text p{
-  color:#d35400;
-  font-weight:700;
-}
-
-nav a{
-  margin-left:22px;
-  color:#071a3d;
-  font-weight:700;
-}
-
-nav a:hover{
-  color:#d35400;
-}
-
-.menu-btn{
-  display:none;
-  font-size:28px;
-  color:#071a3d;
-}
-
-#check{
-  display:none;
-}
+.menu-btn{display:none;font-size:28px;color:#071a3d}
+#check{display:none}
 
 .hero{
-  min-height:85vh;
-  background:
-  linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),
-  url("ncc1.jpeg");
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  align-items:center;
-  padding:70px 7%;
-  color:white;
+  min-height:85vh;background:linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),url("ncc1.jpeg");
+  background-size:cover;background-position:center;display:flex;align-items:center;padding:70px 7%;color:white
 }
-
-.hero-content{
-  max-width:760px;
-}
-
-.hero-content h1{
-  font-size:55px;
-  line-height:1.1;
-  margin-bottom:18px;
-}
-
-.hero-content h1 span{
-  color:#ff9933;
-}
-
-.hero-content p{
-  font-size:18px;
-  color:#eee;
-  margin-bottom:28px;
-  line-height:1.8;
-}
+.hero-content{max-width:760px}
+.hero h1{font-size:55px;line-height:1.1;margin-bottom:18px}
+.hero span{color:#ff9933}
+.hero p{font-size:18px;color:#eee;margin-bottom:28px;line-height:1.8}
 
 .btn{
-  display:inline-block;
-  padding:13px 28px;
-  background:#ff9933;
-  color:#071a3d;
-  border-radius:7px;
-  font-weight:800;
-  margin:8px 8px 8px 0;
-  border:none;
-  cursor:pointer;
+  display:inline-block;padding:13px 28px;background:#ff9933;color:#071a3d;
+  border-radius:7px;font-weight:800;margin:8px 8px 8px 0;border:none;cursor:pointer
+}
+.btn-outline{background:transparent;color:white;border:2px solid #ff9933}
+
+section{padding:70px 7%}
+.title{text-align:center;color:#071a3d;font-size:36px;margin-bottom:12px}
+.subtitle{text-align:center;color:#666;margin-bottom:40px}
+
+.grid,.gallery,.social-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px
 }
 
-.btn-outline{
-  background:transparent;
-  color:white;
-  border:2px solid #ff9933;
+.card,.notice,.social-card{
+  background:white;padding:28px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid #ff9933;transition:.3s
 }
+.card:hover,.social-card:hover{transform:translateY(-8px)}
+.card i,.social-card i{font-size:38px;color:#071a3d;margin-bottom:15px}
+.card h3,.social-card h3{color:#071a3d;margin-bottom:10px}
+.card p,.social-card p{color:#555;line-height:1.7}
 
-section{
-  padding:70px 7%;
-}
-
-.title{
-  text-align:center;
-  color:#071a3d;
-  font-size:36px;
-  margin-bottom:12px;
-}
-
-.subtitle{
-  text-align:center;
-  color:#666;
-  margin-bottom:40px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:24px;
-}
-
-.card{
-  background:white;
-  padding:28px;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  border-top:5px solid #ff9933;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-}
-
-.card i{
-  font-size:38px;
-  color:#071a3d;
-  margin-bottom:15px;
-}
-
-.card h3{
-  color:#071a3d;
-  margin-bottom:10px;
-}
-
-.card p{
-  color:#555;
-  line-height:1.7;
-}
-
-.notice-board{
-  background:#fff7ef;
-}
-
-.notice{
-  background:white;
-  padding:18px;
-  border-left:5px solid #ff9933;
-  border-radius:10px;
-  margin-bottom:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.06);
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+.notice-board{background:#fff7ef}
+.notice{border-left:5px solid #ff9933;border-top:none}
 
 .gallery img{
-  width:100%;
-  height:230px;
-  object-fit:cover;
-  border-radius:14px;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  width:100%;height:230px;object-fit:cover;border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15)
 }
 
-.social-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:22px;
-  margin-top:40px;
-}
-
-.social-card{
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  color:#071a3d;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  transition:.35s;
-}
-
-.social-card:hover{
-  transform:translateY(-8px);
-}
-
-.social-card i{
-  font-size:38px;
-}
-
-.social-card h3{
-  margin-bottom:5px;
-  font-size:20px;
-}
-
-.social-card p{
-  color:#666;
-  font-size:14px;
-}
-
-.instagram{
-  border-left:5px solid #E1306C;
-}
-
-.instagram i{
-  color:#E1306C;
-}
-
-.facebook{
-  border-left:5px solid #1877F2;
-}
-
-.facebook i{
-  color:#1877F2;
-}
-
-.whatsapp{
-  border-left:5px solid #25D366;
-}
-
-.whatsapp i{
-  color:#25D366;
-}
-
-.email{
-  border-left:5px solid #ff9933;
-}
-
-.email i{
-  color:#ff9933;
-}
+.social-card{display:flex;align-items:center;gap:18px}
+.instagram{border-left:5px solid #E1306C}.instagram i{color:#E1306C}
+.facebook{border-left:5px solid #1877F2}.facebook i{color:#1877F2}
+.whatsapp{border-left:5px solid #25D366}.whatsapp i{color:#25D366}
+.email{border-left:5px solid #ff9933}.email i{color:#ff9933}
 
 .login-section{
-  background:
-  linear-gradient(rgba(7,26,61,.88),rgba(7,26,61,.94)),
-  url("ncc2.jpeg");
-  background-size:cover;
-  background-position:center;
-  position:relative;
-  overflow:hidden;
-  perspective:1200px;
+  background:linear-gradient(rgba(7,26,61,.88),rgba(7,26,61,.94)),url("ncc2.jpeg");
+  background-size:cover;background-position:center;position:relative;overflow:hidden;perspective:1200px
 }
-
-.login-section .title,
-.login-section .subtitle{
-  color:white;
-}
+.login-section .title,.login-section .subtitle{color:white}
 
 .tricolor-bg{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:1200px;
-  height:500px;
-  z-index:0;
-  pointer-events:none;
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:1200px;height:500px;z-index:0;pointer-events:none
 }
-
-.tricolor-bg::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:120px;
-  top:40px;
+.tricolor-bg:before{
+  content:"";position:absolute;width:100%;height:120px;top:40px;
   background:linear-gradient(90deg,transparent,#FF9933,transparent);
-  filter:blur(50px);
-  animation:saffronWave 6s ease-in-out infinite;
+  filter:blur(50px);animation:saffronWave 6s ease-in-out infinite
 }
-
-.tricolor-bg::after{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:120px;
-  bottom:40px;
+.tricolor-bg:after{
+  content:"";position:absolute;width:100%;height:120px;bottom:40px;
   background:linear-gradient(90deg,transparent,#138808,transparent);
-  filter:blur(50px);
-  animation:greenWave 6s ease-in-out infinite reverse;
-}
-
-.login-section::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:1000px;
-  height:100px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
-  filter:blur(40px);
-  animation:whiteWave 5s ease-in-out infinite;
-  z-index:0;
+  filter:blur(50px);animation:greenWave 6s ease-in-out infinite reverse
 }
 
 .flip-wrapper{
-  max-width:880px;
-  min-height:470px;
-  margin:auto;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform .8s ease;
-  z-index:5;
+  max-width:880px;min-height:470px;margin:auto;position:relative;
+  transform-style:preserve-3d;transition:transform .8s ease;z-index:5
 }
-
-.flip-wrapper.flip{
-  transform:rotateY(180deg);
-}
-
-.flip-side{
-  position:absolute;
-  width:100%;
-  min-height:470px;
-  backface-visibility:hidden;
-}
-
-.flip-front{
-  transform:rotateY(0deg);
-}
-
-.flip-back{
-  transform:rotateY(180deg);
-}
+.flip-wrapper.flip{transform:rotateY(180deg)}
+.flip-side{position:absolute;width:100%;min-height:470px;backface-visibility:hidden}
+.flip-front{transform:rotateY(0)}
+.flip-back{transform:rotateY(180deg)}
 
 .login-glass{
-  width:100%;
-  min-height:470px;
-  padding:36px;
-  border-radius:28px;
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.28);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 25px 55px rgba(0,0,0,.35);
+  width:100%;min-height:470px;padding:36px;border-radius:28px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);
+  backdrop-filter:blur(18px);box-shadow:0 25px 55px rgba(0,0,0,.35)
 }
+.login-glass h3{color:white;text-align:center;margin-bottom:24px;font-size:28px}
+.login-glass input,.login-glass select{
+  width:100%;padding:15px;margin:11px 0;border:1px solid rgba(255,255,255,.28);
+  border-radius:14px;outline:none;background:rgba(255,255,255,.12);color:white;font-size:15px
+}
+.login-glass input::placeholder{color:rgba(255,255,255,.75)}
+.login-glass select option{color:black}
+.note{color:rgba(255,255,255,.85);font-size:14px;margin:12px 0 20px;text-align:center}
+.login-main-btn{width:100%;border-radius:50px;margin-top:12px}
+.switch-text{text-align:center;margin-top:22px;color:white}
+.switch-link{background:none;border:none;color:#ff9933;font-weight:800;font-size:17px;cursor:pointer}
 
-.login-glass h3{
-  color:white;
-  text-align:center;
-  margin-bottom:24px;
-  font-size:28px;
-}
+@keyframes saffronWave{0%{transform:translateX(-100px)}50%{transform:translateX(100px)}100%{transform:translateX(-100px)}}
+@keyframes greenWave{0%{transform:translateX(100px)}50%{transform:translateX(-100px)}100%{transform:translateX(100px)}}
 
-.login-glass input,
-.login-glass select{
-  width:100%;
-  padding:15px;
-  margin:11px 0;
-  border:1px solid rgba(255,255,255,.28);
-  border-radius:14px;
-  outline:none;
-  background:rgba(255,255,255,.12);
-  color:white;
-  font-size:15px;
-}
-
-.login-glass input::placeholder{
-  color:rgba(255,255,255,.75);
-}
-
-.login-glass select option{
-  color:black;
-}
-
-.note{
-  color:rgba(255,255,255,.85);
-  font-size:14px;
-  margin:12px 0 20px;
-  text-align:center;
-}
-
-.login-main-btn{
-  width:100%;
-  border-radius:50px;
-  margin-top:12px;
-  transition:.35s;
-}
-
-.login-main-btn:hover{
-  transform:translateY(-5px);
-  box-shadow:0 15px 30px rgba(255,153,51,.35);
-}
-
-.switch-text{
-  text-align:center;
-  margin-top:22px;
-  color:white;
-}
-
-.switch-link{
-  background:none;
-  border:none;
-  color:#ff9933;
-  font-weight:800;
-  font-size:17px;
-  cursor:pointer;
-}
-
-.switch-link:hover{
-  text-decoration:underline;
-}
-
-@keyframes saffronWave{
-  0%{transform:translateX(-100px);}
-  50%{transform:translateX(100px);}
-  100%{transform:translateX(-100px);}
-}
-
-@keyframes greenWave{
-  0%{transform:translateX(100px);}
-  50%{transform:translateX(-100px);}
-  100%{transform:translateX(100px);}
-}
-
-@keyframes whiteWave{
-  0%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
-  50%{transform:translate(-50%,-50%) scaleX(1.1);opacity:1;}
-  100%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
-}
-
-footer{
-  background:#071a3d;
-  color:white;
-  text-align:center;
-  padding:25px;
-}
+footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 @media(max-width:900px){
-  .top-bar{
-    flex-direction:column;
-    gap:5px;
-    text-align:center;
-  }
-
-  .menu-btn{
-    display:block;
-  }
-
+  .top-bar{flex-direction:column;gap:5px;text-align:center}
+  .menu-btn{display:block}
   nav{
-    position:fixed;
-    top:98px;
-    right:-100%;
-    width:75%;
-    height:100vh;
-    background:white;
-    display:flex;
-    flex-direction:column;
-    padding:35px;
-    transition:.4s;
+    position:fixed;top:98px;right:-100%;width:75%;height:100vh;background:white;
+    display:flex;flex-direction:column;padding:35px;transition:.4s
   }
-
-  nav a{
-    margin:14px 0;
-  }
-
-  #check:checked ~ nav{
-    right:0;
-  }
-
-  .hero{
-    text-align:center;
-  }
-
-  .hero-content h1{
-    font-size:38px;
-  }
+  nav a{margin:14px 0}
+  #check:checked ~ nav{right:0}
+  .hero{text-align:center}
+  .hero h1{font-size:38px}
 }
 
 @media(max-width:600px){
-  .login-section{
-    padding:60px 5%;
-  }
-
-  .flip-wrapper,
-  .flip-side,
-  .login-glass{
-    min-height:540px;
-  }
-
-  .login-glass{
-    padding:26px 18px;
-    border-radius:22px;
-  }
-
-  .login-glass h3{
-    font-size:24px;
-  }
-
-  .logo-frame{
-    width:60px;
-    height:60px;
-  }
+  .login-section{padding:60px 5%}
+  .flip-wrapper,.flip-side,.login-glass{min-height:540px}
+  .login-glass{padding:26px 18px;border-radius:22px}
+  .logo-frame{width:60px;height:60px}
 }
-  </style>
+</style>
 </head>
 
 <body>
 
+<div class="top-bar">
+  <p><i class="fa-solid fa-location-dot"></i> University of Science & Technology Meghalaya</p>
+  <p><i class="fa-solid fa-shield-halved"></i> 42 MEGH BN NCC</p>
+</div>
+
 <header>
-  <div class="logo">
-    <img src="ncc2.jpeg">
-    <div>USTM NCC<br><small>Unity and Discipline</small></div>
+  <div class="logo-box">
+    <div class="logo-frame">
+      <img src="ncc2.jpeg" alt="USTM NCC Logo">
+    </div>
+    <div class="logo-text">
+      <h2>USTM NCC</h2>
+      <p>Unity and Discipline</p>
+    </div>
   </div>
+
+  <input type="checkbox" id="check">
+  <label for="check" class="menu-btn"><i class="fa-solid fa-bars"></i></label>
+
   <nav>
     <a href="#home">Home</a>
+    <a href="#about">About</a>
     <a href="#notice">Notice</a>
     <a href="#gallery">Gallery</a>
+    <a href="#social">Social</a>
     <a href="#login">Login</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <div>
+  <div class="hero-content">
     <h1>Welcome to <span>USTM NCC</span></h1>
-    <p>Jai Hind. USTM NCC develops discipline, leadership, confidence, patriotism and service among cadets under 42 MEGH BN NCC.</p>
-    <a href="#login" class="btn">Cadet / ANO Login</a>
+    <p>
+      Jai Hind. USTM NCC develops discipline, leadership, confidence,
+      patriotism and service among cadets under 42 MEGH BN NCC.
+    </p>
+    <a href="#about" class="btn">Explore NCC</a>
+    <a href="#login" class="btn btn-outline">Cadet / ANO Login</a>
   </div>
 </section>
 
-<section id="notice">
+<section id="about">
+  <h2 class="title">About USTM NCC</h2>
+  <p class="subtitle">Discipline, leadership, service and national spirit.</p>
+
+  <div class="grid">
+    <div class="card">
+      <i class="fa-solid fa-flag"></i>
+      <h3>About NCC</h3>
+      <p>NCC develops discipline, leadership, teamwork and service-mindedness among students.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-building-columns"></i>
+      <h3>USTM NCC</h3>
+      <p>USTM NCC participates in parades, camps, institutional events and social service activities.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-user-plus"></i>
+      <h3>Join NCC</h3>
+      <p>Interested students may contact the NCC office, ANO or senior cadets.</p>
+    </div>
+  </div>
+</section>
+
+<section class="notice-board" id="notice">
   <h2 class="title">Notice Board</h2>
   <p class="subtitle">Latest updates from ANO or Senior In-Charge.</p>
+
   <div class="notice">
     <h3 id="noticeTitle">No Notice Available</h3>
     <p id="noticeContent">Waiting for official updates.</p>
@@ -602,53 +241,97 @@ footer{
 <section id="gallery">
   <h2 class="title">USTM NCC Gallery</h2>
   <p class="subtitle">Cadet achievements and NCC activities.</p>
+
   <div class="gallery" id="mainGallery">
-    <img src="ncc1.jpeg">
-    <img src="ncc2.jpeg">
-    <img src="ustmncclogo.jpeg">
+    <img src="ncc1.jpeg" alt="NCC Activity">
+    <img src="ncc2.jpeg" alt="NCC Gallery">
+    <img src="ustmncclogo.jpeg" alt="USTM NCC Logo">
+  </div>
+</section>
+
+<section id="social">
+  <h2 class="title">Connect With USTM NCC</h2>
+
+  <div class="social-grid">
+    <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ==" target="_blank" class="social-card instagram">
+      <i class="fab fa-instagram"></i>
+      <div><h3>Instagram</h3><p>@ustmncc_warriors</p></div>
+    </a>
+
+    <a href="https://www.facebook.com/share/1BdKmMqtJk/" target="_blank" class="social-card facebook">
+      <i class="fab fa-facebook-f"></i>
+      <div><h3>Facebook</h3><p>USTM NCC Official</p></div>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank" class="social-card whatsapp">
+      <i class="fab fa-whatsapp"></i>
+      <div><h3>WhatsApp Channel</h3><p>Join Official NCC Updates</p></div>
+    </a>
+
+    <a href="mailto:ustmncc@ustm.ac.in" class="social-card email">
+      <i class="fas fa-envelope"></i>
+      <div><h3>Email</h3><p>ustmncc@ustm.ac.in</p></div>
+    </a>
   </div>
 </section>
 
 <section class="login-section" id="login">
+  <div class="tricolor-bg"></div>
+
   <h2 class="title">Cadet / ANO Access</h2>
+  <p class="subtitle">Cadets register first. ANO uses private admin login.</p>
 
-  <div class="login-box" id="loginBox">
-    <h2>Login</h2>
+  <div class="flip-wrapper" id="flipCard">
 
-    <select id="loginType">
-      <option value="cadet">Cadet Login</option>
-      <option value="ano">ANO Admin Login</option>
-    </select>
+    <div class="flip-side flip-front">
+      <div class="login-glass">
+        <h3>Login</h3>
 
-    <input type="text" id="loginId" placeholder="Enter ID">
-    <input type="password" id="loginPass" placeholder="Enter Password">
+        <select id="loginType">
+          <option value="cadet">Cadet Login</option>
+          <option value="ano">ANO Admin Login</option>
+        </select>
 
-    <button class="btn" onclick="login()">Login</button>
+        <input type="text" id="loginId" placeholder="Enter ID">
+        <input type="password" id="loginPass" placeholder="Enter Password">
 
-    <p class="switch">Cadet not registered?
-      <button onclick="showRegister()">Register here</button>
-    </p>
-  </div>
+        <button class="btn login-main-btn" onclick="login()">Login</button>
 
-  <div class="login-box" id="registerBox">
-    <h2>Cadet Registration</h2>
+        <p class="switch-text">
+          Cadet not registered?
+          <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
+        </p>
+      </div>
+    </div>
 
-    <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
-    <input type="password" id="registerPass" placeholder="Create Password">
+    <div class="flip-side flip-back">
+      <div class="login-glass">
+        <h3>Cadet Registration</h3>
 
-    <button class="btn" onclick="registerCadet()">Register</button>
+        <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
+        <input type="password" id="registerPass" placeholder="Create Password">
 
-    <p class="switch">Already registered?
-      <button onclick="showLogin()">Login here</button>
-    </p>
+        <p class="note">Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME</p>
+
+        <button class="btn login-main-btn" onclick="registerCadet()">Register Cadet</button>
+
+        <p class="switch-text">
+          Already registered?
+          <button type="button" class="switch-link" onclick="flipToLogin()">Login here</button>
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<footer>© 2026 USTM NCC | 42 MEGH BN NCC</footer>
+<footer>
+  © 2026 USTM NCC | 42 MEGH BN NCC
+</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, set, get, onValue, push } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
@@ -667,14 +350,12 @@ function safeKey(id){
   return btoa(unescape(encodeURIComponent(id))).replaceAll("=","");
 }
 
-window.showRegister = function(){
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("registerBox").style.display="block";
+window.flipToRegister = function(){
+  document.getElementById("flipCard").classList.add("flip");
 }
 
-window.showLogin = function(){
-  document.getElementById("registerBox").style.display="none";
-  document.getElementById("loginBox").style.display="block";
+window.flipToLogin = function(){
+  document.getElementById("flipCard").classList.remove("flip");
 }
 
 window.registerCadet = async function(){
@@ -708,9 +389,10 @@ window.registerCadet = async function(){
   });
 
   alert("Cadet registration successful. Now login.");
-  showLogin();
-  document.getElementById("loginType").value="cadet";
-  document.getElementById("loginId").value=id;
+  document.getElementById("loginType").value = "cadet";
+  document.getElementById("loginId").value = id;
+  document.getElementById("loginPass").value = "";
+  flipToLogin();
 }
 
 window.login = async function(){
@@ -721,7 +403,7 @@ window.login = async function(){
   if(type === "ano"){
     if(id.toUpperCase() === "ANO001" && pass === "USTMNCC@Admin2026"){
       localStorage.setItem("activeAnoId","ANO001");
-      window.location.href="ano-dashboard.html";
+      window.location.href = "ano-dashboard.html";
     }else{
       alert("Invalid ANO ID or Password.");
     }
@@ -753,29 +435,35 @@ window.login = async function(){
   if(cadet.password === pass){
     localStorage.setItem("activeCadetId",id);
     localStorage.setItem("activeCadetKey",key);
-    window.location.href="cadet-dashboard.html";
+    window.location.href = "cadet-dashboard.html";
   }else{
     alert("Wrong password.");
   }
 }
 
 onValue(ref(db,"notice"), snap=>{
-  const data=snap.val();
+  const data = snap.val();
   if(data){
-    document.getElementById("noticeTitle").innerText=data.title;
-    document.getElementById("noticeContent").innerText=data.content;
-    document.getElementById("noticeBy").innerText="Published by: "+data.by+" | "+data.date;
+    document.getElementById("noticeTitle").innerText = data.title;
+    document.getElementById("noticeContent").innerText = data.content;
+    document.getElementById("noticeBy").innerText = "Published by: " + data.by + " | " + data.date;
   }
 });
 
 onValue(ref(db,"gallery"), snap=>{
-  const gallery=document.getElementById("mainGallery");
+  const gallery = document.getElementById("mainGallery");
+  if(!gallery) return;
+
+  const oldUploads = gallery.querySelectorAll(".uploaded-achievement");
+  oldUploads.forEach(img => img.remove());
+
   snap.forEach(child=>{
-    const item=child.val();
+    const item = child.val();
     if(item.url){
-      const img=document.createElement("img");
-      img.src=item.url;
-      img.alt="Cadet Achievement";
+      const img = document.createElement("img");
+      img.src = item.url;
+      img.alt = "Cadet Achievement";
+      img.className = "uploaded-achievement";
       gallery.appendChild(img);
     }
   });
