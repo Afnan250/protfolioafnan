@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANO Dashboard | USTM NCC</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#071a3d;
+}
+
+header{
+  background:#071a3d;
+  color:white;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom-right-radius:45px;
+  box-shadow:0 10px 25px rgba(0,0,0,.18);
+}
+
+.brand h2{
+  color:#ff9933;
+  font-size:28px;
+}
+
+.brand p{
+  color:#ddd;
+}
+
+.logout{
+  background:#ff9933;
+  color:#071a3d;
+  padding:12px 22px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.hero{
+  margin:25px 3%;
+  padding:45px 7%;
+  border-radius:28px;
+  background:
+  linear-gradient(rgba(7,26,61,.85),rgba(7,26,61,.88)),
+  url("ncc2.jpeg");
+  background-size:cover;
+  background-position:center;
+  color:white;
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.hero h1{
+  font-size:38px;
+  margin-bottom:10px;
+  color:#ff9933;
+}
+
+.dashboard{
+  padding:25px 4% 45px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:24px;
+}
+
+.card{
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  border-top:5px solid #ff9933;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-7px);
+}
+
+.card i{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#071a3d;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:25px;
+  margin-bottom:14px;
+}
+
+.card p{
+  color:#555;
+  line-height:1.6;
+  margin-bottom:12px;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:13px;
+  margin:9px 0;
+  border:1px solid #d2d6df;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+}
+
+textarea{
+  resize:vertical;
+}
+
+button{
+  background:#071a3d;
+  color:white;
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+button:hover{
+  background:#ff9933;
+  color:#071a3d;
+}
+
+.danger{
+  background:#b00020;
+}
+
+.danger:hover{
+  background:#ff4d4d;
+  color:white;
+}
+
+.output{
+  margin-top:14px;
+  padding:14px;
+  background:#fff7ef;
+  border-left:5px solid #ff9933;
+  border-radius:12px;
+  color:#333;
+}
+
+.cadet-list p{
+  padding:10px;
+  background:#f4f6f9;
+  border-radius:8px;
+  margin:8px 0;
+  font-size:14px;
+}
+
+footer{
+  background:#071a3d;
+  color:white;
+  text-align:center;
+  padding:24px;
+}
+
+@media(max-width:700px){
+  header{
+    flex-direction:column;
+    gap:14px;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <h2>USTM NCC ANO Dashboard</h2>
+    <p id="anoIdText">Loading ANO ID...</p>
+  </div>
+
+  <a href="ncc.html" class="logout" onclick="logoutANO()">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+  </a>
+</header>
+
+<section class="hero">
+  <h1>Administrative Control Panel</h1>
+  <p>
+    Manage notices, attendance, camp updates, cadet status, and public gallery data.
+  </p>
+</section>
+
+<main class="dashboard">
+
+  <div class="card">
+    <i class="fa-solid fa-bullhorn"></i>
+    <h3>Publish Notice</h3>
+    <p>Notice can be published by ANO or Senior In-Charge.</p>
+
+    <select id="noticeRole">
+      <option value="ANO">ANO</option>
+      <option value="Senior In-Charge">Senior In-Charge</option>
+    </select>
+
+    <input type="text" id="noticeTitle" placeholder="Notice Title">
+
+    <textarea id="noticeContent" rows="5" placeholder="Write notice here..."></textarea>
+
+    <button onclick="publishNotice()">Publish Notice</button>
+
+    <div class="output" id="noticeOutput">No notice published yet.</div>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-calendar-check"></i>
+    <h3>Declare Attendance</h3>
+    <p>Attendance is counted from regular NCC classes and events.</p>
+
+    <input type="text" id="attendanceCadetId" placeholder="Enter Cadet ID">
+
+    <input type="number" id="attendancePercent" placeholder="Attendance Percentage">
+
+    <textarea id="attendanceText" rows="4" placeholder="Example: Regular classes: 70%, Events: 80%"></textarea>
+
+    <button onclick="declareAttendance()">Declare Attendance</button>
+
+    <div class="output">
+      20% to 70% attendance means the cadet is not eligible for camp.
+    </div>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-campground"></i>
+    <h3>Declare Camp Update</h3>
+    <p>Camp updates will appear on cadet dashboards after declaration.</p>
+
+    <textarea id="campUpdate" rows="5" placeholder="Write camp update here..."></textarea>
+
+    <button onclick="declareCamp()">Publish Camp Update</button>
+
+    <div class="output" id="campOutput">No camp update published yet.</div>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-user-xmark"></i>
+    <h3>Cancel Cadet</h3>
+    <p>Cancelled cadets will not be able to open their dashboard.</p>
+
+    <input type="text" id="cancelCadetId" placeholder="Enter Cadet ID">
+
+    <button class="danger" onclick="cancelCadet()">Cancel Cadet</button>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-user-check"></i>
+    <h3>Mark Cadet as Passout</h3>
+    <p>Passout cadets will receive a respectful legacy message on login.</p>
+
+    <input type="text" id="passoutCadetId" placeholder="Enter Cadet ID">
+
+    <button onclick="markPassout()">Mark Passout</button>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-users"></i>
+    <h3>Registered Cadets</h3>
+    <p>View cadets registered in this browser storage.</p>
+
+    <button onclick="showCadets()">Show Cadets</button>
+
+    <div class="output cadet-list" id="cadetList">
+      Click “Show Cadets”.
+    </div>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-images"></i>
+    <h3>Main Gallery Review</h3>
+    <p>Achievement photos uploaded by cadets are stored for the main page gallery.</p>
+
+    <button onclick="showGalleryCount()">Check Gallery Uploads</button>
+
+    <div class="output" id="galleryOutput">
+      No gallery data checked yet.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 USTM NCC | ANO Admin Portal
+</footer>
+
+<script>
+const anoId = localStorage.getItem("activeAnoId");
+
+if(!anoId){
+  alert("Please login first as ANO.");
+  window.location.href = "ncc.html";
+}else{
+  document.getElementById("anoIdText").innerText = anoId;
+}
+
+function publishNotice(){
+  const role = document.getElementById("noticeRole").value;
+  const title = document.getElementById("noticeTitle").value.trim();
+  const content = document.getElementById("noticeContent").value.trim();
+
+  if(title === "" || content === ""){
+    alert("Please fill notice title and content.");
+    return;
+  }
+
+  localStorage.setItem("nccNoticeTitle", title);
+  localStorage.setItem("nccNoticeContent", content);
+  localStorage.setItem("nccNoticeBy", role);
+  localStorage.setItem("nccNoticeDate", new Date().toLocaleString());
+
+  document.getElementById("noticeOutput").innerHTML =
+    "<b>" + title + "</b><br>" + content + "<br><small>Published by: " + role + "</small>";
+
+  alert("Notice published successfully.");
+}
+
+function declareAttendance(){
+  const cadetId = document.getElementById("attendanceCadetId").value.trim();
+  const percent = document.getElementById("attendancePercent").value.trim();
+  const text = document.getElementById("attendanceText").value.trim();
+
+  if(cadetId === "" || percent === ""){
+    alert("Enter Cadet ID and attendance percentage.");
+    return;
+  }
+
+  if(percent < 0 || percent > 100){
+    alert("Attendance percentage must be between 0 and 100.");
+    return;
+  }
+
+  localStorage.setItem("attendancePercent_" + cadetId, percent);
+  localStorage.setItem("attendanceText_" + cadetId, text || "Attendance counted from regular NCC classes and events.");
+
+  alert("Attendance declared successfully.");
+}
+
+function declareCamp(){
+  const camp = document.getElementById("campUpdate").value.trim();
+
+  if(camp === ""){
+    alert("Write camp update first.");
+    return;
+  }
+
+  localStorage.setItem("nccCampUpdate", camp);
+  localStorage.setItem("nccCampDate", new Date().toLocaleString());
+
+  document.getElementById("campOutput").innerText = camp;
+
+  alert("Camp update published successfully.");
+}
+
+function cancelCadet(){
+  const cadetId = document.getElementById("cancelCadetId").value.trim();
+
+  if(cadetId === ""){
+    alert("Enter Cadet ID first.");
+    return;
+  }
+
+  localStorage.removeItem("cadet_" + cadetId);
+  localStorage.setItem("cadetStatus_" + cadetId, "cancelled");
+
+  alert("Cadet cancelled successfully.");
+}
+
+function markPassout(){
+  const cadetId = document.getElementById("passoutCadetId").value.trim();
+
+  if(cadetId === ""){
+    alert("Enter Cadet ID first.");
+    return;
+  }
+
+  localStorage.setItem("cadetStatus_" + cadetId, "completed");
+
+  alert("Cadet marked as passout successfully.");
+}
+
+function showCadets(){
+  let output = "";
+
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+
+    if(key.startsWith("cadet_")){
+      const cadetId = key.replace("cadet_", "");
+      const status = localStorage.getItem("cadetStatus_" + cadetId) || "active";
+
+      output += "<p><b>" + cadetId + "</b><br>Status: " + status + "</p>";
+    }
+  }
+
+  document.getElementById("cadetList").innerHTML =
+    output || "No registered cadets found.";
+}
+
+function showGalleryCount(){
+  const gallery =
+    JSON.parse(localStorage.getItem("mainGalleryPhotos")) || [];
+
+  document.getElementById("galleryOutput").innerText =
+    "Total uploaded achievement photos: " + gallery.length;
+}
+
+function logoutANO(){
+  localStorage.removeItem("activeAnoId");
+}
+</script>
+
+</body>
+</html>
