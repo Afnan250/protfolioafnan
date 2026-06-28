@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Afnan Al Jedid | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body>
 
 <header>
-  <a href="#" class="logo">Afnan<span>.</span></a>
+  <a href="#" class="logo"><span class="logo-glow">AFNAN</span> A</a>
 
   <input type="checkbox" id="check">
   <label for="check" class="menu-btn">☰</label>
@@ -21,6 +23,7 @@
     <a href="#skills">Skills</a>
     <a href="#services">Services</a>
     <a href="#projects">Projects</a>
+    <a href="#views">Views</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -30,7 +33,7 @@
     <p class="tag">Full Stack Developer & UI/UX Designer</p>
     <h1>Hi, I'm <span>Afnan Al Jedid</span></h1>
     <h3>BCA Student • Freelancer • Web Developer</h3>
-    <p>I build modern, responsive, and professional websites with clean design and strong user experience.</p>
+    <p>I design and develop sleek, responsive, and professional digital experiences.</p>
 
     <div class="buttons">
       <a href="#contact" class="btn">Hire Me</a>
@@ -48,36 +51,42 @@
 
   <div class="about-box">
     <p>
-      I am a BCA student interested in web development, software engineering,
-      and UI/UX design. I love creating sleek, responsive, and high-end digital products.
+      I am Afnan Al Jedid, a passionate BCA student, web developer, and UI/UX enthusiast.
+      I focus on building clean, modern, and high-performing websites that combine
+      strong functionality with elegant design. My goal is to create digital solutions
+      that look premium, work smoothly, and deliver a professional user experience.
     </p>
 
-    <div class="info">
-      <div><b>Name:</b> Afnan Al Jedid</div>
-      <div><b>Email:</b> afnanjedid@gmail.com</div>
-      <div><b>Degree:</b> BCA Student</div>
-      <div><b>Freelance:</b> Available</div>
-    </div>
+    <a href="#" class="btn resume-btn" onclick="window.print()">Download Resume / CV</a>
   </div>
 </section>
 
 <section id="skills">
   <h2 class="title">My Skills</h2>
 
-  <div class="grid">
-    <div class="card skills">
-      <h3>Frontend</h3>
-      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span>
+  <div class="skill-container">
+    <div class="skill-card">
+      <i class="fa-brands fa-html5"></i>
+      <h3>HTML</h3>
+      <div class="bar"><span style="width:95%"></span></div>
     </div>
 
-    <div class="card skills">
-      <h3>Backend</h3>
-      <span>Node.js</span><span>Express.js</span><span>Database</span>
+    <div class="skill-card">
+      <i class="fa-brands fa-css3-alt"></i>
+      <h3>CSS</h3>
+      <div class="bar"><span style="width:90%"></span></div>
     </div>
 
-    <div class="card skills">
-      <h3>Tools</h3>
-      <span>GitHub</span><span>VS Code</span><span>Canva</span><span>Figma</span>
+    <div class="skill-card">
+      <i class="fa-brands fa-js"></i>
+      <h3>JavaScript</h3>
+      <div class="bar"><span style="width:75%"></span></div>
+    </div>
+
+    <div class="skill-card">
+      <i class="fa-brands fa-react"></i>
+      <h3>React</h3>
+      <div class="bar"><span style="width:70%"></span></div>
     </div>
   </div>
 </section>
@@ -88,17 +97,17 @@
   <div class="grid">
     <div class="card">
       <h3>Portfolio Website</h3>
-      <p>Modern personal portfolio websites for students, developers, and freelancers.</p>
+      <p>Modern portfolio websites for students, developers, and freelancers.</p>
     </div>
 
     <div class="card">
       <h3>Business Website</h3>
-      <p>Professional websites for brands, startups, organizations, and small businesses.</p>
+      <p>Professional websites for brands, startups, and organizations.</p>
     </div>
 
     <div class="card">
       <h3>UI/UX Design</h3>
-      <p>Clean, premium, and user-friendly interface designs for websites and apps.</p>
+      <p>Clean, premium, and user-friendly interface designs.</p>
     </div>
   </div>
 </section>
@@ -107,35 +116,76 @@
   <h2 class="title">Projects</h2>
 
   <div class="grid">
-    <div class="card">
+    <a href="dashboard.html" class="card project-card">
       <h3>Hostel Management System</h3>
       <p>Student, room, complaints, food menu and admin management system.</p>
-    </div>
+    </a>
 
-    <div class="card">
+    <a href="ncc.html" class="card project-card">
       <h3>USTM NCC Website</h3>
       <p>Professional webpage for USTM NCC updates, gallery, and event showcase.</p>
+    </a>
+  </div>
+</section>
+
+<section id="views">
+  <h2 class="title">People's Views</h2>
+
+  <div class="view-box">
+    <p>Did you like my portfolio?</p>
+
+    <div class="reaction-buttons">
+      <button onclick="likePortfolio()">👍 Like <span id="likeCount">0</span></button>
+      <button onclick="dislikePortfolio()">👎 Dislike <span id="dislikeCount">0</span></button>
     </div>
+  </div>
 </section>
 
 <section id="contact">
   <h2 class="title">Contact Me</h2>
 
-  <div class="about-box contact-box">
-    <p><b>Email:</b> afnanjedid@gmail.com</p>
-    <p><b>GitHub:</b> github.com/Afnan250</p>
-    <p><b>LinkedIn:</b> linkedin.com/in/afnan-al-jedid-005937323</p>
-    <p><b>Instagram:</b> instagram.com/afnanunfolded24</p>
+  <div class="contact-box">
+    <a href="mailto:afnanjedid@gmail.com">
+      <i class="fa-solid fa-envelope"></i> Email
+    </a>
 
-    <div class="buttons">
-      <a href="mailto:afnanjedid@gmail.com" class="btn">Send Email</a>
-    </div>
+    <a href="https://github.com/Afnan250" target="_blank">
+      <i class="fa-brands fa-github"></i> GitHub
+    </a>
+
+    <a href="https://linkedin.com/in/afnan-al-jedid-005937323" target="_blank">
+      <i class="fa-brands fa-linkedin"></i> LinkedIn
+    </a>
+
+    <a href="https://instagram.com/afnanunfolded24" target="_blank">
+      <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
   </div>
 </section>
 
 <footer>
   © 2026 Afnan Al Jedid. All rights reserved.
 </footer>
+
+<script>
+  let likes = localStorage.getItem("likes") || 0;
+  let dislikes = localStorage.getItem("dislikes") || 0;
+
+  document.getElementById("likeCount").innerText = likes;
+  document.getElementById("dislikeCount").innerText = dislikes;
+
+  function likePortfolio() {
+    likes++;
+    localStorage.setItem("likes", likes);
+    document.getElementById("likeCount").innerText = likes;
+  }
+
+  function dislikePortfolio() {
+    dislikes++;
+    localStorage.setItem("dislikes", dislikes);
+    document.getElementById("dislikeCount").innerText = dislikes;
+  }
+</script>
 
 </body>
 </html>
