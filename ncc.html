@@ -721,13 +721,11 @@ function changeRegisterType(){
   const input = document.getElementById("registerId");
   const note = document.getElementById("formatNote");
 
-  if(type === "cadet"){
-    input.placeholder = "ML/2026/SDIA/12345/Cadet/Afnan Al Jedid";
-    note.innerText = "Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME";
-  }else{
-    input.placeholder = "NCC/Lt/SD/12345";
-    note.innerText = "Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER";
-  }
+ if(type === "cadet"){
+    alert("Cadet Login");
+}
+else{
+    alert("ANO Login");
 }
 
 function registerUser(){
