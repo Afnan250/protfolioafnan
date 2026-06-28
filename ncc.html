@@ -5,206 +5,397 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>USTM NCC | 42 MEGH BN NCC</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Segoe UI,Arial,sans-serif;
+  font-family:"Segoe UI",Arial,sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background:#0b0f14;
-  color:#f5f5f5;
+  background:#f4f6f9;
+  color:#222;
+}
+
+a{
+  text-decoration:none;
+}
+
+.top-bar{
+  background:#071a3d;
+  color:white;
+  padding:8px 7%;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
 }
 
 header{
-  padding:18px 8%;
+  background:white;
+  padding:14px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:#101820;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
   position:sticky;
   top:0;
   z-index:1000;
 }
 
-.logo{
-  font-size:24px;
-  font-weight:800;
-  color:#ff7a18;
+.logo-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-nav a, nav button{
-  margin-left:18px;
-  color:white;
-  background:none;
-  border:none;
-  cursor:pointer;
-  font-size:15px;
-  text-decoration:none;
+.logo-box img{
+  width:62px;
+  height:62px;
+  object-fit:contain;
 }
 
-nav a:hover, nav button:hover{
-  color:#ff7a18;
+.logo-text h2{
+  color:#071a3d;
 }
 
-section{
-  padding:70px 8%;
+.logo-text p{
+  color:#d35400;
+  font-weight:700;
+}
+
+nav a{
+  margin-left:22px;
+  color:#071a3d;
+  font-weight:700;
+}
+
+nav a:hover{
+  color:#d35400;
+}
+
+.menu-btn{
+  display:none;
+  font-size:28px;
+  color:#071a3d;
+}
+
+#check{
+  display:none;
 }
 
 .hero{
-  min-height:90vh;
+  min-height:85vh;
+  background:
+  linear-gradient(rgba(7,26,61,.82),rgba(7,26,61,.9)),
+  url("ncc1.jpg");
+  background-size:cover;
+  background-position:center;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:35px;
-  background:linear-gradient(135deg,#0b0f14,#13202c);
+  padding:70px 7%;
+  color:white;
 }
 
-.hero-text{
-  max-width:650px;
+.hero-content{
+  max-width:720px;
 }
 
-.hero h1{
-  font-size:52px;
-  color:#ff7a18;
+.hero-content h1{
+  font-size:55px;
+  line-height:1.1;
   margin-bottom:18px;
 }
 
-.hero p{
-  color:#d6d6d6;
-  margin-bottom:25px;
-  font-size:18px;
+.hero-content h1 span{
+  color:#ff9933;
+}
+
+.hero-content p{
+  font-size:19px;
+  color:#eee;
+  margin-bottom:28px;
 }
 
 .btn{
   display:inline-block;
-  padding:13px 26px;
-  border-radius:8px;
-  background:#ff7a18;
-  color:#111;
-  font-weight:700;
-  text-decoration:none;
+  padding:13px 28px;
+  background:#ff9933;
+  color:#071a3d;
+  border-radius:7px;
+  font-weight:800;
+  margin:8px 8px 8px 0;
   border:none;
   cursor:pointer;
 }
 
 .btn-outline{
   background:transparent;
-  color:#ff7a18;
-  border:2px solid #ff7a18;
+  color:white;
+  border:2px solid #ff9933;
 }
 
-.card{
-  background:#151c24;
-  padding:25px;
-  border-radius:18px;
-  border:1px solid #26313d;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
+section{
+  padding:70px 7%;
 }
 
 .title{
   text-align:center;
-  color:#ff7a18;
+  color:#071a3d;
   font-size:36px;
-  margin-bottom:35px;
+  margin-bottom:12px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:40px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:22px;
+  gap:24px;
 }
 
-.login-box{
-  max-width:760px;
+.card{
+  background:white;
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid #ff9933;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card i{
+  font-size:38px;
+  color:#071a3d;
+  margin-bottom:15px;
+}
+
+.card h3{
+  color:#071a3d;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#555;
+  line-height:1.7;
+}
+
+.notice-board{
+  background:#fff7ef;
+}
+
+.notice{
+  background:white;
+  padding:18px;
+  border-left:5px solid #ff9933;
+  border-radius:10px;
+  margin-bottom:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.06);
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.gallery img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+/* Glass Login */
+.login-section{
+  background:
+  linear-gradient(rgba(7,26,61,.88),rgba(7,26,61,.94)),
+  url("ncc2.jpg");
+  background-size:cover;
+  background-position:center;
+}
+
+.login-section .title,
+.login-section .subtitle{
+  color:white;
+}
+
+.login-glass{
+  max-width:880px;
   margin:auto;
+  padding:34px;
+  border-radius:28px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.28);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 25px 55px rgba(0,0,0,.35);
+  animation:glassUp .9s ease;
+}
+
+@keyframes glassUp{
+  from{
+    opacity:0;
+    transform:translateY(45px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 
 .tabs{
   display:flex;
-  gap:12px;
   justify-content:center;
-  margin-bottom:25px;
   flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:28px;
 }
 
 .tabs button{
-  padding:12px 24px;
+  padding:13px 24px;
   border:none;
-  border-radius:8px;
-  background:#1f2a36;
+  border-radius:50px;
+  background:rgba(255,255,255,.16);
   color:white;
+  font-weight:700;
   cursor:pointer;
+  transition:.35s;
+  border:1px solid rgba(255,255,255,.25);
 }
 
 .tabs button.active{
-  background:#ff7a18;
-  color:#111;
-  font-weight:700;
+  background:#ff9933;
+  color:#071a3d;
 }
 
 .form{
   display:none;
+  animation:formFade .5s ease;
 }
 
 .form.active{
   display:block;
 }
 
-input, select{
-  width:100%;
-  padding:13px;
-  margin:10px 0;
-  border:none;
-  border-radius:8px;
-  background:#0b0f14;
+@keyframes formFade{
+  from{
+    opacity:0;
+    transform:translateX(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.form h3{
   color:white;
-  border:1px solid #334155;
-}
-
-.dashboard{
-  display:none;
-}
-
-.notice{
-  background:#0f172a;
-  border-left:5px solid #ff7a18;
-  padding:18px;
   margin-bottom:18px;
-  border-radius:10px;
+  text-align:center;
+  font-size:26px;
+}
+
+.login-glass input,
+.login-glass select{
+  width:100%;
+  padding:15px;
+  margin:11px 0;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:14px;
+  outline:none;
+  background:rgba(255,255,255,.12);
+  color:white;
+  font-size:15px;
+}
+
+.login-glass input::placeholder{
+  color:rgba(255,255,255,.75);
+}
+
+.login-glass select option{
+  color:black;
+}
+
+.note{
+  color:rgba(255,255,255,.85);
+  font-size:14px;
+  margin:12px 0 20px;
+  text-align:center;
+}
+
+.login-main-btn{
+  width:100%;
+  border-radius:50px;
 }
 
 footer{
+  background:#071a3d;
+  color:white;
   text-align:center;
   padding:25px;
-  background:#07090c;
-  color:#aaa;
 }
 
-@media(max-width:768px){
-  header{
+@media(max-width:900px){
+  .top-bar{
     flex-direction:column;
-    gap:15px;
-  }
-
-  nav{
+    gap:5px;
     text-align:center;
   }
 
-  nav a, nav button{
-    margin:8px;
-    display:inline-block;
+  .menu-btn{
+    display:block;
+  }
+
+  nav{
+    position:fixed;
+    top:92px;
+    right:-100%;
+    width:75%;
+    height:100vh;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    padding:35px;
+    transition:.4s;
+  }
+
+  nav a{
+    margin:14px 0;
+  }
+
+  #check:checked ~ nav{
+    right:0;
   }
 
   .hero{
     text-align:center;
-    flex-direction:column;
   }
 
-  .hero h1{
-    font-size:36px;
+  .hero-content h1{
+    font-size:38px;
+  }
+
+  .login-glass{
+    padding:24px 18px;
+  }
+
+  .tabs button{
+    width:100%;
   }
 }
 </style>
@@ -212,55 +403,95 @@ footer{
 
 <body>
 
+<div class="top-bar">
+  <p><i class="fa-solid fa-location-dot"></i> University of Science & Technology Meghalaya</p>
+  <p><i class="fa-solid fa-shield-halved"></i> 42 MEGH BN NCC</p>
+</div>
+
 <header>
-  <div class="logo">USTM NCC</div>
+  <div class="logo-box">
+    <img src="ustmncclogo.png" alt="USTM NCC Logo">
+    <div class="logo-text">
+      <h2>USTM NCC</h2>
+      <p>Unity and Discipline</p>
+    </div>
+  </div>
+
+  <input type="checkbox" id="check">
+  <label for="check" class="menu-btn"><i class="fa-solid fa-bars"></i></label>
 
   <nav>
     <a href="#home">Home</a>
-    <a href="#public">About</a>
+    <a href="#about">About</a>
+    <a href="#notice">Notice</a>
+    <a href="#gallery">Gallery</a>
     <a href="#login">Login/Register</a>
-    <button onclick="logout()">Logout</button>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-text">
-    <h1>Welcome to USTM NCC</h1>
+  <div class="hero-content">
+    <h1>Welcome to <span>USTM NCC</span></h1>
     <p>
-      Discipline, Unity, Leadership and Service.  
-      This is the official promotional page for USTM NCC under 42 MEGH BN NCC.
+      A public information portal for USTM NCC. Registered ML cadets and ANOs
+      can access their separate internal dashboard after login.
     </p>
 
-    <a href="#public" class="btn">Explore</a>
+    <a href="#about" class="btn">Explore NCC</a>
     <a href="#login" class="btn btn-outline">Cadet / ANO Login</a>
   </div>
 </section>
 
-<section id="public">
-  <h2 class="title">Public Information</h2>
+<section id="about">
+  <h2 class="title">About USTM NCC</h2>
+  <p class="subtitle">Discipline, leadership, service and national spirit.</p>
 
   <div class="grid">
     <div class="card">
+      <i class="fa-solid fa-flag"></i>
       <h3>About NCC</h3>
-      <p>NCC develops discipline, leadership, teamwork and national service among students.</p>
+      <p>NCC develops discipline, leadership, teamwork and service-mindedness among students.</p>
     </div>
 
     <div class="card">
+      <i class="fa-solid fa-building-columns"></i>
       <h3>USTM NCC</h3>
-      <p>USTM NCC participates in training, camps, social service, parades and institutional events.</p>
+      <p>USTM NCC participates in parades, camps, institutional events and social service activities.</p>
     </div>
 
     <div class="card">
+      <i class="fa-solid fa-user-plus"></i>
       <h3>Join NCC</h3>
-      <p>Interested students can contact the NCC office or ANO for enrollment guidance.</p>
+      <p>Students interested in joining NCC may contact the NCC office, ANO or senior cadets.</p>
     </div>
   </div>
 </section>
 
-<section id="login">
-  <h2 class="title">Cadet / ANO Access</h2>
+<section class="notice-board" id="notice">
+  <h2 class="title">Notice Board</h2>
+  <p class="subtitle">Public updates and announcements.</p>
 
-  <div class="card login-box">
+  <div class="notice"><b>Parade:</b> Reporting details will be shared through official NCC communication.</div>
+  <div class="notice"><b>Enrollment:</b> New enrollment updates will be informed by the NCC office.</div>
+  <div class="notice"><b>Camp Selection:</b> Selected cadets must follow instructions from ANO and PI Staff.</div>
+</section>
+
+<section id="gallery">
+  <h2 class="title">Gallery</h2>
+  <p class="subtitle">Moments from USTM NCC activities.</p>
+
+  <div class="gallery">
+    <img src="ncc1.jpg" alt="NCC Activity">
+    <img src="ncc2.jpg" alt="NCC Gallery">
+    <img src="ustmncclogo.png" alt="USTM NCC Logo">
+  </div>
+</section>
+
+<section class="login-section" id="login">
+  <h2 class="title">Cadet / ANO Access</h2>
+  <p class="subtitle">Register first, then login to open your dashboard.</p>
+
+  <div class="login-glass">
 
     <div class="tabs">
       <button class="active" onclick="showForm('cadetRegister', this)">Cadet Register</button>
@@ -274,11 +505,9 @@ footer{
       <input type="text" id="cadetId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
       <input type="password" id="cadetPass" placeholder="Create Password">
 
-      <button class="btn" onclick="registerCadet()">Register Cadet</button>
+      <p class="note">Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME</p>
 
-      <p>
-        Format: <b>ML/REGISTERED YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME</b>
-      </p>
+      <button class="btn login-main-btn" onclick="registerCadet()">Register Cadet</button>
     </div>
 
     <div id="anoRegister" class="form">
@@ -287,11 +516,9 @@ footer{
       <input type="text" id="anoId" placeholder="NCC/Lt/SD/12345">
       <input type="password" id="anoPass" placeholder="Create Password">
 
-      <button class="btn" onclick="registerANO()">Register ANO</button>
+      <p class="note">Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER</p>
 
-      <p>
-        Format: <b>NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER</b>
-      </p>
+      <button class="btn login-main-btn" onclick="registerANO()">Register ANO</button>
     </div>
 
     <div id="loginForm" class="form">
@@ -305,47 +532,9 @@ footer{
       <input type="text" id="loginId" placeholder="Enter ID">
       <input type="password" id="loginPass" placeholder="Enter Password">
 
-      <button class="btn" onclick="login()">Login</button>
+      <button class="btn login-main-btn" onclick="login()">Login</button>
     </div>
 
-  </div>
-</section>
-
-<section id="dashboard" class="dashboard">
-  <h2 class="title">USTM NCC Internal Dashboard</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Daily Orders</h3>
-      <div class="notice">
-        Reporting Time: 0900 hrs<br>
-        Venue: Basketball Ground / I-Block<br>
-        Dress Code: NCC Track Pant + DM Boots
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Cadet Essentials</h3>
-      <p>
-        Drill commands, NCC history, rank structure, camp rules,
-        discipline instructions and attendance updates.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Training Materials</h3>
-      <p>
-        Map reading, weapon training theory, leadership, personality development
-        and NCC written exam preparation.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Announcements</h3>
-      <p>
-        Important notices from ANO, PI staff and senior cadets will be updated here.
-      </p>
-    </div>
   </div>
 </section>
 
@@ -379,7 +568,10 @@ function registerCadet(){
   }
 
   localStorage.setItem("cadet_" + id, pass);
-  alert("Cadet registered successfully");
+  localStorage.setItem("activeCadetId", id);
+
+  alert("Cadet registered successfully. Opening cadet dashboard.");
+  window.location.href = "cadet-dashboard.html";
 }
 
 function registerANO(){
@@ -399,7 +591,8 @@ function registerANO(){
   }
 
   localStorage.setItem("ano_" + id, pass);
-  alert("ANO registered successfully");
+  alert("ANO registered successfully. Please login to open ANO admin dashboard.");
+  showForm("loginForm", document.querySelectorAll(".tabs button")[2]);
 }
 
 function login(){
@@ -410,17 +603,18 @@ function login(){
   const savedPass = localStorage.getItem(type + "_" + id);
 
   if(savedPass === pass){
-    alert("Login successful");
-    document.getElementById("dashboard").style.display = "block";
-    document.getElementById("dashboard").scrollIntoView({behavior:"smooth"});
+    if(type === "cadet"){
+      localStorage.setItem("activeCadetId", id);
+      window.location.href = "cadet-dashboard.html";
+    }
+
+    if(type === "ano"){
+      localStorage.setItem("activeAnoId", id);
+      window.location.href = "ano-dashboard.html";
+    }
   }else{
     alert("Invalid ID or password");
   }
-}
-
-function logout(){
-  document.getElementById("dashboard").style.display = "none";
-  alert("Logged out successfully");
 }
 </script>
 
