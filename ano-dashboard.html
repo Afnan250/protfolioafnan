@@ -327,7 +327,9 @@ footer{
     <h3>Mark Cadet as Passout</h3>
     <p>Passout cadets will receive a respectful legacy message on login.</p>
 
-    <input type="text" id="passoutCadetId" placeholder="Enter Cadet ID">
+    <select id="passoutYear">
+    <option value="">Select Registered Year</option>
+</select>
 
     <button onclick="markPassout()">Mark Passout</button>
   </div>
@@ -485,6 +487,22 @@ function showGalleryCount(){
 
 function logoutANO(){
   localStorage.removeItem("activeAnoId");
+}
+  function loadBatchYears(){
+
+    const yearSelect = document.getElementById("passoutYear");
+
+    const currentYear = new Date().getFullYear();
+
+    for(let year = 2026; year <= currentYear + 10; year++){
+
+        const option = document.createElement("option");
+
+        option.value = year;
+        option.textContent = year + " Batch";
+
+        yearSelect.appendChild(option);
+    }
 }
 </script>
 
