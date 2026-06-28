@@ -48,12 +48,16 @@ header {
 .logo {
   font-size: 25px;
   font-weight: 800;
+  color: #fff;
+}
+
+.logo strong {
+  color: #fff;
 }
 
 .logo span {
   color: var(--blue);
   text-shadow: 0 0 12px var(--blue), 0 0 30px var(--blue);
-  animation: logoGlow 2s infinite alternate;
 }
 
 @keyframes logoGlow {
@@ -291,7 +295,9 @@ section {
   margin-bottom: 25px;
 }
 
-.feedback-buttons a {
+.feedback-buttons button {
+  border: none;
+  cursor: pointer;
   display: inline-block;
   padding: 14px 28px;
   margin: 10px;
@@ -300,17 +306,7 @@ section {
   transition: 0.3s;
 }
 
-.like-btn {
-  background: var(--blue);
-  color: #111;
-}
-
-.dislike-btn {
-  background: var(--orange);
-  color: white;
-}
-
-.feedback-buttons a:hover {
+.feedback-buttons button:hover {
   transform: scale(1.08);
 }
 
