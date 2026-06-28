@@ -654,10 +654,10 @@ footer{
 </section>
 
 <section id="gallery">
-  <h2 class="title">Gallery</h2>
-  <p class="subtitle">Moments from USTM NCC activities.</p>
+  <h2 class="title">USTM NCC Gallery</h2>
+  <p class="subtitle">Cadet achievements and NCC activities.</p>
 
-  <div class="gallery">
+  <div class="gallery" id="mainGallery">
     <img src="ncc1.jpeg" alt="NCC Activity">
     <img src="ustmncclogo.jpeg" alt="NCC Gallery">
     <img src="ncc3.jpeg" alt="USTM NCC Logo">
@@ -704,11 +704,6 @@ footer{
 
         <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
         <input type="password" id="registerPass" placeholder="Create Password">
-
-        <p class="note" id="formatNote">
-          Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME
-        </p>
-
         <button class="btn login-main-btn" onclick="registerUser()">Register</button>
 
         <p class="switch-text">
@@ -841,6 +836,21 @@ function login(){
     flipToRegister();
   }
 }
+  function loadMainGallery(){
+  const gallery = document.getElementById("mainGallery");
+
+  const uploadedPhotos =
+    JSON.parse(localStorage.getItem("mainGalleryPhotos")) || [];
+
+  uploadedPhotos.forEach(item => {
+    const img = document.createElement("img");
+    img.src = item.photo;
+    img.alt = "Cadet Achievement";
+    gallery.appendChild(img);
+  });
+}
+
+loadMainGallery();
 </script>
 
 </body>
