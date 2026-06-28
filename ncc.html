@@ -227,7 +227,9 @@ section{
   url("ncc2.jpg");
   background-size:cover;
   background-position:center;
-  perspective:1200px;
+
+  position:relative;
+  overflow:hidden;
 }
 
 .login-section .title,
@@ -425,6 +427,138 @@ footer{
     width:100%;
   }
 }
+  /* NCC Tricolor Background Animation */
+
+.tricolor-bg{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:1200px;
+    height:500px;
+    z-index:0;
+    pointer-events:none;
+}
+
+/* SAFFRON - TOP */
+.tricolor-bg::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:120px;
+    top:40px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #FF9933,
+        transparent
+    );
+
+    filter:blur(50px);
+
+    animation:saffronWave 6s ease-in-out infinite;
+}
+
+/* GREEN - BOTTOM */
+.tricolor-bg::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:120px;
+    bottom:40px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #138808,
+        transparent
+    );
+
+    filter:blur(50px);
+
+    animation:greenWave 6s ease-in-out infinite reverse;
+}
+
+/* WHITE - CENTER */
+.login-section::before{
+    content:"";
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:1000px;
+    height:100px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.95),
+        transparent
+    );
+
+    filter:blur(40px);
+
+    animation:whiteWave 5s ease-in-out infinite;
+
+    z-index:0;
+}
+
+.flip-wrapper{
+    position:relative;
+    z-index:5;
+}
+
+@keyframes saffronWave{
+
+    0%{
+        transform:translateX(-100px);
+    }
+
+    50%{
+        transform:translateX(100px);
+    }
+
+    100%{
+        transform:translateX(-100px);
+    }
+}
+
+@keyframes greenWave{
+
+    0%{
+        transform:translateX(100px);
+    }
+
+    50%{
+        transform:translateX(-100px);
+    }
+
+    100%{
+        transform:translateX(100px);
+    }
+}
+
+@keyframes whiteWave{
+
+    0%{
+        transform:translate(-50%,-50%) scaleX(.8);
+        opacity:.6;
+    }
+
+    50%{
+        transform:translate(-50%,-50%) scaleX(1.1);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(-50%,-50%) scaleX(.8);
+        opacity:.6;
+    }
+}
 </style>
 </head>
 
@@ -437,7 +571,7 @@ footer{
 
 <header>
   <div class="logo-box">
-    <img src="ustmncclogo.png" alt="USTM NCC Logo">
+    <img src="ncc2.jpeg" alt="USTM NCC Logo">
     <div class="logo-text">
       <h2>USTM NCC</h2>
       <p>Unity and Discipline</p>
@@ -498,7 +632,6 @@ footer{
   <h2 class="title">Notice Board</h2>
   <p class="subtitle">Public updates and announcements.</p>
 
-  <div class="notice"><b>Parade:</b> Reporting details will be shared through official NCC communication.</div>
   <div class="notice"><b>Enrollment:</b> New enrollment updates will be informed by the NCC office.</div>
   <div class="notice"><b>Camp Selection:</b> Selected cadets must follow instructions from ANO and PI Staff.</div>
 </section>
@@ -508,16 +641,16 @@ footer{
   <p class="subtitle">Moments from USTM NCC activities.</p>
 
   <div class="gallery">
-    <img src="ncc1.jpg" alt="NCC Activity">
-    <img src="ncc2.jpg" alt="NCC Gallery">
-    <img src="ustmncclogo.png" alt="USTM NCC Logo">
+    <img src="ncc1.jpeg" alt="NCC Activity">
+    <img src="ustmncclogo.jpeg" alt="NCC Gallery">
+    <img src="ncc3.jpeg" alt="USTM NCC Logo">
   </div>
 </section>
 
 <section class="login-section" id="login">
   <h2 class="title">Cadet / ANO Access</h2>
   <p class="subtitle">Login first. New user? Flip the card and register.</p>
-
+  <div class="tricolor-bg"></div>
   <div class="flip-wrapper" id="flipCard">
 
     <!-- LOGIN SIDE -->
@@ -558,10 +691,6 @@ footer{
         <input type="text" id="registerId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
         <input type="password" id="registerPass" placeholder="Create Password">
 
-        <p class="note" id="formatNote">
-          Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME
-        </p>
-
         <button class="btn login-main-btn" onclick="registerUser()">Register</button>
 
         <p class="switch-text">
@@ -575,7 +704,7 @@ footer{
   </div>
 </section>
 <footer>
-  © 2026 USTM NCC | 42 MEGH BN NCC
+  © 2026 USTM NCC
 </footer>
 
 <script>
