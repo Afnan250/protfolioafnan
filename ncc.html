@@ -424,6 +424,70 @@ section{
   100%{transform:translate(-50%,-50%) scaleX(.8);opacity:.6;}
 }
 
+  .social-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:22px;
+    margin-top:40px;
+}
+
+.social-card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    color:#071a3d;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.social-card:hover{
+    transform:translateY(-8px);
+}
+
+.social-card i{
+    font-size:38px;
+}
+
+.social-card h3{
+    margin-bottom:5px;
+    font-size:20px;
+}
+
+.social-card p{
+    color:#666;
+    font-size:14px;
+}
+
+/* Instagram */
+.instagram{
+    border-left:5px solid #E1306C;
+}
+
+.instagram i{
+    color:#E1306C;
+}
+
+/* Facebook */
+.facebook{
+    border-left:5px solid #1877F2;
+}
+
+.facebook i{
+    color:#1877F2;
+}
+
+/* WhatsApp */
+.whatsapp{
+    border-left:5px solid #25D366;
+}
+
+.whatsapp i{
+    color:#25D366;
+}
+  
 footer{
   background:#071a3d;
   color:white;
@@ -650,6 +714,37 @@ footer{
 </section>
 
 <footer>
+  <section id="social">
+  <h2 class="title">Connect With USTM NCC</h2>
+
+  <div class="social-grid">
+
+    <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ==" target="_blank" class="social-card instagram">
+      <i class="fab fa-instagram"></i>
+      <div>
+        <h3>Instagram</h3>
+        <p>@ustmncc_warriors</p>
+      </div>
+    </a>
+
+    <a href="https://www.facebook.com/share/1BdKmMqtJk/" target="_blank" class="social-card facebook">
+      <i class="fab fa-facebook-f"></i>
+      <div>
+        <h3>Facebook</h3>
+        <p>USTM NCC Official</p>
+      </div>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank" class="social-card whatsapp">
+      <i class="fab fa-whatsapp"></i>
+      <div>
+        <h3>WhatsApp Channel</h3>
+        <p>Join Official NCC Updates</p>
+      </div>
+    </a>
+
+  </div>
+</section>
   © 2026 USTM NCC
 </footer>
 
