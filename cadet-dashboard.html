@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cadet Dashboard | USTM NCC</title>
+
+<link rel="stylesheet" href="cadetdashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+  <div class="brand">
+    <div class="logo-circle">
+      <img src="ncc2.jpeg" alt="USTM NCC Logo">
+    </div>
+
+    <div>
+      <h2>USTM NCC</h2>
+      <p>Cadet Dashboard</p>
+    </div>
+  </div>
+
+  <a href="ncc.html" class="logout-btn" onclick="logoutCadet()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
+  </a>
+
+</header>
+
+<section class="hero">
+  <h1>Welcome, Cadet</h1>
+  <p id="cadetIdText">Loading Cadet ID...</p>
+</section>
+
+<section class="profile-card">
+
+  <div class="profile-photo">
+    <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+  </div>
+
+  <div class="profile-details">
+    <h2 id="cadetName">Cadet Name</h2>
+    <p id="cadetRank">Rank: Cadet</p>
+    <p id="cadetWing">Wing: SD / SW</p>
+    <p id="cadetService">Status: Active</p>
+
+    <label class="upload-btn">
+      Upload Uniform Photo
+      <input type="file" id="photoUpload" accept="image/*" hidden>
+    </label>
+
+    <p class="photo-rule">
+      Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
+    </p>
+  </div>
+
+</section>
+
+<main class="dashboard">
+
+  <div class="card notice-card">
+    <i class="fa-solid fa-bullhorn"></i>
+    <h3 id="noticeTitle">No Notice Available</h3>
+    <p id="noticeContent">Waiting for updates from ANO or Senior In-Charge.</p>
+    <small id="noticeBy"></small>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-user"></i>
+    <h3>My Profile</h3>
+    <p>View your registered cadet ID, rank, wing, enrollment year and service status.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-calendar-check"></i>
+    <h3>Attendance</h3>
+    <p>View parade, class, camp and event attendance records.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-campground"></i>
+    <h3>Camp Updates</h3>
+    <p>Get updates for CATC, RDC, TSC, EBSB, trekking and other NCC camps.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-book-open"></i>
+    <h3>Training Materials</h3>
+    <p>Access drill, map reading, NCC history, leadership and personality development materials.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-medal"></i>
+    <h3>Achievements</h3>
+    <p>View achievements, selections, certificates, awards and participation records.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-image"></i>
+    <h3>Gallery</h3>
+    <p>Explore photos from parades, camps, social service, events and adventure activities.</p>
+  </div>
+
+  <div class="card">
+    <i class="fa-solid fa-phone"></i>
+    <h3>Important Contacts</h3>
+    <p>Contact ANO, Senior In-Charge, PI Staff and NCC office for official help.</p>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 USTM NCC | 42 MEGH BN NCC
+</footer>
+
+<script src="cadetdashboard.js"></script>
+
+</body>
+</html>
