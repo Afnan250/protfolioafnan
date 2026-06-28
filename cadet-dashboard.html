@@ -1,65 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadet Dashboard | USTM NCC</title>
 
-<title>Cadet Dashboard | USTM NCC</title>
-
-<link rel="stylesheet" href="cadetdashboard.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="cadet-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
-
 <body>
 
 <header class="top-header">
 
-  <div class="brand">
-    <div class="logo-circle">
-      <img src="ncc2.jpeg" alt="USTM NCC Logo">
-    </div>
+  <div class="cadet-brand">
+    <img id="headerCadetPhoto" src="default-cadet.png" alt="Cadet Photo">
 
     <div>
-      <h2>USTM NCC</h2>
-      <p>Cadet Dashboard</p>
+      <h2 id="headerCadetName">Cadet Name</h2>
+      <p id="headerCadetRank">Rank: Cadet</p>
     </div>
   </div>
 
   <a href="ncc.html" class="logout-btn" onclick="logoutCadet()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Logout
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
   </a>
 
 </header>
 
 <section class="hero">
-  <h1>Welcome, Cadet</h1>
-  <p id="cadetIdText">Loading Cadet ID...</p>
+  <div class="hero-overlay">
+
+    <div class="cadet-profile">
+
+      <div class="photo-box">
+        <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+
+        <label class="upload-btn">
+          Upload Photo
+          <input type="file" id="photoUpload" accept="image/*" hidden>
+        </label>
+      </div>
+
+      <div class="cadet-info">
+        <h1 id="cadetName">Cadet Name</h1>
+        <p id="cadetIdText">Cadet ID loading...</p>
+
+        <div class="info-row">
+          <span id="cadetRank">Rank: Cadet</span>
+          <span>Wing: Army Wing</span>
+          <span id="cadetStatus">Status: Active</span>
+        </div>
+
+        <div class="service-select">
+          <label for="serviceYear">Service Year:</label>
+
+          <select id="serviceYear">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+          </select>
+        </div>
+
+        <p class="photo-rule">
+          Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
-<section class="profile-card">
-
-  <div class="profile-photo">
-    <img id="cadetPhoto" src="default-cadet.png" alt="Cadet Photo">
+<section class="stats">
+  <div class="stat-box">
+    <h2>Army</h2>
+    <p>Wing</p>
   </div>
 
-  <div class="profile-details">
-    <h2 id="cadetName">Cadet Name</h2>
-    <p id="cadetRank">Rank: Cadet</p>
-    <p id="cadetWing">Wing: SD / SW</p>
-    <p id="cadetService">Status: Active</p>
-
-    <label class="upload-btn">
-      Upload Uniform Photo
-      <input type="file" id="photoUpload" accept="image/*" hidden>
-    </label>
-
-    <p class="photo-rule">
-      Uniform photo only. No beret, no cap, plain background, passport-size style photograph.
-    </p>
+  <div class="stat-box">
+    <h2 id="rankStat">Cadet</h2>
+    <p>Rank</p>
   </div>
 
+  <div class="stat-box">
+    <h2 id="yearStat">1st</h2>
+    <p>Service Year</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>Active</h2>
+    <p>Status</p>
+  </div>
 </section>
 
 <main class="dashboard">
@@ -74,7 +106,7 @@
   <div class="card">
     <i class="fa-solid fa-user"></i>
     <h3>My Profile</h3>
-    <p>View your registered cadet ID, rank, wing, enrollment year and service status.</p>
+    <p>View your registered cadet ID, rank, army wing, service year and status.</p>
   </div>
 
   <div class="card">
@@ -110,7 +142,18 @@
   <div class="card">
     <i class="fa-solid fa-phone"></i>
     <h3>Important Contacts</h3>
-    <p>Contact ANO, Senior In-Charge, PI Staff and NCC office for official help.</p>
+    <p>Select ANO or Senior In-Charge contact.</p>
+
+    <select id="contactSelect" onchange="showContact()">
+      <option value="">-- Select Contact --</option>
+      <option value="ano1">ANO - Lt. Rizaul Karim Ahmed</option>
+      <option value="ano2">ANO - Lt. Dr. Fahmida S. Bora</option>
+      <option value="senior">Senior In-Charge - Sgt. Afnan Al Jedid</option>
+    </select>
+
+    <div id="contactInfo" class="contact-info">
+      <p>Select a contact from the dropdown.</p>
+    </div>
   </div>
 
 </main>
@@ -119,7 +162,7 @@
   © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
 
-<script src="cadetdashboard.js"></script>
+<script src="cadet-dashboard.js"></script>
 
 </body>
 </html>
