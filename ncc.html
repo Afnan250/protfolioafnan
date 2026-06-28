@@ -822,7 +822,16 @@ if(type === "ano"){
 
   const savedPass = localStorage.getItem("cadet_" + id);
   const cadetStatus = localStorage.getItem("cadetStatus_" + id);
-
+const cadetParts = id.split("/");
+const registeredYear = parseInt(cadetParts[1]);
+const currentYear = new Date().getFullYear();
+if(currentYear - registeredYear >= 3){
+  alert(
+    "Thank you for your dedicated service to USTM NCC. Your dedication, discipline, and leadership have contributed greatly to the growth of our unit. The new generation of cadets is now carrying forward the legacy built by senior cadets like you. We wish you success in all your future endeavors. Jai Hind."
+  );
+  return;
+}
+  
   if(cadetStatus === "completed"){
     alert(
       "Thank you for your dedicated service to USTM NCC. Your commitment, discipline, and leadership have helped guide the next generation of cadets. The legacy you built is now being carried forward by new cadets. We wish them strength, success, and honour as they continue this journey. Jai Hind."
