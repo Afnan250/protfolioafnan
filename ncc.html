@@ -806,16 +806,20 @@ function login(){
   const id = document.getElementById("loginId").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
 
-  if(type === "ano"){
-    if(id === "ANO001" && pass === "USTMNCC@Admin2026"){
-      localStorage.setItem("activeAnoId", "ANO001");
-      alert("Welcome ANO");
-      window.location.href = "ano-dashboard.html";
-    }else{
-      alert("Invalid ANO ID or Password.");
-    }
-    return;
+if(type === "ano"){
+  const anoUser = "ANO001";
+  const anoPass = "USTMNCC@Admin2026";
+
+  if(id.trim() === anoUser && pass.trim() === anoPass){
+    localStorage.setItem("activeAnoId", anoUser);
+    alert("Welcome ANO");
+    window.location.href = "ano-dashboard.html";
+  }else{
+    alert("Invalid ANO ID or Password.");
   }
+
+  return;
+}
 
   const savedPass = localStorage.getItem("cadet_" + id);
   const cadetStatus = localStorage.getItem("cadetStatus_" + id);
