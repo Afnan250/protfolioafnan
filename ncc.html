@@ -227,6 +227,7 @@ section{
   url("ncc2.jpg");
   background-size:cover;
   background-position:center;
+  perspective:1200px;
 }
 
 .login-section .title,
@@ -234,10 +235,38 @@ section{
   color:white;
 }
 
-.login-glass{
+.flip-wrapper{
   max-width:880px;
+  min-height:470px;
   margin:auto;
-  padding:34px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .8s ease;
+}
+
+.flip-wrapper.flip{
+  transform:rotateY(180deg);
+}
+
+.flip-side{
+  position:absolute;
+  width:100%;
+  min-height:470px;
+  backface-visibility:hidden;
+}
+
+.flip-front{
+  transform:rotateY(0deg);
+}
+
+.flip-back{
+  transform:rotateY(180deg);
+}
+
+.login-glass{
+  width:100%;
+  min-height:470px;
+  padding:36px;
   border-radius:28px;
   background:rgba(255,255,255,.13);
   border:1px solid rgba(255,255,255,.28);
@@ -258,56 +287,11 @@ section{
   }
 }
 
-.tabs{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-bottom:28px;
-}
-
-.tabs button{
-  padding:13px 24px;
-  border:none;
-  border-radius:50px;
-  background:rgba(255,255,255,.16);
+.login-glass h3{
   color:white;
-  font-weight:700;
-  cursor:pointer;
-  transition:.35s;
-  border:1px solid rgba(255,255,255,.25);
-}
-
-.tabs button.active{
-  background:#ff9933;
-  color:#071a3d;
-}
-
-.form{
-  display:none;
-  animation:formFade .5s ease;
-}
-
-.form.active{
-  display:block;
-}
-
-@keyframes formFade{
-  from{
-    opacity:0;
-    transform:translateX(25px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
-}
-
-.form h3{
-  color:white;
-  margin-bottom:18px;
   text-align:center;
-  font-size:26px;
+  margin-bottom:24px;
+  font-size:28px;
 }
 
 .login-glass input,
@@ -331,6 +315,30 @@ section{
   color:black;
 }
 
+.login-main-btn{
+  width:100%;
+  border-radius:50px;
+  margin-top:12px;
+  transition:.35s;
+}
+
+.login-main-btn:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 30px rgba(255,153,51,.35);
+}
+
+.switch-text{
+  text-align:center;
+  margin-top:22px;
+  color:white;
+}
+
+.switch-text span{
+  color:#ff9933;
+  font-weight:800;
+  cursor:pointer;
+}
+
 .note{
   color:rgba(255,255,255,.85);
   font-size:14px;
@@ -338,9 +346,28 @@ section{
   text-align:center;
 }
 
-.login-main-btn{
-  width:100%;
-  border-radius:50px;
+@media(max-width:600px){
+  .login-section{
+    padding:60px 5%;
+  }
+
+  .flip-wrapper{
+    min-height:540px;
+  }
+
+  .flip-side{
+    min-height:540px;
+  }
+
+  .login-glass{
+    min-height:540px;
+    padding:26px 18px;
+    border-radius:22px;
+  }
+
+  .login-glass h3{
+    font-size:24px;
+  }
 }
 
 footer{
@@ -552,56 +579,59 @@ footer{
 </footer>
 
 <script>
-function showForm(formId, btn){
-  document.querySelectorAll(".form").forEach(form => form.classList.remove("active"));
-  document.getElementById(formId).classList.add("active");
-
-  document.querySelectorAll(".tabs button").forEach(button => button.classList.remove("active"));
-  btn.classList.add("active");
+function flipToRegister(){
+  document.getElementById("flipCard").classList.add("flip");
 }
 
-function registerCadet(){
-  const id = document.getElementById("cadetId").value.trim();
-  const pass = document.getElementById("cadetPass").value.trim();
+function flipToLogin(){
+  document.getElementById("flipCard").classList.remove("flip");
+}
 
-  const pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
+function changeRegisterType(){
+  const type = document.getElementById("registerType").value;
+  const input = document.getElementById("registerId");
+  const note = document.getElementById("formatNote");
+
+  if(type === "cadet"){
+    input.placeholder = "ML/2026/SDIA/12345/Cadet/Afnan Al Jedid";
+    note.innerText = "Format: ML/YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME";
+  }else{
+    input.placeholder = "NCC/Lt/SD/12345";
+    note.innerText = "Format: NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER";
+  }
+}
+
+function registerUser(){
+  const type = document.getElementById("registerType").value;
+  const id = document.getElementById("registerId").value.trim();
+  const pass = document.getElementById("registerPass").value.trim();
+
+  let pattern;
+
+  if(type === "cadet"){
+    pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
+  }else{
+    pattern = /^NCC\/[A-Za-z]+\/(SD|SW)\/\d{5}$/;
+  }
 
   if(!pattern.test(id)){
-    alert("Invalid Cadet ID Format");
+    alert("Invalid ID format.");
     return;
   }
 
   if(pass.length < 4){
-    alert("Password must be at least 4 characters");
+    alert("Password must be at least 4 characters.");
     return;
   }
 
-  localStorage.setItem("cadet_" + id, pass);
-  localStorage.setItem("activeCadetId", id);
+  localStorage.setItem(type + "_" + id, pass);
 
-  alert("Cadet registered successfully. Opening cadet dashboard.");
-  window.location.href = "cadet-dashboard.html";
-}
+  alert("Registration successful. Now login.");
 
-function registerANO(){
-  const id = document.getElementById("anoId").value.trim();
-  const pass = document.getElementById("anoPass").value.trim();
+  document.getElementById("loginType").value = type;
+  document.getElementById("loginId").value = id;
 
-  const pattern = /^NCC\/[A-Za-z]+\/(SD|SW)\/\d{5}$/;
-
-  if(!pattern.test(id)){
-    alert("Invalid ANO ID Format");
-    return;
-  }
-
-  if(pass.length < 4){
-    alert("Password must be at least 4 characters");
-    return;
-  }
-
-  localStorage.setItem("ano_" + id, pass);
-  alert("ANO registered successfully. Please login to open ANO admin dashboard.");
-  showForm("loginForm", document.querySelectorAll(".tabs button")[2]);
+  flipToLogin();
 }
 
 function login(){
@@ -612,6 +642,7 @@ function login(){
   const savedPass = localStorage.getItem(type + "_" + id);
 
   if(savedPass === pass){
+
     if(type === "cadet"){
       localStorage.setItem("activeCadetId", id);
       window.location.href = "cadet-dashboard.html";
@@ -621,8 +652,10 @@ function login(){
       localStorage.setItem("activeAnoId", id);
       window.location.href = "ano-dashboard.html";
     }
+
   }else{
-    alert("Invalid ID or password");
+    alert("You are not registered. Please register first.");
+    flipToRegister();
   }
 }
 </script>
