@@ -3,753 +3,426 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>USTM NCC</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<title>USTM NCC | 42 MEGH BN NCC</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial,sans-serif;
 }
 
 body{
-    background:#061f3a;
-    color:white;
+  background:#0b0f14;
+  color:#f5f5f5;
 }
 
-/* NAVBAR */
-
-.navbar{
-    width:100%;
-    padding:16px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#061f3a;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 20px rgba(0,0,0,.35);
+header{
+  padding:18px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#101820;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.logo{
+  font-size:24px;
+  font-weight:800;
+  color:#ff7a18;
 }
 
-.logo-area img{
-    width:70px;
-    height:70px;
-    object-fit:contain;
+nav a, nav button{
+  margin-left:18px;
+  color:white;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:15px;
+  text-decoration:none;
 }
 
-.logo-area h1{
-    font-size:30px;
-    font-weight:900;
+nav a:hover, nav button:hover{
+  color:#ff7a18;
 }
 
-.logo-area h1 span{
-    color:#ff7a00;
+section{
+  padding:70px 8%;
 }
-
-.logo-area p{
-    font-size:14px;
-    color:#ddd;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    margin-left:26px;
-    font-weight:800;
-    font-size:15px;
-}
-
-.nav-links a:hover{
-    color:#ff7a00;
-}
-
-/* HERO */
 
 .hero{
-    min-height:88vh;
-    padding:80px 7%;
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    align-items:center;
-    gap:40px;
-    background:
-    linear-gradient(rgba(4,24,45,.65),rgba(4,24,45,.95)),
-    url("indian-flag.jpg");
-    background-size:cover;
-    background-position:center;
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:35px;
+  background:linear-gradient(135deg,#0b0f14,#13202c);
 }
 
-.hero-logo{
-    width:190px;
-    margin-bottom:25px;
+.hero-text{
+  max-width:650px;
 }
 
-.hero h2{
-    font-size:56px;
-    font-weight:900;
-    line-height:1.1;
-}
-
-.hero h2 span{
-    display:block;
-    color:#ff7a00;
-    font-size:64px;
-}
-
-.tricolor{
-    display:flex;
-    margin:20px 0;
-}
-
-.tricolor span{
-    width:95px;
-    height:6px;
-}
-
-.orange{
-    background:#ff7a00;
-}
-
-.white{
-    background:white;
-}
-
-.green{
-    background:#18a84f;
+.hero h1{
+  font-size:52px;
+  color:#ff7a18;
+  margin-bottom:18px;
 }
 
 .hero p{
-    max-width:620px;
-    font-size:18px;
-    line-height:1.7;
-    color:#f1f5f9;
+  color:#d6d6d6;
+  margin-bottom:25px;
+  font-size:18px;
 }
 
 .btn{
-    display:inline-block;
-    margin-top:25px;
-    padding:14px 28px;
-    border:2px solid white;
-    border-radius:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:800;
+  display:inline-block;
+  padding:13px 26px;
+  border-radius:8px;
+  background:#ff7a18;
+  color:#111;
+  font-weight:700;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
 }
 
-.btn:hover{
-    background:white;
-    color:#061f3a;
-}
-
-/* RIGHT LOGO CARD */
-
-.ustm-card{
-    background:transparent;
-    border:none;
-    text-align:center;
-    padding:20px;
-}
-
-.ustm-card img{
-    width:280px;
-    height:280px;
-    object-fit:contain;
-    background:white;
-    border-radius:50%;
-    padding:12px;
-    border:6px solid white;
-
-    box-shadow:
-    0 0 15px rgba(255,255,255,.8),
-    0 0 30px rgba(255,255,255,.7),
-    0 0 60px rgba(255,255,255,.6);
-
-    margin-bottom:25px;
-}
-
-.ustm-card h3{
-    font-size:48px;
-    font-weight:900;
-    color:white;
-    margin-bottom:18px;
-}
-
-.title-line{
-    display:flex;
-    justify-content:center;
-    margin-bottom:20px;
-}
-
-.title-line span{
-    width:80px;
-    height:5px;
-}
-
-.ustm-card h4{
-    font-size:38px;
-    color:#ffd700;
-    margin-bottom:15px;
-    font-weight:900;
-}
-
-.ustm-card p{
-    font-size:24px;
-    color:white;
-    font-weight:700;
-    line-height:1.4;
-}
-/* SECTIONS */
-
-.section{
-    padding:70px 7%;
-    background:#f8fafc;
-    color:#061f3a;
-}
-
-.dark{
-    background:#061f3a;
-    color:white;
-}
-
-.section h2{
-    text-align:center;
-    font-size:34px;
-    font-weight:900;
-    margin-bottom:15px;
-}
-
-.line{
-    display:flex;
-    justify-content:center;
-    margin-bottom:35px;
-}
-
-.line span{
-    width:60px;
-    height:5px;
-}
-
-.about-text{
-    max-width:850px;
-    margin:auto;
-    text-align:center;
-    font-size:17px;
-    line-height:1.7;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-    margin-top:35px;
+.btn-outline{
+  background:transparent;
+  color:#ff7a18;
+  border:2px solid #ff7a18;
 }
 
 .card{
-    background:white;
-    color:#061f3a;
-    padding:28px;
-    border-radius:16px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
+  background:#151c24;
+  padding:25px;
+  border-radius:18px;
+  border:1px solid #26313d;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-.card i{
-    font-size:42px;
-    color:#ff7a00;
-    margin-bottom:15px;
+.title{
+  text-align:center;
+  color:#ff7a18;
+  font-size:36px;
+  margin-bottom:35px;
 }
 
-.card h3{
-    margin-bottom:10px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
 }
 
-.dark .card{
-    background:#092d52;
-    color:white;
-    border:1px solid rgba(255,255,255,.15);
+.login-box{
+  max-width:760px;
+  margin:auto;
 }
 
-.achievement-box{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:35px;
-    align-items:center;
+.tabs{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-bottom:25px;
+  flex-wrap:wrap;
 }
 
-.achievement-box ul{
-    list-style:none;
+.tabs button{
+  padding:12px 24px;
+  border:none;
+  border-radius:8px;
+  background:#1f2a36;
+  color:white;
+  cursor:pointer;
 }
 
-.achievement-box li{
-    margin-bottom:15px;
-    font-size:17px;
+.tabs button.active{
+  background:#ff7a18;
+  color:#111;
+  font-weight:700;
 }
 
-.achievement-box li i{
-    color:#18a84f;
-    margin-right:10px;
+.form{
+  display:none;
 }
 
-/* GALLERY */
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.form.active{
+  display:block;
 }
 
-.gallery img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-    border-radius:14px;
-    border:3px solid white;
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
-    background:white;
+input, select{
+  width:100%;
+  padding:13px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  background:#0b0f14;
+  color:white;
+  border:1px solid #334155;
 }
 
-/* CONNECT SECTION */
-
-.connect-container{
-    display:flex;
-    justify-content:space-evenly;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    gap:35px;
+.dashboard{
+  display:none;
 }
 
-.social-link{
-    width:220px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    text-align:center;
+.notice{
+  background:#0f172a;
+  border-left:5px solid #ff7a18;
+  padding:18px;
+  margin-bottom:18px;
+  border-radius:10px;
 }
-
-.social-link i{
-    font-size:52px;
-    margin-bottom:15px;
-    display:block;
-}
-
-.social-link a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    font-size:23px;
-    font-weight:900;
-    margin-bottom:8px;
-    text-align:center;
-}
-
-.social-link a:hover{
-    color:#ff7a00;
-}
-
-.social-link p{
-    color:#dce7f3;
-    font-size:16px;
-    word-break:break-word;
-    text-align:center;
-    line-height:1.4;
-}
-
-/* Social Icon Colors */
-
-.fa-instagram{
-    color:#E1306C;
-}
-
-.fa-facebook-f{
-    color:#1877F2;
-}
-
-.fa-whatsapp{
-    color:#25D366;
-}
-
-.fa-envelope{
-    color:#EA4335;
-}
-
-/* Hover Effect */
-
-.social-link:hover i{
-    transform:scale(1.1);
-    transition:0.3s ease;
-}
-/* FOOTER */
 
 footer{
-    background:#04182d;
-    padding:25px 20px 55px;
+  text-align:center;
+  padding:25px;
+  background:#07090c;
+  color:#aaa;
+}
+
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav{
     text-align:center;
-    color:white;
-}
+  }
 
-/* MARQUEE */
-
-.marquee{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:linear-gradient(
-        to right,
-        #ff9933 0%,
-        #ff9933 33.33%,
-        #ffffff 33.33%,
-        #ffffff 66.66%,
-        #138808 66.66%,
-        #138808 100%
-    );
-    color:#061f3a;
-    font-weight:900;
-    padding:10px 0;
-    overflow:hidden;
-    z-index:1000;
-    border-top:2px solid white;
-}
-
-.marquee span{
+  nav a, nav button{
+    margin:8px;
     display:inline-block;
-    white-space:nowrap;
-    padding-left:100%;
-    animation:moveText 18s linear infinite;
-}
+  }
 
-@keyframes moveText{
-    0%{
-        transform:translateX(0);
-    }
+  .hero{
+    text-align:center;
+    flex-direction:column;
+  }
 
-    100%{
-        transform:translateX(-100%);
-    }
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-    .navbar{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .nav-links a{
-        margin:8px;
-        display:inline-block;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero-logo{
-        margin:auto auto 25px;
-    }
-
-    .tricolor{
-        justify-content:center;
-    }
-
-    .achievement-box{
-        grid-template-columns:1fr;
-    }
-
-    .hero h2{
-        font-size:40px;
-    }
-
-    .hero h2 span{
-        font-size:48px;
-    }
-
-    .connect-container{
-        flex-direction:column;
-    }
-}
-
-@media(max-width:600px){
-    .logo-area h1{
-        font-size:22px;
-    }
-
-    .hero h2{
-        font-size:32px;
-    }
-
-    .hero h2 span{
-        font-size:40px;
-    }
-
-    .ustm-card img{
-        width:190px;
-        height:190px;
-    }
-
-    .section h2{
-        font-size:28px;
-    }
+  .hero h1{
+    font-size:36px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-    <div class="logo-area">
-        <img src="ncc-logo.png" alt="NCC Logo">
-        <div>
-            <h1>USTM <span>NCC</span></h1>
-            <p>Unity • Discipline • Leadership</p>
-        </div>
-    </div>
+<header>
+  <div class="logo">USTM NCC</div>
 
-    <div class="nav-links">
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#activities">ACTIVITIES</a>
-        <a href="#camps">CAMPS</a>
-        <a href="#gallery">GALLERY</a>
-        <a href="#contact">CONTACT</a>
-    </div>
-</nav>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#public">About</a>
+    <a href="#login">Login/Register</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+</header>
 
 <section class="hero" id="home">
-    <div>
-        <img src="ncc-logo.png" class="hero-logo" alt="NCC Logo">
-
-        <h2>42 MEGH BN NCC <span>JOURNEY</span></h2>
-
-        <div class="tricolor">
-            <span class="orange"></span>
-            <span class="white"></span>
-            <span class="green"></span>
-        </div>
-
-        <p>
-            USTM NCC is dedicated to developing discipline, leadership, courage, teamwork and service among cadets.
-            It inspires students to become responsible citizens and confident leaders.
-        </p>
-
-        <a href="index.html" class="btn">
-            <i class="fa-solid fa-arrow-left"></i> BACK TO PORTFOLIO
-        </a>
-    </div>
-
-    <div class="ustm-card">
-     <img src="ncc2.jpeg" alt="USTM NCC Logo">
-    <h4>USTM NCC UNIT</h4>
-
-    <div class="title-line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
-    </div>
-
-    <h3>42 MEGH BN NCC</h3>
-
+  <div class="hero-text">
+    <h1>Welcome to USTM NCC</h1>
     <p>
-        UNIVERSITY OF SCIENCE <br>
-        AND TECHNOLOGY MEGHALAYA
-    </p>
-</div>
-</section>
-
-<section class="section" id="about">
-    <h2>ABOUT USTM NCC</h2>
-
-    <div class="line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
-    </div>
-
-    <p class="about-text">
-        NCC at USTM aims to build disciplined, responsible and confident youth.
-        It provides cadets a platform to grow through training, adventure, social service,
-        teamwork and national integration.
+      Discipline, Unity, Leadership and Service.  
+      This is the official promotional page for USTM NCC under 42 MEGH BN NCC.
     </p>
 
-    <div class="grid">
-        <div class="card">
-            <i class="fa-solid fa-people-group"></i>
-            <h3>Unity</h3>
-            <p>Working together as one team.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Discipline</h3>
-            <p>The foundation of success.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-person-hiking"></i>
-            <h3>Leadership</h3>
-            <p>Leading with courage and confidence.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-            <h3>Service</h3>
-            <p>Serving society and nation selflessly.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-bullseye"></i>
-            <h3>Commitment</h3>
-            <p>Dedicated to duty and institution.</p>
-        </div>
-    </div>
+    <a href="#public" class="btn">Explore</a>
+    <a href="#login" class="btn btn-outline">Cadet / ANO Login</a>
+  </div>
 </section>
 
-<section class="section dark" id="activities">
-    <h2>OUR RESPONSIBILITIES</h2>
+<section id="public">
+  <h2 class="title">Public Information</h2>
 
-    <div class="line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
+  <div class="grid">
+    <div class="card">
+      <h3>About NCC</h3>
+      <p>NCC develops discipline, leadership, teamwork and national service among students.</p>
     </div>
 
-    <div class="grid">
-        <div class="card">
-            <i class="fa-solid fa-person-military-rifle"></i>
-            <h3>Drill & Parade</h3>
-            <p>Regular drill practice and parade training.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-book-open"></i>
-            <h3>Theory Classes</h3>
-            <p>NCC knowledge, discipline and leadership sessions.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-tent"></i>
-            <h3>Camps</h3>
-            <p>Participation in training and adventure camps.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-users"></i>
-            <h3>Event Management</h3>
-            <p>Managing university and NCC events.</p>
-        </div>
-
-        <div class="card">
-            <i class="fa-solid fa-handshake-angle"></i>
-            <h3>Social Service</h3>
-            <p>Community awareness and service activities.</p>
-        </div>
+    <div class="card">
+      <h3>USTM NCC</h3>
+      <p>USTM NCC participates in training, camps, social service, parades and institutional events.</p>
     </div>
+
+    <div class="card">
+      <h3>Join NCC</h3>
+      <p>Interested students can contact the NCC office or ANO for enrollment guidance.</p>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="camps">
-    <h2>CAMPS & ACHIEVEMENTS</h2>
+<section id="login">
+  <h2 class="title">Cadet / ANO Access</h2>
 
-    <div class="line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
+  <div class="card login-box">
+
+    <div class="tabs">
+      <button class="active" onclick="showForm('cadetRegister', this)">Cadet Register</button>
+      <button onclick="showForm('anoRegister', this)">ANO Register</button>
+      <button onclick="showForm('loginForm', this)">Login</button>
     </div>
 
-    <div class="achievement-box">
-        <ul>
-            <li><i class="fa-solid fa-circle-check"></i> CATC Camp Participation</li>
-            <li><i class="fa-solid fa-circle-check"></i> Trekking / Adventure Camps</li>
-            <li><i class="fa-solid fa-circle-check"></i> Firing Practice Activities</li>
-            <li><i class="fa-solid fa-circle-check"></i> Social Service & Blood Donation</li>
-            <li><i class="fa-solid fa-circle-check"></i> University Event Volunteering</li>
-            <li><i class="fa-solid fa-circle-check"></i> Leadership and Cadet Management</li>
-        </ul>
+    <div id="cadetRegister" class="form active">
+      <h3>Cadet Registration</h3>
 
-        <div class="card">
-            <i class="fa-solid fa-award"></i>
-            <h3>NCC Journey</h3>
-            <p>
-                USTM NCC continues to grow through training, discipline,
-                camp participation and service-oriented activities.
-            </p>
-        </div>
+      <input type="text" id="cadetId" placeholder="ML/2026/SDIA/12345/Cadet/Afnan Al Jedid">
+      <input type="password" id="cadetPass" placeholder="Create Password">
+
+      <button class="btn" onclick="registerCadet()">Register Cadet</button>
+
+      <p>
+        Format: <b>ML/REGISTERED YEAR/SDIA or SWIA/UNIQUE NUMBER/RANK/NAME</b>
+      </p>
     </div>
+
+    <div id="anoRegister" class="form">
+      <h3>ANO Registration</h3>
+
+      <input type="text" id="anoId" placeholder="NCC/Lt/SD/12345">
+      <input type="password" id="anoPass" placeholder="Create Password">
+
+      <button class="btn" onclick="registerANO()">Register ANO</button>
+
+      <p>
+        Format: <b>NCC/RANK/SD or SW/UNIQUE 5 DIGIT NUMBER</b>
+      </p>
+    </div>
+
+    <div id="loginForm" class="form">
+      <h3>Login</h3>
+
+      <select id="loginType">
+        <option value="cadet">Cadet</option>
+        <option value="ano">ANO</option>
+      </select>
+
+      <input type="text" id="loginId" placeholder="Enter ID">
+      <input type="password" id="loginPass" placeholder="Enter Password">
+
+      <button class="btn" onclick="login()">Login</button>
+    </div>
+
+  </div>
 </section>
 
-<section class="section" id="gallery">
-    <h2>GALLERY</h2>
+<section id="dashboard" class="dashboard">
+  <h2 class="title">USTM NCC Internal Dashboard</h2>
 
-    <div class="line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
+  <div class="grid">
+    <div class="card">
+      <h3>Daily Orders</h3>
+      <div class="notice">
+        Reporting Time: 0900 hrs<br>
+        Venue: Basketball Ground / I-Block<br>
+        Dress Code: NCC Track Pant + DM Boots
+      </div>
     </div>
 
-    <div class="gallery">
-        <img src="ncc1.jpeg" alt="USTM NCC Gallery 1">
-        <img src="ustmncclogo.jpeg" alt="USTM NCC Gallery 2">
-        <img src="ncc3.jpeg">
-    </div>
-</section>
-
-<section class="section dark" id="contact">
-    <h2>CONNECT WITH USTM NCC</h2>
-
-    <div class="line">
-        <span class="orange"></span>
-        <span class="white"></span>
-        <span class="green"></span>
+    <div class="card">
+      <h3>Cadet Essentials</h3>
+      <p>
+        Drill commands, NCC history, rank structure, camp rules,
+        discipline instructions and attendance updates.
+      </p>
     </div>
 
-    <div class="connect-container">
-
-        <div class="social-link">
-            <i class="fa-brands fa-instagram"></i>
-            <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ%3D%3D" target="_blank">ustmncc_warriors</a>
-        </div>
-
-        <div class="social-link">
-            <i class="fa-brands fa-facebook-f"></i>
-            <a href="https://www.facebook.com/people/USTM-NCC-Unit/61580434981030/?rdid=x5k94QZkvKnY5w9v&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BdKmMqtJk%2F" target="_blank">USTM NCC Unit</a>
-        </div>
-
-        <div class="social-link">
-            <i class="fa-brands fa-whatsapp"></i>
-            <a href="https://whatsapp.com/channel/0029VbAghfx9mrGWu04tYc3M" target="_blank">USTM NCC Updates</a>
-        </div>
-
-        <div class="social-link">
-    <i class="fa-solid fa-envelope"></i>
-   <a href="mailto:ustmnccwarriors@gmail.com">ustmnccwarriors@gmail.com</a>
+    <div class="card">
+      <h3>Training Materials</h3>
+      <p>
+        Map reading, weapon training theory, leadership, personality development
+        and NCC written exam preparation.
+      </p>
     </div>
+
+    <div class="card">
+      <h3>Announcements</h3>
+      <p>
+        Important notices from ANO, PI staff and senior cadets will be updated here.
+      </p>
+    </div>
+  </div>
 </section>
 
 <footer>
-    <p>© 2026 USTM NCC. All Rights Reserved.</p>
+  © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
 
-<div class="marquee">
-    <span>
-        JAI HIND • WELCOME TO USTM NCC • UNITY • DISCIPLINE • LEADERSHIP • CHARACTER • SERVICE • JAI HIND
-    </span>
-</div>
+<script>
+function showForm(formId, btn){
+  document.querySelectorAll(".form").forEach(form => form.classList.remove("active"));
+  document.getElementById(formId).classList.add("active");
+
+  document.querySelectorAll(".tabs button").forEach(button => button.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+function registerCadet(){
+  const id = document.getElementById("cadetId").value.trim();
+  const pass = document.getElementById("cadetPass").value.trim();
+
+  const pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
+
+  if(!pattern.test(id)){
+    alert("Invalid Cadet ID Format");
+    return;
+  }
+
+  if(pass.length < 4){
+    alert("Password must be at least 4 characters");
+    return;
+  }
+
+  localStorage.setItem("cadet_" + id, pass);
+  alert("Cadet registered successfully");
+}
+
+function registerANO(){
+  const id = document.getElementById("anoId").value.trim();
+  const pass = document.getElementById("anoPass").value.trim();
+
+  const pattern = /^NCC\/[A-Za-z]+\/(SD|SW)\/\d{5}$/;
+
+  if(!pattern.test(id)){
+    alert("Invalid ANO ID Format");
+    return;
+  }
+
+  if(pass.length < 4){
+    alert("Password must be at least 4 characters");
+    return;
+  }
+
+  localStorage.setItem("ano_" + id, pass);
+  alert("ANO registered successfully");
+}
+
+function login(){
+  const type = document.getElementById("loginType").value;
+  const id = document.getElementById("loginId").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+
+  const savedPass = localStorage.getItem(type + "_" + id);
+
+  if(savedPass === pass){
+    alert("Login successful");
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("dashboard").scrollIntoView({behavior:"smooth"});
+  }else{
+    alert("Invalid ID or password");
+  }
+}
+
+function logout(){
+  document.getElementById("dashboard").style.display = "none";
+  alert("Logged out successfully");
+}
+</script>
 
 </body>
 </html>
