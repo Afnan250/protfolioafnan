@@ -414,7 +414,7 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
         </select>
         <input type="text" id="loginId" placeholder="Enter ID">
         <input type="password" id="loginPass" placeholder="Enter Password">
-      <button type="button" class="btn login-main-btn" onclick="window.login()">Login</button>
+      <button type="button" class="btn login-main-btn" onclick="login()">Login</button>
         <p class="switch-text">
           Cadet not registered?
           <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
@@ -820,46 +820,54 @@ await set(ref(db,"cadets/" + key), {
   flipToLogin();
 }
 
-window.login = async function(){
-  alert("Login function started");
-
+window.login = async function () {
   const type = document.getElementById("loginType").value;
   const id = document.getElementById("loginId").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
 
-  if(type === "ano"){
-    if(id.toUpperCase() === "ANO001" && pass === "USTMNCC@Admin2026"){
-      localStorage.setItem("activeAnoId","ANO001");
-      window.location.href = "ano-dashboard.html";
-    }else{
+  if (id === "" || pass === "") {
+    alert("Please enter ID and Password.");
+    return;
+  }
+
+  if (type === "ano") {
+    if (id.toUpperCase() === "ANO001" && pass === "USTMNCC@Admin2026") {
+      localStorage.setItem("activeAnoId", "ANO001");
+      window.location.assign("./ano-dashboard.html");
+    } else {
       alert("Invalid ANO ID or Password.");
     }
     return;
   }
 
-  const key = safeKey(id);
-  const snap = await get(ref(db,"cadets/" + key));
+  try {
+    const key = safeKey(id);
+    const snap = await get(ref(db, "cadets/" + key));
 
-  if(!snap.exists()){
-    alert("Cadet not registered.");
-    return;
+    if (!snap.exists()) {
+      alert("Cadet not registered. Please register first.");
+      return;
+    }
+
+    const cadet = snap.val();
+
+    if (cadet.status === "cancelled") {
+      alert("Your NCC enrollment has been cancelled.");
+      return;
+    }
+
+    if (cadet.password === pass) {
+      localStorage.setItem("activeCadetId", id);
+      localStorage.setItem("activeCadetKey", key);
+      window.location.assign("./cadet-dashboard.html");
+    } else {
+      alert("Wrong password.");
+    }
+  } catch (error) {
+    alert("Login error. Check Firebase rules or internet connection.");
+    console.error(error);
   }
-
-  const cadet = snap.val();
-
-  if(cadet.status === "cancelled"){
-    alert("Your NCC enrollment has been cancelled by the authority.");
-    return;
-  }
-
-  if(cadet.password === pass){
-    localStorage.setItem("activeCadetId",id);
-    localStorage.setItem("activeCadetKey",key);
-    window.location.href = "cadet-dashboard.html";
-  }else{
-    alert("Wrong password.");
-  }
-}
+};
 
 onValue(ref(db,"notice"), snap=>{
   const data = snap.val();
