@@ -673,12 +673,19 @@ But the Quartermaster of Badluram’s company didn’t remove Badluram’s name 
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, set, get, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
   authDomain: "ustm-ncc-portal.firebaseapp.com",
-  databaseURL: "https://ustm-ncc-portal-default-rtdb.firebaseio.com",
   projectId: "ustm-ncc-portal",
   storageBucket: "ustm-ncc-portal.firebasestorage.app",
   messagingSenderId: "164517585348",
@@ -686,10 +693,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const db = getFirestore(app);
 
 function safeKey(id){
-  return btoa(unescape(encodeURIComponent(id))).replaceAll("=","");
+  return id.replaceAll("/", "-").replaceAll(" ", "-").toUpperCase();
 }
 
 function isRecruitmentOpen(){
@@ -722,11 +729,11 @@ function setRecruitmentUI(){
 
 window.flipToRegister = function(){
   document.getElementById("flipCard").classList.add("flip");
-}
+};
 
 window.flipToLogin = function(){
   document.getElementById("flipCard").classList.remove("flip");
-}
+};
 
 window.openJoinPopup = function(){
   document.getElementById("joinPopup").style.display = "flex";
@@ -738,11 +745,11 @@ window.openJoinPopup = function(){
     document.getElementById("joinOpenBox").style.display = "none";
     document.getElementById("joinClosedBox").style.display = "block";
   }
-}
+};
 
 window.closeJoinPopup = function(){
   document.getElementById("joinPopup").style.display = "none";
-}
+};
 
 document.getElementById("joinForm").addEventListener("submit", async function(e){
   e.preventDefault();
@@ -752,42 +759,51 @@ document.getElementById("joinForm").addEventListener("submit", async function(e)
     return;
   }
 
-  const appRef = push(ref(db,"nccApplications"));
+  try{
+    await addDoc(collection(db,"nccApplications"), {
+      name:document.getElementById("appName").value.trim(),
+      department:document.getElementById("appDepartment").value.trim(),
+      roll:document.getElementById("appRoll").value.trim(),
+      semester:document.getElementById("appSemester").value.trim(),
+      gender:document.getElementById("appGender").value,
+      mobile:document.getElementById("appMobile").value.trim(),
+      email:document.getElementById("appEmail").value.trim(),
+      height:document.getElementById("appHeight").value.trim(),
+      bloodGroup:document.getElementById("appBlood").value,
+      hostelStatus:document.getElementById("appHostel").value,
+      emergencyContact:document.getElementById("appEmergency").value.trim(),
+      aCertificate:document.getElementById("appAcer").value,
+      sportsCertificate:document.getElementById("appSports").value,
+      culturalCertificate:document.getElementById("appCultural").value,
+      medicalIssues:document.getElementById("appMedical").value.trim(),
+      skills:document.getElementById("appSkills").value.trim(),
+      reason:document.getElementById("appReason").value.trim(),
+      status:"pending",
+      submittedAt:new Date().toLocaleString()
+    });
 
-  await set(appRef,{
-    name:document.getElementById("appName").value.trim(),
-    department:document.getElementById("appDepartment").value.trim(),
-    roll:document.getElementById("appRoll").value.trim(),
-    semester:document.getElementById("appSemester").value.trim(),
-    gender:document.getElementById("appGender").value,
-    mobile:document.getElementById("appMobile").value.trim(),
-    email:document.getElementById("appEmail").value.trim(),
-    height:document.getElementById("appHeight").value.trim(),
-    bloodGroup:document.getElementById("appBlood").value,
-    hostelStatus:document.getElementById("appHostel").value,
-    emergencyContact:document.getElementById("appEmergency").value.trim(),
-    aCertificate:document.getElementById("appAcer").value,
-    sportsCertificate:document.getElementById("appSports").value,
-    culturalCertificate:document.getElementById("appCultural").value,
-    medicalIssues:document.getElementById("appMedical").value.trim(),
-    skills:document.getElementById("appSkills").value.trim(),
-    reason:document.getElementById("appReason").value.trim(),
-    status:"pending",
-    submittedAt:new Date().toLocaleString()
-  });
-
-  alert("Your NCC application has been submitted successfully. Jai Hind.");
-  document.getElementById("joinForm").reset();
-  closeJoinPopup();
+    alert("Your NCC application has been submitted successfully. Jai Hind.");
+    document.getElementById("joinForm").reset();
+    closeJoinPopup();
+  }catch(error){
+    alert("Application submit failed. Check Firestore rules.");
+    console.error(error);
+  }
 });
 
 window.registerCadet = async function(){
   const id = document.getElementById("registerId").value.trim();
   const pass = document.getElementById("registerPass").value.trim();
-  const pattern = /^ML\/\d{4}\/(SDIA|SWIA)\/\d+\/[A-Za-z ]+\/[A-Za-z ]+$/;
+
+  const pattern = /^ML[-/]\d{4}[-/](SDIA|SWIA)[-/]\d+[-/][A-Za-z ]+[-/][A-Za-z ]+$/;
+
+  if(id === "" || pass === ""){
+    alert("Please fill all fields.");
+    return;
+  }
 
   if(!pattern.test(id)){
-    alert("Invalid Cadet ID format.");
+    alert("Invalid Cadet ID format. Example: ML-2026-SDIA-12345-Cadet-Afnan Al Jedid");
     return;
   }
 
@@ -796,169 +812,102 @@ window.registerCadet = async function(){
     return;
   }
 
-  const parts = id.split("/");
-  const key = safeKey(id);
+  const cleanId = id.replaceAll("/", "-");
+  const parts = cleanId.split("-");
+  const key = safeKey(cleanId);
 
-await set(ref(db,"cadets/" + key), {
-  id:id,
-  password:pass,
-  year:parts[1],
-  wing:parts[2],
-  rank:parts[4],
-  name:parts[5],
+  try{
+    await setDoc(doc(db,"cadets",key), {
+      id:cleanId,
+      password:pass,
+      year:parts[1],
+      wing:parts[2],
+      rank:parts[4],
+      name:parts.slice(5).join(" "),
+      cadetYear:1,
+      status:"active",
+      createdAt:new Date().toLocaleString()
+    });
 
-  cadetYear: 1,
+    alert("Cadet registration successful. Now login.");
+    document.getElementById("loginType").value = "cadet";
+    document.getElementById("loginId").value = cleanId;
+    document.getElementById("loginPass").value = "";
+    flipToLogin();
+  }catch(error){
+    alert("Registration failed. Check Firestore rules.");
+    console.error(error);
+  }
+};
 
-  status:"active",
-  createdAt:new Date().toLocaleString()
-});
-
-  alert("Cadet registration successful. Now login.");
-  document.getElementById("loginType").value = "cadet";
-  document.getElementById("loginId").value = id;
-  document.getElementById("loginPass").value = "";
-  flipToLogin();
-}
-
-window.login = async function () {
+window.login = async function(){
   const type = document.getElementById("loginType").value;
-  const id = document.getElementById("loginId").value.trim();
+  const id = document.getElementById("loginId").value.trim().replaceAll("/", "-");
   const pass = document.getElementById("loginPass").value.trim();
 
-  if (id === "" || pass === "") {
+  if(id === "" || pass === ""){
     alert("Please enter ID and Password.");
     return;
   }
 
-  if (type === "ano") {
-    if (id.toUpperCase() === "ANO001" && pass === "USTMNCC@Admin2026") {
-      localStorage.setItem("activeAnoId", "ANO001");
-      window.location.assign("./ano-dashboard.html");
-    } else {
+  if(type === "ano"){
+    if(id.toUpperCase() === "ANO001" && pass === "USTMNCC@Admin2026"){
+      localStorage.setItem("activeAnoId","ANO001");
+      window.location.href = "ano-dashboard.html";
+    }else{
       alert("Invalid ANO ID or Password.");
     }
     return;
   }
 
-  try {
-    const key = safeKey(id);
-    const snap = await get(ref(db, "cadets/" + key));
+  const key = safeKey(id);
 
-    if (!snap.exists()) {
+  try{
+    const snap = await getDoc(doc(db,"cadets",key));
+
+    if(!snap.exists()){
       alert("Cadet not registered. Please register first.");
       return;
     }
 
-    const cadet = snap.val();
+    const cadet = snap.data();
 
-    if (cadet.status === "cancelled") {
+    if(cadet.status === "cancelled"){
       alert("Your NCC enrollment has been cancelled.");
       return;
     }
 
-    if (cadet.password === pass) {
-      localStorage.setItem("activeCadetId", id);
-      localStorage.setItem("activeCadetKey", key);
-      window.location.assign("./cadet-dashboard.html");
-    } else {
+    if(cadet.password === pass){
+      localStorage.setItem("activeCadetId",cadet.id);
+      localStorage.setItem("activeCadetKey",key);
+      window.location.href = "cadet-dashboard.html";
+    }else{
       alert("Wrong password.");
     }
-  } catch (error) {
-    alert("Login error. Check Firebase rules or internet connection.");
+  }catch(error){
+    alert("Login failed. Check Firestore rules.");
     console.error(error);
   }
 };
 
-onValue(ref(db,"notice"), snap=>{
-  const data = snap.val();
-  if(data){
-    document.getElementById("noticeTitle").innerText = data.title;
-    document.getElementById("noticeContent").innerText = data.content;
-    document.getElementById("noticeBy").innerText = "Published by: " + data.by + " | " + data.date;
+onSnapshot(collection(db,"notices"), snapshot=>{
+  if(snapshot.empty) return;
+
+  let latestNotice = null;
+
+  snapshot.forEach(docSnap=>{
+    latestNotice = docSnap.data();
+  });
+
+  if(latestNotice){
+    document.getElementById("noticeTitle").innerText = latestNotice.title || "Notice";
+    document.getElementById("noticeContent").innerText = latestNotice.content || "";
+    document.getElementById("noticeBy").innerText =
+      "Published by: " + (latestNotice.by || "ANO") + " | " + (latestNotice.date || "");
   }
 });
 
-onValue(ref(db,"gallery"), snap=>{
-  const gallery = document.getElementById("mainGallery");
-  if(!gallery) return;
-
-  const oldUploads = gallery.querySelectorAll(".uploaded-achievement");
-  oldUploads.forEach(img => img.remove());
-
-  let count = 0;
-
-  snap.forEach(child=>{
-    if(count >= 4) return;
-
-    const item = child.val();
-
-    if(item.url){
-      const img = document.createElement("img");
-      img.src = item.url;
-      img.alt = item.title || "Cadet Achievement";
-      img.className = "uploaded-achievement";
-      gallery.appendChild(img);
-      count++;
-    }
-  });
-});
-
 setRecruitmentUI();
-</script>
-
-<script>
-function openAudioPopup(){
-  document.getElementById("audioPopup").style.display = "flex";
-}
-
-function closeAudioPopup(){
-  document.getElementById("audioPopup").style.display = "none";
-  document.querySelectorAll("audio").forEach(audio=>{
-    audio.pause();
-    audio.currentTime = 0;
-  });
-}
-
-function showAudio(event,id){
-  document.querySelectorAll(".audio-content").forEach(content=>{
-    content.style.display = "none";
-  });
-
-  document.querySelectorAll(".tab-btn").forEach(btn=>{
-    btn.classList.remove("active");
-  });
-
-  document.querySelectorAll("audio").forEach(audio=>{
-    audio.pause();
-    audio.currentTime = 0;
-  });
-
-  document.getElementById(id).style.display = "block";
-  event.currentTarget.classList.add("active");
-}
-
-function showInfo(event,id){
-  const parent = event.currentTarget.closest(".audio-content");
-
-  parent.querySelectorAll(".info-box").forEach(box=>{
-    box.style.display = "none";
-  });
-
-  parent.querySelectorAll(".info-tab-btn").forEach(btn=>{
-    btn.classList.remove("active-info");
-  });
-
-  document.getElementById(id).style.display = "block";
-  event.currentTarget.classList.add("active-info");
-}
-
-document.getElementById("audioPopup").addEventListener("click", function(e){
-  if(e.target === this) closeAudioPopup();
-});
-
-document.getElementById("joinPopup").addEventListener("click", function(e){
-  if(e.target === this) closeJoinPopup();
-});
 </script>
 
 </body>
