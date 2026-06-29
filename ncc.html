@@ -17,12 +17,37 @@ a{text-decoration:none}
 
 .recruitment-marquee{
   display:none;
-  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+  width:100%;
+  overflow:hidden;
+  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
   color:#071a3d;
-  padding:10px;
   font-weight:800;
+  padding:10px 0;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 
+.marquee-track{
+  display:flex;
+  width:max-content;
+  animation:moveMarquee 22s linear infinite;
+  white-space:nowrap;
+}
+
+.marquee-track span{
+  padding:0 40px;
+  font-size:15px;
+}
+
+@keyframes moveMarquee{
+  from{transform:translateX(100vw)}
+  to{transform:translateX(-100%)}
+}
+
+@media(max-width:600px){
+  .marquee-track{animation-duration:16s}
+  .marquee-track span{font-size:13px;padding:0 25px}
+}
+  
 header{
   background:white;padding:14px 7%;display:flex;justify-content:space-between;align-items:center;
   box-shadow:0 4px 15px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000
@@ -267,7 +292,10 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 </div>
 
 <div class="recruitment-marquee" id="recruitmentMarquee">
-  <marquee>🇮🇳 USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</marquee>
+  <div class="marquee-track">
+    <span>USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
+    <span>USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
+  </div>
 </div>
 
 <header>
