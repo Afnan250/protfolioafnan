@@ -799,11 +799,19 @@ window.registerCadet = async function(){
   const parts = id.split("/");
   const key = safeKey(id);
 
-  await set(ref(db,"cadets/" + key), {
-    id:id,password:pass,year:parts[1],wing:parts[2],
-    rank:parts[4],name:parts[5],status:"active",
-    createdAt:new Date().toLocaleString()
-  });
+await set(ref(db,"cadets/" + key), {
+  id:id,
+  password:pass,
+  year:parts[1],
+  wing:parts[2],
+  rank:parts[4],
+  name:parts[5],
+
+  cadetYear: 1,
+
+  status:"active",
+  createdAt:new Date().toLocaleString()
+});
 
   alert("Cadet registration successful. Now login.");
   document.getElementById("loginType").value = "cadet";
