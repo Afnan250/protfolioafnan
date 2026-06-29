@@ -687,7 +687,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
   authDomain: "ustm-ncc-portal.firebaseapp.com",
   projectId: "ustm-ncc-portal",
-  storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  storageBucket: "ustm-ncc-portal.appspot.com",
   messagingSenderId: "164517585348",
   appId: "1:164517585348:web:119a2abdb1d871226ec491"
 };
@@ -908,6 +908,105 @@ onSnapshot(collection(db,"notices"), snapshot=>{
 });
 
 setRecruitmentUI();
+</script>
+
+
+<script>
+function openAudioPopup(){
+  const popup = document.getElementById("audioPopup");
+  if(popup){
+    popup.style.display = "flex";
+  }
+}
+
+function closeAudioPopup(){
+  const popup = document.getElementById("audioPopup");
+  if(popup){
+    popup.style.display = "none";
+  }
+
+  document.querySelectorAll("audio").forEach(audio=>{
+    audio.pause();
+    audio.currentTime = 0;
+  });
+}
+
+function showAudio(event,id){
+  document.querySelectorAll(".audio-content").forEach(content=>{
+    content.style.display = "none";
+  });
+
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  document.querySelectorAll("audio").forEach(audio=>{
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  const selectedAudio = document.getElementById(id);
+  if(selectedAudio){
+    selectedAudio.style.display = "block";
+  }
+
+  if(event && event.currentTarget){
+    event.currentTarget.classList.add("active");
+  }
+}
+
+function showInfo(event,id){
+  const parent = event.currentTarget.closest(".audio-content");
+
+  if(!parent){
+    return;
+  }
+
+  parent.querySelectorAll(".info-box").forEach(box=>{
+    box.style.display = "none";
+  });
+
+  parent.querySelectorAll(".info-tab-btn").forEach(btn=>{
+    btn.classList.remove("active-info");
+  });
+
+  const selectedInfo = document.getElementById(id);
+  if(selectedInfo){
+    selectedInfo.style.display = "block";
+  }
+
+  event.currentTarget.classList.add("active-info");
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  const audioPopup = document.getElementById("audioPopup");
+  const joinPopup = document.getElementById("joinPopup");
+
+  if(audioPopup){
+    audioPopup.addEventListener("click",function(e){
+      if(e.target === audioPopup){
+        closeAudioPopup();
+      }
+    });
+  }
+
+  if(joinPopup){
+    joinPopup.addEventListener("click",function(e){
+      if(e.target === joinPopup && typeof closeJoinPopup === "function"){
+        closeJoinPopup();
+      }
+    });
+  }
+
+  document.addEventListener("keydown",function(e){
+    if(e.key === "Escape"){
+      closeAudioPopup();
+      if(typeof closeJoinPopup === "function"){
+        closeJoinPopup();
+      }
+    }
+  });
+});
 </script>
 
 </body>
