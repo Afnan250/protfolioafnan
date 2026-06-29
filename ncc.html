@@ -13,28 +13,30 @@ html{scroll-behavior:smooth}
 body{background:#f4f6f9;color:#222}
 a{text-decoration:none}
 
-.top-bar{background:#071a3d;color:white;padding:8px 7%;display:flex;justify-content:space-between;font-size:14px}
+.top-bar{
+  background:#071a3d;color:white;padding:8px 7%;
+  display:flex;justify-content:space-between;font-size:14px
+}
 
 .recruitment-marquee{
   display:none;
   width:100%;
   overflow:hidden;
-  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
   color:#071a3d;
   font-weight:800;
   padding:10px 0;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 
 .marquee-track{
   display:flex;
   width:max-content;
-  animation:moveMarquee 22s linear infinite;
   white-space:nowrap;
+  animation:moveMarquee 22s linear infinite;
 }
 
 .marquee-track span{
-  padding:0 40px;
+  padding:0 45px;
   font-size:15px;
 }
 
@@ -43,11 +45,6 @@ a{text-decoration:none}
   to{transform:translateX(-100%)}
 }
 
-@media(max-width:600px){
-  .marquee-track{animation-duration:16s}
-  .marquee-track span{font-size:13px;padding:0 25px}
-}
-  
 header{
   background:white;padding:14px 7%;display:flex;justify-content:space-between;align-items:center;
   box-shadow:0 4px 15px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000
@@ -168,7 +165,6 @@ section{padding:70px 7%}
 @keyframes saffronWave{0%{transform:translateX(-100px)}50%{transform:translateX(100px)}100%{transform:translateX(-100px)}}
 @keyframes greenWave{0%{transform:translateX(100px)}50%{transform:translateX(-100px)}100%{transform:translateX(100px)}}
 
-/* Popup Common */
 .audio-popup,.join-popup{
   position:fixed;inset:0;background:rgba(0,0,0,.72);
   display:none;justify-content:center;align-items:center;
@@ -234,29 +230,14 @@ section{padding:70px 7%}
   gap:14px;
 }
 .join-box input,.join-box select,.join-box textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  outline:none;
-  font-size:15px;
+  width:100%;padding:13px;border:1px solid #ddd;
+  border-radius:10px;outline:none;font-size:15px
 }
 .join-box textarea{
-  resize:none;
-  min-height:90px;
-  grid-column:1/-1;
+  resize:none;min-height:90px;grid-column:1/-1
 }
-.closed-message{
-  text-align:center;
-  padding:25px;
-  line-height:1.8;
-  color:#333;
-}
-.closed-message i{
-  font-size:45px;
-  color:#ff9933;
-  margin-bottom:12px;
-}
+.closed-message{text-align:center;padding:25px;line-height:1.8;color:#333}
+.closed-message i{font-size:45px;color:#ff9933;margin-bottom:12px}
 
 footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
@@ -274,6 +255,8 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 }
 
 @media(max-width:600px){
+  .marquee-track{animation-duration:16s}
+  .marquee-track span{font-size:13px;padding:0 25px}
   .login-section{padding:60px 5%}
   .flip-wrapper,.flip-side,.login-glass{min-height:540px}
   .login-glass{padding:26px 18px;border-radius:22px}
@@ -293,8 +276,8 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 <div class="recruitment-marquee" id="recruitmentMarquee">
   <div class="marquee-track">
-    <span>USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
-    <span>USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
+    <span>🇮🇳 USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
+    <span>🇮🇳 USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</span>
   </div>
 </div>
 
@@ -547,8 +530,11 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
     <div class="audio-content" id="anthem">
       <h3>National Anthem</h3>
       <p>Jana Gana Mana</p>
-      <audio controls><source src="audio/nationalanthem.mp3" type="audio/mpeg"></audio>
-      <a href="audio/nationalanthem.mp3" download class="download-btn">Download Audio</a>
+      <audio controls preload="metadata">
+        <source src="nationalanthem.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+      <a href="nationalanthem.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
         <button class="info-tab-btn active-info" onclick="showInfo(event,'anthemLyrics')">Lyrics</button>
@@ -556,6 +542,7 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
       </div>
 
       <div class="info-box" id="anthemLyrics">
+        <h4>Lyrics</h4>
         <p class="lyrics-text">Jana Gana Mana
 Adhinayaka Jay He
 Bharata Bhagya Vidhata
@@ -573,7 +560,7 @@ Jay Jay Jay Jay He.</p>
       </div>
 
       <div class="info-box" id="anthemHistory" style="display:none;">
-        <h4>History</h4>
+        <h4>History & Significance</h4>
         <p>Jana Gana Mana was written by Rabindranath Tagore in 1911 and adopted as the National Anthem of India on 24 January 1950. In NCC, it is played during official functions, parades and ceremonies to show respect towards the nation.</p>
       </div>
     </div>
@@ -581,8 +568,11 @@ Jay Jay Jay Jay He.</p>
     <div class="audio-content" id="nccsong" style="display:none;">
       <h3>NCC Song</h3>
       <p>Hum Sab Bharatiya Hain</p>
-      <audio controls><source src="audio/nccsong.mp3" type="audio/mpeg"></audio>
-      <a href="audio/nccsong.mp3" download class="download-btn">Download Audio</a>
+      <audio controls preload="metadata">
+        <source src="nccsong.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+      <a href="nccsong.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
         <button class="info-tab-btn active-info" onclick="showInfo(event,'nccLyrics')">Lyrics</button>
@@ -590,40 +580,24 @@ Jay Jay Jay Jay He.</p>
       </div>
 
       <div class="info-box" id="nccLyrics">
-        <p class="lyrics-text">Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain
-Apni Manzil Ek Hai,
-Ha, Ha, Ha, Ek Hai,
-Ho, Ho, Ho, Ek Hai.
-Hum Sab Bharatiya Hain.
-Kashmir Ki Dharti Rani Hai,
-Sartaj Himalaya Hai,
-Saadiyon Se Humne Isko Apne Khoon Se Pala Hai
-Desh Ki Raksha Ki Khatir Hum Shamshir Utha Lenge,
-Hum Shamshir Utha Lenge.
-Bikhre Bikhre Taare Hain Hum Lekin Jhilmil Ek Hai,
-Ha, Ha, Ha, Ek Hai
-Hum Sab Bharatiya Hai.
-Mandir Gurudwaare Bhi Hain Yahan
-Aur Masjid Bhi Hai Yahan
-Girija Ka Hai Ghariyaal Kahin
-Mullah ki Kahin Hai Ajaan
-Ek Hee Apna Ram Hain, Ek hi Allah Taala Hai,
-Ek Hee Allah Taala Hain, Raang Birange Deepak Hain Hum,
-lekin Jagmag Ek Hai, Ha Ha Ha Ek Hai, Ho Ho Ho Ek Hai.
-Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.</p>
+        <h4>Lyrics</h4>
+        <p class="lyrics-text">Paste your NCC Song lyrics here.</p>
       </div>
 
       <div class="info-box" id="nccHistory" style="display:none;">
-        <h4>History</h4>
-        <p>The desirability of composing a NCC song was considered in the Circle Commanders (now called DDGs) Conference held in January 1956 and all circles were asked to send their proposals. The official song of the NCC – “Kadam Mila Ke Chal” was adopted in 1962, and registered in 1969 with the approval of the Ministry of Defence. In 1974, it was felt that the NCC song had failed to catch the imagination of the youth, and there was a need for a change. A sustained process began; entries were invited from Directorates for suitable lyrics; 107 entries were received; of which eight were selected by a Board of Officers. However, all the eight were considered sub standard by Dr Nagendra of Delhi University, who was the judge. On the suggestion of Dr Nagendra, the task was entrusted to Shri Chiranjit, the Chief Producer, Drama Division, AIR, Delhi. The song written by Shri Chiranjit was approved, in 1976. The Maharashtra Directorate was asked to get the song composed and recorded with the help of Shri Raj Kapoor, and the Films Division, Bombay. However, nothing much came out of this exercise as Shri Raj Kapoor was then busy in making his film “Satyam Shivam Sundaram” and the studios of the Films Division were under renovation. Later, Shri Mahinder Singh Bedi, a well known poet of Delhi, was requested to write another song. This effort also proved infructuous. AEC Centre Pachmarhi was also approached, but somehow the matter could not be finalized. Almost during the same period and independent of efforts at Directorate General NCC, the Film Division undertook production of a documentary on NCC ‘A Cadet’ s Diary’. The Director of the documentary was looking for a suitable song for the film. He happened to hear the song – ‘Ham Sab Hindi Hain’ which appears to have been first sung at a Youth Festival at Chandigarh, sometime during 1968-69, and introduced it in the documentary film. The song was a hit and successive Director Generals (DGs) found it good and played it repeatedly in Republic Day camps. In 1980, the word ‘Hindi’ was substituted with ‘Bhartiya’. Come ASIAD (1982), and the NCC got the opportunity to display its potential in the opening ceremony. The Special Organising Committee approved trial recording of the song for recital during the Asian Games Festival. The song was finally recorded in its present form, sometime during Oct 1982, at the Western Outdoor Studio, Delhi with the help of AIR artists, and musicians under overall supervision of Pandit Vijai Raghavan Rao. Post ASIAD era in the NCC saw among other events, a well composed musical hit and an inspiring NCC song being played and sung alongwith recorded music; a 16 mm colour film had also been made with title ‘Hum Sab Bhartiya Hain’ of 7½ minutes duration. This film had been telecast twice on national hook up. Other films, ‘Unity and Discipline’; ‘A Cadet’ s Diary, had also used this song prominently. The writer of this song seems to have been lost in oblivion. “No body knows” – said Shri SK Sharma, Joint Director, Armed Forces Film and Photo Division, who was actively involved with the production of documentaries on the NCC. “This song was not written for the NCC, as such, writes Shri Mathur, ex-publicity officer, DGNCC, in his notings on the file. But nobody has claimed it so far. Another noting speaks of Sri Virender Sharma as the lyrics writer, and Sri Vijai Raghavan Rao as the music composer. This NCC song is liked by millions of cadets, both past and present, and is sung on all important occasions of the NCC.</p>
+        <h4>History & Significance</h4>
+        <p>Hum Sab Bharatiya Hain is widely known as the NCC Song. It promotes unity, discipline, patriotism and national integration among cadets.</p>
       </div>
     </div>
 
     <div class="audio-content" id="badluram" style="display:none;">
       <h3>Badluram Ka Badan</h3>
-      <p>ASSAM REGIMENTAL SONG</p>
-      <audio controls><source src="audio/badluramkabadan.mp3" type="audio/mpeg"></audio>
-      <a href="audio/badluramkabadan.mp3" download class="download-btn">Download Audio</a>
+      <p>Military marching song</p>
+      <audio controls preload="metadata">
+        <source src="badluramkabadan.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+      <a href="badluramkabadan.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
         <button class="info-tab-btn active-info" onclick="showInfo(event,'badluramLyrics')">Lyrics</button>
@@ -631,24 +605,13 @@ Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.</p>
       </div>
 
       <div class="info-box" id="badluramLyrics">
-        <p class="lyrics-text">Ek khubsurat ladki thi…
-Usko dekh ke rifleman…
-Chindi khichna bhul gaya…
-Havaldar Major dekh liya…
-Usko pittu lagaya…
-Badluram ek sipahi thaa…
-Japan war me mar gaya…
-Quarter Master smart thaa…
-Usney ration nikala…
-Badluram ka badan zamin ke nichey hain… x 3
-Toh humein uska ration milta hain…
-Sabashh… hallelujah… x 3
-Toh humein uska ration milta hain…</p>
+        <h4>Lyrics</h4>
+        <p class="lyrics-text">Paste Badluram Ka Badan lyrics here.</p>
       </div>
 
       <div class="info-box" id="badluramHistory" style="display:none;">
-        <h4>History</h4>
-        <p>This song is based on a real-life incident and is created in honor of Rifleman Badluram a soldier of the 1st Battalion, Assam Regiment in British Indian Army who died while fighting against the Japanese Army in World War II. Badluram was killed in the early days of the battle from a gunshot wound. Later the Japanese troops had Kohima under their military blockade and cut down British Indian Army supply. Soon the British troops started facing the food shortage, the airdrop supply was also difficult because of the terrain and due to the deployment of Japanese anti-aircraft gun. But the Quartermaster of Badluram’s company didn’t remove Badluram’s name from the ration list and the surplus ration that was collected in the name of Badluram over the months proved to be a godsend. Which later helped the troops survive the siege. And in his memory, Major P.T Porktor in 1946 created a song that later became the regimental song of the Assam Regiment and is sung by recruits in passing out parade at Shillong.</p>
+        <h4>History & Significance</h4>
+        <p>Badluram Ka Badan is a popular military marching song associated with Indian Army tradition. It helps build marching spirit, morale and motivation.</p>
       </div>
     </div>
   </div>
