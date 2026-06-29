@@ -357,11 +357,18 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 <section id="gallery">
   <h2 class="title">USTM NCC Gallery</h2>
-  <p class="subtitle">Cadet achievements and NCC activities.</p>
+  <p class="subtitle">Cadet achievements, camps, events and NCC activities.</p>
+
   <div class="gallery" id="mainGallery">
     <img src="ncc1.jpeg" alt="NCC Activity">
     <img src="ncc3.jpeg" alt="NCC Gallery">
     <img src="ustmncclogo.jpeg" alt="USTM NCC Logo">
+  </div>
+
+  <div style="text-align:center;margin-top:30px;">
+    <a href="achievements-gallery.html" class="btn">
+      View More Achievements
+    </a>
   </div>
 </section>
 
@@ -857,14 +864,20 @@ onValue(ref(db,"gallery"), snap=>{
   const oldUploads = gallery.querySelectorAll(".uploaded-achievement");
   oldUploads.forEach(img => img.remove());
 
+  let count = 0;
+
   snap.forEach(child=>{
+    if(count >= 4) return;
+
     const item = child.val();
+
     if(item.url){
       const img = document.createElement("img");
       img.src = item.url;
-      img.alt = "Cadet Achievement";
+      img.alt = item.title || "Cadet Achievement";
       img.className = "uploaded-achievement";
       gallery.appendChild(img);
+      count++;
     }
   });
 });
