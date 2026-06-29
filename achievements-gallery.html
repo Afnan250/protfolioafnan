@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USTM NCC | Achievements Gallery</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{background:#f4f6f9;color:#222}
+a{text-decoration:none}
+
+header{
+  background:linear-gradient(rgba(7,26,61,.9),rgba(7,26,61,.95)),url("ncc1.jpeg");
+  background-size:cover;
+  background-position:center;
+  color:white;
+  text-align:center;
+  padding:70px 7%;
+}
+
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  padding:5px;
+  background:linear-gradient(135deg,#ff9933,#fff,#138808);
+  margin:0 auto 18px;
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
+}
+
+header h1{
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+header p{
+  color:#eee;
+  font-size:17px;
+}
+
+.back-btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 26px;
+  background:#ff9933;
+  color:#071a3d;
+  border-radius:8px;
+  font-weight:800;
+}
+
+section{
+  padding:60px 7%;
+}
+
+.title{
+  text-align:center;
+  color:#071a3d;
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:35px;
+}
+
+.filter-box{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:35px;
+}
+
+.filter-btn{
+  padding:11px 22px;
+  border:none;
+  border-radius:50px;
+  background:white;
+  color:#071a3d;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.filter-btn.active{
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+.gallery-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+  border-top:5px solid #ff9933;
+  transition:.3s;
+}
+
+.gallery-card:hover{
+  transform:translateY(-8px);
+}
+
+.gallery-card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+}
+
+.gallery-info{
+  padding:18px;
+}
+
+.gallery-info h3{
+  color:#071a3d;
+  margin-bottom:8px;
+}
+
+.gallery-info p{
+  color:#555;
+  line-height:1.6;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:6px 12px;
+  background:#fff7ef;
+  color:#d35400;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.empty{
+  text-align:center;
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  color:#555;
+}
+
+footer{
+  background:#071a3d;
+  color:white;
+  text-align:center;
+  padding:25px;
+}
+
+@media(max-width:600px){
+  header h1{font-size:30px}
+  .title{font-size:28px}
+  .gallery-card img{height:220px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="ncc2.jpeg" alt="USTM NCC Logo">
+  </div>
+
+  <h1>USTM NCC Achievements Gallery</h1>
+  <p>Honouring cadet achievements, camps, parades, events and service activities.</p>
+
+  <a href="ncc.html" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to NCC Page
+  </a>
+</header>
+
+<section>
+  <h2 class="title">Achievements, Events & Activities</h2>
+  <p class="subtitle">A proud collection of USTM NCC memories and milestones.</p>
+
+  <div class="filter-box">
+    <button class="filter-btn active" onclick="filterGallery('All', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('Achievement', this)">Achievements</button>
+    <button class="filter-btn" onclick="filterGallery('Event', this)">Events</button>
+    <button class="filter-btn" onclick="filterGallery('Camp', this)">Camps</button>
+    <button class="filter-btn" onclick="filterGallery('Parade', this)">Parades</button>
+    <button class="filter-btn" onclick="filterGallery('Social Service', this)">Social Service</button>
+  </div>
+
+  <div class="gallery" id="fullGallery"></div>
+</section>
+
+<footer>
+  © 2026 USTM NCC | 42 MEGH BN NCC
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
+  authDomain: "ustm-ncc-portal.firebaseapp.com",
+  databaseURL: "https://ustm-ncc-portal-default-rtdb.firebaseio.com",
+  projectId: "ustm-ncc-portal",
+  storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  messagingSenderId: "164517585348",
+  appId: "1:164517585348:web:119a2abdb1d871226ec491"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let allPhotos = [];
+
+function renderGallery(category = "All"){
+  const gallery = document.getElementById("fullGallery");
+  gallery.innerHTML = "";
+
+  const photos = category === "All"
+    ? allPhotos
+    : allPhotos.filter(photo => photo.category === category);
+
+  if(photos.length === 0){
+    gallery.innerHTML = `
+      <div class="empty">
+        <h3>No Photos Available</h3>
+        <p>Uploaded photos will appear here automatically.</p>
+      </div>
+    `;
+    return;
+  }
+
+  photos.forEach(photo=>{
+    const card = document.createElement("div");
+    card.className = "gallery-card";
+
+    card.innerHTML = `
+      <img src="${photo.url}" alt="${photo.title || 'USTM NCC Photo'}">
+      <div class="gallery-info">
+        <h3>${photo.title || 'USTM NCC Achievement'}</h3>
+        <p>${photo.description || 'Cadet achievement, event or NCC activity.'}</p>
+        <span class="badge">${photo.category || 'Achievement'}</span>
+      </div>
+    `;
+
+    gallery.appendChild(card);
+  });
+}
+
+window.filterGallery = function(category, button){
+  document.querySelectorAll(".filter-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  renderGallery(category);
+}
+
+onValue(ref(db,"gallery"), snap=>{
+  allPhotos = [];
+
+  if(snap.exists()){
+    snap.forEach(child=>{
+      const item = child.val();
+
+      if(item.url){
+        allPhotos.push({
+          url:item.url,
+          title:item.title || "USTM NCC Photo",
+          description:item.description || "",
+          category:item.category || "Achievement",
+          date:item.date || ""
+        });
+      }
+    });
+  }
+
+  renderGallery("All");
+});
+</script>
+
+</body>
+</html>
