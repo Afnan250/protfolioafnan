@@ -20,6 +20,52 @@ button{background:#071a3d;color:white;padding:12px 18px;border:none;border-radiu
 button:hover{background:#ff9933;color:#071a3d}.danger{background:#b00020}
 .output{margin-top:12px;background:#fff7ef;padding:12px;border-left:5px solid #ff9933;border-radius:10px}
 footer{text-align:center;background:#071a3d;color:white;padding:22px}
+  .year-card{
+  background:white;
+  margin:25px 0;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.year-card h3{
+  color:#071a3d;
+  margin-bottom:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+  border:1px solid #ddd;
+  text-align:left;
+}
+
+th{
+  background:#071a3d;
+  color:white;
+}
+
+.action-btn{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.promote-btn{
+  background:#ff9933;
+  color:#071a3d;
+}
+
+.passout-btn{
+  background:#071a3d;
+  color:white;
+}
 </style>
 </head>
 
@@ -85,15 +131,71 @@ footer{text-align:center;background:#071a3d;color:white;padding:22px}
   <button onclick="markBatchPassout()">Mark Batch Passout</button>
   <div class="output" id="batchPassoutOutput">No batch selected yet.</div>
 </div>
+<div class="dashboard-card" onclick="showCadetList()">
+  <i class="fa-solid fa-users"></i>
+  <h3>Registered Cadets</h3>
+  <p>View and manage 1st, 2nd and 3rd year cadets.</p>
+</div>
+  
+<section id="cadetListSection" style="display:none;">
+  <h2>Registered Cadet List</h2>
 
+  <div class="year-card">
+    <h3>1st Year Cadets: <span id="firstYearCount">0</span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Regimental Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="firstYearTable"></tbody>
+    </table>
+  </div>
+
+  <div class="year-card">
+    <h3>2nd Year Cadets: <span id="secondYearCount">0</span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Regimental Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="secondYearTable"></tbody>
+    </table>
+  </div>
+
+  <div class="year-card">
+    <h3>3rd Year Cadets: <span id="thirdYearCount">0</span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Regimental Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="thirdYearTable"></tbody>
+    </table>
+  </div>
+</section>
+  
 </main>
 
 <footer>© 2026 USTM NCC | ANO Portal</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-
+import { getDatabase, ref, set, get, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
   authDomain: "ustm-ncc-portal.firebaseapp.com",
@@ -227,6 +329,109 @@ window.logoutANO=function(){
 }
 
 document.addEventListener("DOMContentLoaded",loadBatchYears);
+  window.showCadetList = function(){
+  document.getElementById("cadetListSection").style.display = "block";
+  document.getElementById("cadetListSection").scrollIntoView({behavior:"smooth"});
+}
+
+function createCadetRow(child, cadet, serial){
+  const currentYear = Number(cadet.cadetYear || 1);
+
+  let actionButton = "";
+
+  if(currentYear < 3){
+    actionButton = `
+      <button class="action-btn promote-btn" onclick="promoteCadet('${child.key}', ${currentYear})">
+        Promote
+      </button>
+    `;
+  }else{
+    actionButton = `
+      <button class="action-btn passout-btn" onclick="markPassout('${child.key}')">
+        Pass Out
+      </button>
+    `;
+  }
+
+  return `
+    <tr>
+      <td>${serial}</td>
+      <td>${cadet.rank || "Cadet"}</td>
+      <td>${cadet.name || "N/A"}</td>
+      <td>${cadet.id || "N/A"}</td>
+      <td>${actionButton}</td>
+    </tr>
+  `;
+}
+
+onValue(ref(db,"cadets"), snap=>{
+  const firstYearTable = document.getElementById("firstYearTable");
+  const secondYearTable = document.getElementById("secondYearTable");
+  const thirdYearTable = document.getElementById("thirdYearTable");
+
+  if(!firstYearTable || !secondYearTable || !thirdYearTable) return;
+
+  firstYearTable.innerHTML = "";
+  secondYearTable.innerHTML = "";
+  thirdYearTable.innerHTML = "";
+
+  let firstCount = 0;
+  let secondCount = 0;
+  let thirdCount = 0;
+
+  snap.forEach(child=>{
+    const cadet = child.val();
+
+    if(!cadet || cadet.status !== "active") return;
+
+    const cadetYear = Number(cadet.cadetYear || 1);
+
+    if(cadetYear === 1){
+      firstCount++;
+      firstYearTable.innerHTML += createCadetRow(child, cadet, firstCount);
+    }
+
+    if(cadetYear === 2){
+      secondCount++;
+      secondYearTable.innerHTML += createCadetRow(child, cadet, secondCount);
+    }
+
+    if(cadetYear === 3){
+      thirdCount++;
+      thirdYearTable.innerHTML += createCadetRow(child, cadet, thirdCount);
+    }
+  });
+
+  document.getElementById("firstYearCount").innerText = firstCount;
+  document.getElementById("secondYearCount").innerText = secondCount;
+  document.getElementById("thirdYearCount").innerText = thirdCount;
+});
+
+window.promoteCadet = async function(cadetKey, currentYear){
+  const ok = confirm(`Promote this cadet to ${currentYear + 1} year?`);
+  if(!ok) return;
+
+  await update(ref(db,"cadets/" + cadetKey),{
+    cadetYear: currentYear + 1,
+    updatedBy: "ANO",
+    updatedAt: new Date().toLocaleString()
+  });
+
+  alert("Cadet promoted successfully.");
+}
+
+window.markPassout = async function(cadetKey){
+  const ok = confirm("Mark this cadet as pass out?");
+  if(!ok) return;
+
+  await update(ref(db,"cadets/" + cadetKey),{
+    status:"completed",
+    cadetYear:"Pass Out",
+    passoutDate:new Date().toLocaleString()
+  });
+
+  alert("Cadet marked as pass out.");
+}
 </script>
 
 </body>
