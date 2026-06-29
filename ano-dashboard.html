@@ -326,7 +326,7 @@ footer strong{
     <div class="card">
       <i class="fa-solid fa-photo-film"></i>
       <h2>Showcase Upload</h2>
-      <p>Paste photo/video links for the main showcase/gallery.</p>
+      <p>Upload photos directly or paste video links for the main showcase/gallery.</p>
       <button onclick="scrollToSection('showcaseSection')">
         Upload Showcase
       </button>
@@ -351,12 +351,8 @@ footer strong{
     <input id="noticeDate" placeholder="Date e.g. 29-06-2026">
 
     
-    <input type="url" id="noticeMediaUrl" placeholder="Optional notice photo/video URL">
-    <select id="noticeMediaType">
-      <option value="">Media Type (optional)</option>
-      <option value="image">Photo/Image</option>
-      <option value="video">Video</option>
-    </select>
+    <input type="file" id="noticeMediaFile" accept="image/*">
+    <p style="font-size:13px;color:#555;margin-top:-4px;">Optional: Choose a notice photo. It will upload through Cloudinary.</p>
 
     <button class="action-btn" id="noticeBtn" onclick="publishNotice()">
       Publish Notice
@@ -403,15 +399,16 @@ footer strong{
   </section>
 
   <section class="form-section" id="showcaseSection">
-    <h2>Add Showcase Photo / Video URL</h2>
+    <h2>Add Showcase Photo / Video</h2>
 
     <input id="showcaseTitle" placeholder="Showcase Title">
     <textarea id="showcaseCaption" placeholder="Caption / Description"></textarea>
     
-    <input type="url" id="showcaseMediaUrl" placeholder="Paste showcase photo/video URL">
+    <input type="file" id="showcaseImageFile" accept="image/*">
+    <input type="url" id="showcaseVideoUrl" placeholder="Optional video URL, e.g. YouTube/Google Drive public link">
     <select id="showcaseMediaType">
-      <option value="image">Photo/Image</option>
-      <option value="video">Video</option>
+      <option value="image">Photo/Image Upload</option>
+      <option value="video">Video URL</option>
     </select>
 
     <button class="action-btn" id="showcaseBtn" onclick="uploadShowcase()">
@@ -485,6 +482,33 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let allCadetRows = [];
+
+const CLOUDINARY_CLOUD_NAME = "dgrr5cupl";
+const CLOUDINARY_UPLOAD_PRESET = "ustm_ncc_upload";
+
+async function uploadToCloudinary(file){
+  if(!file) return "";
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+  formData.append("folder", "ustm-ncc");
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+    { method:"POST", body:formData }
+  );
+
+  const data = await response.json();
+
+  if(!response.ok){
+    console.error("Cloudinary error:", data);
+    throw new Error(data.error?.message || "Cloudinary upload failed.");
+  }
+
+  return data.secure_url;
+}
+
 
 if(localStorage.getItem("activeAnoId") !== "ANO001"){
   alert("Please login as ANO first.");
@@ -774,14 +798,6 @@ window.updateAttendance = async function(){
   document.getElementById("attendanceTextInput").value = "";
 };
 
-function isValidUrl(value){
-  try{
-    new URL(value);
-    return true;
-  }catch{
-    return false;
-  }
-}
 
 
 window.publishNotice = async function(){
@@ -789,8 +805,7 @@ window.publishNotice = async function(){
   const content = document.getElementById("noticeContent").value.trim();
   const by = document.getElementById("noticeBy").value;
   const date = document.getElementById("noticeDate").value.trim();
-  const mediaUrl = document.getElementById("noticeMediaUrl").value.trim();
-  const mediaTypeValue = document.getElementById("noticeMediaType").value;
+  const mediaFile = document.getElementById("noticeMediaFile").files[0];
   const btn = document.getElementById("noticeBtn");
 
   if(!title || !content || !by){
@@ -798,8 +813,8 @@ window.publishNotice = async function(){
     return;
   }
 
-  if(mediaUrl && !isValidUrl(mediaUrl)){
-    alert("Please paste a valid notice media URL.");
+  if(mediaFile && !mediaFile.type.startsWith("image/")){
+    alert("Only image files are allowed for notice photo.");
     return;
   }
 
@@ -807,6 +822,7 @@ window.publishNotice = async function(){
     btn.textContent = "Publishing...";
     btn.disabled = true;
 
+    const mediaUrl = mediaFile ? await uploadToCloudinary(mediaFile) : "";
     const createdAt = new Date();
     const expiresAt = new Date(createdAt.getTime() + 7 * 24 * 60 * 60 * 1000);
 
@@ -818,7 +834,7 @@ window.publishNotice = async function(){
       createdAt:createdAt.toISOString(),
       expiresAt:expiresAt.toISOString(),
       mediaUrl:mediaUrl,
-      mediaType:mediaUrl ? mediaTypeValue : ""
+      mediaType:mediaUrl ? "image" : ""
     });
 
     alert("Notice published successfully. It will expire after 7 days.");
@@ -827,12 +843,11 @@ window.publishNotice = async function(){
     document.getElementById("noticeContent").value = "";
     document.getElementById("noticeBy").value = "";
     document.getElementById("noticeDate").value = "";
-    document.getElementById("noticeMediaUrl").value = "";
-    document.getElementById("noticeMediaType").value = "";
+    document.getElementById("noticeMediaFile").value = "";
 
   }catch(error){
     console.error(error);
-    alert("Notice publishing failed. Check Firestore rules.");
+    alert("Notice publishing failed. Check Cloudinary preset or Firestore rules.");
   }finally{
     btn.textContent = "Publish Notice";
     btn.disabled = false;
@@ -908,32 +923,55 @@ window.updateCamp = async function(){
 };
 
 
+
 window.uploadShowcase = async function(){
   const title = document.getElementById("showcaseTitle").value.trim();
   const caption = document.getElementById("showcaseCaption").value.trim();
-  const mediaUrl = document.getElementById("showcaseMediaUrl").value.trim();
+  const imageFile = document.getElementById("showcaseImageFile").files[0];
+  const videoUrl = document.getElementById("showcaseVideoUrl").value.trim();
   const mediaType = document.getElementById("showcaseMediaType").value;
   const btn = document.getElementById("showcaseBtn");
 
-  if(!title || !mediaUrl){
-    alert("Please enter title and paste photo/video URL.");
+  if(!title){
+    alert("Please enter showcase title.");
     return;
   }
 
-  if(!isValidUrl(mediaUrl)){
-    alert("Please paste a valid showcase URL.");
+  if(mediaType === "image" && !imageFile){
+    alert("Please choose a photo to upload.");
+    return;
+  }
+
+  if(mediaType === "video" && !videoUrl){
+    alert("Please paste a public video URL.");
+    return;
+  }
+
+  if(imageFile && !imageFile.type.startsWith("image/")){
+    alert("Only image files are allowed for showcase photo.");
     return;
   }
 
   try{
-    btn.textContent = "Submitting...";
+    btn.textContent = "Uploading...";
     btn.disabled = true;
+
+    let mediaUrl = "";
+    let finalMediaType = mediaType;
+
+    if(mediaType === "image"){
+      mediaUrl = await uploadToCloudinary(imageFile);
+      finalMediaType = "image";
+    }else{
+      mediaUrl = videoUrl;
+      finalMediaType = "video";
+    }
 
     await addDoc(collection(db,"showcase"),{
       title:title,
       caption:caption,
       mediaUrl:mediaUrl,
-      mediaType:mediaType,
+      mediaType:finalMediaType,
       uploadedBy:"ANO",
       createdAt:new Date().toISOString()
     });
@@ -942,12 +980,13 @@ window.uploadShowcase = async function(){
 
     document.getElementById("showcaseTitle").value = "";
     document.getElementById("showcaseCaption").value = "";
-    document.getElementById("showcaseMediaUrl").value = "";
+    document.getElementById("showcaseImageFile").value = "";
+    document.getElementById("showcaseVideoUrl").value = "";
     document.getElementById("showcaseMediaType").value = "image";
 
   }catch(error){
     console.error(error);
-    alert("Showcase submission failed. Check Firestore rules.");
+    alert("Showcase upload failed. Check Cloudinary preset or Firestore rules.");
   }finally{
     btn.textContent = "Upload Showcase";
     btn.disabled = false;
