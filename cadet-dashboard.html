@@ -444,15 +444,9 @@ footer strong{
     </div>
 
     <div class="detail-row">
-      <i class="fa-solid fa-key"></i>
-      <span class="detail-label">Attendance Key:</span>
-      <span class="attendance-key" id="attendanceKeyText">Loading...</span>
-    </div>
-
-    <div class="detail-row">
       <i class="fa-solid fa-chevron-up"></i>
       <span class="detail-label">Rank:</span>
-      <span id="cadetRankText">Loading...</span>
+      <span id="cadetRankText">Cadet</span>
     </div>
 
     <div class="detail-row">
@@ -610,7 +604,7 @@ function makeAttendanceKey(value){
 }
 
 function getRankText(cadet){
-  return cadet.rank || "Not marked by ANO";
+  return cadet.rank || "Cadet";
 }
 
 function getServiceYear(cadet){
@@ -698,9 +692,6 @@ async function loadCadet(){
 
     document.getElementById("cadetIdText").textContent =
       updatedCadetId;
-
-    document.getElementById("attendanceKeyText").textContent =
-      attendanceKey;
 
     document.getElementById("cadetRankText").textContent =
       getRankText(currentCadet);
