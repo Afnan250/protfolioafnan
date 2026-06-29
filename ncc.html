@@ -414,7 +414,7 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
         </select>
         <input type="text" id="loginId" placeholder="Enter ID">
         <input type="password" id="loginPass" placeholder="Enter Password">
-       <button class="btn login-main-btn" onclick="alert('Button working'); login()">Login</button>
+      <button type="button" class="btn login-main-btn" onclick="window.login()">Login</button>
         <p class="switch-text">
           Cadet not registered?
           <button type="button" class="switch-link" onclick="flipToRegister()">Register here</button>
@@ -821,6 +821,8 @@ await set(ref(db,"cadets/" + key), {
 }
 
 window.login = async function(){
+  alert("Login function started");
+
   const type = document.getElementById("loginType").value;
   const id = document.getElementById("loginId").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
