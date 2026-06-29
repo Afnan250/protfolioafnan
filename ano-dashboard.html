@@ -274,12 +274,45 @@ window.deleteShowcase = async function(id, storagePath){
 };
 
 window.updateAttendance = async function(){
-  const cadetKey=document.getElementById("attendanceCadetKey").value.trim();
-  const percent=document.getElementById("attendancePercentInput").value.trim();
-  const text=document.getElementById("attendanceTextInput").value.trim();
-  if(!cadetKey || percent===""){alert("Please enter cadet document ID and attendance percentage."); return;}
-  await setDoc(doc(db,"attendance",cadetKey),{percent:Number(percent),text:text||"Attendance counted from regular NCC classes and events.",updatedAt:new Date().toISOString()});
-  alert("Attendance updated successfully."); document.getElementById("attendanceCadetKey").value=""; document.getElementById("attendancePercentInput").value=""; document.getElementById("attendanceTextInput").value="";
+
+  const cadetKey =
+    document.getElementById("attendanceCadetKey").value.trim().toUpperCase();
+
+  const percent =
+    Number(document.getElementById("attendancePercentInput").value);
+
+  if(!cadetKey || isNaN(percent)){
+    alert("Please enter Cadet Key and Attendance Percentage.");
+    return;
+  }
+
+  let remarks = "";
+  let eligibility = "";
+
+  if(percent < 70){
+    remarks =
+      "Attendance below minimum NCC requirement. Cadet is not eligible for camp selection.";
+
+    eligibility = "Not Eligible";
+  }
+  else{
+    remarks =
+      "Attendance meets NCC requirement. Cadet is eligible for camp selection subject to ANO approval.";
+
+    eligibility = "Eligible";
+  }
+
+  await setDoc(doc(db,"attendance",cadetKey),{
+    percent: percent,
+    remarks: remarks,
+    eligibility: eligibility,
+    updatedAt: new Date().toISOString()
+  });
+
+  alert("Attendance Updated Successfully.");
+
+  document.getElementById("attendanceCadetKey").value = "";
+  document.getElementById("attendancePercentInput").value = "";
 };
 
 window.updateCamp = async function(){
