@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USTM NCC | Alumni Legacy</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{background:#f4f6f9;color:#222}
+a{text-decoration:none}
+
+.hero{
+  background:linear-gradient(rgba(7,26,61,.92),rgba(7,26,61,.96)),url("ncc1.jpeg");
+  background-size:cover;background-position:center;
+  color:white;text-align:center;padding:70px 7%;
+}
+
+.logo{
+  width:90px;height:90px;border-radius:50%;padding:5px;
+  background:linear-gradient(135deg,#ff9933,#fff,#138808);
+  margin:0 auto 18px;
+}
+.logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:white}
+
+.hero h1{font-size:42px;margin-bottom:10px}
+.hero p{color:#eee;line-height:1.7}
+
+.btn{
+  display:inline-block;margin-top:22px;padding:12px 25px;
+  background:#ff9933;color:#071a3d;border-radius:8px;
+  font-weight:800;
+}
+
+section{padding:60px 7%}
+.title{text-align:center;color:#071a3d;font-size:34px;margin-bottom:10px}
+.subtitle{text-align:center;color:#666;margin-bottom:35px}
+
+.batch-filter{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:35px;
+}
+
+.batch-filter button{
+  border:none;background:white;color:#071a3d;padding:10px 22px;
+  border-radius:50px;font-weight:800;cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.batch-filter button.active{
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+}
+
+.alumni-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:25px;
+}
+
+.alumni-card{
+  background:white;border-radius:18px;padding:22px;text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.1);
+  border-top:5px solid #ff9933;
+  cursor:pointer;transition:.3s;
+}
+
+.alumni-card:hover{transform:translateY(-8px)}
+
+.alumni-card img{
+  width:135px;height:135px;border-radius:50%;
+  object-fit:cover;border:4px solid #ff9933;
+  margin-bottom:15px;
+}
+
+.alumni-card h3{color:#071a3d;margin-bottom:5px}
+.alumni-card p{color:#555;font-weight:600}
+
+.rank-badge{
+  display:inline-block;margin-bottom:10px;
+  padding:6px 14px;border-radius:30px;
+  background:#071a3d;color:white;font-weight:800;font-size:13px;
+}
+
+.empty{
+  background:white;text-align:center;padding:35px;border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  color:#555;
+}
+
+.popup{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);
+  display:none;justify-content:center;align-items:center;
+  padding:20px;z-index:9999;
+}
+
+.popup-box{
+  width:95%;max-width:620px;background:white;border-radius:22px;
+  padding:28px;position:relative;text-align:center;
+  box-shadow:0 0 18px #ff9933,0 0 30px #fff,0 0 42px #138808;
+  animation:zoom .35s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(.75);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.close-btn{
+  position:absolute;right:18px;top:12px;
+  background:none;border:none;font-size:30px;
+  color:#071a3d;cursor:pointer;
+}
+
+.popup-box img{
+  width:150px;height:150px;border-radius:50%;
+  object-fit:cover;border:5px solid #ff9933;margin-bottom:15px;
+}
+
+.popup-box h2{color:#071a3d;margin-bottom:6px}
+.popup-box .details{color:#555;line-height:1.7;margin-bottom:18px}
+
+.message-box{
+  background:#f8fafc;border-left:5px solid #ff9933;
+  padding:16px;border-radius:12px;text-align:left;
+  line-height:1.7;color:#333;
+}
+
+.message-box h4{color:#071a3d;margin-bottom:8px}
+
+footer{
+  background:#071a3d;color:white;text-align:center;padding:25px;
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:30px}
+  .title{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="logo">
+    <img src="ncc2.jpeg" alt="USTM NCC Logo">
+  </div>
+  <h1>USTM NCC Alumni Legacy</h1>
+  <p>
+    Honouring the passed out cadets of USTM NCC who continue to inspire future generations
+    through discipline, service and leadership.
+  </p>
+  <a href="ncc.html" class="btn"><i class="fa-solid fa-arrow-left"></i> Back to NCC Page</a>
+</div>
+
+<section>
+  <h2 class="title">Alumni Wall of Honour</h2>
+  <p class="subtitle">Batch-wise record of former USTM NCC cadets.</p>
+
+  <div class="batch-filter" id="batchFilters">
+    <button class="active" onclick="filterAlumni('All', this)">All Batches</button>
+  </div>
+
+  <div class="alumni-grid" id="alumniGrid"></div>
+</section>
+
+<div class="popup" id="alumniPopup">
+  <div class="popup-box">
+    <button class="close-btn" onclick="closeAlumniPopup()">×</button>
+
+    <img id="popupPhoto" src="" alt="Alumni Photo">
+    <h2 id="popupName"></h2>
+
+    <div class="details">
+      <p><strong>Rank:</strong> <span id="popupRank"></span></p>
+      <p><strong>Regimental No:</strong> <span id="popupRegt"></span></p>
+      <p><strong>Batch:</strong> <span id="popupBatch"></span></p>
+    </div>
+
+    <div class="message-box">
+      <h4>Message for Future Cadets</h4>
+      <p id="popupMessage"></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 USTM NCC | 42 MEGH BN NCC
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
+  authDomain: "ustm-ncc-portal.firebaseapp.com",
+  databaseURL: "https://ustm-ncc-portal-default-rtdb.firebaseio.com",
+  projectId: "ustm-ncc-portal",
+  storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  messagingSenderId: "164517585348",
+  appId: "1:164517585348:web:119a2abdb1d871226ec491"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let alumniData = [];
+
+function renderBatchFilters(){
+  const batchFilters = document.getElementById("batchFilters");
+  const batches = [...new Set(alumniData.map(a => a.batch).filter(Boolean))];
+
+  batchFilters.innerHTML = `
+    <button class="active" onclick="filterAlumni('All', this)">All Batches</button>
+  `;
+
+  batches.forEach(batch=>{
+    const btn = document.createElement("button");
+    btn.innerText = batch;
+    btn.onclick = function(){ filterAlumni(batch, btn); };
+    batchFilters.appendChild(btn);
+  });
+}
+
+function renderAlumni(batch="All"){
+  const grid = document.getElementById("alumniGrid");
+  grid.innerHTML = "";
+
+  const list = batch === "All" ? alumniData : alumniData.filter(a => a.batch === batch);
+
+  if(list.length === 0){
+    grid.innerHTML = `
+      <div class="empty">
+        <h3>No Alumni Records Available</h3>
+        <p>Passed out cadets will appear here after records are uploaded.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.forEach(cadet=>{
+    const card = document.createElement("div");
+    card.className = "alumni-card";
+
+    card.innerHTML = `
+      <img src="${cadet.photo || 'ustmncclogo.jpeg'}" alt="${cadet.name || 'Alumni'}">
+      <div class="rank-badge">${cadet.rank || 'Cadet'}</div>
+      <h3>${cadet.name || 'NCC Alumni'}</h3>
+      <p>Batch: ${cadet.batch || 'Not Updated'}</p>
+    `;
+
+    card.onclick = function(){
+      openAlumniPopup(cadet);
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+window.filterAlumni = function(batch, button){
+  document.querySelectorAll(".batch-filter button").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  renderAlumni(batch);
+}
+
+window.openAlumniPopup = function(cadet){
+  document.getElementById("popupPhoto").src = cadet.photo || "ustmncclogo.jpeg";
+  document.getElementById("popupName").innerText = cadet.name || "NCC Alumni";
+  document.getElementById("popupRank").innerText = cadet.rank || "Cadet";
+  document.getElementById("popupRegt").innerText = cadet.regimentalNumber || "Not Updated";
+  document.getElementById("popupBatch").innerText = cadet.batch || "Not Updated";
+  document.getElementById("popupMessage").innerText =
+    cadet.message && cadet.message.trim() !== ""
+      ? cadet.message
+      : "No message shared yet.";
+
+  document.getElementById("alumniPopup").style.display = "flex";
+}
+
+window.closeAlumniPopup = function(){
+  document.getElementById("alumniPopup").style.display = "none";
+}
+
+document.getElementById("alumniPopup").addEventListener("click", function(e){
+  if(e.target === this){
+    closeAlumniPopup();
+  }
+});
+
+onValue(ref(db,"alumni"), snap=>{
+  alumniData = [];
+
+  if(snap.exists()){
+    snap.forEach(child=>{
+      const item = child.val();
+
+      alumniData.push({
+        name:item.name || "",
+        rank:item.rank || "",
+        regimentalNumber:item.regimentalNumber || "",
+        batch:item.batch || "",
+        photo:item.photo || "",
+        message:item.message || ""
+      });
+    });
+  }
+
+  renderBatchFilters();
+  renderAlumni("All");
+});
+</script>
+
+</body>
+</html>
