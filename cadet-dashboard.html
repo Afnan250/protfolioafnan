@@ -3,57 +3,388 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Cadet Dashboard | USTM NCC</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{--navy:#061a40;--saffron:#ff9933;--green:#138808;--light:#f4f7fc;--danger:#c62828}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{background:var(--light);color:var(--navy)}
-.dashboard-header{background:linear-gradient(135deg,#041433,#08275d);color:white;padding:22px 5%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 25px rgba(0,0,0,.2)}
-.brand-area h1{color:var(--saffron);font-size:34px}
-.logout-btn{border:none;background:var(--saffron);color:var(--navy);padding:15px 28px;border-radius:13px;font-weight:900;font-size:17px;cursor:pointer}
-.page-container{width:min(1450px,94%);margin:30px auto}
-.profile-section{background:white;border-radius:28px;padding:30px;display:grid;grid-template-columns:220px 1fr;gap:35px;align-items:center;box-shadow:0 15px 35px rgba(7,26,61,.14);position:relative}
-.profile-section::before{content:"";position:absolute;top:0;left:25px;right:25px;height:4px;background:linear-gradient(90deg,var(--saffron),white,var(--green))}
-.photo-wrapper{width:180px;height:225px;position:relative;margin:auto}
-.profile-photo{width:180px;height:225px;object-fit:cover;object-position:center top;border-radius:18px;border:3px solid var(--saffron);background:#e7ebf2;box-shadow:0 0 15px var(--saffron),0 0 25px var(--green);cursor:pointer}
-.photo-click-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(6,26,64,.88);color:white;font-size:11px;padding:6px 10px;border-radius:20px;white-space:nowrap}
-.photo-menu{display:none;position:absolute;top:238px;left:50%;transform:translateX(-50%);background:white;width:190px;border-radius:14px;box-shadow:0 15px 35px rgba(0,0,0,.22);padding:9px;z-index:100}
-.photo-menu.show{display:block}
-.photo-menu button{width:100%;border:none;background:white;padding:11px;text-align:left;border-radius:9px;font-weight:800;cursor:pointer;color:var(--navy)}
-.photo-menu button:hover{background:#f1f4f9}
-.remove-photo-btn{color:var(--danger)!important}
-.cadet-details h4{font-size:22px}
-.cadet-name{font-size:42px;text-transform:uppercase;margin:5px 0 18px}
-.detail-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #e6e9f1;font-size:17px}
-.detail-row i{width:28px;font-size:20px}
-.detail-label{font-weight:900}
-.service-highlight{color:#e87500;font-weight:900}
-.status-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:25px;background:var(--green);color:white;font-weight:900}
-.status-badge.alumni{background:#6a1b9a}
-.dashboard-grid{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.tricolor-card{position:relative;min-height:310px;padding:30px 25px;border-radius:28px;background:white;text-align:center;overflow:hidden;box-shadow:0 -3px 16px rgba(255,153,51,.8),0 3px 18px rgba(19,136,8,.7),0 12px 25px rgba(7,26,61,.13);transition:.3s}
-.tricolor-card:hover{transform:translateY(-8px);box-shadow:0 -5px 24px rgba(255,153,51,1),0 6px 25px rgba(19,136,8,.9),0 18px 34px rgba(7,26,61,.18)}
-.tricolor-card::before{content:"";position:absolute;inset:-4px;border-radius:30px;background:linear-gradient(135deg,var(--saffron),white,var(--green),white,var(--saffron));background-size:300% 300%;animation:glowMove 5s linear infinite;z-index:0}
-.tricolor-card::after{content:"";position:absolute;inset:5px;background:white;border-radius:24px;z-index:1}
-@keyframes glowMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.card-content{position:relative;z-index:2}
-.card-icon{font-size:48px;margin-bottom:16px}
-.card-divider{width:45px;height:3px;background:var(--saffron);margin:12px auto 22px;border-radius:10px}
-.tricolor-card h2{font-size:25px}
-.tricolor-card p{line-height:1.6;color:#243653}
-.notice-meta{display:block;margin-top:20px;font-size:13px}
-.attendance-number{font-size:62px;color:var(--green);font-weight:900}
-.eligibility-box{margin-top:16px;padding:13px;border-radius:14px;border:1px solid #8bcc81;background:#f0fff0;color:#176a10;font-weight:800}
-.not-allowed{border-color:#ef9a9a;background:#fff2f2;color:#b71c1c}
-.achievement-card{grid-column:span 2}
-.achievement-input{width:100%;max-width:600px;padding:14px;margin:20px 0;border:1px solid #cfd6e2;border-radius:12px;background:white}
-.achievement-btn,.material-btn{background:var(--navy);color:white;padding:13px 25px;border:none;border-radius:10px;font-weight:900;cursor:pointer}
-.achievement-btn:hover,.material-btn:hover{background:var(--saffron);color:var(--navy)}
-footer{background:linear-gradient(135deg,#041433,#08275d);color:white;text-align:center;padding:28px}
-footer strong{color:var(--saffron)}
-@media(max-width:900px){.profile-section{grid-template-columns:1fr;text-align:center}.dashboard-grid{grid-template-columns:1fr}.achievement-card{grid-column:span 1}.detail-row{justify-content:center;flex-wrap:wrap}.brand-area h1{font-size:24px}}
+:root{
+  --navy:#061a40;
+  --saffron:#ff9933;
+  --green:#138808;
+  --light:#f4f7fc;
+  --danger:#c62828;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+  background:var(--light);
+  color:var(--navy);
+}
+
+/* HEADER */
+.dashboard-header{
+  background:linear-gradient(135deg,#041433,#08275d);
+  color:white;
+  padding:22px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.brand-area h1{
+  color:var(--saffron);
+  font-size:34px;
+}
+
+.logout-btn{
+  border:none;
+  background:var(--saffron);
+  color:var(--navy);
+  padding:15px 28px;
+  border-radius:13px;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+}
+
+/* CONTAINER */
+.page-container{
+  width:min(1450px,94%);
+  margin:30px auto;
+}
+
+/* PROFILE */
+.profile-section{
+  background:white;
+  border-radius:28px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:35px;
+  align-items:center;
+  box-shadow:0 15px 35px rgba(7,26,61,.14);
+  position:relative;
+}
+
+.profile-section::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:25px;
+  right:25px;
+  height:4px;
+  background:linear-gradient(90deg,var(--saffron),white,var(--green));
+}
+
+.photo-wrapper{
+  width:180px;
+  height:225px;
+  position:relative;
+  margin:auto;
+}
+
+.profile-photo{
+  width:180px;
+  height:225px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:18px;
+  border:3px solid var(--saffron);
+  background:#e7ebf2;
+  box-shadow:0 0 15px var(--saffron),0 0 25px var(--green);
+  cursor:pointer;
+}
+
+.photo-click-hint{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(6,26,64,.88);
+  color:white;
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.photo-menu{
+  display:none;
+  position:absolute;
+  top:238px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  width:190px;
+  border-radius:14px;
+  box-shadow:0 15px 35px rgba(0,0,0,.22);
+  padding:9px;
+  z-index:100;
+}
+
+.photo-menu.show{
+  display:block;
+}
+
+.photo-menu button{
+  width:100%;
+  border:none;
+  background:white;
+  padding:11px;
+  text-align:left;
+  border-radius:9px;
+  font-weight:800;
+  cursor:pointer;
+  color:var(--navy);
+}
+
+.photo-menu button:hover{
+  background:#f1f4f9;
+}
+
+.remove-photo-btn{
+  color:var(--danger)!important;
+}
+
+.cadet-details h4{
+  font-size:22px;
+}
+
+.cadet-name{
+  font-size:42px;
+  text-transform:uppercase;
+  margin:5px 0 18px;
+}
+
+.detail-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid #e6e9f1;
+  font-size:17px;
+}
+
+.detail-row i{
+  width:28px;
+  font-size:20px;
+}
+
+.detail-label{
+  font-weight:900;
+}
+
+.service-highlight{
+  color:#e87500;
+  font-weight:900;
+}
+
+.attendance-key{
+  color:#0b54a0;
+  font-weight:900;
+  word-break:break-all;
+}
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 15px;
+  border-radius:25px;
+  background:var(--green);
+  color:white;
+  font-weight:900;
+}
+
+.status-badge.alumni{
+  background:#6a1b9a;
+}
+
+/* DASHBOARD CARDS */
+.dashboard-grid{
+  margin-top:42px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.tricolor-card{
+  position:relative;
+  min-height:310px;
+  padding:30px 25px;
+  border-radius:28px;
+  background:white;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 -3px 16px rgba(255,153,51,.8),
+             0 3px 18px rgba(19,136,8,.7),
+             0 12px 25px rgba(7,26,61,.13);
+  transition:.3s;
+}
+
+.tricolor-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 -5px 24px rgba(255,153,51,1),
+             0 6px 25px rgba(19,136,8,.9),
+             0 18px 34px rgba(7,26,61,.18);
+}
+
+.tricolor-card::before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--saffron),white,var(--green),white,var(--saffron));
+  background-size:300% 300%;
+  animation:glowMove 5s linear infinite;
+  z-index:0;
+}
+
+.tricolor-card::after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  background:white;
+  border-radius:24px;
+  z-index:1;
+}
+
+@keyframes glowMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.card-content{
+  position:relative;
+  z-index:2;
+}
+
+.card-icon{
+  font-size:48px;
+  margin-bottom:16px;
+}
+
+.card-divider{
+  width:45px;
+  height:3px;
+  background:var(--saffron);
+  margin:12px auto 22px;
+  border-radius:10px;
+}
+
+.tricolor-card h2{
+  font-size:25px;
+}
+
+.tricolor-card p{
+  line-height:1.6;
+  color:#243653;
+}
+
+.notice-meta{
+  display:block;
+  margin-top:20px;
+  font-size:13px;
+}
+
+.attendance-number{
+  font-size:62px;
+  color:var(--green);
+  font-weight:900;
+}
+
+.eligibility-box{
+  margin-top:16px;
+  padding:13px;
+  border-radius:14px;
+  border:1px solid #8bcc81;
+  background:#f0fff0;
+  color:#176a10;
+  font-weight:800;
+}
+
+.not-allowed{
+  border-color:#ef9a9a;
+  background:#fff2f2;
+  color:#b71c1c;
+}
+
+.achievement-card{
+  grid-column:span 2;
+}
+
+.achievement-input{
+  width:100%;
+  max-width:600px;
+  padding:14px;
+  margin:20px 0;
+  border:1px solid #cfd6e2;
+  border-radius:12px;
+  background:white;
+}
+
+.achievement-btn,
+.material-btn{
+  background:var(--navy);
+  color:white;
+  padding:13px 25px;
+  border:none;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.achievement-btn:hover,
+.material-btn:hover{
+  background:var(--saffron);
+  color:var(--navy);
+}
+
+footer{
+  background:linear-gradient(135deg,#041433,#08275d);
+  color:white;
+  text-align:center;
+  padding:28px;
+}
+
+footer strong{
+  color:var(--saffron);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .profile-section{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .achievement-card{
+    grid-column:span 1;
+  }
+
+  .detail-row{
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .brand-area h1{
+    font-size:24px;
+  }
+}
 </style>
 </head>
 
@@ -63,6 +394,7 @@ footer strong{color:var(--saffron)}
   <div class="brand-area">
     <h1>Cadet Dashboard</h1>
   </div>
+
   <button class="logout-btn" onclick="logoutCadet()">
     <i class="fa-solid fa-right-from-bracket"></i> Logout
   </button>
@@ -71,13 +403,28 @@ footer strong{color:var(--saffron)}
 <div class="page-container">
 
 <section class="profile-section">
+
   <div class="photo-wrapper">
-    <img id="profilePreview" class="profile-photo" src="default-profile.png" alt="Cadet Passport Photo" onclick="togglePhotoMenu(event)">
-    <div class="photo-click-hint" id="photoClickHint">Click to upload</div>
+    <img
+      id="profilePreview"
+      class="profile-photo"
+      src="default-profile.png"
+      alt="Cadet Passport Photo"
+      onclick="togglePhotoMenu(event)"
+    >
+
+    <div class="photo-click-hint" id="photoClickHint">
+      Click to upload
+    </div>
 
     <div class="photo-menu" id="photoMenu">
-      <button onclick="chooseNewPhoto()"><i class="fa-solid fa-image"></i> Add / Change Photo</button>
-      <button class="remove-photo-btn" onclick="removeProfilePhoto()"><i class="fa-solid fa-trash"></i> Remove Photo</button>
+      <button onclick="chooseNewPhoto()">
+        <i class="fa-solid fa-image"></i> Add / Change Photo
+      </button>
+
+      <button class="remove-photo-btn" onclick="removeProfilePhoto()">
+        <i class="fa-solid fa-trash"></i> Remove Photo
+      </button>
     </div>
 
     <input type="file" id="profilePhotoInput" accept="image/*" hidden>
@@ -91,6 +438,12 @@ footer strong{color:var(--saffron)}
       <i class="fa-solid fa-id-card"></i>
       <span class="detail-label">Cadet ID:</span>
       <span id="cadetIdText">Loading...</span>
+    </div>
+
+    <div class="detail-row">
+      <i class="fa-solid fa-key"></i>
+      <span class="detail-label">Attendance Key:</span>
+      <span class="attendance-key" id="attendanceKeyText">Loading...</span>
     </div>
 
     <div class="detail-row">
@@ -111,6 +464,7 @@ footer strong{color:var(--saffron)}
       <span class="status-badge" id="cadetStatusText">Loading...</span>
     </div>
   </div>
+
 </section>
 
 <main class="dashboard-grid">
@@ -123,6 +477,7 @@ footer strong{color:var(--saffron)}
       <h3 id="noticeTitle">No Notice Available</h3>
       <p id="noticeContent">Waiting for official updates.</p>
       <small class="notice-meta" id="noticeBy"></small>
+      <div id="noticeMediaBox" style="margin-top:15px;"></div>
     </div>
   </article>
 
@@ -133,7 +488,9 @@ footer strong{color:var(--saffron)}
       <div class="card-divider"></div>
       <div class="attendance-number" id="attendancePercent">--</div>
       <p id="attendanceText">Attendance will appear when ANO declares it.</p>
-      <div class="eligibility-box" id="campEligibility">Camp eligibility pending</div>
+      <div class="eligibility-box" id="campEligibility">
+        Camp eligibility pending
+      </div>
     </div>
   </article>
 
@@ -142,7 +499,9 @@ footer strong{color:var(--saffron)}
       <i class="fa-solid fa-campground card-icon"></i>
       <h2>Camp Updates</h2>
       <div class="card-divider"></div>
-      <p id="campText">Camp updates will appear here after being published by ANO.</p>
+      <p id="campText">
+        Camp updates will appear here after being published by ANO.
+      </p>
     </div>
   </article>
 
@@ -152,7 +511,9 @@ footer strong{color:var(--saffron)}
       <h2>Training Materials</h2>
       <div class="card-divider"></div>
       <p>Study materials, drill videos and important documents will be updated here.</p>
-      <button class="material-btn"><i class="fa-solid fa-download"></i> View Materials</button>
+      <button class="material-btn">
+        <i class="fa-solid fa-download"></i> View Materials
+      </button>
     </div>
   </article>
 
@@ -163,7 +524,12 @@ footer strong{color:var(--saffron)}
       <div class="card-divider"></div>
       <p>Upload your achievement photo directly for ANO approval.</p>
 
-      <input type="file" id="achievementFile" accept="image/*" class="achievement-input">
+      <input
+        type="file"
+        id="achievementFile"
+        accept="image/*"
+        class="achievement-input"
+      >
 
       <br>
 
@@ -211,7 +577,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
   authDomain: "ustm-ncc-portal.firebaseapp.com",
   projectId: "ustm-ncc-portal",
-  storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  storageBucket: "ustm-ncc-portal.appspot.com",
   messagingSenderId: "164517585348",
   appId: "1:164517585348:web:119a2abdb1d871226ec491"
 };
@@ -225,6 +591,7 @@ const cadetKey = localStorage.getItem("activeCadetKey");
 
 let currentCadet = null;
 let selectedProfilePhoto = null;
+let attendanceMainLoaded = false;
 
 const defaultPhoto = "default-profile.png";
 
@@ -232,12 +599,30 @@ if(!cadetId || !cadetKey){
   window.location.replace("ncc.html");
 }
 
+function makeAttendanceKey(value){
+  return String(value || "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g,"");
+}
+
+const attendanceKey = makeAttendanceKey(cadetId);
+
 function getServiceYear(cadet){
   const year = Number(cadet.cadetYear);
+
   if(year === 1) return "1st Year";
   if(year === 2) return "2nd Year";
   if(year === 3) return "3rd Year";
+
   return "Not marked by ANO";
+}
+
+function getAttendanceRemark(percent){
+  if(percent > 70){
+    return "Attendance meets NCC requirement. Cadet is eligible for camp selection subject to ANO approval.";
+  }
+
+  return "Attendance below minimum NCC requirement. Cadet is not eligible for camp selection.";
 }
 
 function showCadetStatus(status){
@@ -286,10 +671,20 @@ async function loadCadet(){
       return;
     }
 
-    document.getElementById("cadetName").textContent = currentCadet.name || "Cadet";
-    document.getElementById("cadetIdText").textContent = currentCadet.id || cadetId;
-    document.getElementById("cadetRankText").textContent = currentCadet.rank || "Not updated";
-    document.getElementById("serviceYearText").textContent = getServiceYear(currentCadet);
+    document.getElementById("cadetName").textContent =
+      currentCadet.name || "Cadet";
+
+    document.getElementById("cadetIdText").textContent =
+      currentCadet.id || cadetId;
+
+    document.getElementById("attendanceKeyText").textContent =
+      attendanceKey;
+
+    document.getElementById("cadetRankText").textContent =
+      currentCadet.rank || "Not updated";
+
+    document.getElementById("serviceYearText").textContent =
+      getServiceYear(currentCadet);
 
     showCadetStatus(currentCadet.status);
     updatePhotoUI(currentCadet.profilePhoto || "");
@@ -436,10 +831,8 @@ function loadNotices(){
     if(snapshot.empty) return;
 
     const notice = snapshot.docs[0].data();
+    showNotice(notice);
 
-    document.getElementById("noticeTitle").textContent = notice.title || "Official Notice";
-    document.getElementById("noticeContent").textContent = notice.content || "";
-    document.getElementById("noticeBy").textContent = `Published by: ${notice.by || "ANO"} | ${notice.date || ""}`;
   },()=>{
     onSnapshot(collection(db,"notices"),snapshot=>{
       let latest = null;
@@ -448,36 +841,74 @@ function loadNotices(){
         latest = docSnap.data();
       });
 
-      if(latest){
-        document.getElementById("noticeTitle").textContent = latest.title || "Official Notice";
-        document.getElementById("noticeContent").textContent = latest.content || "";
-        document.getElementById("noticeBy").textContent = `Published by: ${latest.by || "ANO"} | ${latest.date || ""}`;
-      }
+      if(latest) showNotice(latest);
     });
   });
 }
 
+function showNotice(notice){
+  document.getElementById("noticeTitle").textContent =
+    notice.title || "Official Notice";
+
+  document.getElementById("noticeContent").textContent =
+    notice.content || "";
+
+  document.getElementById("noticeBy").textContent =
+    `Published by: ${notice.by || "ANO"} | ${notice.date || ""}`;
+
+  const mediaBox = document.getElementById("noticeMediaBox");
+  mediaBox.innerHTML = "";
+
+  if(notice.mediaUrl){
+    if(String(notice.mediaType || "").startsWith("video")){
+      mediaBox.innerHTML =
+        `<video controls style="width:100%;border-radius:12px;margin-top:12px;">
+          <source src="${notice.mediaUrl}">
+        </video>`;
+    }else{
+      mediaBox.innerHTML =
+        `<img src="${notice.mediaUrl}" alt="Notice Photo" style="width:100%;border-radius:12px;margin-top:12px;">`;
+    }
+  }
+}
+
+function updateAttendanceUI(data){
+  const percent = Number(data.percent);
+
+  document.getElementById("attendancePercent").textContent =
+    Number.isFinite(percent) ? percent + "%" : "--";
+
+  document.getElementById("attendanceText").textContent =
+    data.remarks || data.text || getAttendanceRemark(percent);
+
+  const eligibility = document.getElementById("campEligibility");
+
+  if(Number.isFinite(percent) && percent > 70){
+    eligibility.textContent =
+      "Eligible for Camp Selection";
+
+    eligibility.className =
+      "eligibility-box";
+  }else if(Number.isFinite(percent)){
+    eligibility.textContent =
+      "Not Eligible for Camp Selection";
+
+    eligibility.className =
+      "eligibility-box not-allowed";
+  }
+}
+
 function loadAttendance(){
+  onSnapshot(doc(db,"attendance",attendanceKey),snapshot=>{
+    if(snapshot.exists()){
+      attendanceMainLoaded = true;
+      updateAttendanceUI(snapshot.data());
+    }
+  });
+
   onSnapshot(doc(db,"attendance",cadetKey),snapshot=>{
-    if(!snapshot.exists()) return;
-
-    const data = snapshot.data();
-    const percent = Number(data.percent);
-
-    document.getElementById("attendancePercent").textContent =
-      Number.isFinite(percent) ? percent + "%" : "--";
-
-    document.getElementById("attendanceText").textContent =
-      data.text || "Attendance counted from regular NCC classes and events.";
-
-    const eligibility = document.getElementById("campEligibility");
-
-    if(Number.isFinite(percent) && percent > 70){
-      eligibility.textContent = "Eligible for Camp — Subject to ANO approval";
-      eligibility.className = "eligibility-box";
-    }else if(Number.isFinite(percent)){
-      eligibility.textContent = "Not eligible for camp due to low attendance";
-      eligibility.className = "eligibility-box not-allowed";
+    if(snapshot.exists() && !attendanceMainLoaded){
+      updateAttendanceUI(snapshot.data());
     }
   });
 }
@@ -487,6 +918,7 @@ function loadCampUpdate(){
     if(!snapshot.exists()) return;
 
     const data = snapshot.data();
+
     document.getElementById("campText").textContent =
       data.text || "No camp update available.";
   });
@@ -527,6 +959,7 @@ window.uploadAchievement = async function(){
       url:imageURL,
       storagePath:storagePath,
       cadetId:cadetId,
+      attendanceKey:attendanceKey,
       cadetKey:cadetKey,
       cadetName:currentCadet?.name || "",
       status:"pending",
