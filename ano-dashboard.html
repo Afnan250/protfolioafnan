@@ -326,7 +326,7 @@ footer strong{
     <div class="card">
       <i class="fa-solid fa-photo-film"></i>
       <h2>Showcase Upload</h2>
-      <p>Upload photos and videos for the main showcase/gallery.</p>
+      <p>Paste photo/video links for the main showcase/gallery.</p>
       <button onclick="scrollToSection('showcaseSection')">
         Upload Showcase
       </button>
@@ -350,7 +350,13 @@ footer strong{
 
     <input id="noticeDate" placeholder="Date e.g. 29-06-2026">
 
-    <input type="file" id="noticeMedia" accept="image/*">
+    
+    <input type="url" id="noticeMediaUrl" placeholder="Optional notice photo/video URL">
+    <select id="noticeMediaType">
+      <option value="">Media Type (optional)</option>
+      <option value="image">Photo/Image</option>
+      <option value="video">Video</option>
+    </select>
 
     <button class="action-btn" id="noticeBtn" onclick="publishNotice()">
       Publish Notice
@@ -397,11 +403,16 @@ footer strong{
   </section>
 
   <section class="form-section" id="showcaseSection">
-    <h2>Upload Showcase Photo / Video</h2>
+    <h2>Add Showcase Photo / Video URL</h2>
 
     <input id="showcaseTitle" placeholder="Showcase Title">
     <textarea id="showcaseCaption" placeholder="Caption / Description"></textarea>
-    <input type="file" id="showcaseFile" accept="image/*,video/*">
+    
+    <input type="url" id="showcaseMediaUrl" placeholder="Paste showcase photo/video URL">
+    <select id="showcaseMediaType">
+      <option value="image">Photo/Image</option>
+      <option value="video">Video</option>
+    </select>
 
     <button class="action-btn" id="showcaseBtn" onclick="uploadShowcase()">
       Upload Showcase
@@ -460,25 +471,18 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
   authDomain: "ustm-ncc-portal.firebaseapp.com",
   projectId: "ustm-ncc-portal",
- storageBucket: "ustm-ncc-portal.firebasestorage.app",
+  storageBucket: "ustm-ncc-portal.appspot.com",
   messagingSenderId: "164517585348",
   appId: "1:164517585348:web:119a2abdb1d871226ec491"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 let allCadetRows = [];
 
@@ -770,41 +774,23 @@ window.updateAttendance = async function(){
   document.getElementById("attendanceTextInput").value = "";
 };
 
-async function uploadOptionalFile(file,pathPrefix){
-  if(!file){
-    return {
-      mediaUrl:"",
-      mediaPath:"",
-      mediaType:""
-    };
+function isValidUrl(value){
+  try{
+    new URL(value);
+    return true;
+  }catch{
+    return false;
   }
-
-  const uploadFile = isImageFile(file) ? await compressImageFile(file,1200,0.75) : file;
-
-  const extension = uploadFile.name.includes(".")
-    ? uploadFile.name.split(".").pop().toLowerCase()
-    : "file";
-
-  const storagePath = `${pathPrefix}/${Date.now()}.${extension}`;
-  const fileRef = ref(storage,storagePath);
-
-  await uploadBytes(fileRef,uploadFile);
-
-  const url = await getDownloadURL(fileRef);
-
-  return {
-    mediaUrl:url,
-    mediaPath:storagePath,
-    mediaType:file.type
-  };
 }
+
 
 window.publishNotice = async function(){
   const title = document.getElementById("noticeTitle").value.trim();
   const content = document.getElementById("noticeContent").value.trim();
   const by = document.getElementById("noticeBy").value;
   const date = document.getElementById("noticeDate").value.trim();
-  const mediaFile = document.getElementById("noticeMedia").files[0];
+  const mediaUrl = document.getElementById("noticeMediaUrl").value.trim();
+  const mediaTypeValue = document.getElementById("noticeMediaType").value;
   const btn = document.getElementById("noticeBtn");
 
   if(!title || !content || !by){
@@ -812,11 +798,14 @@ window.publishNotice = async function(){
     return;
   }
 
+  if(mediaUrl && !isValidUrl(mediaUrl)){
+    alert("Please paste a valid notice media URL.");
+    return;
+  }
+
   try{
     btn.textContent = "Publishing...";
     btn.disabled = true;
-
-    const media = await uploadOptionalFile(mediaFile,"noticeMedia");
 
     const createdAt = new Date();
     const expiresAt = new Date(createdAt.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -828,7 +817,8 @@ window.publishNotice = async function(){
       date:date || createdAt.toLocaleDateString(),
       createdAt:createdAt.toISOString(),
       expiresAt:expiresAt.toISOString(),
-      ...media
+      mediaUrl:mediaUrl,
+      mediaType:mediaUrl ? mediaTypeValue : ""
     });
 
     alert("Notice published successfully. It will expire after 7 days.");
@@ -837,11 +827,12 @@ window.publishNotice = async function(){
     document.getElementById("noticeContent").value = "";
     document.getElementById("noticeBy").value = "";
     document.getElementById("noticeDate").value = "";
-    document.getElementById("noticeMedia").value = "";
+    document.getElementById("noticeMediaUrl").value = "";
+    document.getElementById("noticeMediaType").value = "";
 
   }catch(error){
     console.error(error);
-    alert("Notice publishing failed. Check Firebase Storage/Firestore rules.");
+    alert("Notice publishing failed. Check Firestore rules.");
   }finally{
     btn.textContent = "Publish Notice";
     btn.disabled = false;
@@ -916,45 +907,47 @@ window.updateCamp = async function(){
   document.getElementById("campTextInput").value = "";
 };
 
+
 window.uploadShowcase = async function(){
   const title = document.getElementById("showcaseTitle").value.trim();
   const caption = document.getElementById("showcaseCaption").value.trim();
-  const file = document.getElementById("showcaseFile").files[0];
+  const mediaUrl = document.getElementById("showcaseMediaUrl").value.trim();
+  const mediaType = document.getElementById("showcaseMediaType").value;
   const btn = document.getElementById("showcaseBtn");
 
-  if(!title || !file){
-    alert("Please enter title and choose photo/video.");
+  if(!title || !mediaUrl){
+    alert("Please enter title and paste photo/video URL.");
     return;
   }
 
-  if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
-    alert("Only photo or video files are allowed.");
+  if(!isValidUrl(mediaUrl)){
+    alert("Please paste a valid showcase URL.");
     return;
   }
 
   try{
-    btn.textContent = "Uploading...";
+    btn.textContent = "Submitting...";
     btn.disabled = true;
-
-    const media = await uploadOptionalFile(file,"showcaseUploads");
 
     await addDoc(collection(db,"showcase"),{
       title:title,
       caption:caption,
-      ...media,
+      mediaUrl:mediaUrl,
+      mediaType:mediaType,
       uploadedBy:"ANO",
       createdAt:new Date().toISOString()
     });
 
-    alert("Showcase uploaded successfully.");
+    alert("Showcase submitted successfully.");
 
     document.getElementById("showcaseTitle").value = "";
     document.getElementById("showcaseCaption").value = "";
-    document.getElementById("showcaseFile").value = "";
+    document.getElementById("showcaseMediaUrl").value = "";
+    document.getElementById("showcaseMediaType").value = "image";
 
   }catch(error){
     console.error(error);
-    alert("Showcase upload failed. Check Firebase Storage rules.");
+    alert("Showcase submission failed. Check Firestore rules.");
   }finally{
     btn.textContent = "Upload Showcase";
     btn.disabled = false;
