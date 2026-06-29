@@ -356,6 +356,17 @@ body{
   color:var(--navy);
 }
 
+footer{
+  background:linear-gradient(135deg,#041433,#08275d);
+  color:white;
+  text-align:center;
+  padding:28px;
+}
+
+footer strong{
+  color:var(--saffron);
+}
+
 /* MOBILE */
 @media(max-width:900px){
   .profile-section{
@@ -389,9 +400,10 @@ body{
 </head>
 
 <body>
+
 <header class="dashboard-header">
   <div class="brand-area">
-    <img src="ncc2.jpeg" class="header-logo" alt="USTM NCC Logo">
+    <img src="ustmncclogo.jpeg" class="header-logo" alt="USTM NCC Logo">
     <h1>Cadet Dashboard</h1>
   </div>
 
@@ -528,7 +540,7 @@ body{
 
       <br>
 
-      <button class="achievement-btn" onclick="uploadAchievement()">
+      <button class="achievement-btn" id="achievementBtn" onclick="uploadAchievement()">
         <i class="fa-solid fa-upload"></i> Upload Achievement
       </button>
     </div>
@@ -668,8 +680,6 @@ async function loadCadet(){
   }catch(error){
     console.error(error);
     alert("Unable to load cadet details.");
-  }finally{
-    document.getElementById("loadingOverlay").style.display = "none";
   }
 }
 
@@ -725,7 +735,6 @@ window.uploadProfilePhoto = async function(){
   }
 
   try{
-
     const extension = file.name.includes(".")
       ? file.name.split(".").pop().toLowerCase()
       : "jpg";
@@ -768,7 +777,6 @@ window.uploadProfilePhoto = async function(){
   }catch(error){
     console.error(error);
     alert("Profile photo upload failed. Check Firebase Storage rules.");
-  }finally{
   }
 };
 
@@ -785,8 +793,6 @@ window.removeProfilePhoto = async function(){
   }
 
   try{
-    document.getElementById("loadingOverlay").style.display = "flex";
-
     if(currentCadet.profilePhotoPath){
       try{
         await deleteObject(ref(storage,currentCadet.profilePhotoPath));
@@ -811,8 +817,6 @@ window.removeProfilePhoto = async function(){
   }catch(error){
     console.error(error);
     alert("Could not remove profile photo.");
-  }finally{
-    document.getElementById("loadingOverlay").style.display = "none";
   }
 };
 
@@ -896,6 +900,7 @@ function loadCampUpdate(){
 
 window.uploadAchievement = async function(){
   const file = document.getElementById("achievementFile").files[0];
+  const btn = document.getElementById("achievementBtn");
 
   if(!file){
     alert("Please select an achievement photo.");
@@ -908,7 +913,8 @@ window.uploadAchievement = async function(){
   }
 
   try{
-    document.getElementById("loadingOverlay").style.display = "flex";
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+    btn.disabled = true;
 
     const extension = file.name.includes(".")
       ? file.name.split(".").pop().toLowerCase()
@@ -941,7 +947,8 @@ window.uploadAchievement = async function(){
     console.error(error);
     alert("Achievement upload failed. Check Firebase Storage rules.");
   }finally{
-    document.getElementById("loadingOverlay").style.display = "none";
+    btn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload Achievement';
+    btn.disabled = false;
   }
 };
 
