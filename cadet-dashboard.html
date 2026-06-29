@@ -356,44 +356,6 @@ body{
   color:var(--navy);
 }
 
-/* LOADING */
-.loading-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(6,26,64,.85);
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.loader{
-  width:55px;
-  height:55px;
-  margin:auto;
-  border:6px solid rgba(255,255,255,.3);
-  border-top-color:var(--saffron);
-  border-bottom-color:var(--green);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-footer{
-  background:linear-gradient(135deg,#041433,#08275d);
-  color:white;
-  text-align:center;
-  padding:28px;
-}
-
-footer strong{
-  color:var(--saffron);
-}
-
 /* MOBILE */
 @media(max-width:900px){
   .profile-section{
@@ -427,14 +389,6 @@ footer strong{
 </head>
 
 <body>
-
-<div class="loading-overlay" id="loadingOverlay">
-  <div>
-    <div class="loader"></div>
-    <p style="margin-top:15px;">Loading cadet dashboard...</p>
-  </div>
-</div>
-
 <header class="dashboard-header">
   <div class="brand-area">
     <img src="ncc2.jpeg" class="header-logo" alt="USTM NCC Logo">
@@ -771,7 +725,6 @@ window.uploadProfilePhoto = async function(){
   }
 
   try{
-    document.getElementById("loadingOverlay").style.display = "flex";
 
     const extension = file.name.includes(".")
       ? file.name.split(".").pop().toLowerCase()
@@ -816,7 +769,6 @@ window.uploadProfilePhoto = async function(){
     console.error(error);
     alert("Profile photo upload failed. Check Firebase Storage rules.");
   }finally{
-    document.getElementById("loadingOverlay").style.display = "none";
   }
 };
 
