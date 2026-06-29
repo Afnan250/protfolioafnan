@@ -351,10 +351,13 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 <section class="notice-board" id="notice">
   <h2 class="title">Notice Board</h2>
   <p class="subtitle">Latest updates from ANO or Senior In-Charge.</p>
+
   <div class="notice">
     <h3 id="noticeTitle">No Notice Available</h3>
     <p id="noticeContent">Waiting for official updates.</p>
     <small id="noticeBy"></small>
+
+    <div id="noticeMediaBox" style="margin-top:18px;"></div>
   </div>
 </section>
 
@@ -896,14 +899,41 @@ onSnapshot(collection(db,"notices"), snapshot=>{
   let latestNotice = null;
 
   snapshot.forEach(docSnap=>{
-    latestNotice = docSnap.data();
+    const notice = docSnap.data();
+
+    if(!notice.expiresAt || new Date(notice.expiresAt) > new Date()){
+      latestNotice = notice;
+    }
   });
 
   if(latestNotice){
-    document.getElementById("noticeTitle").innerText = latestNotice.title || "Notice";
-    document.getElementById("noticeContent").innerText = latestNotice.content || "";
+    document.getElementById("noticeTitle").innerText =
+      latestNotice.title || "Notice";
+
+    document.getElementById("noticeContent").innerText =
+      latestNotice.content || "";
+
     document.getElementById("noticeBy").innerText =
       "Published by: " + (latestNotice.by || "ANO") + " | " + (latestNotice.date || "");
+
+    const mediaBox = document.getElementById("noticeMediaBox");
+    mediaBox.innerHTML = "";
+
+    if(latestNotice.mediaUrl){
+      if(latestNotice.mediaType === "video"){
+        mediaBox.innerHTML = `
+          <video controls style="width:100%;max-height:420px;border-radius:14px;margin-top:15px;">
+            <source src="${latestNotice.mediaUrl}">
+          </video>
+        `;
+      }else{
+        mediaBox.innerHTML = `
+          <img src="${latestNotice.mediaUrl}" 
+               alt="Notice Photo"
+               style="width:100%;max-height:500px;object-fit:contain;border-radius:14px;margin-top:15px;">
+        `;
+      }
+    }
   }
 });
 
