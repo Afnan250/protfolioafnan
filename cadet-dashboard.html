@@ -29,7 +29,6 @@ body{
   color:var(--navy);
 }
 
-/* HEADER */
 .dashboard-header{
   background:linear-gradient(135deg,#041433,#08275d);
   color:white;
@@ -56,13 +55,11 @@ body{
   cursor:pointer;
 }
 
-/* CONTAINER */
 .page-container{
   width:min(1450px,94%);
   margin:30px auto;
 }
 
-/* PROFILE */
 .profile-section{
   background:white;
   border-radius:28px;
@@ -209,7 +206,14 @@ body{
   background:#6a1b9a;
 }
 
-/* DASHBOARD CARDS */
+.status-badge.pending{
+  background:#e87500;
+}
+
+.status-badge.cancelled{
+  background:var(--danger);
+}
+
 .dashboard-grid{
   margin-top:42px;
   display:grid;
@@ -361,7 +365,6 @@ footer strong{
   color:var(--saffron);
 }
 
-/* MOBILE */
 @media(max-width:900px){
   .profile-section{
     grid-template-columns:1fr;
@@ -441,6 +444,12 @@ footer strong{
     </div>
 
     <div class="detail-row">
+      <i class="fa-solid fa-key"></i>
+      <span class="detail-label">Attendance Key:</span>
+      <span class="attendance-key" id="attendanceKeyText">Loading...</span>
+    </div>
+
+    <div class="detail-row">
       <i class="fa-solid fa-chevron-up"></i>
       <span class="detail-label">Rank:</span>
       <span id="cadetRankText">Loading...</span>
@@ -455,7 +464,7 @@ footer strong{
     <div class="detail-row">
       <i class="fa-solid fa-shield-halved"></i>
       <span class="detail-label">Status:</span>
-      <span class="status-badge" id="cadetStatusText">Loading...</span>
+      <span class="status-badge pending" id="cadetStatusText">Loading...</span>
     </div>
   </div>
 
@@ -601,6 +610,11 @@ function makeAttendanceKey(value){
 
 const attendanceKey = makeAttendanceKey(cadetId);
 
+function getRankFromId(id){
+  const parts = String(id || "").split("-");
+  return parts.length >= 5 ? parts[4] : "Not updated";
+}
+
 function getServiceYear(cadet){
   const year = Number(cadet.cadetYear);
 
@@ -619,19 +633,32 @@ function getAttendanceRemark(percent){
   return "Attendance below minimum NCC requirement. Cadet is not eligible for camp selection.";
 }
 
-function showCadetStatus(status){
+function showCadetStatus(cadet){
   const statusElement = document.getElementById("cadetStatusText");
-  const normalized = String(status || "active").toLowerCase();
+  const year = Number(cadet.cadetYear);
+  const status = String(cadet.status || "active").toLowerCase();
 
   statusElement.className = "status-badge";
 
-  if(normalized === "completed" || normalized === "alumni"){
+  if(status === "cancelled"){
+    statusElement.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Cancelled';
+    statusElement.classList.add("cancelled");
+    return;
+  }
+
+  if(status === "alumni" || status === "completed" || year > 3){
     statusElement.innerHTML = '<i class="fa-solid fa-user-graduate"></i> Alumni Cadet';
     statusElement.classList.add("alumni");
     return;
   }
 
-  statusElement.innerHTML = '<i class="fa-solid fa-circle-check"></i> Active Cadet';
+  if(year === 1 || year === 2 || year === 3){
+    statusElement.innerHTML = '<i class="fa-solid fa-circle-check"></i> Active Cadet';
+    return;
+  }
+
+  statusElement.innerHTML = '<i class="fa-solid fa-clock"></i> Pending by ANO';
+  statusElement.classList.add("pending");
 }
 
 function updatePhotoUI(photoURL){
@@ -675,12 +702,12 @@ async function loadCadet(){
       attendanceKey;
 
     document.getElementById("cadetRankText").textContent =
-      currentCadet.rank || "Not updated";
+      currentCadet.rank || getRankFromId(currentCadet.id || cadetId);
 
     document.getElementById("serviceYearText").textContent =
       getServiceYear(currentCadet);
 
-    showCadetStatus(currentCadet.status);
+    showCadetStatus(currentCadet);
     updatePhotoUI(currentCadet.profilePhoto || "");
 
   }catch(error){
