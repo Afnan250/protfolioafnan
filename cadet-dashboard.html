@@ -2,28 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Cadet Dashboard | USTM NCC</title>
 
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
   --navy:#061a40;
-  --navy-light:#0c2d68;
   --saffron:#ff9933;
   --green:#138808;
-  --white:#ffffff;
   --light:#f4f7fc;
-  --text:#071a3d;
   --danger:#c62828;
 }
 
@@ -31,31 +21,22 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Segoe UI",Arial,sans-serif;
+  font-family:Segoe UI,Arial,sans-serif;
 }
 
 body{
-  min-height:100vh;
-  background:#f4f7fc;
-  color:var(--text);
+  background:var(--light);
+  color:var(--navy);
 }
 
-button,
-input{
-  font:inherit;
-}
-
-/* ================= HEADER ================= */
-
+/* HEADER */
 .dashboard-header{
-  min-height:112px;
   background:linear-gradient(135deg,#041433,#08275d);
   color:white;
-  padding:20px 5%;
+  padding:22px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
   box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
 
@@ -66,58 +47,44 @@ input{
 }
 
 .header-logo{
-  width:72px;
-  height:72px;
+  width:70px;
+  height:70px;
   object-fit:contain;
 }
 
 .brand-area h1{
   color:var(--saffron);
   font-size:34px;
-  line-height:1.2;
 }
 
 .logout-btn{
   border:none;
   background:var(--saffron);
   color:var(--navy);
-  padding:15px 27px;
+  padding:15px 28px;
   border-radius:13px;
   font-weight:900;
   font-size:17px;
   cursor:pointer;
-  transition:.25s;
 }
 
-.logout-btn:hover{
-  transform:translateY(-2px);
-  background:white;
-}
-
-.logout-btn i{
-  margin-right:8px;
-}
-
-/* ================= MAIN CONTAINER ================= */
-
+/* CONTAINER */
 .page-container{
   width:min(1450px,94%);
-  margin:28px auto 40px;
+  margin:30px auto;
 }
 
-/* ================= PROFILE SECTION ================= */
-
+/* PROFILE */
 .profile-section{
-  position:relative;
   background:white;
   border-radius:28px;
   padding:30px;
   display:grid;
-  grid-template-columns:220px 1fr 250px;
-  align-items:center;
+  grid-template-columns:220px 1fr;
   gap:35px;
+  align-items:center;
   box-shadow:0 15px 35px rgba(7,26,61,.14);
-  overflow:visible;
+  position:relative;
 }
 
 .profile-section::before{
@@ -126,27 +93,15 @@ input{
   top:0;
   left:25px;
   right:25px;
-  height:3px;
-  background:linear-gradient(
-    90deg,
-    var(--saffron),
-    white,
-    var(--green)
-  );
-}
-
-/* Photo */
-
-.photo-column{
-  display:flex;
-  justify-content:center;
-  position:relative;
+  height:4px;
+  background:linear-gradient(90deg,var(--saffron),white,var(--green));
 }
 
 .photo-wrapper{
-  position:relative;
   width:180px;
   height:225px;
+  position:relative;
+  margin:auto;
 }
 
 .profile-photo{
@@ -155,18 +110,10 @@ input{
   object-fit:cover;
   object-position:center top;
   border-radius:18px;
-  background:#eef1f6;
   border:3px solid var(--saffron);
-  box-shadow:
-    0 0 12px rgba(255,153,51,.8),
-    0 0 22px rgba(19,136,8,.45);
+  background:#e7ebf2;
+  box-shadow:0 0 15px var(--saffron),0 0 25px var(--green);
   cursor:pointer;
-  transition:.25s;
-}
-
-.profile-photo:hover{
-  transform:scale(1.015);
-  filter:brightness(.94);
 }
 
 .photo-click-hint{
@@ -174,31 +121,26 @@ input{
   bottom:8px;
   left:50%;
   transform:translateX(-50%);
-  width:max-content;
-  max-width:90%;
-  padding:6px 10px;
-  border-radius:20px;
   background:rgba(6,26,64,.88);
   color:white;
   font-size:11px;
-  pointer-events:none;
+  padding:6px 10px;
+  border-radius:20px;
+  white-space:nowrap;
 }
-
-/* Photo action menu */
 
 .photo-menu{
   display:none;
   position:absolute;
-  top:calc(100% + 10px);
+  top:238px;
   left:50%;
   transform:translateX(-50%);
-  width:190px;
-  z-index:100;
-  padding:9px;
   background:white;
+  width:190px;
   border-radius:14px;
   box-shadow:0 15px 35px rgba(0,0,0,.22);
-  border:1px solid #e2e6ee;
+  padding:9px;
+  z-index:100;
 }
 
 .photo-menu.show{
@@ -208,46 +150,31 @@ input{
 .photo-menu button{
   width:100%;
   border:none;
-  padding:11px 12px;
+  background:white;
+  padding:11px;
+  text-align:left;
   border-radius:9px;
   font-weight:800;
-  text-align:left;
   cursor:pointer;
-  background:white;
   color:var(--navy);
 }
 
 .photo-menu button:hover{
-  background:#f0f4fa;
+  background:#f1f4f9;
 }
 
-.photo-menu .remove-photo-btn{
-  color:var(--danger);
+.remove-photo-btn{
+  color:var(--danger)!important;
 }
 
-.photo-menu i{
-  width:22px;
-}
-
-/* Cadet information */
-
-.cadet-details{
-  min-width:0;
-}
-
-.welcome-small{
-  font-size:21px;
-  font-weight:700;
-  margin-bottom:3px;
+.cadet-details h4{
+  font-size:22px;
 }
 
 .cadet-name{
   font-size:42px;
-  line-height:1.15;
-  color:var(--navy);
-  margin-bottom:20px;
   text-transform:uppercase;
-  overflow-wrap:anywhere;
+  margin:5px 0 18px;
 }
 
 .detail-row{
@@ -255,27 +182,17 @@ input{
   align-items:center;
   gap:12px;
   padding:11px 0;
-  border-bottom:1px solid #e5e8ef;
+  border-bottom:1px solid #e6e9f1;
   font-size:17px;
 }
 
-.detail-row:last-child{
-  border-bottom:none;
-}
-
-.detail-icon{
-  width:30px;
-  text-align:center;
-  color:var(--navy);
-  font-size:21px;
+.detail-row i{
+  width:28px;
+  font-size:20px;
 }
 
 .detail-label{
-  font-weight:800;
-}
-
-.detail-value{
-  overflow-wrap:anywhere;
+  font-weight:900;
 }
 
 .service-highlight{
@@ -298,73 +215,11 @@ input{
   background:#6a1b9a;
 }
 
-.status-badge.cancelled{
-  background:var(--danger);
-}
-
-/* Initial upload box */
-
-.initial-upload-box{
-  text-align:center;
-  padding:18px;
-  border-radius:18px;
-  border:1px solid #d8dde7;
-  background:#fafbfe;
-}
-
-.initial-upload-box h3{
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.initial-upload-box p{
-  font-size:13px;
-  color:#667085;
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-.photo-select-btn,
-.upload-confirm-btn{
-  width:100%;
-  border:none;
-  border-radius:11px;
-  padding:12px;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.photo-select-btn{
-  background:white;
-  color:var(--navy);
-  border:1px solid #ccd3df;
-  margin-bottom:9px;
-}
-
-.upload-confirm-btn{
-  background:var(--navy);
-  color:white;
-}
-
-.upload-confirm-btn:hover{
-  background:var(--saffron);
-  color:var(--navy);
-}
-
-.selected-file-name{
-  display:block;
-  margin:9px 0;
-  font-size:12px;
-  color:#596579;
-  overflow-wrap:anywhere;
-}
-
-/* ================= DASHBOARD CARDS ================= */
-
+/* DASHBOARD CARDS */
 .dashboard-grid{
   margin-top:42px;
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(3,1fr);
   gap:30px;
 }
 
@@ -372,90 +227,47 @@ input{
   position:relative;
   min-height:310px;
   padding:30px 25px;
-  border-radius:27px;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.94));
+  border-radius:28px;
+  background:white;
   text-align:center;
-  z-index:1;
   overflow:hidden;
-  box-shadow:
-    0 -3px 16px rgba(255,153,51,.72),
-    0 3px 18px rgba(19,136,8,.65),
-    0 12px 25px rgba(7,26,61,.13);
-  transition:transform .3s,box-shadow .3s;
+  box-shadow:0 -3px 16px rgba(255,153,51,.8),
+             0 3px 18px rgba(19,136,8,.7),
+             0 12px 25px rgba(7,26,61,.13);
+  transition:.3s;
+}
+
+.tricolor-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 -5px 24px rgba(255,153,51,1),
+             0 6px 25px rgba(19,136,8,.9),
+             0 18px 34px rgba(7,26,61,.18);
 }
 
 .tricolor-card::before{
   content:"";
   position:absolute;
   inset:-4px;
-  z-index:-2;
   border-radius:30px;
-  padding:4px;
-  background:linear-gradient(
-    135deg,
-    var(--saffron),
-    white,
-    var(--green),
-    white,
-    var(--saffron)
-  );
+  background:linear-gradient(135deg,var(--saffron),white,var(--green),white,var(--saffron));
   background-size:300% 300%;
-  animation:tricolorGlow 5s linear infinite;
+  animation:glowMove 5s linear infinite;
+  z-index:0;
 }
 
 .tricolor-card::after{
   content:"";
   position:absolute;
-  inset:4px;
-  z-index:-1;
-  border-radius:23px;
+  inset:5px;
   background:white;
+  border-radius:24px;
+  z-index:1;
 }
 
-.tricolor-card:hover{
-  transform:translateY(-8px);
-  box-shadow:
-    0 -5px 24px rgba(255,153,51,.95),
-    0 6px 25px rgba(19,136,8,.8),
-    0 18px 34px rgba(7,26,61,.16);
-}
-
-@keyframes tricolorGlow{
+@keyframes glowMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
-}
-
-/* Decorative wave */
-
-.card-wave{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:85px;
-  opacity:.75;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      90% 65px at 15% 110%,
-      transparent 61%,
-      rgba(255,153,51,.55) 63%,
-      transparent 69%
-    ),
-    radial-gradient(
-      95% 70px at 35% 115%,
-      transparent 61%,
-      rgba(255,255,255,.95) 63%,
-      transparent 69%
-    ),
-    radial-gradient(
-      100% 75px at 65% 120%,
-      transparent 61%,
-      rgba(19,136,8,.45) 63%,
-      transparent 69%
-    );
 }
 
 .card-content{
@@ -464,76 +276,53 @@ input{
 }
 
 .card-icon{
-  font-size:49px;
-  color:var(--navy);
-  margin-bottom:15px;
+  font-size:48px;
+  margin-bottom:16px;
+}
+
+.card-divider{
+  width:45px;
+  height:3px;
+  background:var(--saffron);
+  margin:12px auto 22px;
+  border-radius:10px;
 }
 
 .tricolor-card h2{
   font-size:25px;
-  margin-bottom:11px;
-}
-
-.card-divider{
-  width:42px;
-  height:3px;
-  border-radius:10px;
-  margin:0 auto 20px;
-  background:var(--saffron);
 }
 
 .tricolor-card p{
-  color:#253451;
-  line-height:1.65;
-  font-size:16px;
+  line-height:1.6;
+  color:#243653;
 }
 
 .notice-meta{
   display:block;
-  margin-top:25px;
+  margin-top:20px;
   font-size:13px;
-  line-height:1.6;
 }
 
 .attendance-number{
-  margin:10px 0;
-  font-size:64px;
+  font-size:62px;
   color:var(--green);
   font-weight:900;
 }
 
 .eligibility-box{
-  margin-top:19px;
+  margin-top:16px;
   padding:13px;
   border-radius:14px;
   border:1px solid #8bcc81;
   background:#f0fff0;
-  font-weight:800;
   color:#176a10;
+  font-weight:800;
 }
 
 .not-allowed{
   border-color:#ef9a9a;
   background:#fff2f2;
   color:#b71c1c;
-}
-
-.material-btn,
-.achievement-btn{
-  border:none;
-  padding:13px 24px;
-  border-radius:10px;
-  background:var(--navy);
-  color:white;
-  font-weight:900;
-  cursor:pointer;
-  margin-top:22px;
-}
-
-.material-btn:hover,
-.achievement-btn:hover{
-  background:var(--saffron);
-  color:var(--navy);
 }
 
 .achievement-card{
@@ -544,38 +333,45 @@ input{
   width:100%;
   max-width:600px;
   padding:14px;
-  border-radius:11px;
+  margin:20px 0;
   border:1px solid #cfd6e2;
-  outline:none;
-  margin-top:20px;
+  border-radius:12px;
+  background:white;
 }
 
-.achievement-input:focus{
-  border-color:var(--saffron);
-  box-shadow:0 0 0 3px rgba(255,153,51,.18);
+.achievement-btn,
+.material-btn{
+  background:var(--navy);
+  color:white;
+  padding:13px 25px;
+  border:none;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
 }
 
-/* ================= LOADING ================= */
+.achievement-btn:hover,
+.material-btn:hover{
+  background:var(--saffron);
+  color:var(--navy);
+}
 
+/* LOADING */
 .loading-overlay{
   position:fixed;
   inset:0;
-  background:rgba(6,26,64,.82);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:5000;
+  background:rgba(6,26,64,.85);
   color:white;
-}
-
-.loader-box{
-  text-align:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
 .loader{
   width:55px;
   height:55px;
-  margin:0 auto 15px;
+  margin:auto;
   border:6px solid rgba(255,255,255,.3);
   border-top-color:var(--saffron);
   border-bottom-color:var(--green);
@@ -587,90 +383,44 @@ input{
   to{transform:rotate(360deg)}
 }
 
-/* ================= FOOTER ================= */
-
 footer{
   background:linear-gradient(135deg,#041433,#08275d);
   color:white;
   text-align:center;
-  padding:28px 20px;
-  line-height:1.8;
+  padding:28px;
 }
 
 footer strong{
   color:var(--saffron);
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1100px){
-  .profile-section{
-    grid-template-columns:190px 1fr;
-  }
-
-  .initial-upload-box{
-    grid-column:1/-1;
-    max-width:420px;
-    width:100%;
-    justify-self:center;
-  }
-
-  .dashboard-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-
-@media(max-width:720px){
-  .dashboard-header{
-    min-height:auto;
-    padding:15px 5%;
-  }
-
-  .header-logo{
-    width:52px;
-    height:52px;
-  }
-
-  .brand-area{
-    gap:10px;
-  }
-
-  .brand-area h1{
-    font-size:22px;
-  }
-
-  .logout-btn{
-    padding:11px 15px;
-    font-size:14px;
-  }
-
+/* MOBILE */
+@media(max-width:900px){
   .profile-section{
     grid-template-columns:1fr;
     text-align:center;
-    padding:25px 18px;
-  }
-
-  .cadet-name{
-    font-size:30px;
-  }
-
-  .detail-row{
-    justify-content:center;
-    flex-wrap:wrap;
-    font-size:15px;
   }
 
   .dashboard-grid{
     grid-template-columns:1fr;
-    gap:24px;
   }
 
   .achievement-card{
     grid-column:span 1;
   }
 
-  .tricolor-card{
-    min-height:285px;
+  .detail-row{
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .brand-area h1{
+    font-size:24px;
+  }
+
+  .header-logo{
+    width:55px;
+    height:55px;
   }
 }
 </style>
@@ -679,319 +429,158 @@ footer strong{
 <body>
 
 <div class="loading-overlay" id="loadingOverlay">
-  <div class="loader-box">
+  <div>
     <div class="loader"></div>
-    <p>Loading cadet dashboard...</p>
+    <p style="margin-top:15px;">Loading cadet dashboard...</p>
   </div>
 </div>
 
 <header class="dashboard-header">
-
   <div class="brand-area">
-    <img
-      src="ustmncclogo.jpeg"
-      alt="USTM NCC Logo"
-      class="header-logo"
-    >
-
+    <img src="ustmncclogo.jpeg" class="header-logo" alt="USTM NCC Logo">
     <h1>Cadet Dashboard</h1>
   </div>
 
-  <button class="logout-btn" type="button" onclick="logoutCadet()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Logout
+  <button class="logout-btn" onclick="logoutCadet()">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
   </button>
-
 </header>
 
 <div class="page-container">
 
-  <section class="profile-section">
+<section class="profile-section">
 
-    <div class="photo-column">
-
-      <div class="photo-wrapper">
-
-        <img
-          id="profilePreview"
-          class="profile-photo"
-          src="default-profile.png"
-          alt="Cadet Passport Photo"
-          onclick="togglePhotoMenu(event)"
-        >
-
-        <div class="photo-click-hint" id="photoClickHint">
-          Upload passport photo
-        </div>
-
-        <div class="photo-menu" id="photoMenu">
-
-          <button type="button" onclick="chooseNewPhoto()">
-            <i class="fa-solid fa-image"></i>
-            Change photo
-          </button>
-
-          <button
-            type="button"
-            class="remove-photo-btn"
-            onclick="removeProfilePhoto()"
-          >
-            <i class="fa-solid fa-trash"></i>
-            Remove photo
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="cadet-details">
-
-      <p class="welcome-small">Welcome,</p>
-
-      <h2 class="cadet-name" id="cadetName">
-        Cadet
-      </h2>
-
-      <div class="detail-row">
-        <span class="detail-icon">
-          <i class="fa-solid fa-id-card"></i>
-        </span>
-
-        <span class="detail-label">Cadet ID:</span>
-
-        <span class="detail-value" id="cadetIdText">
-          Loading...
-        </span>
-      </div>
-
-      <div class="detail-row">
-        <span class="detail-icon">
-          <i class="fa-solid fa-chevron-up"></i>
-        </span>
-
-        <span class="detail-label">Rank:</span>
-
-        <span class="detail-value" id="cadetRankText">
-          Loading...
-        </span>
-      </div>
-
-      <div class="detail-row">
-        <span class="detail-icon">
-          <i class="fa-solid fa-calendar-days"></i>
-        </span>
-
-        <span class="detail-label">Service Year:</span>
-
-        <span
-          class="detail-value service-highlight"
-          id="serviceYearText"
-        >
-          Not marked by ANO
-        </span>
-      </div>
-
-      <div class="detail-row">
-        <span class="detail-icon">
-          <i class="fa-solid fa-shield-halved"></i>
-        </span>
-
-        <span class="detail-label">Status:</span>
-
-        <span class="status-badge" id="cadetStatusText">
-          Loading...
-        </span>
-      </div>
-
-    </div>
-
-    <div class="initial-upload-box" id="initialUploadBox">
-
-      <h3>
-        <i class="fa-regular fa-image"></i>
-        Choose Passport Photo
-      </h3>
-
-      <p>
-        Upload a clear passport-size photograph.
-        There is no size limit.
-      </p>
-
-      <button
-        type="button"
-        class="photo-select-btn"
-        onclick="openPhotoChooser()"
-      >
-        <i class="fa-solid fa-folder-open"></i>
-        Select Photo
-      </button>
-
-      <span class="selected-file-name" id="selectedFileName">
-        No photo selected
-      </span>
-
-      <button
-        type="button"
-        class="upload-confirm-btn"
-        onclick="uploadProfilePhoto()"
-      >
-        <i class="fa-solid fa-upload"></i>
-        Upload Photo
-      </button>
-
-    </div>
-
-    <input
-      type="file"
-      id="profilePhotoInput"
-      accept="image/*"
-      hidden
+  <div class="photo-wrapper">
+    <img
+      id="profilePreview"
+      class="profile-photo"
+      src="default-profile.png"
+      alt="Cadet Passport Photo"
+      onclick="togglePhotoMenu(event)"
     >
 
-  </section>
+    <div class="photo-click-hint" id="photoClickHint">
+      Click to upload
+    </div>
 
-  <main class="dashboard-grid">
+    <div class="photo-menu" id="photoMenu">
+      <button onclick="chooseNewPhoto()">
+        <i class="fa-solid fa-image"></i> Add / Change Photo
+      </button>
 
-    <article class="tricolor-card">
+      <button class="remove-photo-btn" onclick="removeProfilePhoto()">
+        <i class="fa-solid fa-trash"></i> Remove Photo
+      </button>
+    </div>
 
-      <div class="card-content">
+    <input type="file" id="profilePhotoInput" accept="image/*" hidden>
+  </div>
 
-        <i class="fa-solid fa-bullhorn card-icon"></i>
+  <div class="cadet-details">
+    <h4>Welcome,</h4>
+    <h2 class="cadet-name" id="cadetName">Cadet</h2>
 
-        <h2>Notice Board</h2>
+    <div class="detail-row">
+      <i class="fa-solid fa-id-card"></i>
+      <span class="detail-label">Cadet ID:</span>
+      <span id="cadetIdText">Loading...</span>
+    </div>
 
-        <div class="card-divider"></div>
+    <div class="detail-row">
+      <i class="fa-solid fa-chevron-up"></i>
+      <span class="detail-label">Rank:</span>
+      <span id="cadetRankText">Loading...</span>
+    </div>
 
-        <h3 id="noticeTitle">No Notice Available</h3>
+    <div class="detail-row">
+      <i class="fa-solid fa-calendar-days"></i>
+      <span class="detail-label">Service Year:</span>
+      <span class="service-highlight" id="serviceYearText">
+        Not marked by ANO
+      </span>
+    </div>
 
-        <p id="noticeContent">
-          Waiting for official updates.
-        </p>
+    <div class="detail-row">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span class="detail-label">Status:</span>
+      <span class="status-badge" id="cadetStatusText">Loading...</span>
+    </div>
+  </div>
 
-        <small class="notice-meta" id="noticeBy"></small>
+</section>
 
+<main class="dashboard-grid">
+
+  <article class="tricolor-card">
+    <div class="card-content">
+      <i class="fa-solid fa-bullhorn card-icon"></i>
+      <h2>Notice Board</h2>
+      <div class="card-divider"></div>
+      <h3 id="noticeTitle">No Notice Available</h3>
+      <p id="noticeContent">Waiting for official updates.</p>
+      <small class="notice-meta" id="noticeBy"></small>
+    </div>
+  </article>
+
+  <article class="tricolor-card">
+    <div class="card-content">
+      <i class="fa-regular fa-calendar-check card-icon"></i>
+      <h2>Attendance</h2>
+      <div class="card-divider"></div>
+      <div class="attendance-number" id="attendancePercent">--</div>
+      <p id="attendanceText">Attendance will appear when ANO declares it.</p>
+      <div class="eligibility-box" id="campEligibility">
+        Camp eligibility pending
       </div>
+    </div>
+  </article>
 
-      <div class="card-wave"></div>
+  <article class="tricolor-card">
+    <div class="card-content">
+      <i class="fa-solid fa-campground card-icon"></i>
+      <h2>Camp Updates</h2>
+      <div class="card-divider"></div>
+      <p id="campText">
+        Camp updates will appear here after being published by ANO.
+      </p>
+    </div>
+  </article>
 
-    </article>
+  <article class="tricolor-card">
+    <div class="card-content">
+      <i class="fa-solid fa-book-open card-icon"></i>
+      <h2>Training Materials</h2>
+      <div class="card-divider"></div>
+      <p>Study materials, drill videos and important documents will be updated here.</p>
+      <button class="material-btn">
+        <i class="fa-solid fa-download"></i> View Materials
+      </button>
+    </div>
+  </article>
 
-    <article class="tricolor-card">
+  <article class="tricolor-card achievement-card">
+    <div class="card-content">
+      <i class="fa-solid fa-trophy card-icon"></i>
+      <h2>Achievement Gallery Upload</h2>
+      <div class="card-divider"></div>
+      <p>Upload your achievement photo directly for ANO approval.</p>
 
-      <div class="card-content">
+      <input
+        type="file"
+        id="achievementFile"
+        accept="image/*"
+        class="achievement-input"
+      >
 
-        <i class="fa-regular fa-calendar-check card-icon"></i>
+      <br>
 
-        <h2>Attendance</h2>
+      <button class="achievement-btn" onclick="uploadAchievement()">
+        <i class="fa-solid fa-upload"></i> Upload Achievement
+      </button>
+    </div>
+  </article>
 
-        <div class="card-divider"></div>
-
-        <div class="attendance-number" id="attendancePercent">
-          --
-        </div>
-
-        <p id="attendanceText">
-          Attendance will appear when ANO declares it.
-        </p>
-
-        <div class="eligibility-box" id="campEligibility">
-          Camp eligibility pending
-        </div>
-
-      </div>
-
-      <div class="card-wave"></div>
-
-    </article>
-
-    <article class="tricolor-card">
-
-      <div class="card-content">
-
-        <i class="fa-solid fa-campground card-icon"></i>
-
-        <h2>Camp Updates</h2>
-
-        <div class="card-divider"></div>
-
-        <p id="campText">
-          Camp updates will appear here after being published by ANO.
-        </p>
-
-      </div>
-
-      <div class="card-wave"></div>
-
-    </article>
-
-    <article class="tricolor-card">
-
-      <div class="card-content">
-
-        <i class="fa-solid fa-book-open card-icon"></i>
-
-        <h2>Training Materials</h2>
-
-        <div class="card-divider"></div>
-
-        <p>
-          Study materials, drill videos and important documents
-          will be updated here.
-        </p>
-
-        <button type="button" class="material-btn">
-          <i class="fa-solid fa-download"></i>
-          View Materials
-        </button>
-
-      </div>
-
-      <div class="card-wave"></div>
-
-    </article>
-
-    <article class="tricolor-card achievement-card">
-
-      <div class="card-content">
-
-        <i class="fa-solid fa-trophy card-icon"></i>
-
-        <h2>Achievement Gallery Upload</h2>
-
-        <div class="card-divider"></div>
-
-        <p>
-          Paste an achievement image link from GitHub,
-          ImgBB or Cloudinary.
-        </p>
-
-        <input
-          type="url"
-          class="achievement-input"
-          id="achievementUrl"
-          placeholder="Paste achievement image URL"
-        >
-
-        <br>
-
-        <button
-          type="button"
-          class="achievement-btn"
-          onclick="uploadAchievement()"
-        >
-          <i class="fa-solid fa-upload"></i>
-          Submit Achievement
-        </button>
-
-      </div>
-
-      <div class="card-wave"></div>
-
-    </article>
-
-  </main>
+</main>
 
 </div>
 
@@ -1001,9 +590,7 @@ footer strong{
 </footer>
 
 <script type="module">
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
 import {
   getFirestore,
@@ -1044,15 +631,13 @@ const cadetId = localStorage.getItem("activeCadetId");
 const cadetKey = localStorage.getItem("activeCadetKey");
 
 let currentCadet = null;
-let selectedPhotoFile = null;
+let selectedProfilePhoto = null;
 
 const defaultPhoto = "default-profile.png";
 
 if(!cadetId || !cadetKey){
   window.location.replace("ncc.html");
 }
-
-/* ================= SERVICE YEAR ================= */
 
 function getServiceYear(cadet){
   const year = Number(cadet.cadetYear);
@@ -1064,89 +649,48 @@ function getServiceYear(cadet){
   return "Not marked by ANO";
 }
 
-/* ================= STATUS ================= */
-
 function showCadetStatus(status){
-  const statusElement =
-    document.getElementById("cadetStatusText");
-
-  const normalizedStatus =
-    String(status || "active").toLowerCase();
+  const statusElement = document.getElementById("cadetStatusText");
+  const normalized = String(status || "active").toLowerCase();
 
   statusElement.className = "status-badge";
 
-  if(
-    normalizedStatus === "completed" ||
-    normalizedStatus === "alumni"
-  ){
-    statusElement.innerHTML =
-      '<i class="fa-solid fa-user-graduate"></i> Alumni Cadet';
-
+  if(normalized === "completed" || normalized === "alumni"){
+    statusElement.innerHTML = '<i class="fa-solid fa-user-graduate"></i> Alumni Cadet';
     statusElement.classList.add("alumni");
     return;
   }
 
-  if(normalizedStatus === "cancelled"){
-    statusElement.innerHTML =
-      '<i class="fa-solid fa-circle-xmark"></i> Cancelled';
-
-    statusElement.classList.add("cancelled");
-    return;
-  }
-
-  statusElement.innerHTML =
-    '<i class="fa-solid fa-circle-check"></i> Active Cadet';
+  statusElement.innerHTML = '<i class="fa-solid fa-circle-check"></i> Active Cadet';
 }
 
-/* ================= PROFILE PHOTO UI ================= */
-
 function updatePhotoUI(photoURL){
-  const profilePreview =
-    document.getElementById("profilePreview");
-
-  const initialUploadBox =
-    document.getElementById("initialUploadBox");
-
-  const photoClickHint =
-    document.getElementById("photoClickHint");
+  const profilePreview = document.getElementById("profilePreview");
+  const photoClickHint = document.getElementById("photoClickHint");
 
   if(photoURL){
     profilePreview.src = photoURL;
-    initialUploadBox.style.display = "none";
-    photoClickHint.textContent = "Click photo to manage";
+    photoClickHint.textContent = "Click to change";
   }else{
     profilePreview.src = defaultPhoto;
-    initialUploadBox.style.display = "block";
-    photoClickHint.textContent = "Upload passport photo";
+    photoClickHint.textContent = "Click to upload";
   }
 }
 
-/* ================= LOAD CADET ================= */
-
 async function loadCadet(){
   try{
-    const cadetReference =
-      doc(db,"cadets",cadetKey);
+    const snap = await getDoc(doc(db,"cadets",cadetKey));
 
-    const cadetSnapshot =
-      await getDoc(cadetReference);
-
-    if(!cadetSnapshot.exists()){
-      alert("Cadet record was not found. Please login again.");
+    if(!snap.exists()){
+      alert("Cadet record not found. Please login again.");
       logoutCadet();
       return;
     }
 
-    currentCadet = cadetSnapshot.data();
+    currentCadet = snap.data();
 
-    const normalizedStatus =
-      String(currentCadet.status || "active").toLowerCase();
-
-    if(normalizedStatus === "cancelled"){
-      alert(
-        "Your NCC enrollment has been cancelled by the authority."
-      );
-
+    if(String(currentCadet.status || "").toLowerCase() === "cancelled"){
+      alert("Your NCC enrollment has been cancelled.");
       logoutCadet();
       return;
     }
@@ -1168,152 +712,93 @@ async function loadCadet(){
     updatePhotoUI(currentCadet.profilePhoto || "");
 
   }catch(error){
-    console.error("Cadet loading error:",error);
-
-    alert(
-      "Unable to load cadet details. Check your Firestore connection."
-    );
+    console.error(error);
+    alert("Unable to load cadet details.");
   }finally{
-    document.getElementById("loadingOverlay").style.display =
-      "none";
+    document.getElementById("loadingOverlay").style.display = "none";
   }
 }
 
-/* ================= PHOTO MENU ================= */
-
 window.togglePhotoMenu = function(event){
   event.stopPropagation();
-
-  if(!currentCadet || !currentCadet.profilePhoto){
-    openPhotoChooser();
-    return;
-  }
-
-  document.getElementById("photoMenu")
-    .classList.toggle("show");
+  document.getElementById("photoMenu").classList.toggle("show");
 };
 
 window.chooseNewPhoto = function(){
-  document.getElementById("photoMenu")
-    .classList.remove("show");
-
-  openPhotoChooser();
-};
-
-window.openPhotoChooser = function(){
+  document.getElementById("photoMenu").classList.remove("show");
   document.getElementById("profilePhotoInput").click();
 };
 
-document.addEventListener("click",function(){
-  document.getElementById("photoMenu")
-    .classList.remove("show");
+document.addEventListener("click",()=>{
+  document.getElementById("photoMenu").classList.remove("show");
 });
 
-document.getElementById("photoMenu")
-  .addEventListener("click",function(event){
-    event.stopPropagation();
-  });
+document.getElementById("photoMenu").addEventListener("click",e=>{
+  e.stopPropagation();
+});
 
-/* ================= PHOTO SELECTION ================= */
-
-document.getElementById("profilePhotoInput")
-  .addEventListener("change",function(){
-    const file = this.files[0];
-
-    if(!file){
-      return;
-    }
-
-    if(!file.type.startsWith("image/")){
-      alert("Please select a valid image file.");
-      this.value = "";
-      return;
-    }
-
-    selectedPhotoFile = file;
-
-    document.getElementById("selectedFileName")
-      .textContent = file.name;
-
-    const previewURL = URL.createObjectURL(file);
-
-    document.getElementById("profilePreview").src =
-      previewURL;
-
-    if(currentCadet && currentCadet.profilePhoto){
-      const changeConfirmed = confirm(
-        "Do you want to upload this selected photo?"
-      );
-
-      if(changeConfirmed){
-        uploadProfilePhoto();
-      }else{
-        document.getElementById("profilePreview").src =
-          currentCadet.profilePhoto;
-
-        selectedPhotoFile = null;
-        this.value = "";
-      }
-    }
-  });
-
-/* ================= UPLOAD PHOTO ================= */
-
-window.uploadProfilePhoto = async function(){
-  const file =
-    selectedPhotoFile ||
-    document.getElementById("profilePhotoInput").files[0];
+document.getElementById("profilePhotoInput").addEventListener("change",function(){
+  const file = this.files[0];
 
   if(!file){
-    alert("Please select a passport-size photograph.");
     return;
   }
 
   if(!file.type.startsWith("image/")){
-    alert("Only image files are allowed.");
+    alert("Please select a valid image file.");
+    this.value = "";
+    return;
+  }
+
+  selectedProfilePhoto = file;
+  document.getElementById("profilePreview").src = URL.createObjectURL(file);
+
+  if(confirm("Upload this photo as your profile photo?")){
+    uploadProfilePhoto();
+  }else{
+    updatePhotoUI(currentCadet?.profilePhoto || "");
+    selectedProfilePhoto = null;
+    this.value = "";
+  }
+});
+
+window.uploadProfilePhoto = async function(){
+  const file = selectedProfilePhoto;
+
+  if(!file){
+    alert("Please select a photo first.");
     return;
   }
 
   try{
-    document.getElementById("loadingOverlay").style.display =
-      "flex";
+    document.getElementById("loadingOverlay").style.display = "flex";
 
-    const extension =
-      file.name.includes(".")
-        ? file.name.split(".").pop().toLowerCase()
-        : "jpg";
+    const extension = file.name.includes(".")
+      ? file.name.split(".").pop().toLowerCase()
+      : "jpg";
 
     const storagePath =
       `cadetProfilePhotos/${cadetKey}/profile-${Date.now()}.${extension}`;
 
-    const photoReference =
-      ref(storage,storagePath);
+    const photoRef = ref(storage,storagePath);
 
-    await uploadBytes(photoReference,file);
+    await uploadBytes(photoRef,file);
 
-    const photoURL =
-      await getDownloadURL(photoReference);
+    const photoURL = await getDownloadURL(photoRef);
 
-    const oldStoragePath =
-      currentCadet?.profilePhotoPath;
+    const oldPath = currentCadet?.profilePhotoPath;
 
-    await updateDoc(
-      doc(db,"cadets",cadetKey),
-      {
-        profilePhoto:photoURL,
-        profilePhotoPath:storagePath,
-        profilePhotoUpdatedAt:new Date().toISOString()
-      }
-    );
+    await updateDoc(doc(db,"cadets",cadetKey),{
+      profilePhoto:photoURL,
+      profilePhotoPath:storagePath,
+      profilePhotoUpdatedAt:new Date().toISOString()
+    });
 
-    if(oldStoragePath && oldStoragePath !== storagePath){
+    if(oldPath){
       try{
-        await deleteObject(ref(storage,oldStoragePath));
-      }catch(deleteError){
-        console.warn(
-          "Previous photo could not be deleted:",
-          deleteError
-        );
+        await deleteObject(ref(storage,oldPath));
+      }catch(e){
+        console.warn("Old photo not deleted:",e);
       }
     }
 
@@ -1322,90 +807,62 @@ window.uploadProfilePhoto = async function(){
 
     updatePhotoUI(photoURL);
 
-    selectedPhotoFile = null;
-
+    selectedProfilePhoto = null;
     document.getElementById("profilePhotoInput").value = "";
-
-    document.getElementById("selectedFileName")
-      .textContent = "No photo selected";
 
     alert("Profile photo uploaded successfully.");
 
   }catch(error){
-    console.error("Photo upload error:",error);
-
-    alert(
-      "Photo upload failed. Check Firebase Storage rules and connection."
-    );
+    console.error(error);
+    alert("Profile photo upload failed. Check Firebase Storage rules.");
   }finally{
-    document.getElementById("loadingOverlay").style.display =
-      "none";
+    document.getElementById("loadingOverlay").style.display = "none";
   }
 };
 
-/* ================= REMOVE PHOTO ================= */
-
 window.removeProfilePhoto = async function(){
-  document.getElementById("photoMenu")
-    .classList.remove("show");
+  document.getElementById("photoMenu").classList.remove("show");
 
-  if(!currentCadet || !currentCadet.profilePhoto){
-    alert("There is no profile photo to remove.");
+  if(!currentCadet?.profilePhoto){
+    alert("No profile photo to remove.");
     return;
   }
 
-  const confirmed = confirm(
-    "Are you sure you want to remove your profile photo?"
-  );
-
-  if(!confirmed){
+  if(!confirm("Remove your profile photo?")){
     return;
   }
 
   try{
-    document.getElementById("loadingOverlay").style.display =
-      "flex";
+    document.getElementById("loadingOverlay").style.display = "flex";
 
     if(currentCadet.profilePhotoPath){
       try{
-        await deleteObject(
-          ref(storage,currentCadet.profilePhotoPath)
-        );
-      }catch(storageError){
-        console.warn(
-          "Storage photo deletion warning:",
-          storageError
-        );
+        await deleteObject(ref(storage,currentCadet.profilePhotoPath));
+      }catch(e){
+        console.warn("Storage delete warning:",e);
       }
     }
 
-    await updateDoc(
-      doc(db,"cadets",cadetKey),
-      {
-        profilePhoto:deleteField(),
-        profilePhotoPath:deleteField(),
-        profilePhotoUpdatedAt:new Date().toISOString()
-      }
-    );
+    await updateDoc(doc(db,"cadets",cadetKey),{
+      profilePhoto:deleteField(),
+      profilePhotoPath:deleteField(),
+      profilePhotoUpdatedAt:new Date().toISOString()
+    });
 
     currentCadet.profilePhoto = "";
     currentCadet.profilePhotoPath = "";
 
     updatePhotoUI("");
 
-    alert("Profile photo removed successfully.");
+    alert("Profile photo removed.");
 
   }catch(error){
-    console.error("Photo removal error:",error);
-
-    alert("Unable to remove the profile photo.");
+    console.error(error);
+    alert("Could not remove profile photo.");
   }finally{
-    document.getElementById("loadingOverlay").style.display =
-      "none";
+    document.getElementById("loadingOverlay").style.display = "none";
   }
 };
-
-/* ================= NOTICE ================= */
 
 function loadNotices(){
   const noticesQuery = query(
@@ -1414,178 +871,133 @@ function loadNotices(){
     limit(1)
   );
 
-  onSnapshot(
-    noticesQuery,
-    function(snapshot){
-      if(snapshot.empty){
-        return;
+  onSnapshot(noticesQuery,snapshot=>{
+    if(snapshot.empty) return;
+
+    const notice = snapshot.docs[0].data();
+
+    document.getElementById("noticeTitle").textContent =
+      notice.title || "Official Notice";
+
+    document.getElementById("noticeContent").textContent =
+      notice.content || "";
+
+    document.getElementById("noticeBy").textContent =
+      `Published by: ${notice.by || "ANO"} | ${notice.date || ""}`;
+  },()=>{
+    onSnapshot(collection(db,"notices"),snapshot=>{
+      let latest = null;
+
+      snapshot.forEach(docSnap=>{
+        latest = docSnap.data();
+      });
+
+      if(latest){
+        document.getElementById("noticeTitle").textContent =
+          latest.title || "Official Notice";
+
+        document.getElementById("noticeContent").textContent =
+          latest.content || "";
+
+        document.getElementById("noticeBy").textContent =
+          `Published by: ${latest.by || "ANO"} | ${latest.date || ""}`;
       }
-
-      const notice =
-        snapshot.docs[0].data();
-
-      document.getElementById("noticeTitle").textContent =
-        notice.title || "Official Notice";
-
-      document.getElementById("noticeContent").textContent =
-        notice.content || "";
-
-      document.getElementById("noticeBy").textContent =
-        `Published by: ${notice.by || "ANO"} | ${notice.date || ""}`;
-    },
-    function(error){
-      console.warn(
-        "Ordered notice query failed:",
-        error
-      );
-
-      onSnapshot(
-        collection(db,"notices"),
-        function(snapshot){
-          let latestNotice = null;
-
-          snapshot.forEach(function(documentSnapshot){
-            latestNotice = documentSnapshot.data();
-          });
-
-          if(latestNotice){
-            document.getElementById("noticeTitle").textContent =
-              latestNotice.title || "Official Notice";
-
-            document.getElementById("noticeContent").textContent =
-              latestNotice.content || "";
-
-            document.getElementById("noticeBy").textContent =
-              `Published by: ${latestNotice.by || "ANO"} | ${latestNotice.date || ""}`;
-          }
-        }
-      );
-    }
-  );
+    });
+  });
 }
-
-/* ================= ATTENDANCE ================= */
 
 function loadAttendance(){
-  onSnapshot(
-    doc(db,"attendance",cadetKey),
-    function(snapshot){
-      if(!snapshot.exists()){
-        return;
-      }
+  onSnapshot(doc(db,"attendance",cadetKey),snapshot=>{
+    if(!snapshot.exists()) return;
 
-      const attendance = snapshot.data();
+    const data = snapshot.data();
+    const percent = Number(data.percent);
 
-      const percent =
-        Number(attendance.percent);
+    document.getElementById("attendancePercent").textContent =
+      Number.isFinite(percent) ? percent + "%" : "--";
 
-      document.getElementById("attendancePercent")
-        .textContent =
-          Number.isFinite(percent)
-            ? `${percent}%`
-            : "--";
+    document.getElementById("attendanceText").textContent =
+      data.text || "Attendance counted from regular NCC classes and events.";
 
-      document.getElementById("attendanceText")
-        .textContent =
-          attendance.text ||
-          "Attendance counted from regular NCC classes and events.";
+    const eligibility = document.getElementById("campEligibility");
 
-      const eligibility =
-        document.getElementById("campEligibility");
-
-      if(Number.isFinite(percent) && percent > 70){
-        eligibility.textContent =
-          "Eligible for Camp — Subject to ANO approval";
-
-        eligibility.className =
-          "eligibility-box";
-      }else if(Number.isFinite(percent)){
-        eligibility.textContent =
-          "Not eligible for camp due to low attendance";
-
-        eligibility.className =
-          "eligibility-box not-allowed";
-      }
+    if(Number.isFinite(percent) && percent > 70){
+      eligibility.textContent = "Eligible for Camp — Subject to ANO approval";
+      eligibility.className = "eligibility-box";
+    }else if(Number.isFinite(percent)){
+      eligibility.textContent = "Not eligible for camp due to low attendance";
+      eligibility.className = "eligibility-box not-allowed";
     }
-  );
+  });
 }
-
-/* ================= CAMP UPDATE ================= */
 
 function loadCampUpdate(){
-  onSnapshot(
-    doc(db,"campUpdates","current"),
-    function(snapshot){
-      if(!snapshot.exists()){
-        return;
-      }
+  onSnapshot(doc(db,"campUpdates","current"),snapshot=>{
+    if(!snapshot.exists()) return;
 
-      const campUpdate = snapshot.data();
+    const data = snapshot.data();
 
-      document.getElementById("campText").textContent =
-        campUpdate.text ||
-        "No camp update available.";
-    }
-  );
+    document.getElementById("campText").textContent =
+      data.text || "No camp update available.";
+  });
 }
 
-/* ================= ACHIEVEMENT ================= */
-
 window.uploadAchievement = async function(){
-  const input =
-    document.getElementById("achievementUrl");
+  const file = document.getElementById("achievementFile").files[0];
 
-  const url =
-    input.value.trim();
+  if(!file){
+    alert("Please select an achievement photo.");
+    return;
+  }
 
-  if(!url){
-    alert("Please paste an achievement image URL.");
+  if(!file.type.startsWith("image/")){
+    alert("Please upload only image files.");
     return;
   }
 
   try{
-    new URL(url);
-  }catch{
-    alert("Please enter a valid image URL.");
-    return;
-  }
+    document.getElementById("loadingOverlay").style.display = "flex";
 
-  try{
-    await addDoc(
-      collection(db,"gallery"),
-      {
-        url:url,
-        cadetId:cadetId,
-        cadetKey:cadetKey,
-        cadetName:currentCadet?.name || "",
-        status:"pending",
-        submittedAt:new Date().toISOString()
-      }
-    );
+    const extension = file.name.includes(".")
+      ? file.name.split(".").pop().toLowerCase()
+      : "jpg";
 
-    input.value = "";
+    const storagePath =
+      `achievementUploads/${cadetKey}/achievement-${Date.now()}.${extension}`;
 
-    alert(
-      "Achievement submitted successfully for ANO approval."
-    );
+    const achievementRef = ref(storage,storagePath);
+
+    await uploadBytes(achievementRef,file);
+
+    const imageURL = await getDownloadURL(achievementRef);
+
+    await addDoc(collection(db,"gallery"),{
+      url:imageURL,
+      storagePath:storagePath,
+      cadetId:cadetId,
+      cadetKey:cadetKey,
+      cadetName:currentCadet?.name || "",
+      status:"pending",
+      submittedAt:new Date().toISOString()
+    });
+
+    document.getElementById("achievementFile").value = "";
+
+    alert("Achievement photo uploaded successfully for ANO approval.");
 
   }catch(error){
-    console.error("Achievement error:",error);
-
-    alert("Unable to submit the achievement.");
+    console.error(error);
+    alert("Achievement upload failed. Check Firebase Storage rules.");
+  }finally{
+    document.getElementById("loadingOverlay").style.display = "none";
   }
 };
-
-/* ================= LOGOUT ================= */
 
 window.logoutCadet = function(){
   localStorage.removeItem("activeCadetId");
   localStorage.removeItem("activeCadetKey");
-
   window.location.replace("ncc.html");
 };
-
-/* ================= START ================= */
 
 loadCadet();
 loadNotices();
