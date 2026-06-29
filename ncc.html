@@ -15,6 +15,14 @@ a{text-decoration:none}
 
 .top-bar{background:#071a3d;color:white;padding:8px 7%;display:flex;justify-content:space-between;font-size:14px}
 
+.recruitment-marquee{
+  display:none;
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+  color:#071a3d;
+  padding:10px;
+  font-weight:800;
+}
+
 header{
   background:white;padding:14px 7%;display:flex;justify-content:space-between;align-items:center;
   box-shadow:0 4px 15px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000
@@ -32,7 +40,6 @@ header{
 
 nav a{margin-left:22px;color:#071a3d;font-weight:700}
 nav a:hover{color:#d35400}
-
 .menu-btn{display:none;font-size:28px;color:#071a3d}
 #check{display:none}
 
@@ -70,8 +77,7 @@ section{padding:70px 7%}
 .card i,.social-card i{font-size:38px;color:#071a3d;margin-bottom:15px}
 .card h3,.social-card h3{color:#071a3d;margin-bottom:10px}
 .card p,.social-card p{color:#555;line-height:1.7}
-
-.audio-card{cursor:pointer}
+.audio-card,.join-card{cursor:pointer}
 
 .notice-board{background:#fff7ef}
 .notice{border-left:5px solid #ff9933;border-top:none}
@@ -115,7 +121,6 @@ section{padding:70px 7%}
 }
 .flip-wrapper.flip{transform:rotateY(180deg)}
 .flip-side{position:absolute;width:100%;min-height:470px;backface-visibility:hidden}
-.flip-front{transform:rotateY(0)}
 .flip-back{transform:rotateY(180deg)}
 
 .login-glass{
@@ -138,21 +143,21 @@ section{padding:70px 7%}
 @keyframes saffronWave{0%{transform:translateX(-100px)}50%{transform:translateX(100px)}100%{transform:translateX(-100px)}}
 @keyframes greenWave{0%{transform:translateX(100px)}50%{transform:translateX(-100px)}100%{transform:translateX(100px)}}
 
-/* Audio Popup */
-.audio-popup{
+/* Popup Common */
+.audio-popup,.join-popup{
   position:fixed;inset:0;background:rgba(0,0,0,.72);
   display:none;justify-content:center;align-items:center;
   z-index:9999;padding:20px
 }
 
-.popup-box{
+.popup-box,.join-box{
   width:95%;max-width:800px;max-height:90vh;overflow-y:auto;
   background:white;padding:28px;border-radius:22px;position:relative;
   animation:popupZoom .4s ease;border:3px solid transparent;
   box-shadow:0 0 18px #ff9933,0 0 30px #ffffff,0 0 42px #138808
 }
 
-.popup-box:before{
+.popup-box:before,.join-box:before{
   content:"";position:absolute;inset:-4px;border-radius:24px;
   background:linear-gradient(90deg,#ff9933,#ffffff,#138808,#ffffff,#ff9933);
   background-size:300%;z-index:-1;filter:blur(12px);
@@ -162,7 +167,7 @@ section{padding:70px 7%}
 @keyframes tricolorGlow{0%{background-position:0%}100%{background-position:300%}}
 @keyframes popupZoom{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}
 
-.popup-box h2{text-align:center;color:#071a3d;margin-bottom:20px;font-size:30px}
+.popup-box h2,.join-box h2{text-align:center;color:#071a3d;margin-bottom:20px;font-size:30px}
 
 .close-btn{
   position:absolute;right:18px;top:12px;font-size:30px;
@@ -198,6 +203,36 @@ section{padding:70px 7%}
 .info-box h4{color:#071a3d;margin-bottom:8px}
 .lyrics-text{white-space:pre-line}
 
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px;
+}
+.join-box input,.join-box select,.join-box textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+}
+.join-box textarea{
+  resize:none;
+  min-height:90px;
+  grid-column:1/-1;
+}
+.closed-message{
+  text-align:center;
+  padding:25px;
+  line-height:1.8;
+  color:#333;
+}
+.closed-message i{
+  font-size:45px;
+  color:#ff9933;
+  margin-bottom:12px;
+}
+
 footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 @media(max-width:900px){
@@ -218,8 +253,8 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
   .flip-wrapper,.flip-side,.login-glass{min-height:540px}
   .login-glass{padding:26px 18px;border-radius:22px}
   .logo-frame{width:60px;height:60px}
-  .popup-box{padding:20px}
-  .popup-box h2{font-size:23px}
+  .popup-box,.join-box{padding:20px}
+  .popup-box h2,.join-box h2{font-size:23px}
 }
 </style>
 </head>
@@ -229,6 +264,10 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 <div class="top-bar">
   <p><i class="fa-solid fa-location-dot"></i> University of Science & Technology Meghalaya</p>
   <p><i class="fa-solid fa-shield-halved"></i> 42 MEGH BN NCC</p>
+</div>
+
+<div class="recruitment-marquee" id="recruitmentMarquee">
+  <marquee>🇮🇳 USTM NCC recruitment will begin from 1st July. Interested students are advised to keep their documents ready. Jai Hind.</marquee>
 </div>
 
 <header>
@@ -281,10 +320,10 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
       <p>USTM NCC participates in parades, camps, institutional events and social service activities.</p>
     </div>
 
-    <div class="card">
+    <div class="card join-card" id="joinCard" onclick="openJoinPopup()">
       <i class="fa-solid fa-user-plus"></i>
-      <h3>Join NCC</h3>
-      <p>Interested students may contact the NCC office, ANO or senior cadets.</p>
+      <h3>Join USTM NCC</h3>
+      <p>Interested students can submit their details during the official recruitment period.</p>
     </div>
 
     <div class="card audio-card" onclick="openAudioPopup()">
@@ -298,7 +337,6 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 <section class="notice-board" id="notice">
   <h2 class="title">Notice Board</h2>
   <p class="subtitle">Latest updates from ANO or Senior In-Charge.</p>
-
   <div class="notice">
     <h3 id="noticeTitle">No Notice Available</h3>
     <p id="noticeContent">Waiting for official updates.</p>
@@ -309,7 +347,6 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 <section id="gallery">
   <h2 class="title">USTM NCC Gallery</h2>
   <p class="subtitle">Cadet achievements and NCC activities.</p>
-
   <div class="gallery" id="mainGallery">
     <img src="ncc1.jpeg" alt="NCC Activity">
     <img src="ncc3.jpeg" alt="NCC Gallery">
@@ -319,7 +356,6 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 <section id="social">
   <h2 class="title">Connect With USTM NCC</h2>
-
   <div class="social-grid">
     <a href="https://www.instagram.com/ustmncc_warriors?igsh=MXNpYnFkcTVkdXd4YQ==" target="_blank" class="social-card instagram">
       <i class="fab fa-instagram"></i>
@@ -348,7 +384,6 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
   <h2 class="title">Cadet / ANO Access</h2>
 
   <div class="flip-wrapper" id="flipCard">
-
     <div class="flip-side flip-front">
       <div class="login-glass">
         <h3>Login</h3>
@@ -379,13 +414,96 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
         </p>
       </div>
     </div>
-
   </div>
 </section>
 
 <footer>
   © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
+
+<div class="join-popup" id="joinPopup">
+  <div class="join-box">
+    <button class="close-btn" onclick="closeJoinPopup()">×</button>
+    <h2>USTM NCC Enrollment Form</h2>
+
+    <div id="joinOpenBox">
+      <form id="joinForm">
+        <div class="form-grid">
+          <input type="text" id="appName" placeholder="Full Name" required>
+          <input type="text" id="appDepartment" placeholder="Department" required>
+          <input type="text" id="appRoll" placeholder="Roll Number" required>
+          <input type="text" id="appSemester" placeholder="Semester" required>
+
+          <select id="appGender" required>
+            <option value="">Select Wing</option>
+            <option value="SD">SD</option>
+            <option value="SW">SW</option>
+          </select>
+
+          <input type="text" id="appMobile" placeholder="Mobile Number" required>
+          <input type="email" id="appEmail" placeholder="Email Address">
+          <input type="text" id="appHeight" placeholder="Height e.g. 170 cm" required>
+
+          <select id="appBlood" required>
+            <option value="">Blood Group</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+          </select>
+
+          <select id="appHostel" required>
+            <option value="">Hostel / Day Scholar</option>
+            <option>Hosteller</option>
+            <option>Day Scholar</option>
+          </select>
+
+          <input type="text" id="appEmergency" placeholder="Emergency Contact Number" required>
+
+          <select id="appAcer" required>
+            <option value="">Do you have NCC 'A' Certificate?</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+
+          <select id="appSports" required>
+            <option value="">Sports Certificate</option>
+            <option>International</option>
+            <option>National</option>
+            <option>State</option>
+            <option>District</option>
+            <option>College</option>
+            <option>None</option>
+          </select>
+
+          <select id="appCultural" required>
+            <option value="">Cultural Certificate</option>
+            <option>National</option>
+            <option>State</option>
+            <option>District</option>
+            <option>College</option>
+            <option>None</option>
+          </select>
+
+          <textarea id="appMedical" placeholder="Medical Issues, if any. Write None if no issue." required></textarea>
+          <textarea id="appSkills" placeholder="Special Skills / Achievements / Leadership Experience"></textarea>
+          <textarea id="appReason" placeholder="Why do you want to join NCC?" required></textarea>
+        </div>
+
+        <button type="submit" class="btn login-main-btn">Submit Application</button>
+      </form>
+    </div>
+
+    <div id="joinClosedBox" class="closed-message" style="display:none;">
+      <i class="fa-solid fa-lock"></i>
+      <h3>NCC Recruitment Closed</h3>
+      <p>
+        Thank you for your interest in USTM NCC. The recruitment period for this session has concluded.
+        Please apply during the next enrollment cycle from July to October. Jai Hind.
+      </p>
+    </div>
+  </div>
+</div>
 
 <div class="audio-popup" id="audioPopup">
   <div class="popup-box">
@@ -401,9 +519,7 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
     <div class="audio-content" id="anthem">
       <h3>National Anthem</h3>
       <p>Jana Gana Mana</p>
-      <audio controls>
-        <source src="audio/nationalanthem.mp3" type="audio/mpeg">
-      </audio>
+      <audio controls><source src="audio/nationalanthem.mp3" type="audio/mpeg"></audio>
       <a href="audio/nationalanthem.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
@@ -430,17 +546,15 @@ Jay Jay Jay Jay He.</p>
       </div>
 
       <div class="info-box" id="anthemHistory" style="display:none;">
-        <h4>History</h4>
-        <p>Jana Gana Mana was written by Rabindranath Tagore in 1911 and adopted as the National Anthem of India on 24 January 1950. It represents unity, dignity and national pride. In NCC, it is played during official functions, parades and ceremonies to show respect towards the nation.</p>
+        <h4>History & Significance</h4>
+        <p>Jana Gana Mana was written by Rabindranath Tagore in 1911 and adopted as the National Anthem of India on 24 January 1950. In NCC, it is played during official functions, parades and ceremonies to show respect towards the nation.</p>
       </div>
     </div>
 
     <div class="audio-content" id="nccsong" style="display:none;">
       <h3>NCC Song</h3>
       <p>Hum Sab Bharatiya Hain</p>
-      <audio controls>
-        <source src="audio/nccsong.mp3" type="audio/mpeg">
-      </audio>
+      <audio controls><source src="audio/nccsong.mp3" type="audio/mpeg"></audio>
       <a href="audio/nccsong.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
@@ -450,47 +564,19 @@ Jay Jay Jay Jay He.</p>
 
       <div class="info-box" id="nccLyrics">
         <h4>Lyrics</h4>
-        <p class="lyrics-text">Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain
-Apni Manzil Ek Hai,
-Ha, Ha, Ha, Ek Hai,
-Ho, Ho, Ho, Ek Hai.
-Hum Sab Bharatiya Hain.
-Kashmir Ki Dharti Rani Hai,
-Sartaj Himalaya Hai,
-Saadiyon Se Humne Isko Apne Khoon Se Pala Hai
-Desh Ki Raksha Ki Khatir Hum Shamshir Utha Lenge,
-Hum Shamshir Utha Lenge.
-Bikhre Bikhre Taare Hain Hum Lekin Jhilmil Ek Hai,
-Ha, Ha, Ha, Ek Hai
-Hum Sab Bharatiya Hai.
-Mandir Gurudwaare Bhi Hain Yahan
-Aur Masjid Bhi Hai Yahan
-Girija Ka Hai Ghariyaal Kahin
-Mullah ki Kahin Hai Ajaan
-Ek Hee Apna Ram Hain, Ek hi Allah Taala Hai, 
-Ek Hee Allah Taala Hain, Raang Birange Deepak Hain Hum,
-lekin Jagmag Ek Hai, Ha Ha Ha Ek Hai, Ho Ho Ho Ek Hai.
-Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.</p>
+        <p class="lyrics-text">Paste your NCC Song lyrics here.</p>
       </div>
 
       <div class="info-box" id="nccHistory" style="display:none;">
-        <h4>History</h4>
-        <p>The desirability of composing a NCC song was considered in the Circle Commanders (now called DDGs) Conference held in January 1956 and all circles were asked to send their proposals. The official song of the NCC – “Kadam Mila Ke Chal” was adopted in 1962, and registered in 1969 with the approval of the Ministry of Defence. In 1974, it was felt that the NCC song had failed to catch the imagination of the youth, and there was a need for a change. A sustained process began; entries were invited from Directorates for suitable lyrics; 107 entries were received; of which eight were selected by a Board of Officers. However, all the eight were considered sub standard by Dr Nagendra of Delhi University, who was the judge. On the suggestion of Dr Nagendra, the task was entrusted to Shri Chiranjit, the Chief Producer, Drama Division, AIR, Delhi.
-The song written by Shri Chiranjit was approved, in 1976. The Maharashtra Directorate was asked to get the song composed and recorded with the help of Shri Raj Kapoor, and the Films Division, Bombay. However, nothing much came out of this exercise as Shri Raj Kapoor was then busy in making his film “Satyam Shivam Sundaram” and the studios of the Films Division were under renovation. Later, Shri Mahinder Singh Bedi, a well known poet of Delhi, was requested to write another song. This effort also proved infructuous. AEC Centre Pachmarhi was also approached, but somehow the matter could not be finalized.
-Almost during the same period and independent of efforts at Directorate General NCC, the Film Division undertook production of a documentary on NCC ‘A Cadet’ s Diary’. The Director of the documentary was looking for a suitable song for the film. He happened to hear the song – ‘Ham Sab Hindi Hain’ which appears to have been first sung at a Youth Festival at Chandigarh, sometime during 1968-69, and introduced it in the documentary film.
-The song was a hit and successive Director Generals (DGs) found it good and played it repeatedly in Republic Day camps. In 1980, the word ‘Hindi’ was substituted with ‘Bhartiya’.
-Come ASIAD (1982), and the NCC got the opportunity to display its potential in the opening ceremony. The Special Organising Committee approved trial recording of the song for recital during the Asian Games Festival. The song was finally recorded in its present form, sometime during Oct 1982, at the Western Outdoor Studio, Delhi with the help of AIR artists, and musicians under overall supervision of Pandit Vijai Raghavan Rao.
-Post ASIAD era in the NCC saw among other events, a well composed musical hit and an inspiring NCC song being played and sung alongwith recorded music; a 16 mm colour film had also been made with title ‘Hum Sab Bhartiya Hain’ of 7½ minutes duration. This film had been telecast twice on national hook up. Other films, ‘Unity and Discipline’; ‘A Cadet’ s Diary, had also used this song prominently. The writer of this song seems to have been lost in oblivion. “No body knows” – said Shri SK Sharma, Joint Director, Armed Forces Film and Photo Division, who was actively involved with the production of documentaries on the NCC. “This song was not written for the NCC, as such, writes Shri Mathur, ex-publicity officer, DGNCC, in his notings on the file. But nobody has claimed it so far. Another noting speaks of Sri Virender Sharma as the lyrics writer, and Sri Vijai Raghavan Rao as the music composer.
-This NCC song is liked by millions of cadets, both past and present, and is sung on all important occasions of the NCC.</p>
+        <h4>History & Significance</h4>
+        <p>Hum Sab Bharatiya Hain is widely known as the NCC Song. It promotes unity, discipline, patriotism and national integration among cadets.</p>
       </div>
     </div>
 
     <div class="audio-content" id="badluram" style="display:none;">
       <h3>Badluram Ka Badan</h3>
       <p>Military marching song</p>
-      <audio controls>
-        <source src="audio/badluramkabadan.mp3" type="audio/mpeg">
-      </audio>
+      <audio controls><source src="audio/badluramkabadan.mp3" type="audio/mpeg"></audio>
       <a href="audio/badluramkabadan.mp3" download class="download-btn">Download Audio</a>
 
       <div class="info-tabs">
@@ -500,24 +586,12 @@ This NCC song is liked by millions of cadets, both past and present, and is sung
 
       <div class="info-box" id="badluramLyrics">
         <h4>Lyrics</h4>
-        <p class="lyrics-text">Ek khubsurat ladki thi…
-Usko dekh ke rifleman…
-Chindi khichna bhul gaya…
-Havaldar Major dekh liya…
-Usko pittu lagaya…
-Badluram ek sipahi thaa…
-Japan war me mar gaya…
-Quarter Master smart thaa…
-Usney ration nikala…
-Badluram ka badan zamin ke nichey hain…  x 3
-Toh humein uska ration milta hain… 
-Sabashh… hallelujah… x 3
-Toh humein uska ration milta hain…</p>
+        <p class="lyrics-text">Paste Badluram Ka Badan lyrics here.</p>
       </div>
 
       <div class="info-box" id="badluramHistory" style="display:none;">
-        <h4>History</h4>
-        <p>This song is based on a real-life incident and is created in honor of Rifleman Badluram a soldier of the 1st Battalion, Assam Regiment in British Indian Army who died while fighting against the Japanese Army in World War II. Badluram was killed in the early days of the battle from a gunshot wound. Later the Japanese troops had Kohima under their military blockade and cut down British Indian Army supply. Soon the British troops started facing the food shortage, the airdrop supply was also difficult because of the terrain and due to the deployment of Japanese anti-aircraft gun. But the Quartermaster of Badluram’s company didn’t remove Badluram’s name from the ration list and the surplus ration that was collected in the name of Badluram over the months proved to be a godsend. Which later helped the troops survive the siege. And in his memory, Major P.T Porktor in 1946 created a song that later became the regimental song of the Assam Regiment and is sung by recruits in passing out parade at Shillong.</p>
+        <h4>History & Significance</h4>
+        <p>Badluram Ka Badan is a popular military marching song associated with Indian Army tradition. It helps build marching spirit, morale and motivation.</p>
       </div>
     </div>
   </div>
@@ -525,7 +599,7 @@ Toh humein uska ration milta hain…</p>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { getDatabase, ref, set, get, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
@@ -544,6 +618,34 @@ function safeKey(id){
   return btoa(unescape(encodeURIComponent(id))).replaceAll("=","");
 }
 
+function isRecruitmentOpen(){
+  const month = new Date().getMonth() + 1;
+  return month >= 7 && month <= 10;
+}
+
+function setRecruitmentUI(){
+  const month = new Date().getMonth() + 1;
+  const joinCard = document.getElementById("joinCard");
+
+  if(month >= 5 && month <= 6){
+    document.getElementById("recruitmentMarquee").style.display = "block";
+  }
+
+  if(isRecruitmentOpen()){
+    joinCard.innerHTML = `
+      <i class="fa-solid fa-user-plus"></i>
+      <h3>Join USTM NCC</h3>
+      <p>NCC enrollment is open from July to October. Click here to submit your application.</p>
+    `;
+  }else{
+    joinCard.innerHTML = `
+      <i class="fa-solid fa-lock"></i>
+      <h3>NCC Recruitment Closed</h3>
+      <p>Recruitment opens every year from July to October. Please try again in the next enrollment cycle. Jai Hind.</p>
+    `;
+  }
+}
+
 window.flipToRegister = function(){
   document.getElementById("flipCard").classList.add("flip");
 }
@@ -551,6 +653,59 @@ window.flipToRegister = function(){
 window.flipToLogin = function(){
   document.getElementById("flipCard").classList.remove("flip");
 }
+
+window.openJoinPopup = function(){
+  document.getElementById("joinPopup").style.display = "flex";
+
+  if(isRecruitmentOpen()){
+    document.getElementById("joinOpenBox").style.display = "block";
+    document.getElementById("joinClosedBox").style.display = "none";
+  }else{
+    document.getElementById("joinOpenBox").style.display = "none";
+    document.getElementById("joinClosedBox").style.display = "block";
+  }
+}
+
+window.closeJoinPopup = function(){
+  document.getElementById("joinPopup").style.display = "none";
+}
+
+document.getElementById("joinForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  if(!isRecruitmentOpen()){
+    alert("NCC recruitment is currently closed.");
+    return;
+  }
+
+  const appRef = push(ref(db,"nccApplications"));
+
+  await set(appRef,{
+    name:document.getElementById("appName").value.trim(),
+    department:document.getElementById("appDepartment").value.trim(),
+    roll:document.getElementById("appRoll").value.trim(),
+    semester:document.getElementById("appSemester").value.trim(),
+    wing:document.getElementById("appGender").value,
+    mobile:document.getElementById("appMobile").value.trim(),
+    email:document.getElementById("appEmail").value.trim(),
+    height:document.getElementById("appHeight").value.trim(),
+    bloodGroup:document.getElementById("appBlood").value,
+    hostelStatus:document.getElementById("appHostel").value,
+    emergencyContact:document.getElementById("appEmergency").value.trim(),
+    aCertificate:document.getElementById("appAcer").value,
+    sportsCertificate:document.getElementById("appSports").value,
+    culturalCertificate:document.getElementById("appCultural").value,
+    medicalIssues:document.getElementById("appMedical").value.trim(),
+    skills:document.getElementById("appSkills").value.trim(),
+    reason:document.getElementById("appReason").value.trim(),
+    status:"pending",
+    submittedAt:new Date().toLocaleString()
+  });
+
+  alert("Your NCC application has been submitted successfully. Jai Hind.");
+  document.getElementById("joinForm").reset();
+  closeJoinPopup();
+});
 
 window.registerCadet = async function(){
   const id = document.getElementById("registerId").value.trim();
@@ -571,13 +726,8 @@ window.registerCadet = async function(){
   const key = safeKey(id);
 
   await set(ref(db,"cadets/" + key), {
-    id:id,
-    password:pass,
-    year:parts[1],
-    wing:parts[2],
-    rank:parts[4],
-    name:parts[5],
-    status:"active",
+    id:id,password:pass,year:parts[1],wing:parts[2],
+    rank:parts[4],name:parts[5],status:"active",
     createdAt:new Date().toLocaleString()
   });
 
@@ -654,6 +804,8 @@ onValue(ref(db,"gallery"), snap=>{
     }
   });
 });
+
+setRecruitmentUI();
 </script>
 
 <script>
@@ -703,9 +855,11 @@ function showInfo(event,id){
 }
 
 document.getElementById("audioPopup").addEventListener("click", function(e){
-  if(e.target === this){
-    closeAudioPopup();
-  }
+  if(e.target === this) closeAudioPopup();
+});
+
+document.getElementById("joinPopup").addEventListener("click", function(e){
+  if(e.target === this) closeJoinPopup();
 });
 </script>
 
