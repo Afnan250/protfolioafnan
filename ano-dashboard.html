@@ -779,14 +779,16 @@ async function uploadOptionalFile(file,pathPrefix){
     };
   }
 
-  const extension = file.name.includes(".")
-    ? file.name.split(".").pop().toLowerCase()
+  const uploadFile = isImageFile(file) ? await compressImageFile(file,1200,0.75) : file;
+
+  const extension = uploadFile.name.includes(".")
+    ? uploadFile.name.split(".").pop().toLowerCase()
     : "file";
 
   const storagePath = `${pathPrefix}/${Date.now()}.${extension}`;
   const fileRef = ref(storage,storagePath);
 
-  await uploadBytes(fileRef,file);
+  await uploadBytes(fileRef,uploadFile);
 
   const url = await getDownloadURL(fileRef);
 
