@@ -71,6 +71,8 @@ section{padding:70px 7%}
 .card h3,.social-card h3{color:#071a3d;margin-bottom:10px}
 .card p,.social-card p{color:#555;line-height:1.7}
 
+.audio-card{cursor:pointer}
+
 .notice-board{background:#fff7ef}
 .notice{border-left:5px solid #ff9933;border-top:none}
 
@@ -135,6 +137,172 @@ section{padding:70px 7%}
 @keyframes saffronWave{0%{transform:translateX(-100px)}50%{transform:translateX(100px)}100%{transform:translateX(-100px)}}
 @keyframes greenWave{0%{transform:translateX(100px)}50%{transform:translateX(-100px)}100%{transform:translateX(100px)}}
 
+/* AUDIO POPUP */
+.audio-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:20px;
+}
+
+.popup-box{
+  width:95%;
+  max-width:760px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  position:relative;
+  animation:popupZoom .4s ease;
+  border:3px solid transparent;
+  box-shadow:
+    0 0 18px #ff9933,
+    0 0 30px #ffffff,
+    0 0 42px #138808;
+}
+
+.popup-box:before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:24px;
+  background:linear-gradient(90deg,#ff9933,#ffffff,#138808,#ffffff,#ff9933);
+  background-size:300%;
+  z-index:-1;
+  filter:blur(12px);
+  animation:tricolorGlow 4s linear infinite;
+}
+
+@keyframes tricolorGlow{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
+@keyframes popupZoom{
+  from{transform:scale(.75);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.popup-box h2{
+  text-align:center;
+  color:#071a3d;
+  margin-bottom:20px;
+  font-size:30px;
+}
+
+.close-btn{
+  position:absolute;
+  right:18px;
+  top:12px;
+  font-size:30px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#071a3d;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.tab-btn{
+  flex:1;
+  min-width:160px;
+  padding:12px;
+  border:1px solid #ddd;
+  background:white;
+  color:#071a3d;
+  font-weight:800;
+  cursor:pointer;
+  border-radius:10px;
+}
+
+.tab-btn.active{
+  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
+  color:#071a3d;
+  box-shadow:0 0 15px rgba(255,153,51,.8);
+}
+
+.audio-content{
+  border:1px solid #ddd;
+  padding:18px;
+  border-radius:14px;
+  background:#fff;
+}
+
+.audio-content h3{
+  color:#071a3d;
+  margin-bottom:8px;
+  font-size:24px;
+}
+
+.audio-content audio{
+  width:100%;
+  margin:15px 0;
+}
+
+.download-btn{
+  display:inline-block;
+  margin:6px;
+  padding:10px 18px;
+  border-radius:8px;
+  border:1px solid #ff9933;
+  color:#ff7a00;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.download-btn.dark{
+  background:#071a3d;
+  color:white;
+  border-color:#071a3d;
+}
+
+.info-tabs{
+  display:flex;
+  gap:8px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+.info-tab-btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:800;
+  color:#071a3d;
+  background:#eef2f7;
+}
+
+.info-tab-btn.active-info{
+  background:linear-gradient(90deg,#ff9933,#fff,#138808);
+}
+
+.info-box{
+  margin-top:12px;
+  padding:15px;
+  background:#f8fafc;
+  border-left:5px solid #ff9933;
+  border-radius:10px;
+  line-height:1.7;
+  color:#333;
+}
+
+.info-box h4{
+  color:#071a3d;
+  margin-bottom:8px;
+}
+
 footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
 @media(max-width:900px){
@@ -155,6 +323,8 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
   .flip-wrapper,.flip-side,.login-glass{min-height:540px}
   .login-glass{padding:26px 18px;border-radius:22px}
   .logo-frame{width:60px;height:60px}
+  .popup-box{padding:20px}
+  .popup-box h2{font-size:24px}
 }
 </style>
 </head>
@@ -224,6 +394,12 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
       <h3>Join NCC</h3>
       <p>Interested students may contact the NCC office, ANO or senior cadets.</p>
     </div>
+
+    <div class="card audio-card" onclick="openAudioPopup()">
+      <i class="fa-solid fa-headphones"></i>
+      <h3>NCC Heritage & Music Library</h3>
+      <p>Explore NCC songs, patriotic music, history, significance, lyrics and downloadable audio resources.</p>
+    </div>
   </div>
 </section>
 
@@ -270,7 +446,7 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 
     <a href="mailto:ustmnccwarriors@gmail.com" class="social-card email">
       <i class="fas fa-envelope"></i>
-      <div><h3>Email</h3><p>ustmncc@ustm.ac.in</p></div>
+      <div><h3>Email</h3><p>ustmnccwarriors@gmail.com</p></div>
     </a>
   </div>
 </section>
@@ -327,6 +503,115 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
 <footer>
   © 2026 USTM NCC | 42 MEGH BN NCC
 </footer>
+
+<!-- AUDIO POPUP -->
+<div class="audio-popup" id="audioPopup">
+  <div class="popup-box">
+    <button class="close-btn" onclick="closeAudioPopup()">×</button>
+
+    <h2>NCC Heritage & Music Library</h2>
+
+    <div class="tabs">
+      <button onclick="showAudio(event,'anthem')" class="tab-btn active">NATIONAL ANTHEM</button>
+      <button onclick="showAudio(event,'nccsong')" class="tab-btn">NCC SONG</button>
+      <button onclick="showAudio(event,'badluram')" class="tab-btn">BADLURAM KA BADAN</button>
+    </div>
+
+    <div class="audio-content" id="anthem">
+      <h3>National Anthem</h3>
+      <p>Jana Gana Mana</p>
+
+      <audio controls>
+        <source src="audio/national-anthem.mp3" type="audio/mpeg">
+      </audio>
+
+      <a href="lyrics/national-anthem.pdf" download class="download-btn">Download Lyrics</a>
+      <a href="audio/national-anthem.mp3" download class="download-btn dark">Download Audio</a>
+
+      <div class="info-tabs">
+        <button class="info-tab-btn active-info" onclick="showInfo(event,'anthemLyrics')">Lyrics</button>
+        <button class="info-tab-btn" onclick="showInfo(event,'anthemHistory')">History & Significance</button>
+      </div>
+
+      <div class="info-box anthem-info" id="anthemLyrics">
+        <h4>Lyrics</h4>
+        <p>Paste the National Anthem lyrics here or keep only the downloadable PDF.</p>
+      </div>
+
+      <div class="info-box anthem-info" id="anthemHistory" style="display:none;">
+        <h4>History & Significance</h4>
+        <p>
+          The National Anthem of India, Jana Gana Mana, is a symbol of national unity, dignity and pride.
+          It is sung during official ceremonies, parades, educational institutions and NCC functions to show
+          respect towards the nation.
+        </p>
+      </div>
+    </div>
+
+    <div class="audio-content" id="nccsong" style="display:none;">
+      <h3>NCC Song</h3>
+      <p>Hum Sab Bharatiya Hain</p>
+
+      <audio controls>
+        <source src="audio/ncc-song.mp3" type="audio/mpeg">
+      </audio>
+
+      <a href="lyrics/ncc-song.pdf" download class="download-btn">Download Lyrics</a>
+      <a href="audio/ncc-song.mp3" download class="download-btn dark">Download Audio</a>
+
+      <div class="info-tabs">
+        <button class="info-tab-btn active-info" onclick="showInfo(event,'nccLyrics')">Lyrics</button>
+        <button class="info-tab-btn" onclick="showInfo(event,'nccHistory')">History & Significance</button>
+      </div>
+
+      <div class="info-box ncc-info" id="nccLyrics">
+        <h4>Lyrics</h4>
+        <p>Paste NCC Song lyrics here or keep only the downloadable PDF.</p>
+      </div>
+
+      <div class="info-box ncc-info" id="nccHistory" style="display:none;">
+        <h4>History & Significance</h4>
+        <p>
+          The NCC Song represents unity, discipline, patriotism and national integration among cadets.
+          It is used in NCC camps, parades, training activities and institutional programmes to motivate cadets
+          and strengthen the spirit of unity in diversity.
+        </p>
+      </div>
+    </div>
+
+    <div class="audio-content" id="badluram" style="display:none;">
+      <h3>Badluram Ka Badan</h3>
+      <p>Military marching song</p>
+
+      <audio controls>
+        <source src="audio/badluram-ka-badan.mp3" type="audio/mpeg">
+      </audio>
+
+      <a href="lyrics/badluram-ka-badan.pdf" download class="download-btn">Download Lyrics</a>
+      <a href="audio/badluram-ka-badan.mp3" download class="download-btn dark">Download Audio</a>
+
+      <div class="info-tabs">
+        <button class="info-tab-btn active-info" onclick="showInfo(event,'badluramLyrics')">Lyrics</button>
+        <button class="info-tab-btn" onclick="showInfo(event,'badluramHistory')">History & Significance</button>
+      </div>
+
+      <div class="info-box badluram-info" id="badluramLyrics">
+        <h4>Lyrics</h4>
+        <p>Paste Badluram Ka Badan lyrics here or keep only the downloadable PDF.</p>
+      </div>
+
+      <div class="info-box badluram-info" id="badluramHistory" style="display:none;">
+        <h4>History & Significance</h4>
+        <p>
+          Badluram Ka Badan is a well-known marching song associated with Indian military tradition.
+          It is energetic, rhythmic and commonly used to build marching spirit, motivation, coordination
+          and morale during drill or training activities.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
@@ -422,7 +707,7 @@ window.login = async function(){
   const registeredYear = parseInt(cadet.year);
 
   if(currentYear - registeredYear >= 3 || cadet.status === "completed"){
-    alert("Thank you for your dedicated service to USTM NCC. Your discipline, leadership and guidance have helped shape the next generation of cadets. Your legacy continues through them. Jai Hind.");
+    alert("Thank you for your dedicated service to USTM NCC. Your legacy continues through the next generation of cadets. Jai Hind.");
     return;
   }
 
@@ -467,6 +752,44 @@ onValue(ref(db,"gallery"), snap=>{
     }
   });
 });
+</script>
+
+<script>
+function openAudioPopup(){
+  document.getElementById("audioPopup").style.display = "flex";
+}
+
+function closeAudioPopup(){
+  document.getElementById("audioPopup").style.display = "none";
+}
+
+function showAudio(event,id){
+  document.querySelectorAll(".audio-content").forEach(content=>{
+    content.style.display = "none";
+  });
+
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  document.getElementById(id).style.display = "block";
+  event.target.classList.add("active");
+}
+
+function showInfo(event,id){
+  const parent = event.target.closest(".audio-content");
+
+  parent.querySelectorAll(".info-box").forEach(box=>{
+    box.style.display = "none";
+  });
+
+  parent.querySelectorAll(".info-tab-btn").forEach(btn=>{
+    btn.classList.remove("active-info");
+  });
+
+  document.getElementById(id).style.display = "block";
+  event.target.classList.add("active-info");
+}
 </script>
 
 </body>
