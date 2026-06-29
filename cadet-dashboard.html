@@ -595,6 +595,7 @@ const cadetKey = localStorage.getItem("activeCadetKey");
 let currentCadet = null;
 let selectedProfilePhoto = null;
 let attendanceMainLoaded = false;
+let attendanceKey = "";
 
 const defaultPhoto = "default-profile.png";
 
@@ -608,11 +609,8 @@ function makeAttendanceKey(value){
     .replace(/[^A-Z0-9]/g,"");
 }
 
-const attendanceKey = makeAttendanceKey(cadetId);
-
-function getRankFromId(id){
-  const parts = String(id || "").split("-");
-  return parts.length >= 5 ? parts[4] : "Not updated";
+function getRankText(cadet){
+  return cadet.rank || "Not marked by ANO";
 }
 
 function getServiceYear(cadet){
@@ -695,14 +693,17 @@ async function loadCadet(){
     document.getElementById("cadetName").textContent =
       currentCadet.name || "Cadet";
 
+    const updatedCadetId = currentCadet.id || cadetId;
+    attendanceKey = makeAttendanceKey(updatedCadetId);
+
     document.getElementById("cadetIdText").textContent =
-      currentCadet.id || cadetId;
+      updatedCadetId;
 
     document.getElementById("attendanceKeyText").textContent =
       attendanceKey;
 
     document.getElementById("cadetRankText").textContent =
-      currentCadet.rank || getRankFromId(currentCadet.id || cadetId);
+      getRankText(currentCadet);
 
     document.getElementById("serviceYearText").textContent =
       getServiceYear(currentCadet);
@@ -920,12 +921,24 @@ function updateAttendanceUI(data){
 }
 
 function loadAttendance(){
-  onSnapshot(doc(db,"attendance",attendanceKey),snapshot=>{
-    if(snapshot.exists()){
-      attendanceMainLoaded = true;
-      updateAttendanceUI(snapshot.data());
-    }
-  });
+  const oldLoginAttendanceKey = makeAttendanceKey(cadetId);
+
+  if(attendanceKey){
+    onSnapshot(doc(db,"attendance",attendanceKey),snapshot=>{
+      if(snapshot.exists()){
+        attendanceMainLoaded = true;
+        updateAttendanceUI(snapshot.data());
+      }
+    });
+  }
+
+  if(oldLoginAttendanceKey && oldLoginAttendanceKey !== attendanceKey){
+    onSnapshot(doc(db,"attendance",oldLoginAttendanceKey),snapshot=>{
+      if(snapshot.exists() && !attendanceMainLoaded){
+        updateAttendanceUI(snapshot.data());
+      }
+    });
+  }
 
   onSnapshot(doc(db,"attendance",cadetKey),snapshot=>{
     if(snapshot.exists() && !attendanceMainLoaded){
@@ -1007,9 +1020,11 @@ window.logoutCadet = function(){
   window.location.replace("ncc.html");
 };
 
-loadCadet();
+loadCadet().then(()=>{
+  loadAttendance();
+});
+
 loadNotices();
-loadAttendance();
 loadCampUpdate();
 </script>
 
