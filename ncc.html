@@ -446,9 +446,9 @@ footer{background:#071a3d;color:white;text-align:center;padding:25px}
           <input type="text" id="appSemester" placeholder="Semester" required>
 
           <select id="appGender" required>
-            <option value="">Select Wing</option>
-            <option value="SD">SD</option>
-            <option value="SW">SW</option>
+            <option value="">Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
 
           <input type="text" id="appMobile" placeholder="Mobile Number" required>
@@ -576,23 +576,53 @@ Jay Jay Jay Jay He.</p>
 
       <div class="info-tabs">
         <button class="info-tab-btn active-info" onclick="showInfo(event,'nccLyrics')">Lyrics</button>
-        <button class="info-tab-btn" onclick="showInfo(event,'nccHistory')">History & Significance</button>
+        <button class="info-tab-btn" onclick="showInfo(event,'nccHistory')">History</button>
       </div>
 
       <div class="info-box" id="nccLyrics">
         <h4>Lyrics</h4>
-        <p class="lyrics-text">Paste your NCC Song lyrics here.</p>
+        <p class="lyrics-text">Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain
+Apni Manzil Ek Hai,
+Ha, Ha, Ha, Ek Hai,
+Ho, Ho, Ho, Ek Hai.
+Hum Sab Bharatiya Hain.
+
+Kashmir Ki Dharti Rani Hai,
+Sartaj Himalaya Hai,
+Saadiyon Se Humne Isko Apne Khoon Se Pala Hai
+Desh Ki Raksha Ki Khatir Hum Shamshir Utha Lenge,
+Hum Shamshir Utha Lenge.
+
+Bikhre Bikhre Taare Hain Hum Lekin Jhilmil Ek Hai,
+
+Ha, Ha, Ha, Ek Hai
+Hum Sab Bharatiya Hai.
+Mandir Gurudwaare Bhi Hain Yahan
+Aur Masjid Bhi Hai Yahan
+Girija Ka Hai Ghariyaal Kahin
+Mullah ki Kahin Hai Ajaan
+
+Ek Hee Apna Ram Hain, Ek hi Allah Taala Hai,
+Ek Hee Allah Taala Hain, Raang Birange Deepak Hain Hum,
+lekin Jagmag Ek Hai, Ha Ha Ha Ek Hai, Ho Ho Ho Ek Hai.
+Hum Sab Bharatiya Hain, Hum Sab Bharatiya Hain.</p>
       </div>
 
       <div class="info-box" id="nccHistory" style="display:none;">
-        <h4>History & Significance</h4>
-        <p>Hum Sab Bharatiya Hain is widely known as the NCC Song. It promotes unity, discipline, patriotism and national integration among cadets.</p>
+        <h4>History</h4>
+        <p>The desirability of composing a NCC song was considered in the Circle Commanders (now called DDGs) Conference held in January 1956 and all circles were asked to send their proposals. The official song of the NCC – “Kadam Mila Ke Chal” was adopted in 1962, and registered in 1969 with the approval of the Ministry of Defence. In 1974, it was felt that the NCC song had failed to catch the imagination of the youth, and there was a need for a change. A sustained process began; entries were invited from Directorates for suitable lyrics; 107 entries were received; of which eight were selected by a Board of Officers. However, all the eight were considered sub standard by Dr Nagendra of Delhi University, who was the judge. On the suggestion of Dr Nagendra, the task was entrusted to Shri Chiranjit, the Chief Producer, Drama Division, AIR, Delhi.
+The song written by Shri Chiranjit was approved, in 1976. The Maharashtra Directorate was asked to get the song composed and recorded with the help of Shri Raj Kapoor, and the Films Division, Bombay. However, nothing much came out of this exercise as Shri Raj Kapoor was then busy in making his film “Satyam Shivam Sundaram” and the studios of the Films Division were under renovation. Later, Shri Mahinder Singh Bedi, a well known poet of Delhi, was requested to write another song. This effort also proved infructuous. AEC Centre Pachmarhi was also approached, but somehow the matter could not be finalized.
+Almost during the same period and independent of efforts at Directorate General NCC, the Film Division undertook production of a documentary on NCC ‘A Cadet’ s Diary’. The Director of the documentary was looking for a suitable song for the film. He happened to hear the song – ‘Ham Sab Hindi Hain’ which appears to have been first sung at a Youth Festival at Chandigarh, sometime during 1968-69, and introduced it in the documentary film.
+The song was a hit and successive Director Generals (DGs) found it good and played it repeatedly in Republic Day camps. In 1980, the word ‘Hindi’ was substituted with ‘Bhartiya’.
+Come ASIAD (1982), and the NCC got the opportunity to display its potential in the opening ceremony. The Special Organising Committee approved trial recording of the song for recital during the Asian Games Festival. The song was finally recorded in its present form, sometime during Oct 1982, at the Western Outdoor Studio, Delhi with the help of AIR artists, and musicians under overall supervision of Pandit Vijai Raghavan Rao.
+Post ASIAD era in the NCC saw among other events, a well composed musical hit and an inspiring NCC song being played and sung alongwith recorded music; a 16 mm colour film had also been made with title ‘Hum Sab Bhartiya Hain’ of 7½ minutes duration. This film had been telecast twice on national hook up. Other films, ‘Unity and Discipline’; ‘A Cadet’ s Diary, had also used this song prominently. The writer of this song seems to have been lost in oblivion. “No body knows” – said Shri SK Sharma, Joint Director, Armed Forces Film and Photo Division, who was actively involved with the production of documentaries on the NCC. “This song was not written for the NCC, as such, writes Shri Mathur, ex-publicity officer, DGNCC, in his notings on the file. But nobody has claimed it so far. Another noting speaks of Sri Virender Sharma as the lyrics writer, and Sri Vijai Raghavan Rao as the music composer.
+This NCC song is liked by millions of cadets, both past and present, and is sung on all important occasions of the NCC.</p>
       </div>
     </div>
 
     <div class="audio-content" id="badluram" style="display:none;">
       <h3>Badluram Ka Badan</h3>
-      <p>Military marching song</p>
+      <p>Assam Regiment Song</p>
       <audio controls preload="metadata">
         <source src="badluramkabadan.mp3" type="audio/mpeg">
         Your browser does not support audio.
@@ -601,17 +631,31 @@ Jay Jay Jay Jay He.</p>
 
       <div class="info-tabs">
         <button class="info-tab-btn active-info" onclick="showInfo(event,'badluramLyrics')">Lyrics</button>
-        <button class="info-tab-btn" onclick="showInfo(event,'badluramHistory')">History & Significance</button>
+        <button class="info-tab-btn" onclick="showInfo(event,'badluramHistory')">History</button>
       </div>
 
       <div class="info-box" id="badluramLyrics">
         <h4>Lyrics</h4>
-        <p class="lyrics-text">Paste Badluram Ka Badan lyrics here.</p>
+        <p class="lyrics-text">Ek khubsurat ladki thi…
+Usko dekh ke rifleman…
+Chindi khichna bhul gaya…
+Havaldar Major dekh liya…
+Usko pittu lagaya…
+Badluram ek sipahi thaa…
+Japan war me mar gaya…
+Quarter Master smart thaa…
+Usney ration nikala…
+Badluram ka badan zamin ke nichey hain…
+Toh humein uska ration milta hain…
+Sabashh… hallelujah…
+Toh humein uska ration milta hain…</p>
       </div>
 
       <div class="info-box" id="badluramHistory" style="display:none;">
-        <h4>History & Significance</h4>
-        <p>Badluram Ka Badan is a popular military marching song associated with Indian Army tradition. It helps build marching spirit, morale and motivation.</p>
+        <h4>History</h4>
+        <p>This song is based on a real-life incident and is created in honor of Rifleman Badluram a soldier of the 1st Battalion, Assam Regiment in British Indian Army who died while fighting against the Japanese Army in World War II. Badluram was killed in the early days of the battle from a gunshot wound.
+Later the Japanese troops had Kohima under their military blockade and cut down British Indian Army supply. Soon the British troops started facing the food shortage, the airdrop supply was also difficult because of the terrain and due to the deployment of Japanese anti-aircraft gun.
+But the Quartermaster of Badluram’s company didn’t remove Badluram’s name from the ration list and the surplus ration that was collected in the name of Badluram over the months proved to be a godsend. Which later helped the troops survive the siege. And in his memory, Major P.T Porktor in 1946 created a song that later became the regimental song of the Assam Regiment and is sung by recruits in passing out parade at Shillong.</p>
       </div>
     </div>
   </div>
@@ -705,7 +749,7 @@ document.getElementById("joinForm").addEventListener("submit", async function(e)
     department:document.getElementById("appDepartment").value.trim(),
     roll:document.getElementById("appRoll").value.trim(),
     semester:document.getElementById("appSemester").value.trim(),
-    wing:document.getElementById("appGender").value,
+    gender:document.getElementById("appGender").value,
     mobile:document.getElementById("appMobile").value.trim(),
     email:document.getElementById("appEmail").value.trim(),
     height:document.getElementById("appHeight").value.trim(),
