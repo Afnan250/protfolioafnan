@@ -3,129 +3,469 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ANO Dashboard | USTM NCC</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{--navy:#061a40;--saffron:#ff9933;--green:#138808;--light:#f4f7fc;--danger:#c62828;--muted:#667085}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{background:var(--light);color:var(--navy)}
-.header{background:linear-gradient(135deg,#041433,#08275d);color:white;padding:22px 5%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 25px rgba(0,0,0,.2)}
-.header h1{color:var(--saffron)}
-.logout-btn{background:var(--saffron);color:var(--navy);border:none;padding:14px 26px;border-radius:12px;font-weight:900;cursor:pointer}
-.container{width:min(1450px,94%);margin:30px auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.card{background:white;padding:28px;border-radius:22px;box-shadow:0 -3px 16px rgba(255,153,51,.75),0 3px 18px rgba(19,136,8,.6),0 12px 25px rgba(7,26,61,.13);border-top:5px solid var(--saffron)}
-.card i{font-size:36px;margin-bottom:14px;color:var(--navy)}.card h2{margin-bottom:10px}.card p{line-height:1.6;margin-bottom:18px}
-.card button,.action-btn,.small-btn{background:var(--navy);color:white;border:none;border-radius:10px;font-weight:900;cursor:pointer}
-.card button{width:100%;margin-top:10px;padding:13px}.card button:hover,.action-btn:hover,.small-btn:hover{background:var(--saffron);color:var(--navy)}
-.download-buttons{display:flex;flex-direction:column;gap:10px}
-.form-section,.table-box{margin-top:35px;background:white;padding:28px;border-radius:22px;box-shadow:0 12px 25px rgba(0,0,0,.08)}
-.form-section{border-top:5px solid var(--green)}.form-section h2,.table-box h2{margin-bottom:18px}
-input,textarea,select{width:100%;padding:14px;margin:10px 0;border:1px solid #cfd6e2;border-radius:10px;outline:none;background:white}textarea{min-height:100px;resize:none}.action-btn{padding:13px 22px}
-.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.hint{color:var(--muted);font-size:13px;margin:4px 0 12px}
-.table-box{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{padding:13px;border-bottom:1px solid #e5e9f0;text-align:left;font-size:14px;vertical-align:top}th{background:#f4f7fc;color:var(--navy)}
-.small-btn{width:auto!important;padding:8px 12px!important;font-size:12px;margin:3px!important}.danger{background:var(--danger)!important;color:white!important}.success{background:var(--green)!important;color:white!important}.ghost{background:#eef2f7!important;color:var(--navy)!important}
-.preview-img{max-width:110px;max-height:80px;border-radius:10px;object-fit:cover}.preview-video{max-width:150px;max-height:90px;border-radius:10px}.badge{display:inline-block;padding:5px 10px;border-radius:20px;background:#eef2f7;font-weight:800;font-size:12px}.expired{background:#ffecec;color:var(--danger)}.active{background:#eaffea;color:var(--green)}
-footer{text-align:center;background:linear-gradient(135deg,#041433,#08275d);color:white;padding:25px;margin-top:40px}footer strong{color:var(--saffron)}
-@media(max-width:700px){.header{flex-direction:column;gap:14px;text-align:center}}
+:root{
+  --navy:#061a40;
+  --saffron:#ff9933;
+  --green:#138808;
+  --light:#f4f7fc;
+  --danger:#c62828;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+  background:var(--light);
+  color:var(--navy);
+}
+
+.header{
+  background:linear-gradient(135deg,#041433,#08275d);
+  color:white;
+  padding:22px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.header h1{
+  color:var(--saffron);
+}
+
+.logout-btn{
+  background:var(--saffron);
+  color:var(--navy);
+  border:none;
+  padding:14px 26px;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.container{
+  width:min(1450px,94%);
+  margin:30px auto;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 -3px 16px rgba(255,153,51,.75),
+             0 3px 18px rgba(19,136,8,.6),
+             0 12px 25px rgba(7,26,61,.13);
+  border-top:5px solid var(--saffron);
+}
+
+.card i{
+  font-size:36px;
+  margin-bottom:14px;
+  color:var(--navy);
+}
+
+.card h2{
+  margin-bottom:10px;
+}
+
+.card p{
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.card button{
+  width:100%;
+  margin-top:10px;
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:13px;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.card button:hover{
+  background:var(--saffron);
+  color:var(--navy);
+}
+
+.download-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.form-section{
+  margin-top:35px;
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 12px 25px rgba(0,0,0,.08);
+  border-top:5px solid var(--green);
+}
+
+.form-section h2{
+  margin-bottom:18px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border:1px solid #cfd6e2;
+  border-radius:10px;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:none;
+}
+
+.action-btn{
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:13px 22px;
+  border-radius:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.action-btn:hover{
+  background:var(--saffron);
+  color:var(--navy);
+}
+
+.table-box{
+  margin-top:35px;
+  background:white;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 12px 25px rgba(0,0,0,.08);
+  overflow-x:auto;
+}
+
+.table-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.search-box{
+  max-width:350px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:13px;
+  border-bottom:1px solid #e5e9f0;
+  text-align:left;
+  font-size:14px;
+  vertical-align:top;
+}
+
+th{
+  background:#f4f7fc;
+  color:var(--navy);
+}
+
+.small-btn{
+  width:auto!important;
+  padding:8px 12px!important;
+  font-size:12px;
+  margin:3px!important;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.danger{
+  background:var(--danger)!important;
+  color:white!important;
+}
+
+.success{
+  background:var(--green)!important;
+  color:white!important;
+}
+
+.rank-select{
+  min-width:115px;
+  padding:8px;
+  margin:3px;
+  font-size:12px;
+}
+
+.media-preview{
+  width:120px;
+  max-height:80px;
+  object-fit:cover;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+.notice-list-card{
+  margin-top:25px;
+  padding:18px;
+  background:#f8fafc;
+  border-radius:16px;
+  border-left:5px solid var(--saffron);
+}
+
+.notice-list-card h3{
+  margin-bottom:6px;
+}
+
+footer{
+  text-align:center;
+  background:linear-gradient(135deg,#041433,#08275d);
+  color:white;
+  padding:25px;
+  margin-top:40px;
+}
+
+footer strong{
+  color:var(--saffron);
+}
+
+@media(max-width:700px){
+  .header{
+    flex-direction:column;
+    gap:14px;
+    text-align:center;
+  }
+}
 </style>
 </head>
 
 <body>
+
 <header class="header">
   <h1>ANO Dashboard</h1>
-  <button class="logout-btn" onclick="logoutAno()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+
+  <button class="logout-btn" onclick="logoutAno()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
+  </button>
 </header>
 
 <div class="container">
+
   <div class="grid">
+
     <div class="card">
-      <i class="fa-solid fa-users"></i><h2>Registered Cadets</h2>
-      <p>Download separate lists for 1st, 2nd and 3rd year cadets.</p>
+      <i class="fa-solid fa-users"></i>
+      <h2>Registered Cadets</h2>
+      <p>Download and manage 1st, 2nd and 3rd year cadets.</p>
+
       <div class="download-buttons">
-        <button onclick="downloadCadetsByYear(1)"><i class="fa-solid fa-download"></i> Download 1st Year Cadet List</button>
-        <button onclick="downloadCadetsByYear(2)"><i class="fa-solid fa-download"></i> Download 2nd Year Cadet List</button>
-        <button onclick="downloadCadetsByYear(3)"><i class="fa-solid fa-download"></i> Download 3rd Year Cadet List</button>
+        <button onclick="downloadCadetsByYear(1)">
+          <i class="fa-solid fa-download"></i>
+          Download 1st Year Cadet List
+        </button>
+
+        <button onclick="downloadCadetsByYear(2)">
+          <i class="fa-solid fa-download"></i>
+          Download 2nd Year Cadet List
+        </button>
+
+        <button onclick="downloadCadetsByYear(3)">
+          <i class="fa-solid fa-download"></i>
+          Download 3rd Year Cadet List
+        </button>
       </div>
     </div>
-    <div class="card"><i class="fa-solid fa-bullhorn"></i><h2>Notice Board</h2><p>Publish notices with optional photo. Notices expire after 7 days.</p><button onclick="scrollToSection('noticeSection')">Manage Notices</button></div>
-    <div class="card"><i class="fa-solid fa-photo-film"></i><h2>Showcase Upload</h2><p>Upload photos or videos for NCC showcase/gallery.</p><button onclick="scrollToSection('showcaseSection')">Upload Showcase</button></div>
-    <div class="card"><i class="fa-solid fa-calendar-check"></i><h2>Attendance</h2><p>Update attendance percentage of any cadet.</p><button onclick="scrollToSection('attendanceSection')">Update Attendance</button></div>
-    <div class="card"><i class="fa-solid fa-campground"></i><h2>Camp Updates</h2><p>Publish camp details visible to cadets.</p><button onclick="scrollToSection('campSection')">Update Camp</button></div>
+
+    <div class="card">
+      <i class="fa-solid fa-bullhorn"></i>
+      <h2>Notice Board</h2>
+      <p>Publish notice with optional photo. Notice expires after 7 days.</p>
+      <button onclick="scrollToSection('noticeSection')">
+        Manage Notices
+      </button>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-calendar-check"></i>
+      <h2>Attendance</h2>
+      <p>Enter Cadet ID and attendance. Remarks generate automatically.</p>
+      <button onclick="scrollToSection('attendanceSection')">
+        Update Attendance
+      </button>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-photo-film"></i>
+      <h2>Showcase Upload</h2>
+      <p>Upload photos and videos for the main showcase/gallery.</p>
+      <button onclick="scrollToSection('showcaseSection')">
+        Upload Showcase
+      </button>
+    </div>
+
   </div>
 
   <section class="form-section" id="noticeSection">
     <h2>Publish Notice</h2>
+
     <input id="noticeTitle" placeholder="Notice Title">
+
     <textarea id="noticeContent" placeholder="Notice Content"></textarea>
+
     <select id="noticeBy">
       <option value="">Published By</option>
-      <option>Lt. Rizaul Karim Ahmed</option>
-      <option>Lt. Dr. Fahmida S. Bora</option>
-      <option>Senior In Charge</option>
+      <option value="Lt. Rizaul Karim Ahmed">Lt. Rizaul Karim Ahmed</option>
+      <option value="Lt. Dr. Fahmida S. Bora">Lt. Dr. Fahmida S. Bora</option>
+      <option value="Senior In Charge">Senior In Charge</option>
     </select>
+
     <input id="noticeDate" placeholder="Date e.g. 29-06-2026">
-    <input type="file" id="noticePhoto" accept="image/*">
-    <p class="hint">Optional: upload one photo with the notice. Notice will expire after 7 days.</p>
-    <button class="action-btn" id="noticeBtn" onclick="publishNotice()">Publish Notice</button>
-  </section>
 
-  <section class="table-box">
-    <h2>Published Notices</h2>
-    <table>
-      <thead><tr><th>Title</th><th>By</th><th>Date</th><th>Expiry</th><th>Photo</th><th>Status</th><th>Action</th></tr></thead>
-      <tbody id="noticeTable"><tr><td colspan="7">Loading notices...</td></tr></tbody>
-    </table>
-  </section>
+    <input type="file" id="noticeMedia" accept="image/*">
 
-  <section class="form-section" id="showcaseSection">
-    <h2>Upload Showcase Photo / Video</h2>
-    <div class="two-col">
-      <input id="showcaseTitle" placeholder="Showcase Title">
-      <select id="showcaseType"><option value="photo">Photo</option><option value="video">Video</option></select>
-    </div>
-    <textarea id="showcaseDescription" placeholder="Short description"></textarea>
-    <input type="file" id="showcaseFile" accept="image/*,video/*">
-    <button class="action-btn" id="showcaseBtn" onclick="uploadShowcase()">Upload Showcase</button>
-  </section>
+    <button class="action-btn" id="noticeBtn" onclick="publishNotice()">
+      Publish Notice
+    </button>
 
-  <section class="table-box">
-    <h2>Showcase Uploads</h2>
-    <table>
-      <thead><tr><th>Title</th><th>Type</th><th>Preview</th><th>Date</th><th>Action</th></tr></thead>
-      <tbody id="showcaseTable"><tr><td colspan="5">Loading showcase uploads...</td></tr></tbody>
-    </table>
+    <div id="noticeList"></div>
   </section>
 
   <section class="form-section" id="attendanceSection">
     <h2>Update Cadet Attendance</h2>
-    <input id="attendanceCadetKey" placeholder="Cadet Key / Document ID">
-    <input id="attendancePercentInput" type="number" placeholder="Attendance Percentage">
-    <textarea id="attendanceTextInput" placeholder="Attendance Remarks"></textarea>
-    <button class="action-btn" onclick="updateAttendance()">Update Attendance</button>
+
+    <input
+      id="attendanceCadetKey"
+      placeholder="Cadet ID e.g. ML2024SDIA4980182CDTAFNANALJEDID"
+    >
+
+    <input
+      id="attendancePercentInput"
+      type="number"
+      min="0"
+      max="100"
+      placeholder="Attendance Percentage"
+    >
+
+    <textarea
+      id="attendanceTextInput"
+      placeholder="Remarks will be generated automatically"
+      readonly
+    ></textarea>
+
+    <button class="action-btn" onclick="updateAttendance()">
+      Update Attendance
+    </button>
   </section>
 
   <section class="form-section" id="campSection">
     <h2>Update Camp Information</h2>
+
     <textarea id="campTextInput" placeholder="Write camp update here"></textarea>
-    <button class="action-btn" onclick="updateCamp()">Publish Camp Update</button>
+
+    <button class="action-btn" onclick="updateCamp()">
+      Publish Camp Update
+    </button>
+  </section>
+
+  <section class="form-section" id="showcaseSection">
+    <h2>Upload Showcase Photo / Video</h2>
+
+    <input id="showcaseTitle" placeholder="Showcase Title">
+    <textarea id="showcaseCaption" placeholder="Caption / Description"></textarea>
+    <input type="file" id="showcaseFile" accept="image/*,video/*">
+
+    <button class="action-btn" id="showcaseBtn" onclick="uploadShowcase()">
+      Upload Showcase
+    </button>
   </section>
 
   <section class="table-box">
-    <h2>Cadet List</h2>
+    <div class="table-head">
+      <h2>Cadet List</h2>
+      <input class="search-box" id="cadetSearch" placeholder="Search by name, ID, rank, wing..." oninput="filterCadetTable()">
+    </div>
+
     <table>
-      <thead><tr><th>Cadet ID</th><th>Name</th><th>Rank</th><th>Wing</th><th>Year</th><th>Status</th><th>Doc ID</th><th>Action</th></tr></thead>
-      <tbody id="cadetTable"><tr><td colspan="8">Loading cadets...</td></tr></tbody>
+      <thead>
+        <tr>
+          <th>Cadet ID</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Wing</th>
+          <th>Year</th>
+          <th>Status</th>
+          <th>Doc ID</th>
+          <th>Rank Update</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="cadetTable">
+        <tr>
+          <td colspan="9">Loading cadets...</td>
+        </tr>
+      </tbody>
     </table>
   </section>
+
 </div>
 
-<footer><p><strong>USTM NCC</strong> | ANO Portal</p><p>© 2026 USTM NCC | 42 MEGH BN NCC</p></footer>
+<footer>
+  <p><strong>USTM NCC</strong> | ANO Portal</p>
+  <p>© 2026 USTM NCC | 42 MEGH BN NCC</p>
+</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, onSnapshot, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  addDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQZMu4v6XebenpS2cG2NwYN3RYKS6NWUs",
@@ -140,188 +480,493 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+let allCadetRows = [];
+
 if(localStorage.getItem("activeAnoId") !== "ANO001"){
   alert("Please login as ANO first.");
   window.location.href = "ncc.html";
 }
 
-window.scrollToSection = id => document.getElementById(id).scrollIntoView({behavior:"smooth"});
-function yearText(year){const y=Number(year); if(y===1)return "1st Year"; if(y===2)return "2nd Year"; if(y===3)return "3rd Year"; return "Not Marked";}
-function formatDate(d){return new Date(d).toLocaleDateString("en-IN");}
-function isExpired(expiresAt){return expiresAt && new Date(expiresAt).getTime() < Date.now();}
-function storagePathFromURL(path){return path || "";}
+window.scrollToSection = function(id){
+  document.getElementById(id).scrollIntoView({
+    behavior:"smooth"
+  });
+};
+
+function cleanKey(value){
+  return String(value || "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g,"");
+}
+
+function normalizeRank(rank){
+  const r = String(rank || "CDT").toUpperCase().replace(/[^A-Z0-9]/g,"");
+  return r || "CDT";
+}
+
+function yearText(year){
+  const y = Number(year);
+
+  if(y === 1) return "1st Year";
+  if(y === 2) return "2nd Year";
+  if(y === 3) return "3rd Year";
+
+  return "Not Marked";
+}
+
+function generateCadetIdWithRank(cadet,newRank){
+  const rank = normalizeRank(newRank);
+  const oldId = cleanKey(cadet.id || "");
+  const allowedRanks = "(CDT|LCPL|CPL|SGT|JUO|SUO)";
+
+  let match = oldId.match(new RegExp("^ML(\\d{4})(SDIA|SWIA)(\\d+)" + allowedRanks + "(.+)$"));
+
+  if(match){
+    return "ML" + match[1] + match[2] + match[3] + rank + match[5];
+  }
+
+  const year = cleanKey(cadet.year || "").match(/\d{4}/)?.[0] || "";
+  const wing = cleanKey(cadet.wing || "").match(/SDIA|SWIA/)?.[0] || "";
+  const number = cleanKey(cadet.number || cadet.uniqueNumber || "").replace(/\D/g,"");
+  const name = cleanKey(cadet.name || "");
+
+  if(year && wing && number && name){
+    return "ML" + year + wing + number + rank + name;
+  }
+
+  const noOldRank = oldId.replace(new RegExp(allowedRanks,"g"),"");
+  return noOldRank + rank;
+}
 
 function downloadCSV(filename, rows){
-  const csvContent = rows.map(row => row.map(value => `"${String(value ?? "").replaceAll('"','""')}"`).join(",")).join("\n");
-  const blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
+  const csvContent = rows.map(row =>
+    row.map(value => `"${String(value ?? "").replaceAll('"','""')}"`).join(",")
+  ).join("\n");
+
+  const blob = new Blob([csvContent], {
+    type:"text/csv;charset=utf-8;"
+  });
+
   const url = URL.createObjectURL(blob);
-  const link = document.createElement("a"); link.href = url; link.download = filename; link.click(); URL.revokeObjectURL(url);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+
+  URL.revokeObjectURL(url);
 }
 
 window.downloadCadetsByYear = async function(year){
   const snapshot = await getDocs(collection(db,"cadets"));
-  const rows = [["Cadet ID","Name","Rank","Wing","Service Year","Status","Document ID"]];
-  snapshot.forEach(docSnap=>{const cadet=docSnap.data(); if(Number(cadet.cadetYear)===Number(year)){rows.push([cadet.id||"",cadet.name||"",cadet.rank||"",cadet.wing||"",yearText(cadet.cadetYear),cadet.status||"active",docSnap.id]);}});
-  if(rows.length === 1){alert("No cadets found for " + yearText(year)); return;}
-  downloadCSV(`USTM_NCC_${yearText(year).replaceAll(" ","_")}_Cadets.csv`, rows);
+
+  const rows = [
+    [
+      "Cadet ID",
+      "Name",
+      "Rank",
+      "Wing",
+      "Service Year",
+      "Status",
+      "Document ID"
+    ]
+  ];
+
+  snapshot.forEach(docSnap=>{
+    const cadet = docSnap.data();
+
+    if(Number(cadet.cadetYear) === Number(year)){
+      rows.push([
+        cadet.id || "",
+        cadet.name || "",
+        cadet.rank || "CDT",
+        cadet.wing || "",
+        yearText(cadet.cadetYear),
+        cadet.status || "active",
+        docSnap.id
+      ]);
+    }
+  });
+
+  if(rows.length === 1){
+    alert("No cadets found for " + yearText(year));
+    return;
+  }
+
+  downloadCSV(
+    `USTM_NCC_${yearText(year).replaceAll(" ","_")}_Cadets.csv`,
+    rows
+  );
 };
 
 function loadCadets(){
   onSnapshot(collection(db,"cadets"), snapshot=>{
-    const tbody=document.getElementById("cadetTable");
-    if(snapshot.empty){tbody.innerHTML='<tr><td colspan="8">No cadets registered yet.</td></tr>'; return;}
-    tbody.innerHTML="";
-    snapshot.forEach(docSnap=>{const c=docSnap.data(); const tr=document.createElement("tr"); tr.innerHTML=`
-      <td>${c.id||""}</td><td>${c.name||""}</td><td>${c.rank||""}</td><td>${c.wing||""}</td><td>${yearText(c.cadetYear)}</td><td>${c.status||"active"}</td><td>${docSnap.id}</td>
-      <td><button class="small-btn success" onclick="markCadetYear('${docSnap.id}',1)">1st</button><button class="small-btn success" onclick="markCadetYear('${docSnap.id}',2)">2nd</button><button class="small-btn success" onclick="markCadetYear('${docSnap.id}',3)">3rd</button><button class="small-btn danger" onclick="markAlumni('${docSnap.id}')">Alumni</button></td>`; tbody.appendChild(tr);});
-  });
-}
+    const tbody = document.getElementById("cadetTable");
 
-window.markCadetYear = async (cadetDocId, year)=>{await updateDoc(doc(db,"cadets",cadetDocId),{cadetYear:Number(year)}); alert("Cadet marked as " + yearText(year));};
-window.markAlumni = async cadetDocId=>{if(!confirm("Mark this cadet as Alumni?"))return; await updateDoc(doc(db,"cadets",cadetDocId),{status:"alumni"}); alert("Cadet marked as Alumni.");};
-
-window.publishNotice = async function(){
-  const title=document.getElementById("noticeTitle").value.trim();
-  const content=document.getElementById("noticeContent").value.trim();
-  const by=document.getElementById("noticeBy").value;
-  const date=document.getElementById("noticeDate").value.trim() || new Date().toLocaleDateString("en-IN");
-  const file=document.getElementById("noticePhoto").files[0];
-  const btn=document.getElementById("noticeBtn");
-  if(!title || !content || !by){alert("Please enter title, content and published by."); return;}
-  try{
-    btn.textContent="Publishing..."; btn.disabled=true;
-    let mediaURL="", mediaPath="";
-    if(file){
-      if(!file.type.startsWith("image/")){alert("Notice media must be an image."); return;}
-      const ext=file.name.includes(".")?file.name.split(".").pop().toLowerCase():"jpg";
-      mediaPath=`noticePhotos/notice-${Date.now()}.${ext}`;
-      const mediaRef=ref(storage,mediaPath); await uploadBytes(mediaRef,file); mediaURL=await getDownloadURL(mediaRef);
+    if(snapshot.empty){
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9">No cadets registered yet.</td>
+        </tr>
+      `;
+      return;
     }
-    const createdAt=new Date(); const expiresAt=new Date(createdAt.getTime()+7*24*60*60*1000);
-    await addDoc(collection(db,"notices"),{title,content,by,date,photoURL:mediaURL,photoPath:mediaPath,createdAt:createdAt.toISOString(),expiresAt:expiresAt.toISOString()});
-    alert("Notice published successfully. It will expire after 7 days.");
-    document.getElementById("noticeTitle").value=""; document.getElementById("noticeContent").value=""; document.getElementById("noticeBy").value=""; document.getElementById("noticeDate").value=""; document.getElementById("noticePhoto").value="";
-  }catch(e){console.error(e); alert("Notice publish failed. Check Firestore/Storage rules.");}
-  finally{btn.textContent="Publish Notice"; btn.disabled=false;}
-};
 
-async function cleanupExpiredNotice(id, data){
-  if(!isExpired(data.expiresAt)) return;
-  try{ if(data.photoPath) await deleteObject(ref(storage,data.photoPath)); }catch(e){console.warn("Notice photo delete warning",e);}
-  try{ await deleteDoc(doc(db,"notices",id)); }catch(e){console.warn("Expired notice delete warning",e);}
-}
+    allCadetRows = [];
+    tbody.innerHTML = "";
 
-function loadNotices(){
-  onSnapshot(collection(db,"notices"), snapshot=>{
-    const tbody=document.getElementById("noticeTable");
-    if(snapshot.empty){tbody.innerHTML='<tr><td colspan="7">No notices published yet.</td></tr>'; return;}
-    tbody.innerHTML="";
     snapshot.forEach(docSnap=>{
-      const n=docSnap.data(); cleanupExpiredNotice(docSnap.id,n);
-      const expired=isExpired(n.expiresAt);
-      const media=n.photoURL?`<img src="${n.photoURL}" class="preview-img" alt="Notice Photo">`:"No photo";
-      const tr=document.createElement("tr");
-      tr.innerHTML=`<td>${n.title||""}</td><td>${n.by||""}</td><td>${n.date||""}</td><td>${n.expiresAt?formatDate(n.expiresAt):""}</td><td>${media}</td><td><span class="badge ${expired?'expired':'active'}">${expired?'Expired':'Active'}</span></td><td><button class="small-btn danger" onclick="deleteNotice('${docSnap.id}','${n.photoPath||""}')">Delete</button></td>`;
+      const cadet = docSnap.data();
+      const docId = docSnap.id;
+      const rank = cadet.rank || "CDT";
+
+      const tr = document.createElement("tr");
+      tr.setAttribute("data-search", `${cadet.id || ""} ${cadet.name || ""} ${rank} ${cadet.wing || ""} ${cadet.status || ""}`.toLowerCase());
+
+      tr.innerHTML = `
+        <td>${cadet.id || ""}</td>
+        <td>${cadet.name || ""}</td>
+        <td>${rank}</td>
+        <td>${cadet.wing || ""}</td>
+        <td>${yearText(cadet.cadetYear)}</td>
+        <td>${cadet.status || "active"}</td>
+        <td>${docId}</td>
+        <td>
+          <select class="rank-select" id="rank_${docId}">
+            <option value="LCPL" ${rank === "LCPL" ? "selected" : ""}>LCPL</option>
+            <option value="CPL" ${rank === "CPL" ? "selected" : ""}>CPL</option>
+            <option value="SGT" ${rank === "SGT" ? "selected" : ""}>SGT</option>
+            <option value="JUO" ${rank === "JUO" ? "selected" : ""}>JUO</option>
+            <option value="SUO" ${rank === "SUO" ? "selected" : ""}>SUO</option>
+          </select>
+          <button class="small-btn success" onclick="updateCadetRank('${docId}')">Update Rank</button>
+        </td>
+        <td>
+          <button class="small-btn success" onclick="markCadetYear('${docId}',1)">1st</button>
+          <button class="small-btn success" onclick="markCadetYear('${docId}',2)">2nd</button>
+          <button class="small-btn success" onclick="markCadetYear('${docId}',3)">3rd</button>
+          <button class="small-btn danger" onclick="markAlumni('${docId}')">Alumni</button>
+        </td>
+      `;
+
       tbody.appendChild(tr);
+      allCadetRows.push(tr);
     });
   });
 }
 
-window.deleteNotice = async function(id, photoPath){
-  if(!confirm("Delete this notice permanently?")) return;
-  try{ if(photoPath) await deleteObject(ref(storage,photoPath)); }catch(e){console.warn(e);}
-  await deleteDoc(doc(db,"notices",id)); alert("Notice deleted.");
-};
+window.filterCadetTable = function(){
+  const value = document.getElementById("cadetSearch").value.toLowerCase().trim();
 
-window.uploadShowcase = async function(){
-  const title=document.getElementById("showcaseTitle").value.trim();
-  const description=document.getElementById("showcaseDescription").value.trim();
-  const type=document.getElementById("showcaseType").value;
-  const file=document.getElementById("showcaseFile").files[0];
-  const btn=document.getElementById("showcaseBtn");
-  if(!title || !file){alert("Please enter title and choose a photo/video."); return;}
-  if(type==="photo" && !file.type.startsWith("image/")){alert("Please select image file for Photo type."); return;}
-  if(type==="video" && !file.type.startsWith("video/")){alert("Please select video file for Video type."); return;}
-  try{
-    btn.textContent="Uploading..."; btn.disabled=true;
-    const ext=file.name.includes(".")?file.name.split(".").pop().toLowerCase():(type==="video"?"mp4":"jpg");
-    const storagePath=`showcase/${type}-${Date.now()}.${ext}`;
-    const mediaRef=ref(storage,storagePath); await uploadBytes(mediaRef,file); const mediaURL=await getDownloadURL(mediaRef);
-    await addDoc(collection(db,"showcase"),{title,description,type,mediaURL,storagePath,uploadedAt:new Date().toISOString()});
-    alert("Showcase uploaded successfully.");
-    document.getElementById("showcaseTitle").value=""; document.getElementById("showcaseDescription").value=""; document.getElementById("showcaseFile").value="";
-  }catch(e){console.error(e); alert("Showcase upload failed. Check Storage rules.");}
-  finally{btn.textContent="Upload Showcase"; btn.disabled=false;}
-};
-
-function loadShowcase(){
-  onSnapshot(collection(db,"showcase"), snapshot=>{
-    const tbody=document.getElementById("showcaseTable");
-    if(snapshot.empty){tbody.innerHTML='<tr><td colspan="5">No showcase uploaded yet.</td></tr>'; return;}
-    tbody.innerHTML="";
-    snapshot.forEach(docSnap=>{
-      const s=docSnap.data();
-      const preview=s.type==="video"?`<video class="preview-video" controls src="${s.mediaURL}"></video>`:`<img class="preview-img" src="${s.mediaURL}" alt="Showcase">`;
-      const tr=document.createElement("tr"); tr.innerHTML=`<td>${s.title||""}</td><td>${s.type||""}</td><td>${preview}</td><td>${s.uploadedAt?formatDate(s.uploadedAt):""}</td><td><button class="small-btn danger" onclick="deleteShowcase('${docSnap.id}','${s.storagePath||""}')">Delete</button></td>`; tbody.appendChild(tr);
-    });
+  allCadetRows.forEach(row=>{
+    const text = row.getAttribute("data-search") || "";
+    row.style.display = text.includes(value) ? "" : "none";
   });
-}
-
-window.deleteShowcase = async function(id, storagePath){
-  if(!confirm("Delete this showcase item?")) return;
-  try{ if(storagePath) await deleteObject(ref(storage,storagePath)); }catch(e){console.warn(e);}
-  await deleteDoc(doc(db,"showcase",id)); alert("Showcase item deleted.");
 };
 
-window.updateAttendance = async function(){
+window.updateCadetRank = async function(cadetDocId){
+  const select = document.getElementById("rank_" + cadetDocId);
+  const newRank = select.value;
 
-  const cadetKey =
-    document.getElementById("attendanceCadetKey").value.trim().toUpperCase();
+  const cadetRef = doc(db,"cadets",cadetDocId);
+  const snap = await getDoc(cadetRef);
 
-  const percent =
-    Number(document.getElementById("attendancePercentInput").value);
-
-  if(!cadetKey || isNaN(percent)){
-    alert("Please enter Cadet Key and Attendance Percentage.");
+  if(!snap.exists()){
+    alert("Cadet not found.");
     return;
   }
 
-  let remarks = "";
-  let eligibility = "";
+  const cadet = snap.data();
+  const newCadetId = generateCadetIdWithRank(cadet,newRank);
 
-  if(percent < 70){
-    remarks =
-      "Attendance below minimum NCC requirement. Cadet is not eligible for camp selection.";
-
-    eligibility = "Not Eligible";
-  }
-  else{
-    remarks =
-      "Attendance meets NCC requirement. Cadet is eligible for camp selection subject to ANO approval.";
-
-    eligibility = "Eligible";
+  if(!confirm(`Update rank to ${newRank} and change Cadet ID to:\n${newCadetId}`)){
+    return;
   }
 
-  await setDoc(doc(db,"attendance",cadetKey),{
-    percent: percent,
-    remarks: remarks,
-    eligibility: eligibility,
-    updatedAt: new Date().toISOString()
+  await updateDoc(cadetRef,{
+    rank:newRank,
+    id:newCadetId,
+    updatedAt:new Date().toISOString()
   });
 
-  alert("Attendance Updated Successfully.");
+  alert("Rank and Cadet ID updated successfully.");
+};
+
+window.markCadetYear = async function(cadetDocId, year){
+  await updateDoc(doc(db,"cadets",cadetDocId),{
+    cadetYear:Number(year),
+    status:"active",
+    updatedAt:new Date().toISOString()
+  });
+
+  alert("Cadet marked as " + yearText(year));
+};
+
+window.markAlumni = async function(cadetDocId){
+  if(!confirm("Mark this cadet as Alumni?")){
+    return;
+  }
+
+  await updateDoc(doc(db,"cadets",cadetDocId),{
+    status:"alumni",
+    cadetYear:4,
+    updatedAt:new Date().toISOString()
+  });
+
+  alert("Cadet marked as Alumni.");
+};
+
+function getAttendanceRemark(percent){
+  if(percent > 70){
+    return "Attendance meets NCC requirement. Cadet is eligible for camp selection subject to ANO approval.";
+  }
+
+  return "Attendance below minimum NCC requirement. Cadet is not eligible for camp selection.";
+}
+
+function getEligibility(percent){
+  return percent > 70 ? "Eligible" : "Not Eligible";
+}
+
+document.getElementById("attendancePercentInput").addEventListener("input",function(){
+  const percent = Number(this.value);
+  const box = document.getElementById("attendanceTextInput");
+
+  if(Number.isFinite(percent)){
+    box.value = getAttendanceRemark(percent);
+  }else{
+    box.value = "";
+  }
+});
+
+window.updateAttendance = async function(){
+  const cadetKey = cleanKey(document.getElementById("attendanceCadetKey").value);
+  const percent = Number(document.getElementById("attendancePercentInput").value);
+
+  if(!cadetKey || !Number.isFinite(percent)){
+    alert("Please enter Cadet ID and Attendance Percentage.");
+    return;
+  }
+
+  if(percent < 0 || percent > 100){
+    alert("Attendance percentage must be between 0 and 100.");
+    return;
+  }
+
+  const remarks = getAttendanceRemark(percent);
+  const eligibility = getEligibility(percent);
+
+  await setDoc(doc(db,"attendance",cadetKey),{
+    percent:percent,
+    remarks:remarks,
+    eligibility:eligibility,
+    updatedAt:new Date().toISOString()
+  });
+
+  alert("Attendance updated successfully.");
 
   document.getElementById("attendanceCadetKey").value = "";
   document.getElementById("attendancePercentInput").value = "";
+  document.getElementById("attendanceTextInput").value = "";
+};
+
+async function uploadOptionalFile(file,pathPrefix){
+  if(!file){
+    return {
+      mediaUrl:"",
+      mediaPath:"",
+      mediaType:""
+    };
+  }
+
+  const extension = file.name.includes(".")
+    ? file.name.split(".").pop().toLowerCase()
+    : "file";
+
+  const storagePath = `${pathPrefix}/${Date.now()}.${extension}`;
+  const fileRef = ref(storage,storagePath);
+
+  await uploadBytes(fileRef,file);
+
+  const url = await getDownloadURL(fileRef);
+
+  return {
+    mediaUrl:url,
+    mediaPath:storagePath,
+    mediaType:file.type
+  };
+}
+
+window.publishNotice = async function(){
+  const title = document.getElementById("noticeTitle").value.trim();
+  const content = document.getElementById("noticeContent").value.trim();
+  const by = document.getElementById("noticeBy").value;
+  const date = document.getElementById("noticeDate").value.trim();
+  const mediaFile = document.getElementById("noticeMedia").files[0];
+  const btn = document.getElementById("noticeBtn");
+
+  if(!title || !content || !by){
+    alert("Please enter title, content and Published By.");
+    return;
+  }
+
+  try{
+    btn.textContent = "Publishing...";
+    btn.disabled = true;
+
+    const media = await uploadOptionalFile(mediaFile,"noticeMedia");
+
+    const createdAt = new Date();
+    const expiresAt = new Date(createdAt.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    await addDoc(collection(db,"notices"),{
+      title:title,
+      content:content,
+      by:by,
+      date:date || createdAt.toLocaleDateString(),
+      createdAt:createdAt.toISOString(),
+      expiresAt:expiresAt.toISOString(),
+      ...media
+    });
+
+    alert("Notice published successfully. It will expire after 7 days.");
+
+    document.getElementById("noticeTitle").value = "";
+    document.getElementById("noticeContent").value = "";
+    document.getElementById("noticeBy").value = "";
+    document.getElementById("noticeDate").value = "";
+    document.getElementById("noticeMedia").value = "";
+
+  }catch(error){
+    console.error(error);
+    alert("Notice publishing failed. Check Firebase Storage/Firestore rules.");
+  }finally{
+    btn.textContent = "Publish Notice";
+    btn.disabled = false;
+  }
+};
+
+function loadNoticesForAno(){
+  onSnapshot(collection(db,"notices"), snapshot=>{
+    const box = document.getElementById("noticeList");
+    box.innerHTML = "";
+
+    const now = new Date();
+
+    snapshot.forEach(docSnap=>{
+      const notice = docSnap.data();
+      const expired = notice.expiresAt && new Date(notice.expiresAt) < now;
+
+      const div = document.createElement("div");
+      div.className = "notice-list-card";
+
+      let mediaHTML = "";
+      if(notice.mediaUrl){
+        if(String(notice.mediaType || "").startsWith("video")){
+          mediaHTML = `<video class="media-preview" controls src="${notice.mediaUrl}"></video>`;
+        }else{
+          mediaHTML = `<img class="media-preview" src="${notice.mediaUrl}" alt="Notice Media">`;
+        }
+      }
+
+      div.innerHTML = `
+        <h3>${notice.title || "Notice"}</h3>
+        <p>${notice.content || ""}</p>
+        <small>By: ${notice.by || "ANO"} | Date: ${notice.date || ""} | Expiry: ${notice.expiresAt || ""}</small>
+        <br><br>
+        ${mediaHTML}
+        <br>
+        <button class="small-btn danger" onclick="deleteNotice('${docSnap.id}')">
+          Delete Notice
+        </button>
+        ${expired ? "<span style='color:#c62828;font-weight:900;'> Expired</span>" : ""}
+      `;
+
+      box.appendChild(div);
+    });
+  });
+}
+
+window.deleteNotice = async function(noticeId){
+  if(!confirm("Delete this notice?")){
+    return;
+  }
+
+  await deleteDoc(doc(db,"notices",noticeId));
+  alert("Notice deleted.");
 };
 
 window.updateCamp = async function(){
-  const text=document.getElementById("campTextInput").value.trim(); if(!text){alert("Please write camp update."); return;}
-  await setDoc(doc(db,"campUpdates","current"),{text,updatedAt:new Date().toISOString()}); alert("Camp update published."); document.getElementById("campTextInput").value="";
+  const text = document.getElementById("campTextInput").value.trim();
+
+  if(!text){
+    alert("Please write camp update.");
+    return;
+  }
+
+  await setDoc(doc(db,"campUpdates","current"),{
+    text:text,
+    updatedAt:new Date().toISOString()
+  });
+
+  alert("Camp update published.");
+
+  document.getElementById("campTextInput").value = "";
 };
 
-window.logoutAno = function(){localStorage.removeItem("activeAnoId"); window.location.href="ncc.html";};
-loadCadets(); loadNotices(); loadShowcase();
+window.uploadShowcase = async function(){
+  const title = document.getElementById("showcaseTitle").value.trim();
+  const caption = document.getElementById("showcaseCaption").value.trim();
+  const file = document.getElementById("showcaseFile").files[0];
+  const btn = document.getElementById("showcaseBtn");
+
+  if(!title || !file){
+    alert("Please enter title and choose photo/video.");
+    return;
+  }
+
+  if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
+    alert("Only photo or video files are allowed.");
+    return;
+  }
+
+  try{
+    btn.textContent = "Uploading...";
+    btn.disabled = true;
+
+    const media = await uploadOptionalFile(file,"showcaseUploads");
+
+    await addDoc(collection(db,"showcase"),{
+      title:title,
+      caption:caption,
+      ...media,
+      uploadedBy:"ANO",
+      createdAt:new Date().toISOString()
+    });
+
+    alert("Showcase uploaded successfully.");
+
+    document.getElementById("showcaseTitle").value = "";
+    document.getElementById("showcaseCaption").value = "";
+    document.getElementById("showcaseFile").value = "";
+
+  }catch(error){
+    console.error(error);
+    alert("Showcase upload failed. Check Firebase Storage rules.");
+  }finally{
+    btn.textContent = "Upload Showcase";
+    btn.disabled = false;
+  }
+};
+
+window.logoutAno = function(){
+  localStorage.removeItem("activeAnoId");
+  window.location.href = "ncc.html";
+};
+
+loadCadets();
+loadNoticesForAno();
 </script>
+
 </body>
 </html>
